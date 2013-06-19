@@ -12,11 +12,17 @@ use Mojolicious::Lite;
 
 plugin 'Blog' => {storage => 'directory',};
 
-plugin 'Config' => {file => path(dist_dir('App-skryf'), "skryf.conf")};
+# Copy initial config if one doesn't exist.
+my $cfgfile = path($ENV{HOME}, ".skryf.conf");
+
+path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
+  unless $cfgfile->exists;
+
+plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};
 
-my $postdir = $cfghash->{post_directory} || '%bindir%/posts';
+my $postdir = $cfghash->{post_directory} || '%homedir%/posts';
 $postdir = App::skryf::Util->sformat($postdir, bindir => $Bin);
 
 my $postlist = App::skryf::PostList->from_dir($postdir);
