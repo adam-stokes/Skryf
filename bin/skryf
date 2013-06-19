@@ -1,0 +1,616 @@
+#!/usr/bin/env perl
+package main;
+
+# VERSION
+
+use 5.16.3;
+
+BEGIN {
+    local $@;
+    my @failed;
+    my @prereq = qw/
+      List::Objects::WithUtils
+      Mojolicious
+      Path::Tiny
+      Text::Markdown
+      /;
+
+    for my $mod (@prereq) {
+        eval "require $mod; 1";
+        if ($@) { warn $@; push @failed, $mod }
+    }
+    die "\nFailed to load modules:\n " . join "\n ", @failed, "\n"
+      if @failed;
+}
+
+###############################################################################
+# UTIL
+###############################################################################
+package Blag::Util;
+use strictures 1;
+
+# VERSION
+
+sub sformat {
+    my ($class, $string) = splice @_, 0, 2;
+    return '' unless defined $string and length $string;
+    my %vars = (homedir => $ENV{HOME}, @_);
+    my $rpl = sub {
+        my ($orig, $match) = @_;
+        return $orig unless defined $vars{$match};
+        ref $vars{$match} eq 'CODE'
+          ? $vars{$match}->($match, $orig, $vars{$match})
+          : $vars{$match};
+    };
+    my $re = qr/(%([^\s%]+)%?)/;
+    $string =~ s/$re/$rpl->($1,$2)/ge;
+    $string;
+}
+
+###############################################################################
+# CONFIG
+###############################################################################
+package Blag::Cfg;
+
+# VERSION
+
+use Carp 'confess';
+
+sub TITLE ()    {0}
+sub AUTHOR ()   {1}
+sub DESC ()     {2}
+sub CONTACT ()  {3}
+sub GRAVATAR () {4}
+sub SITE ()     {5}
+
+sub author      { $_[0]->[AUTHOR] }
+sub contact     { $_[0]->[CONTACT] }
+sub title       { $_[0]->[TITLE] }
+sub version     {$::VERSION}
+sub description { $_[0]->[DESC] }
+sub gravatar    { $_[0]->[GRAVATAR] }
+sub site        { $_[0]->[SITE] }
+
+sub new {
+    my ($class, %params) = @_;
+    bless [
+        ($params{title}       || 'my underconfigured blag!'),    # TITLE
+        ($params{author}      || 'No One'),                      # AUTHOR
+        ($params{description} || 'Is this internet?'),           # DESC
+        ($params{contact}     || '/dev/null'),                   # CONTACT
+        ($params{gravatar}    || ''),                            # GRAVATAR
+        ($params{site}        || 'http://astokes.org'),          # GRAVATAR
+    ], $class;
+}
+
+###############################################################################
+# POST
+###############################################################################
+package Blag::Post;
+
+# VERSION
+
+use strictures 1;
+use Carp 'confess';
+use List::Objects::WithUtils;
+use Path::Tiny ();
+use Text::Markdown 'markdown';
+
+sub PATH ()     {0}
+sub TOPIC ()    {1}
+sub DATE ()     {2}
+sub CATEGORY () {3}
+sub BLAGID ()   {4}
+sub CONTENTS () {5}
+sub HTML ()     {6}
+sub MTIME ()    {7}
+
+sub html     { $_[0]->[HTML] }
+sub contents { $_[0]->[CONTENTS] }
+sub path     { $_[0]->[PATH] }
+sub topic    { $_[0]->[TOPIC] }
+sub date     { $_[0]->[DATE] }
+sub category { $_[0]->[CATEGORY] }
+sub id       { $_[0]->[BLAGID] }
+sub mtime    { $_[0]->[MTIME] }
+
+sub last_edit { 
+  my ($self) = @_;
+  POSIX::strftime( '%Y-%m-%d %H:%M:%S', localtime($self->mtime) )
+}
+
+sub _parseblag {
+    my ($path) = @_;
+    confess "Expected a Path::Tiny object"
+      unless ref $path and $path->can('lines_utf8');
+
+    my $full = array($path->lines_utf8);
+
+    my $header   = $full->items_before(sub { $_ eq "\n" });
+    my $contents = $full->items_after(sub  { $_ eq "\n" });
+
+    my ($topicline, $dateline, $categoryline);
+    for my $line ($header->all) {
+        if (index($line, 'Topic: ') == 0) {
+            $topicline = $line;
+            next;
+        }
+        if (index($line, 'Date: ') == 0) {
+            $dateline = $line;
+            next;
+        }
+        if (index($line, 'Category: ') == 0) {
+            $categoryline = $line;
+            next;
+        }
+    }
+
+    warn "Malformed blag post at " . $path->absolute
+      unless $topicline
+      and $dateline
+      and $categoryline;
+    warn "Empty blag post at " . $path->absolute
+      unless $contents->count;
+
+    my $topic = substr($topicline, 7);
+    warn "Blag post at @{[$path->absolute]} is missing a Topic:\n"
+      unless $topic;
+
+    my $date = substr($dateline, 6, -1);
+    warn "Blag post at @{[$path->absolute]} is missing a Date:\n"
+      unless $date;
+
+    my $category = substr($categoryline, 10);
+    warn "Blag post at @{[$path->absolute]} is missage a Category:\n"
+      unless $category;
+
+    hash(
+        topic    => $topic,
+        date     => $date,
+        category => $category,
+        contents => $contents,
+    );
+}
+
+sub _renderblag {
+  my ($contents) = @_;
+  markdown( join('', @$contents), { tab_width => 2 } )
+}
+
+sub from_file {
+    my ($class, $filepath) = @_;
+    confess "Expected a path" unless defined $filepath;
+
+    my $self = [];
+
+    my $file = Path::Tiny::path($filepath);
+    confess "Nonexistant post path ($filepath) " . $file->absolute
+      unless $file->exists;
+
+    my $item     = _parseblag($file);
+    my $topic    = $item->get('topic');
+    my $date     = $item->get('date');
+    my $category = $item->get('category');
+
+    my $contents = $item->get('contents');
+    my $html     = _renderblag($contents);
+
+    my ($blagid) = $file->basename =~ /(.+)\.(?:markdown)$/;
+
+    my $mtime = $file->stat->mtime;
+
+    bless [
+        $file,        ## PATH    (Path::Tiny obj, stringifies)
+        $topic,       ## TOPIC
+        $date,        ## DATE
+        $category,    ## CATEGORY
+        $blagid,      ## BLAGID
+        $contents,    ## CONTENTS
+        $html,        ## HTML
+        $mtime,       ## MTIME
+    ], $class;
+}
+
+###############################################################################
+# POSTLIST
+###############################################################################
+package Blag::PostList;
+
+# VERSION
+
+use strictures 1;
+use Carp 'confess';
+use List::Objects::WithUtils;
+use Path::Tiny ();
+
+sub PATH     () { 0 }
+sub POSTHASH () { 1 }
+
+sub path  { $_[0]->[PATH]  }
+sub posts { $_[0]->[POSTHASH] }
+
+sub from_dir {
+  my ($class, $dirpath) = @_;
+
+  my $dir = Path::Tiny::path($dirpath);
+  my $self = [
+    $dir,     ## PATH
+    hash,     ## POSTHASH
+  ];
+  bless $self, $class;
+
+  # Create initial Posts and add hash() of Posts:
+  $self->scan
+}
+
+sub scan {
+  my ($self) = @_;
+  my $dir = $self->path;
+
+  confess "Not a directory: $dir" unless $dir->is_dir;
+
+  my $iter = $dir->iterator;
+  SCAN: while (my $child = $iter->()) {
+    my $basename = $child->basename;
+    my ($maybe_id) = $basename =~ /(.+)\.(?:markdown)$/;
+    next SCAN unless $maybe_id;
+
+    if ( $self->posts->exists($maybe_id) ) {
+      my $current = $self->posts->get($maybe_id);
+      unless ($current->path->basename eq $child->basename) {
+        warn "Possible ID conflict for $maybe_id"
+          if $current->path->exists;
+      }
+      next SCAN if $child->stat->mtime == $current->mtime;
+    }
+
+    $self->_reset_post( $maybe_id => $child );
+  }
+
+  $self
+}
+
+sub _reset_post {
+  my ($self, $id, $path) = @_;
+  my $post = Blag::Post->from_file( $path );
+  $self->posts->set( $id => $post );
+  $post
+}
+
+sub as_array {
+  my ($self) = @_;
+  $self->posts->values
+}
+
+sub by_date {
+  my ($self) = @_;
+  $self->posts->values
+    ->sort_by(sub { $_->date })
+    ->reverse
+}
+
+sub by_mtime {
+  my ($self) = @_;
+  $self->posts->values
+    ->sort_by(sub { $_->mtime })
+}
+
+sub by_topic {
+  my ($self) = @_;
+  $self->posts->values
+    ->sort_by(sub { $_->topic })
+}
+
+sub by_cat {
+    my ($self, $category) = @_;
+    $self->posts->values
+      ->grep(sub { $_->category =~ /$category/i })
+      ->sort_by(sub                { $_->date })
+      ->reverse;
+}
+
+sub get {
+    my ($self, $id) = @_;
+    my $post = $self->posts->get($id) || return;
+    unless ($post->mtime == $post->path->stat->mtime) {
+        return $self->_reset_post($id => $post->path);
+    }
+    $post;
+}
+
+###############################################################################
+# COMMAND: Newpost
+###############################################################################
+package Mojolicious::Command::newpost;
+
+use strictures 1;
+use v5.16;
+use FindBin '$Bin';
+use Mojo::Base 'Mojolicious::Command';
+use Path::Tiny;
+use DateTime;
+
+# VERSION
+
+has description => "Create blog post.\n";
+has usage => <<"EOF";
+Usage: $0 newpost new-blog-entry
+
+new-blog-entry Should be in the 'a-z 0-9 _ -' set.
+
+EOF
+
+has datetime => sub { my $self=shift; DateTime->now->set_time_zone($self->app->config->{blagcfg}->{tz}) };
+
+sub run {
+    my ($self, $post) = @_;
+    die $self->usage unless $post;
+
+    unless ($post =~ /^[A-Za-z0-9_-]+$/) {
+        die "Invalid post name '$post'\n",
+          "Post names should be in the 'a-z 0-9 _ -' set";
+    }
+
+    my $postdir = $self->app->config->{blagcfg}->{post_directory};
+    die "No post_directory configured\n" unless $postdir;
+    $postdir = path(Blag::Util->sformat($postdir, bindir => $Bin));
+    my $pendingdir = $postdir->child('pending');
+    $pendingdir->mkpath;
+
+    my $file = $pendingdir->child($post . ".markdown");
+    die "Post exists at $file, maybe you wanted 'reblag'?\n"
+      if $file->exists;
+
+    my $dest = $postdir->child($self->datetime->strftime("%Y-%m-%d") . '-' .$post . ".markdown");
+    die "Post already published at $dest\n" if $dest->exists;
+
+    print "Topic: ";
+    my $topic = <STDIN>;
+    chomp $topic;
+    my $date = $self->datetime->datetime().'Z';
+    print "Categories: ";
+    my $category = <STDIN>;
+    chomp $category;
+
+    my @tmp = (
+        "Topic: $topic\n",
+        "Date: $date\n",
+        "Category: $category\n\n",
+        "## Gimme some header\n\n",
+        "Hi, put some Markdown here.\n",
+    );
+
+    $file->spew_utf8(@tmp);
+
+    system($ENV{EDITOR}, "$file");
+
+    print "Publish now? [Y/n] ";
+    my $ans = <STDIN>;
+    chomp $ans;
+    $ans = lc($ans || 'y');
+    if ($ans eq 'y') {
+        say "\nMoving to " . $dest->absolute;
+        $file->move($dest->absolute);
+    }
+    else {
+        say "\nMove skipped; use 'reblag $post' to edit";
+    }
+}
+
+###############################################################################
+# COMMAND: REPOST
+###############################################################################
+package Mojolicious::Command::repost;
+use strictures 1;
+use v5.16;
+use FindBin '$Bin';
+use Mojo::Base 'Mojolicious::Command';
+use Path::Tiny;
+use DateTime;
+
+has description => "Edit pending blags.\n";
+has datetime => sub { my $self = shift; DateTime->now->set_time_zone($self->app->config->{blagcfg}->{tz}) };
+
+sub run {
+    my ($self, $post) = @_;
+
+    my $postdir = $self->app->config->{blagcfg}->{post_directory};
+    die "No post_directory configured\n" unless $postdir;
+    $postdir = path(Blag::Util->sformat($postdir, bindir => $Bin));
+    my $pendingdir = $postdir->child('pending');
+    die "No pending post directory\n" unless $pendingdir->exists;
+
+    unless (defined $post) {
+        my ($choice, %enum);
+        until ($choice) {
+            my $idx;
+            %enum = ();
+            my $iter = $pendingdir->iterator;
+            while (my $child = $iter->()) {
+                my $basename = $child->basename;
+                if ($basename =~ s/\.markdown$//) {
+                    $enum{++$idx} = $basename;
+                }
+            }
+            die "No pending posts\n" unless keys %enum;
+            say "\nPending:\n";
+            print map { ; "  $_ => " . $enum{$_} . "\n" } keys %enum;
+            print "\nSelect a post number (or enter tag): ";
+            $choice = <STDIN>;
+            chomp $choice;
+        }
+        $post = $enum{$choice} // $choice;
+    }
+
+    my $file = $pendingdir->child($post . ".markdown");
+    die "No such pending post $post\n"
+      unless $file->exists;
+
+    my $dest = $postdir->child($post . ".markdown");
+    die "Post already published at $dest\n" if $dest->exists;
+
+    system($ENV{EDITOR}, "$file");
+
+    print "Publish now? [Y/n] ";
+    my $ans = <STDIN>;
+    chomp $ans;
+    $ans = lc($ans || 'y');
+    if ($ans eq 'y') {
+        say "\nMoving to " . $dest->absolute;
+        my @lines = $file->lines_utf8;
+        for (@lines) {
+            if (index($_, 'Date: ') == 0) {
+                my $date = $self->datetime->datetime().'Z';
+                $_ = "Date: $date\n";
+                last;
+            }
+        }
+        $dest->spew_utf8(@lines);
+        say "Success! You may want to remove $file";
+    }
+    else {
+        say "\nMove skipped; use 'reblag $post' to edit";
+    }
+}
+
+###############################################################################
+# MAIN: FEEL THE <3
+###############################################################################
+package main;
+use strictures 1;
+use FindBin '$Bin';
+use Path::Tiny;
+use File::ShareDir ':ALL';
+
+use Mojolicious::Lite;
+plugin 'Config' => {file => path($Bin, "skryf.conf")};
+
+my $cfghash = app->config->{blagcfg} || +{};
+
+my $postdir = $cfghash->{post_directory} || '%bindir%/posts';
+$postdir = Blag::Util->sformat($postdir, bindir => $Bin);
+
+my $postlist = Blag::PostList->from_dir($postdir);
+
+my $blagcfg = Blag::Cfg->new(%$cfghash);
+helper blagconf => sub {$blagcfg};
+
+get '/' => sub {
+    my $self = shift;
+
+    $self->stash(postlist => $postlist->scan);
+
+    my $tmpl = $cfghash->{index_template} || 'index';
+    $self->render($tmpl);
+};
+
+# Category feeds
+get '/feeds/:category/atom.xml' => sub {
+    my $self     = shift;
+    my $category = $self->param('category');
+    my $_posts   = $postlist->scan;
+    $self->stash(postlist => $_posts->by_cat($category));
+    my $tmpl = 'atom';
+    $self->render(template => $tmpl, format => 'xml');
+};
+
+# atom.xml
+get '/atom.xml' => sub {
+  my $self = shift;
+
+  my $_posts = $postlist->scan;
+
+  $self->stash(postlist => $_posts->by_date);
+  my $tmpl = 'atom';
+  $self->render(template=> $tmpl, format => 'xml');
+};
+
+get '/about' => sub {
+  my $self = shift;
+  my $tmpl = $cfghash->{about_template} || 'about';
+  my $post = $postlist->get('about');
+  $self->stash(post => $post);
+  $self->render($tmpl);
+
+};
+
+get '/post/:id' => sub {
+    my $self = shift;
+
+    my $id = $self->param('id');
+    unless ($id =~ /^[A-Za-z0-9_-]+$/) {
+        $self->render(text => 'Invalid blag name!', status => 404);
+        return;
+    }
+
+    my ($post, $retry);
+  FETCH_POST: {
+        $post = $postlist->get($id);
+
+        unless ($post) {
+            if ($retry) {
+                $self->render(text => 'No such blag!', status => 404);
+                return;
+            }
+            ## FIXME try to load this specific post instead of re-scanning
+            $postlist->scan;
+            ++$retry;
+            redo FETCH_POST;
+        }
+    }
+
+    $self->stash(post => $post);
+
+    my $tmpl = $cfghash->{post_template} || 'post';
+    $self->render($tmpl);
+};
+
+###############################################################################
+# START THE PARTY
+###############################################################################
+app->secret("WHO CARES RITE?");
+app->start;
+
+__END__
+
+=head1 NAME
+
+skryf - perl blogger
+
+=head1 PREREQS
+
+I like L<http://perlbrew.pl> and so should you :)
+
+=head1 INSTALLATION
+
+    $ git clone git://github.com/battlemidget/skryf.git
+    $ cpanm --installdeps .
+
+=head1 DEPLOY
+
+    $ export BLAGGER_USER=username
+    $ export BLAGGER_SERVER=example.com
+    $ rex deploy
+
+=head1 RUN (Development)
+
+    $ plackup -R
+
+=head1 RUN (Production)
+
+    $ plackup -l /tmp/webserver.sock -R -D -s Starman
+
+=head1 AUTHOR
+
+Adam Stokes <adamjs@cpan.org>
+
+=head1 DISCLAIMER
+
+Jon Portnoy [avenj at cobaltirc.org](http://www.cobaltirc.org) is original author of blagger
+in which this code is based heavily off of.
+
+=head1 LICENSE
+
+Licensed under the same terms as Perl.
+
+=cut

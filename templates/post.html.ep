@@ -1,0 +1,40 @@
+% use DateTime::Format::ISO8601;
+% my $fmt = DateTime::Format::ISO8601->new();
+<!DOCTYPE html>
+<html>
+<head>
+  <title>blag: <%= $post->topic %></title>
+  <link rel="stylesheet"  href="/style.css"
+       type="text/css"
+       media="screen"
+       title="Style Sheet"
+  />
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+</head>
+
+<body>
+%= include "nav"
+<h2><%= $post->topic %></h2>
+
+<h3>
+  % my $dt = $fmt->parse_datetime($post->date);
+  <i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i><br />
+  <i class="categories">Posted under: <%= $post->category %></i>
+  <a href="/" class="align-right">&larr; index</a>
+</h3>
+
+<div id="container" class="post-item">
+
+ <%== $post->html %>
+</div>
+
+<div id="footer">
+ <p>
+   <h2><a href="/" class="align-left">&larr;</a></h2>
+   <b><a href="/" class="align-right">Back to index</a></b>
+ </p>
+</div>
+
+</body>
+</html>
+

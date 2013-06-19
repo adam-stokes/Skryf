@@ -1,0 +1,39 @@
+=head1 NAME
+
+skryf - perl blogger
+
+=head1 PREREQS
+
+I like L<http://perlbrew.pl> and so should you :)
+
+=head1 INSTALLATION
+
+    $ git clone git://github.com/battlemidget/skryf.git
+    $ cpanm --installdeps .
+
+=head1 DEPLOY
+
+    $ export BLAGGER_USER=username
+    $ export BLAGGER_SERVER=example.com
+    $ rex deploy
+
+=head1 RUN (Development)
+
+    $ plackup -R
+
+=head1 RUN (Production)
+
+    $ plackup -l /tmp/webserver.sock -R -D -s Starman
+
+=head1 AUTHOR
+
+Adam Stokes <adamjs@cpan.org>
+
+=head1 DISCLAIMER
+
+Jon Portnoy [avenj at cobaltirc.org](http://www.cobaltirc.org) is original author of blagger
+in which this code is based heavily off of.
+
+=head1 LICENSE
+
+Licensed under the same terms as Perl.

@@ -1,0 +1,11 @@
+requires 'DateTime';
+requires 'File::ShareDir';
+requires 'List::Objects::WithUtils';
+requires 'Mojo::Base';
+requires 'Mojolicious::Lite';
+requires 'Path::Tiny';
+requires 'Rex';
+requires 'Rex::Config';
+requires 'Text::Markdown';
+requires 'perl', 'v5.16.3';
+requires 'strictures', '1';

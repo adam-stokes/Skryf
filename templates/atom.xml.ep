@@ -1,0 +1,26 @@
+% use DateTime;
+% my $lt = DateTime->now;
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[<%= blagconf->title %>]]></title>
+  <link href="<%= blagconf->site %><%= url_for %>" rel="self"/>
+  <link href="<%= blagconf->site %>/"/>
+  <updated><%= $lt->datetime() %>Z</updated>
+  <id><%= blagconf->site %>/</id>
+  <author>
+    <name><![CDATA[<%= blagconf->author %>]]></name>
+    <% if (blagconf->contact) { %><email><![CDATA[<%= blagconf->contact %>]]></email><% } %>
+  </author>
+  <generator uri="https://github.com/battlemidget/App-skryf/">skryf <%= blagconf->version %></generator>
+  % for my $post ($postlist->all) {
+  <entry>
+    <title type="html"><![CDATA[<%= $post->topic %>]]></title>
+    <link href="<%= blagconf->site %>/post/<%= $post->id %>"/>
+    <updated><%= $post->date %></updated>
+    <id><%= blagconf->site %>/<%= $post->id %></id>
+    <content type="html"><![CDATA[<%== $post->html %>]]></content>
+  </entry>
+  % }
+</feed>
+

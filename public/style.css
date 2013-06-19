@@ -1,0 +1,115 @@
+body {
+  color: #000000;
+  background-color: beige;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-family: 'Ubuntu';
+  font-size: 1em;
+}
+
+#container {
+    width: 960px;
+}
+
+.clearfix {
+    clear:both;
+}
+
+a {
+  color: maroon;
+}
+a:link {
+  text-decoration: none; 
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  text-decoration: none;
+}
+
+h1        { color: rgb(40,0,0); }
+h2        { color: rgb(96,0,0); }
+h3 { 
+    color: #339933; 
+    text-shadow: 0.1em 0.1em white;
+}
+h4        { color: navy; }
+a.header  { color: navy; }
+a.header:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+p {
+  text-indent: -1px;
+  margin-left: 1em;
+  margin-top: 0.50em;
+  margin-bottom: 0.50em;
+}
+.rcs {
+  margin-top: 2em;
+}
+.footer {
+  width: 100%;
+  border-top: 1px solid #000042;
+  margin-top: 2em;
+}
+.footer p {
+  text-indent: 0em;
+  font-size: 75%;
+  clear: none;
+}
+
+i.postdate {
+  color: green;
+  font-size: 0.8em;
+}
+
+i.categories {
+  color: orange;
+  font-size: .85em;
+}
+
+.posttopic {
+    font-size: 90%;
+}
+
+.post-item ul {
+    list-style-type: square;
+    display: block;
+}
+
+
+ul {
+  list-style-type: none;
+  display: inline;
+}
+
+li.postbox {
+    width: 310px;
+    height: 125px;
+    padding: 5px;
+    float:left;
+}
+
+dt {
+  font-weight: bold;
+  font-size: 110%;
+}
+
+pre { 
+    font-size: 1em;
+    font-family: 'Ubuntu Mono';
+}
+.align-right { float:right; margin: 0 0 15px 15px; }
+.align-left { float:left; margin: 0 15px 15px 0; }
+
+/* navbar */
+
+#navbar {
+
+}

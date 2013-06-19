@@ -1,0 +1,4 @@
+<div id="navbar">
+  <a href="/">Root</a> :: 
+  <a href="/about">About</a>
+</div>

@@ -1,0 +1,144 @@
+<html>
+<head>
+  <title>About me</title>
+  <link rel="stylesheet"  href="/style.css"
+       type="text/css"
+       media="screen"
+       title="Style Sheet"
+  />
+</head>
+
+<body>
+%= include "nav"
+
+<h2>About</h2>
+
+<div id="container" class="post-item">
+<p><a href="http://coderwall.com/battlemidget"><img src="http://api.coderwall.com/battlemidget/endorsecount.png" alt="endorse" /></a></p>
+<p>Currently, a sustaining engineer for Canonical, Ltd. We maintain current releases of Ubuntu with a heavier focus on LTS releases. A lot of my work tends to go on in the background with fixing bugs, getting new features in, and overall providing a helping hand to the engineering team. It is my goal to be one of the go-to guys when it comes to customer satisfaction with our current supported products. I deal with the engineers in the userspace realm and occasionally dabble in kernel space.</p>
+<p>I enjoy programming in all different languages but I'm well versed in:</p>
+<ul>
+<li>Python</li>
+<li>Perl</li>
+<li>C</li>
+<li>Shell</li>
+</ul>
+<p>Hobby languages:</p>
+<ul>
+<li>LISP dialects</li>
+<li>ANSICL</li>
+<li>SBCL</li>
+<li>CMUCL</li>
+<li>Clojure</li>
+<li>Go</li>
+<li>Dart</li>
+<li>Javascript</li>
+<li>Ruby</li>
+</ul>
+<h2 id="projects-and-contributions">Projects and Contributions</h2>
+<h3 id="canonical-related">Canonical Related</h3>
+<p>My public facing work with Canonical located at:</p>
+<p><a href="https://launchpad.net/~adam-stokes">Launchpad page</a></p>
+<p>You can find the nitty gritty of the details at:</p>
+<p><a href="https://code.launchpad.net/~adam-stokes">Launchpad code</a></p>
+<p>A list of package maintenance I'm involved in:</p>
+<p><a href="https://launchpad.net/~adam-stokes/+uploaded-packages">Uploaded Packages to main distribution</a></p>
+<h3 id="previous-work-and-projects">Previous work and projects</h3>
+<p>Before Canonical, I worked for 7 years at Red Hat, Inc. where I started from the bottom of the totem pole and finally ended my stay with them in their Engineering R&amp;D for Virtualization technologies. My last project with them was <strong>Matahari</strong>, which was basically systems management and monitoring for the cloud.</p>
+<p><a href="https://github.com/matahari/matahari">Github:Matahari</a></p>
+<p>I also wrote <strong>CAS</strong> (core analysis system) which provided support engineers with an automated way to take a kernel core dump and have a system provisioned and setup for the engineering team to analyze.</p>
+<p><a href="https://fedorahosted.org/cas/">CAS Project</a></p>
+<p>I was also a maintainer and still heavily involved with <strong>sosreport</strong>. Which is basically a system's data collector for helping engineers get a peek at a clients system in order to help further troubleshoot or reproduce an issue.</p>
+<h3 id="contributions">Contributions</h3>
+<p><a href="https://github.com/sosreport/sosreport">sosreport</a></p>
+<p><a href="https://launchpad.net/~debugmonkeys/+archive/sosreport">Ubuntu PPA for sosreport</a></p>
+<p>Since working with Canonical I've done a lot of Debian/Ubuntu specific work for sosreport in order to have proper packaging and make sosreport's gathering routines applicable on those distributions.</p>
+<p><a href="https://github.com/teddziuba/django-sslserver/commits?author=battlemidget">django-sslserver</a></p>
+<p>Run development django servers with ssl support.</p>
+<h3 id="other-smaller-projects">Other smaller projects</h3>
+<p><a href="http://python.salesforce.astokes.org">Python-salesforce</a></p>
+<p>A python client and authorization library for interfacing with Salesforce RESTful API.</p>
+<p><a href="http://net.oauth.lp.astokes.org">Net::OAuth::LP</a></p>
+<p>A perl library for interfacing with https://api.launchpad.net over OAuth 1.0.</p>
+<p><a href="http://dtw.harness.astokes.org">DTW::Harness</a></p>
+<p>Functional, Acceptance, and Unit test harness for bug resolutions.</p>
+<p><a href="http://kelp.module.mongodb.astokes.org/">Kelp::Module::MongoDB</a></p>
+<p>Interface with MongoDB through <a href="https://metacpan.org/release/Kelp">Kelp</a></p>
+<p><a href="https://github.com/battlemidget/Mojolicious-Plugin-Blog">Mojolicious::Plugin::Blog</a></p>
+<p>Blogging plugin for Mojolicious 4.x</p>
+<p><a href="https://metacpan.org/author/ADAMJS">Other CPAN related modules</a></p>
+<p><a href="https://addons.mozilla.org/en-US/firefox/collections/battlemidget/shakenbake/">Firefox Collection - shakeNbake</a></p>
+<p>Firefox addons I've found useful.</p>
+<h3 id="technologies-im-interested-in">Technologies I'm interested in</h3>
+<p>The userspace is a big realm and there are a range of different technologies that it can become difficult to specialize in everything. Here are some of the technologies I've researched and hacked on more than others:</p>
+<ul>
+<li>System Administration</li>
+<li>Account management/authentication
+<ul>
+<li>LDAP</li>
+<li>Kerberos</li>
+</ul></li>
+<li>Filesystem
+<ul>
+<li>NFS</li>
+<li>autofs</li>
+</ul></li>
+<li>Clustering/Load balancing</li>
+<li>Security
+<ul>
+<li>Apparmor</li>
+<li>SELinux</li>
+<li>System hardening</li>
+</ul></li>
+<li>Databases
+<ul>
+<li>postgres</li>
+<li>mysql</li>
+<li>mongo</li>
+<li>sqlite</li>
+<li>redis</li>
+</ul></li>
+<li>Automation
+<ul>
+<li>Puppet</li>
+<li>Chef</li>
+<li>Kickstart</li>
+<li>Preseed</li>
+<li>PXE</li>
+</ul></li>
+<li>Cloud
+<ul>
+<li>Openstack</li>
+<li>Rackspace</li>
+<li>Juju</li>
+<li>AWS</li>
+<li>Maas</li>
+<li>Linode</li>
+</ul></li>
+<li>KVM userspace (virt-manager, qemu)</li>
+<li>GNOME/glib</li>
+<li>QT/QML</li>
+<li>Multi-architecture support (arm, x86, x86_64)</li>
+<li>Messaging</li>
+<li>rabbitmq</li>
+<li>amqp</li>
+<li>qpid</li>
+</ul>
+<h2 id="in-closing">In closing</h2>
+<p>Finally, throughout my journey in the opensource community, handling the balance of both community and paying customers I have been lucky enough to experience both ends of the spectrum and everything in between. From my experience I've accomplished roles from frontline support calls, customer on-site visits, sustaining engineering, and engineering.</p>
+<p>I am intimately familiar with processes from both Red Hat and Canonical. I've been fortunate enough to have had my contributions utilized in the progression of an idea to product launch. My understanding of procedures for customer satisfaction, setting expectations, and providing insightful education to my peers are exceptional and increasing every day.</p>
+<p>I am a firm believer in getting what you paid for and the value of customer relationship. Every day I strive to exceed excellence and always on the lookout for productive ways to solve problems quicker in order to provide the highest customer satisfaction.</p>
+<p>You can find me on <a href="http://www.linkedin.com/in/stokachu">Linkedin</a> and my Github, Twitter links are above.</p>
+
+</div>
+<br/>
+<div id="footer">
+ <p>
+   <h2><a href="/" class="align-left">&larr;</a></h2>
+   <b><a href="/" class="align-right">Back to index</a></b>
+ </p>
+</div>
+
+</body>
+</html>
+

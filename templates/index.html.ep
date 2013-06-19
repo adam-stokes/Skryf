@@ -1,0 +1,52 @@
+% use DateTime::Format::ISO8601;
+% my $fmt = DateTime::Format::ISO8601->new();
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= blagconf->title %></title>
+  <link rel="stylesheet"  href="/style.css"
+       type="text/css" 
+       media="screen" 
+       title="Style Sheet"
+  />
+</head>
+
+<body>
+%= include "nav"
+<h2><img src="<%= blagconf->gravatar %>" /><%= blagconf->title %></h2>
+
+<h4><%= blagconf->description %></h4>
+
+<div id="container">
+  <ul>
+  % for my $post ($postlist->by_date->all) {
+  % my $dt = $fmt->parse_datetime($post->date);
+  <li class="postbox">
+      <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />
+
+      <b><a href="/post/<%= $post->id %>">
+          <div class="posttopic"><%= $post->topic %></div>
+      </a></b>
+      </li>
+  % }
+</ul>
+<div class="clearfix">&nbsp;</div>
+</div>
+
+<div id="footer">
+  <p>
+  <i>
+    <a href="https://github.com/battlemidget/App-skryf">
+      skryf <%= blagconf->version %>
+    </a>
+  </i>
+  :: 
+  <a href="/atom.xml"><img src="/rss.png" /></a>
+  <i><%= blagconf->author %></i>
+    :: <%== blagconf->contact %>
+  </p>
+</div>
+
+</body>
+</html>
+
