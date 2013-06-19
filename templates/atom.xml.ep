@@ -3,22 +3,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[<%= blagconf->title %>]]></title>
-  <link href="<%= blagconf->site %><%= url_for %>" rel="self"/>
-  <link href="<%= blagconf->site %>/"/>
+  <title><![CDATA[<%= skryfconf->title %>]]></title>
+  <link href="<%= skryfconf->site %><%= url_for %>" rel="self"/>
+  <link href="<%= skryfconf->site %>/"/>
   <updated><%= $lt->datetime() %>Z</updated>
-  <id><%= blagconf->site %>/</id>
+  <id><%= skryfconf->site %>/</id>
   <author>
-    <name><![CDATA[<%= blagconf->author %>]]></name>
-    <% if (blagconf->contact) { %><email><![CDATA[<%= blagconf->contact %>]]></email><% } %>
+    <name><![CDATA[<%= skryfconf->author %>]]></name>
+    <% if (skryfconf->contact) { %><email><![CDATA[<%= skryfconf->contact %>]]></email><% } %>
   </author>
-  <generator uri="https://github.com/battlemidget/App-skryf/">skryf <%= blagconf->version %></generator>
+  <generator uri="https://github.com/battlemidget/App-skryf/">skryf <%= skryfconf->version %></generator>
   % for my $post ($postlist->all) {
   <entry>
     <title type="html"><![CDATA[<%= $post->topic %>]]></title>
-    <link href="<%= blagconf->site %>/post/<%= $post->id %>"/>
+    <link href="<%= skryfconf->site %>/post/<%= $post->id %>"/>
     <updated><%= $post->date %></updated>
-    <id><%= blagconf->site %>/<%= $post->id %></id>
+    <id><%= skryfconf->site %>/<%= $post->id %></id>
     <content type="html"><![CDATA[<%== $post->html %>]]></content>
   </entry>
   % }

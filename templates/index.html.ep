@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= blagconf->title %></title>
+  <title><%= skryfconf->title %></title>
   <link rel="stylesheet"  href="/style.css"
        type="text/css" 
        media="screen" 
@@ -13,9 +13,9 @@
 
 <body>
 %= include "nav"
-<h2><img src="<%= blagconf->gravatar %>" /><%= blagconf->title %></h2>
+<h2><img src="<%= skryfconf->gravatar %>" /><%= skryfconf->title %></h2>
 
-<h4><%= blagconf->description %></h4>
+<h4><%= skryfconf->description %></h4>
 
 <div id="container">
   <ul>
@@ -37,13 +37,13 @@
   <p>
   <i>
     <a href="https://github.com/battlemidget/App-skryf">
-      skryf <%= blagconf->version %>
+      skryf <%= skryfconf->version %>
     </a>
   </i>
   :: 
   <a href="/atom.xml"><img src="/rss.png" /></a>
-  <i><%= blagconf->author %></i>
-    :: <%== blagconf->contact %>
+  <i><%= skryfconf->author %></i>
+    :: <%== skryfconf->contact %>
   </p>
 </div>
 

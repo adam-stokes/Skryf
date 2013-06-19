@@ -1,3 +1,3 @@
 #!/usr/bin/env perl
 $ENV{MOJO_MODE} = 'production';
-require 'skryf';
+require 'App::skryf';

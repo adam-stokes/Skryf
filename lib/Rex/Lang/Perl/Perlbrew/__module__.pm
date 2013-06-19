@@ -1,19 +1,18 @@
 #
 # AUTHOR: jan gehring <jan.gehring@gmail.com>
-# REQUIRES: 
+# REQUIRES:
 # LICENSE: Apache License 2.0
-# 
+#
 # Simple Module to install Perlbrew on your Server.
 #
-# 
+#
 # vim: set ts=3 sw=3 tw=0:
 # vim: set expandtab:
 #
 package Rex::Lang::Perl::Perlbrew;
-   
+
 # VERSION
-use strict;
-use warnings;
+use strictures 1;
 
 use Rex -base;
 
@@ -22,7 +21,7 @@ use base qw(Exporter);
 use vars qw(@EXPORT);
 
 use Rex::Config;
-    
+
 @EXPORT = qw(perlbrew);
 
 use vars qw($perlbrew_root);
