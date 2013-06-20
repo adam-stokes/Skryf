@@ -20,19 +20,10 @@ task "upgrade",
     run "ubic restart stokesblog";
   };
 
-desc "Refresh templates";
-task "refresh",
-  group => "webserver",
-  sub {
-    perlbrew -use => "perl-5.16.3";
-    say "Refreshing templates and software";
-    run "cd /home/$ENV{BLOGUSER}/skryf && git pull";
-  };
-
 desc "Sync posts";
 task "deploy",
   group => 'webserver',
   sub {
-    sync "$ENV{HOME}/posts/*", "/home/$ENV{BLOGUSER}/posts",
-      {parameters => '--delete',};
+    sync "$ENV{HOME}/blog/*", "/home/$ENV{BLOGUSER}/blog",
+      {parameters => '-C --exclude=\'pending\' --exclude=\'README.pod\' --delete',};
   };
