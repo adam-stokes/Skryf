@@ -10,7 +10,6 @@ use App::skryf::Cfg;
 use App::skryf::Util;
 use App::skryf::Post;
 use App::skryf::PostList;
-use Data::Dump qw[pp];
 
 use Mojolicious::Lite;
 
@@ -46,7 +45,6 @@ if ($media_directory->is_dir) {
 else {
     push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
 }
-pp(@{app->static->paths});
 
 my $postdir = $cfghash->{post_directory} || '%homedir%/blog/posts';
 $postdir = App::skryf::Util->sformat($postdir, bindir => $Bin);
