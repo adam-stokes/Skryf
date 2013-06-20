@@ -11,6 +11,11 @@ __END__
 
 App-skryf - perl blogger
 
+=head1 DESCRIPTION
+
+Another blog engine utilizing Mojolicious, Markdown, Starman, Rex, and Ubic for
+a more streamlined deployable approach.
+
 =head1 PREREQS
 
 I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't judge.

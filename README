@@ -1,8 +1,13 @@
 NAME
     App-skryf - perl blogger
 
+DESCRIPTION
+    Another blog engine utilizing Mojolicious, Markdown, Starman, Rex, and
+    Ubic for a more streamlined deployable approach.
+
 PREREQS
-    I like http://perlbrew.pl and so should you :)
+    I like http://perlbrew.pl, but, whatever you're comfortable with. I
+    won't judge.
 
 INSTALLATION
         $ git clone git://github.com/battlemidget/App-skryf.git
@@ -11,23 +16,26 @@ INSTALLATION
 DEPLOY
         $ export BLOGUSER=username
         $ export BLOGSERVER=example.com
+
+        If perlbrew is installed Rex will autoload that environment to use remotely.
+        Otherwise more tinkering is required to handle the perl environment remotely.
         $ rex deploy
 
 RUN (Development)
-        $ plackup -R
+        $ morbo `which skryf`
 
 RUN (Production)
     I use Ubic to manage the process
 
-       use Ubic::Service::SimpleDaemon;
-       my $service = Ubic::Service::SimpleDaemon->new(
-        bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
-        cwd => "/home/username",
-        stdout => "/tmp/blog.log",
-        stderr => "/tmp/blog.err.log",
-        ubic_log => "/tmp/blog.ubic.log",
-        user => "username"
-       );
+         use Ubic::Service::SimpleDaemon;
+         my $service = Ubic::Service::SimpleDaemon->new(
+          bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
+          cwd => "/home/username",
+          stdout => "/tmp/blog.log",
+          stderr => "/tmp/blog.err.log",
+          ubic_log => "/tmp/blog.ubic.log",
+          user => "username"
+         );
 
 AUTHOR
     Adam Stokes <adamjs@cpan.org>
