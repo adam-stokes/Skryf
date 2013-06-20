@@ -9,6 +9,15 @@ user $ENV{BLOGUSER} || "skryf";
 
 group webserver => $ENV{BLOGSERVER};
 
+desc "Restart blog service";
+task "restart",
+  group => "webserver",
+  sub {
+    perlbrew -use => "perl-5.16.3";
+    say "Restarting blog";
+    run "ubic restart stokesblog";
+  };
+
 desc "Does a full software upgrade and dependency check";
 task "upgrade",
   group => "webserver",
@@ -16,8 +25,7 @@ task "upgrade",
     perlbrew -use => "perl-5.16.3";
     say "cpan update";
     run "cpanm -q --notest App::skryf";
-    say "Restarting blog";
-    run "ubic restart stokesblog";
+    do_task "restart";
   };
 
 desc "Sync posts";
