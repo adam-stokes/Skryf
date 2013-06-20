@@ -6,11 +6,14 @@ use FindBin '$Bin';
 use Path::Tiny;
 use File::ShareDir ':ALL';
 
+use App::skryf::Cfg;
+use App::skryf::Util;
+use App::skryf::Post;
+use App::skryf::PostList;
+
 use Mojolicious::Lite;
 
 # VERSION
-
-plugin 'Blog' => {storage => 'directory',};
 
 # Copy initial config if one doesn't exist.
 my $cfgfile = path($ENV{HOME}, ".skryf.conf");
@@ -108,3 +111,12 @@ app->start;
 
 __END__
 
+=head1 NAME
+
+skryf - blogging gateway
+
+=head1 DESCRIPTION
+
+This is where the magic happens.
+
+=cut
