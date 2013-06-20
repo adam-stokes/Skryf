@@ -7,17 +7,22 @@ use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
 use DateTime;
 
+use App::skryf::Util;
+
 # VERSION
 
-has description => "Edit pending blags.\n";
-has datetime => sub { my $self = shift; DateTime->now->set_time_zone($self->app->config->{blagcfg}->{tz}) };
+has description => "Edit pending posts.\n";
+has datetime => sub {
+    my $self = shift;
+    DateTime->now->set_time_zone($self->app->config->{skryfcfg}->{tz});
+};
 
 sub run {
     my ($self, $post) = @_;
 
-    my $postdir = $self->app->config->{blagcfg}->{post_directory};
+    my $postdir = $self->app->config->{skryfcfg}->{post_directory};
     die "No post_directory configured\n" unless $postdir;
-    $postdir = path(Blag::Util->sformat($postdir, bindir => $Bin));
+    $postdir = path(App::skryf::Util->sformat($postdir, bindir => $Bin));
     my $pendingdir = $postdir->child('pending');
     die "No pending post directory\n" unless $pendingdir->exists;
 
@@ -61,7 +66,7 @@ sub run {
         my @lines = $file->lines_utf8;
         for (@lines) {
             if (index($_, 'Date: ') == 0) {
-                my $date = $self->datetime->datetime().'Z';
+                my $date = $self->datetime->datetime() . 'Z';
                 $_ = "Date: $date\n";
                 last;
             }
@@ -70,7 +75,7 @@ sub run {
         say "Success! You may want to remove $file";
     }
     else {
-        say "\nMove skipped; use 'reblag $post' to edit";
+        say "\nMove skipped; use 'repost $post' to edit";
     }
 }
 1;

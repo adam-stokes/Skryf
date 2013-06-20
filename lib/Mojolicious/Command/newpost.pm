@@ -6,7 +6,8 @@ use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
 use DateTime;
-
+use App::skryf::Util;
+use Data::Dump qw[pp];
 # VERSION
 
 has description => "Create blog post.\n";
@@ -17,7 +18,10 @@ new-blog-entry Should be in the 'a-z 0-9 _ -' set.
 
 EOF
 
-has datetime => sub { my $self=shift; DateTime->now->set_time_zone($self->app->config->{blagcfg}->{tz}) };
+has datetime => sub {
+    my $self = shift;
+    DateTime->now->set_time_zone($self->app->config->{skryfcfg}->{tz});
+};
 
 sub run {
     my ($self, $post) = @_;
@@ -28,23 +32,25 @@ sub run {
           "Post names should be in the 'a-z 0-9 _ -' set";
     }
 
-    my $postdir = $self->app->config->{blagcfg}->{post_directory};
+    my $postdir = $self->app->config->{skryfcfg}->{post_directory};
     die "No post_directory configured\n" unless $postdir;
-    $postdir = path(Blag::Util->sformat($postdir, bindir => $Bin));
+    $postdir = path(App::skryf::Util->sformat($postdir, bindir => $Bin));
     my $pendingdir = $postdir->child('pending');
     $pendingdir->mkpath;
 
     my $file = $pendingdir->child($post . ".markdown");
-    die "Post exists at $file, maybe you wanted 'reblag'?\n"
+    die "Post exists at $file, maybe you wanted 'repost'?\n"
       if $file->exists;
 
-    my $dest = $postdir->child($self->datetime->strftime("%Y-%m-%d") . '-' .$post . ".markdown");
+    my $dest =
+      $postdir->child(
+        $self->datetime->strftime("%Y-%m-%d") . '-' . $post . ".markdown");
     die "Post already published at $dest\n" if $dest->exists;
 
     print "Topic: ";
     my $topic = <STDIN>;
     chomp $topic;
-    my $date = $self->datetime->datetime().'Z';
+    my $date = $self->datetime->datetime() . 'Z';
     print "Categories: ";
     my $category = <STDIN>;
     chomp $category;
@@ -70,7 +76,7 @@ sub run {
         $file->move($dest->absolute);
     }
     else {
-        say "\nMove skipped; use 'reblag $post' to edit";
+        say "\nMove skipped; use 'repost $post' to edit";
     }
 }
 

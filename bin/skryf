@@ -25,7 +25,16 @@ plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};
 
-my $postdir = $cfghash->{post_directory} || '%homedir%/posts';
+# Setup template and static paths
+# Always check config defined paths.
+push @{app->renderer->paths}, path($cfghash->{template_directory});
+push @{app->static->paths}, path($cfghash->{media_directory});
+
+# Fallback on vendor supplied
+push @{app->renderer->paths}, path(dist_dir('App-skryf'), 'templates');
+push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
+
+my $postdir = $cfghash->{post_directory} || '%homedir%/blog/posts';
 $postdir = App::skryf::Util->sformat($postdir, bindir => $Bin);
 
 my $postlist = App::skryf::PostList->from_dir($postdir);
@@ -48,8 +57,7 @@ get '/feeds/:category/atom.xml' => sub {
     my $category = $self->param('category');
     my $_posts   = $postlist->scan;
     $self->stash(postlist => $_posts->by_cat($category));
-    my $tmpl = 'atom';
-    $self->render(template => $tmpl, format => 'xml');
+    $self->render(template => 'atom', format => 'xml');
 };
 
 # atom.xml
@@ -59,8 +67,7 @@ get '/atom.xml' => sub {
     my $_posts = $postlist->scan;
 
     $self->stash(postlist => $_posts->by_date);
-    my $tmpl = 'atom';
-    $self->render(template => $tmpl, format => 'xml');
+    $self->render(template => 'atom', format => 'xml');
 };
 
 get '/about' => sub {

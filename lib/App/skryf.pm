@@ -13,7 +13,7 @@ App-skryf - perl blogger
 
 =head1 PREREQS
 
-I like L<http://perlbrew.pl> and so should you :)
+I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't judge.
 
 =head1 INSTALLATION
 
@@ -24,25 +24,28 @@ I like L<http://perlbrew.pl> and so should you :)
 
     $ export BLOGUSER=username
     $ export BLOGSERVER=example.com
+
+    If perlbrew is installed Rex will autoload that environment to use remotely.
+    Otherwise more tinkering is required to handle the perl environment remotely.
     $ rex deploy
 
 =head1 RUN (Development)
 
-    $ plackup -R
+    $ morbo `which skryf`
 
 =head1 RUN (Production)
 
 I use Ubic to manage the process
 
-   use Ubic::Service::SimpleDaemon;
-   my $service = Ubic::Service::SimpleDaemon->new(
-    bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
-    cwd => "/home/username",
-    stdout => "/tmp/blog.log",
-    stderr => "/tmp/blog.err.log",
-    ubic_log => "/tmp/blog.ubic.log",
-    user => "username"
-   );
+     use Ubic::Service::SimpleDaemon;
+     my $service = Ubic::Service::SimpleDaemon->new(
+      bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
+      cwd => "/home/username",
+      stdout => "/tmp/blog.log",
+      stderr => "/tmp/blog.err.log",
+      ubic_log => "/tmp/blog.ubic.log",
+      user => "username"
+     );
 
 =head1 AUTHOR
 
