@@ -9,9 +9,38 @@ PREREQS
     I like http://perlbrew.pl, but, whatever you're comfortable with. I
     won't judge.
 
-INSTALLATION
+INSTALLATION (SOURCE)
         $ git clone git://github.com/battlemidget/App-skryf.git
         $ cpanm --installdeps .
+
+SETUP
+    By default skryf will look in dist_dir for templates and media. To
+    override that make sure *~/.skryf.conf* points to the locations of your
+    templates, posts, and media. For example, this is a simple directory
+    structure for managing your blog.
+
+        $ mkdir -p ~/blog/{posts,templates,public}
+
+    Edit ~/.skryf.conf to reflect those directories in *media_directory*,
+    *post_directory*, and *template_directory*.
+
+        ## Available vars:
+        ##   %bindir%   (path to executable's dir)
+        ##   %homedir%  (current $HOME)
+        post_directory     => '%homedir%/blog/posts',
+        template_directory => '%homedir%/blog/templates',
+        media_directory    => '%homedir%/blog/public',
+
+    You'll want to make sure that files exist that reflect the template
+    configuration options.
+
+        post_template  => 'post',
+        index_template => 'index',
+        about_template => 'about',
+        css_template   => 'style',
+
+    So ~/blog/templates/{post.html.ep,index.html.ep,about.html.ep} and
+    ~/blog/public/style.css
 
 DEPLOY
         $ export BLOGUSER=username
@@ -29,7 +58,7 @@ RUN (Production)
 
          use Ubic::Service::SimpleDaemon;
          my $service = Ubic::Service::SimpleDaemon->new(
-          bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
+          bin => "starman -p 9001 `which skryf` -R",
           cwd => "/home/username",
           stdout => "/tmp/blog.log",
           stderr => "/tmp/blog.err.log",

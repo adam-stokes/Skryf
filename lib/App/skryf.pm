@@ -20,10 +20,37 @@ a more streamlined deployable approach.
 
 I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't judge.
 
-=head1 INSTALLATION
+=head1 INSTALLATION (SOURCE)
 
     $ git clone git://github.com/battlemidget/App-skryf.git
     $ cpanm --installdeps .
+
+=head1 SETUP
+
+By default B<skryf> will look in dist_dir for templates and media. To override that
+make sure I<~/.skryf.conf> points to the locations of your templates, posts, and media.
+For example, this is a simple directory structure for managing your blog.
+
+    $ mkdir -p ~/blog/{posts,templates,public}
+
+Edit ~/.skryf.conf to reflect those directories in I<media_directory>, I<post_directory>,
+and I<template_directory>.
+
+    ## Available vars:
+    ##   %bindir%   (path to executable's dir)
+    ##   %homedir%  (current $HOME)
+    post_directory     => '%homedir%/blog/posts',
+    template_directory => '%homedir%/blog/templates',
+    media_directory    => '%homedir%/blog/public',
+
+You'll want to make sure that files exist that reflect the template configuration options.
+
+    post_template  => 'post',
+    index_template => 'index',
+    about_template => 'about',
+    css_template   => 'style',
+
+So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/public/style.css>
 
 =head1 DEPLOY
 
@@ -44,7 +71,7 @@ I use Ubic to manage the process
 
      use Ubic::Service::SimpleDaemon;
      my $service = Ubic::Service::SimpleDaemon->new(
-      bin => "starman -p 9001 perl5/perlbrew/perls/perl-5.16.3/bin/skryf -R",
+      bin => "starman -p 9001 `which skryf` -R",
       cwd => "/home/username",
       stdout => "/tmp/blog.log",
       stderr => "/tmp/blog.err.log",
