@@ -10,6 +10,7 @@ use App::skryf::Cfg;
 use App::skryf::Util;
 use App::skryf::Post;
 use App::skryf::PostList;
+use Data::Dump qw[pp];
 
 use Mojolicious::Lite;
 
@@ -26,13 +27,26 @@ plugin 'Config' => {file => $cfgfile};
 my $cfghash = app->config->{skryfcfg} || +{};
 
 # Setup template and static paths
-# Always check config defined paths.
-push @{app->renderer->paths}, path($cfghash->{template_directory});
-push @{app->static->paths}, path($cfghash->{media_directory});
+my $template_directory = $cfghash->{template_directory};
+$template_directory = path(App::skryf::Util->sformat($template_directory, bindir => $Bin));
 
-# Fallback on vendor supplied
-push @{app->renderer->paths}, path(dist_dir('App-skryf'), 'templates');
-push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
+my $media_directory = $cfghash->{media_directory};
+$media_directory = path(App::skryf::Util->sformat($media_directory, bindir => $Bin));
+
+if ($template_directory->is_dir) {
+    push @{app->renderer->paths}, $template_directory;
+}
+else {
+    push @{app->renderer->paths}, path(dist_dir('App-skryf'), 'templates');
+}
+
+if ($media_directory->is_dir) {
+    push @{app->static->paths}, $media_directory;
+}
+else {
+    push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
+}
+pp(@{app->static->paths});
 
 my $postdir = $cfghash->{post_directory} || '%homedir%/blog/posts';
 $postdir = App::skryf::Util->sformat($postdir, bindir => $Bin);
