@@ -1,6 +1,5 @@
 <div id="navbar">
-  <a href="/">Root</a> :: 
-  <a href="/about">About</a>
+  <a href="/">Root</a>
 </div>
 <div id="header">
   <div class="logo">

@@ -1,5 +1,4 @@
 requires "Carp" => "0";
-requires "Data::Dump" => "0";
 requires "DateTime" => "0";
 requires "Exporter" => "0";
 requires "File::ShareDir" => "0";

@@ -82,13 +82,13 @@ get '/atom.xml' => sub {
     $self->render(template => 'atom', format => 'xml');
 };
 
-get '/about' => sub {
+get '/:staticpage' => sub {
     my $self = shift;
-    my $tmpl = $cfghash->{about_template} || 'about';
-    my $post = $postlist->get('about');
+    my $staticpage = $self->param('staticpage');
+    my $tmpl = $cfghash->{static_template} || 'static';
+    my $post = $postlist->get($staticpage);
     $self->stash(post => $post);
     $self->render($tmpl);
-
 };
 
 get '/post/:id' => sub {

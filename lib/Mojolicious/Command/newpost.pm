@@ -7,7 +7,7 @@ use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
 use DateTime;
 use App::skryf::Util;
-use Data::Dump qw[pp];
+
 # VERSION
 
 has description => "Create blog post.\n";
