@@ -13,9 +13,6 @@
 
 <body>
 %= include "nav"
-<h2><img src="<%= skryfconf->gravatar %>" /><%= skryfconf->title %></h2>
-
-<h4><%= skryfconf->description %></h4>
 
 <div id="container">
   <ul>
@@ -25,7 +22,7 @@
       <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />
 
       <b><a href="/post/<%= $post->id %>">
-          <div class="posttopic"><%= $post->topic %></div>
+          <%= $post->topic %>
       </a></b>
       </li>
   % }

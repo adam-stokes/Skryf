@@ -1,6 +1,6 @@
 body {
   color: #000000;
-  background-color: beige;
+  background-image: url('/brickwall.png');
   margin-left: 5%;
   margin-right: 5%;
   font-family: 'Ubuntu';
@@ -9,6 +9,12 @@ body {
 
 #container {
     width: 960px;
+    color: #666;
+}
+
+#container a {
+    font-weight: bold;
+    color: black;
 }
 
 .clearfix {
@@ -16,7 +22,7 @@ body {
 }
 
 a {
-  color: maroon;
+  color: rgb(80,0,0);
 }
 a:link {
   text-decoration: none; 
@@ -31,21 +37,16 @@ a:active {
   text-decoration: none;
 }
 
-h1        { color: rgb(40,0,0); }
-h2        { color: rgb(96,0,0); }
+h1        { color: #666; }
+h2        { color: #999; text-indent: 0.5em; }
 h3 { 
-    color: #339933; 
-    text-shadow: 0.1em 0.1em white;
+    color: rgb(40,0,0); 
+    text-indent: 1em;
 }
-h4        { color: navy; }
-a.header  { color: navy; }
-a.header:hover {
-  color: black;
-  text-decoration: underline;
-}
+h4        { color: #aaa; }
 
 p {
-  text-indent: -1px;
+
   margin-left: 1em;
   margin-top: 0.50em;
   margin-bottom: 0.50em;
@@ -53,6 +54,15 @@ p {
 .rcs {
   margin-top: 2em;
 }
+
+#header {
+    clear:both;
+}
+
+#header .logo {
+    float:left;
+}
+
 .footer {
   width: 100%;
   border-top: 1px solid #000042;
@@ -65,17 +75,21 @@ p {
 }
 
 i.postdate {
-  color: green;
+  color: rgb(50,0,0);
   font-size: 0.8em;
 }
 
 i.categories {
-  color: orange;
+  color: #bbb;
   font-size: .85em;
 }
 
 .posttopic {
     font-size: 90%;
+}
+
+.post-item {
+
 }
 
 .post-item ul {
@@ -89,11 +103,21 @@ ul {
   display: inline;
 }
 
-li.postbox {
+#container li.postbox {
     width: 310px;
     height: 125px;
     padding: 5px;
     float:left;
+}
+
+#container li.postbox a {
+    font-size: 0.95em;
+    color: rgb(140,0,0);
+}
+
+li.postbox i.postdate {
+  font-size: 1em;
+  font-style: normal;
 }
 
 dt {

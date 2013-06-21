@@ -26,10 +26,12 @@
 <p>Hobby languages:</p>
 <ul>
 <li>LISP dialects</li>
-<li>ANSICL</li>
-<li>SBCL</li>
-<li>CMUCL</li>
-<li>Clojure</li>
+<ul>
+  <li>ANSICL</li>
+  <li>SBCL</li>
+  <li>CMUCL</li>
+  <li>Clojure</li>
+</ul>
 <li>Go</li>
 <li>Dart</li>
 <li>Javascript</li>
@@ -55,7 +57,11 @@
 <p>Since working with Canonical I've done a lot of Debian/Ubuntu specific work for sosreport in order to have proper packaging and make sosreport's gathering routines applicable on those distributions.</p>
 <p><a href="https://github.com/teddziuba/django-sslserver/commits?author=battlemidget">django-sslserver</a></p>
 <p>Run development django servers with ssl support.</p>
+<p><a href="https://github.com/ajscg/vagrantpress">Vagrantpress</a></p>
+<p>Project for automating vagrant deployments with php, wordpress, and mysql configured automatically.</p>
 <h3 id="other-smaller-projects">Other smaller projects</h3>
+<p><a href="https://github.com/battlemidget/App-skryf">App::skryf</a></p>
+<p>A perl blog engine utilizing mojolicious, starman, ubic, and rex.</p>
 <p><a href="http://python.salesforce.astokes.org">Python-salesforce</a></p>
 <p>A python client and authorization library for interfacing with Salesforce RESTful API.</p>
 <p><a href="http://net.oauth.lp.astokes.org">Net::OAuth::LP</a></p>

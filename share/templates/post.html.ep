@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>blag: <%= $post->topic %></title>
+  <title><%= $post->topic %></title>
   <link rel="stylesheet"  href="/style.css"
        type="text/css"
        media="screen"
