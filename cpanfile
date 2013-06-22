@@ -7,6 +7,7 @@ requires "List::Objects::WithUtils" => "0";
 requires "Mojo::Base" => "0";
 requires "Mojolicious::Lite" => "0";
 requires "Mojolicious::Plugin::Blog" => "0";
+requires "Mojolicious::Plugin::Gravatar" => "0";
 requires "Path::Tiny" => "0";
 requires "Rex" => "0";
 requires "Rex::Config" => "0";
