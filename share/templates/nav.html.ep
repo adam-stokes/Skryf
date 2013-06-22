@@ -3,7 +3,7 @@
 </div>
 <div id="header">
   <div class="logo">
-    <%= gravatar $skryfconf->contact %>
+    <%= gravatar skryfconf->contact %>
   </div>
   <div class="title">
     <h2><%= skryfconf->title %></h2>
