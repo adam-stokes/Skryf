@@ -24,6 +24,7 @@ path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
   unless $cfgfile->exists;
 
 plugin 'gravatar';
+plugin 'GoogleAnalytics';
 plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};
