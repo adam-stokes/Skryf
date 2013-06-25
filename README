@@ -2,7 +2,7 @@ NAME
     App-skryf - perl blogger
 
 DESCRIPTION
-    Another blog engine utilizing Mojolicious, Markdown, Starman, Rex, and
+    Another blog engine utilizing Mojolicious, Markdown, Hypnotoad, Rex, and
     Ubic for a more streamlined deployable approach.
 
 PREREQS
@@ -37,7 +37,6 @@ SETUP
         post_template  => 'post',
         index_template => 'index',
         about_template => 'about',
-        css_template   => 'style',
 
     So ~/blog/templates/{post.html.ep,index.html.ep,about.html.ep} and
     ~/blog/public/style.css
@@ -48,6 +47,7 @@ DEPLOY
 
         If perlbrew is installed Rex will autoload that environment to use remotely.
         Otherwise more tinkering is required to handle the perl environment remotely.
+        $ rexify --use=Rex::Lang::Perl::Perlbrew
         $ rex deploy
 
 RUN (Development)
@@ -58,7 +58,7 @@ RUN (Production)
 
          use Ubic::Service::SimpleDaemon;
          my $service = Ubic::Service::SimpleDaemon->new(
-          bin => "starman -p 9001 `which skryf` -R",
+          bin => "hypnotoad -f `which skryf`",
           cwd => "/home/username",
           stdout => "/tmp/blog.log",
           stderr => "/tmp/blog.err.log",

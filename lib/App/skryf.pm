@@ -13,7 +13,7 @@ App-skryf - perl blogger
 
 =head1 DESCRIPTION
 
-Another blog engine utilizing Mojolicious, Markdown, Starman, Rex, and Ubic for
+Another blog engine utilizing Mojolicious, Markdown, Hypnotoad, Rex, and Ubic for
 a more streamlined deployable approach.
 
 =head1 PREREQS
