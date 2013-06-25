@@ -1,4 +1,4 @@
-package Mojolicious::Command::repost;
+package App::skryf::Command::repost;
 
 use strictures 1;
 use v5.16;

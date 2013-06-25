@@ -50,6 +50,9 @@ else {
     push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
 }
 
+# use App::skryf::Command namespace
+push @{app->commands->namespaces}, 'App::skryf::Command';
+
 ###############################################################################
 # Pull all blog posts
 ###############################################################################

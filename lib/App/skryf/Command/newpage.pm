@@ -1,4 +1,4 @@
-package Mojolicious::Command::newpost;
+package App::skryf::Command::newpage;
 
 use strictures 1;
 use v5.16;
@@ -10,11 +10,11 @@ use App::skryf::Util;
 
 # VERSION
 
-has description => "Create blog post.\n";
+has description => "Create a new static page.\n";
 has usage => <<"EOF";
-Usage: $0 newpost new-blog-entry
+Usage: $0 newpage page-name
 
-new-blog-entry Should be in the 'a-z 0-9 _ -' set.
+page-name Should be in the 'a-z 0-9 _ -' set.
 
 EOF
 
@@ -24,28 +24,27 @@ has datetime => sub {
 };
 
 sub run {
-    my ($self, $post) = @_;
-    die $self->usage unless $post;
+    my ($self, $page) = @_;
+    die $self->usage unless $page;
 
-    unless ($post =~ /^[A-Za-z0-9_-]+$/) {
-        die "Invalid post name '$post'\n",
-          "Post names should be in the 'a-z 0-9 _ -' set";
+    unless ($page =~ /^[A-Za-z0-9_-]+$/) {
+        die "Invalid post name '$page'\n",
+          "Page names should be in the 'a-z 0-9 _ -' set";
     }
 
-    my $postdir = $self->app->config->{skryfcfg}->{post_directory};
-    die "No post_directory configured\n" unless $postdir;
-    $postdir = path(App::skryf::Util->sformat($postdir, bindir => $Bin));
-    my $pendingdir = $postdir->child('pending');
+    my $staticdir = $self->app->config->{skryfcfg}->{static_directory};
+    die "No static_directory configured\n" unless $staticdir;
+    $staticdir = path(App::skryf::Util->sformat($staticdir, bindir => $Bin));
+    my $pendingdir = $staticdir->child('pending');
     $pendingdir->mkpath;
 
-    my $file = $pendingdir->child($post . ".markdown");
-    die "Post exists at $file, maybe you wanted 'repost'?\n"
+    my $file = $pendingdir->child($page . ".markdown");
+    die "Page exists at $file, maybe you wanted 'repost'?\n"
       if $file->exists;
 
     my $dest =
-      $postdir->child(
-        $self->datetime->strftime("%Y-%m-%d") . '-' . $post . ".markdown");
-    die "Post already published at $dest\n" if $dest->exists;
+      $staticdir->child($page . ".markdown");
+    die "Page already published at $dest\n" if $dest->exists;
 
     print "Topic: ";
     my $topic = <STDIN>;
@@ -76,7 +75,7 @@ sub run {
         $file->move($dest->absolute);
     }
     else {
-        say "\nMove skipped; use 'repost $post' to edit";
+        say "\nMove skipped; use 'repost $page' to edit";
     }
 }
 
