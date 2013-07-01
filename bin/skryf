@@ -25,6 +25,7 @@ path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
 
 plugin 'gravatar';
 plugin 'GoogleAnalytics';
+plugin 'Disqus::Tiny';
 plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};

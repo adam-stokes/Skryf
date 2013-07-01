@@ -26,6 +26,7 @@
 <div id="container" class="post-item">
 
  <%== $post->html %>
+ <%= disqus_inc 'a-working-forum-name' %>
 </div>
 
 <div id="footer">
