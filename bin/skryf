@@ -23,12 +23,14 @@ my $cfgfile = path($ENV{HOME}, ".skryf.conf");
 path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
   unless $cfgfile->exists;
 
-plugin 'gravatar';
-plugin 'GoogleAnalytics';
-plugin 'Disqus::Tiny';
 plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};
+
+# Load extra plugins
+for (keys $cfghash->{extra_modules}) {
+    plugin "$_" if $cfghash->{extra_modules}{$_} > 0;
+  }
 
 # Setup template and static paths
 my $template_directory = $cfghash->{template_directory};
