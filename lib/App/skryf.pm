@@ -1,7 +1,8 @@
-use strictures 1;
+use strict;
+use warnings;
 package App::skryf;
 
-our $VERSION = '0.006';
+our $VERSION = '0.007';
 
 1;
 
@@ -81,7 +82,11 @@ I use Ubic to manage the process
 
 =head1 AUTHOR
 
-Adam Stokes <adamjs@cpan.org>
+Adam Stokes E<lt>adamjs@cpan.orgE<gt>
+
+=head1 COPYRIGHT
+
+Copyright 2013- Adam Stokes
 
 =head1 DISCLAIMER
 

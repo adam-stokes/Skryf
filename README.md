@@ -74,6 +74,10 @@ I use Ubic to manage the process
 
 Adam Stokes <adamjs@cpan.org>
 
+# COPYRIGHT
+
+Copyright 2013- Adam Stokes
+
 # DISCLAIMER
 
 Jon Portnoy \[avenj at cobaltirc.org\](http://www.cobaltirc.org) is original author of blagger

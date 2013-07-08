@@ -1,0 +1,9 @@
+Revision history for App-skryf
+
+{{$NEXT}}
+    - 1804fa4 use milla
+    - 5d4e64b autoload plugins from config
+    - 121f2d3 update cpan reqs
+    - 48065cd add disqus support
+    - 569e734 add datetime format req
+    - 2a5f43c update deploy docs

@@ -1,21 +1,18 @@
-requires "Carp" => "0";
-requires "DateTime" => "0";
-requires "DateTime::Format::ISO8601" => "0";
-requires "File::ShareDir" => "0";
-requires "FindBin" => "0";
-requires "List::Objects::WithUtils" => "0";
-requires "Mojo::Base" => "0";
-requires "Mojolicious::Lite" => "0";
-requires "Mojolicious::Plugin::Disqus::Tiny" => "0";
-requires "Mojolicious::Plugin::GoogleAnalytics" => "0";
-requires "Mojolicious::Plugin::Gravatar" => "0";
-requires "Path::Tiny" => "0";
-requires "Pithub" => "0";
-requires "Text::Markdown" => "0";
-requires "perl" => "v5.16.3";
-requires "strictures" => "1";
+requires 'Carp';
+requires 'DateTime';
+requires 'DateTime::Format::ISO8601';
+requires 'File::ShareDir';
+requires 'FindBin';
+requires 'List::Objects::WithUtils';
+requires 'Mojo::Base';
+requires 'Mojolicious::Lite';
+requires 'Mojolicious::Plugin::Disqus::Tiny';
+requires 'Mojolicious::Plugin::GoogleAnalytics';
+requires 'Mojolicious::Plugin::Gravatar';
+requires 'Path::Tiny';
+requires 'Pithub';
+requires 'Text::Markdown';
 
-on 'configure' => sub {
-  requires "ExtUtils::MakeMaker" => "6.30";
-  requires "File::ShareDir::Install" => "0.03";
+on develop => sub {
+    requires 'Test::Pod', '1.41';
 };
