@@ -1,7 +1,5 @@
 package App::skryf::PostList;
 
-# VERSION
-
 use strictures 1;
 use Carp 'confess';
 use List::Objects::WithUtils;

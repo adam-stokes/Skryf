@@ -1,7 +1,5 @@
 package App::skryf::Social::Github;
 
-# VERSION
-
 use strictures 1;
 use Pithub;
 

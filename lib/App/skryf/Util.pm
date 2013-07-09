@@ -1,7 +1,6 @@
 package App::skryf::Util;
-use strictures 1;
 
-# VERSION
+use strictures 1;
 
 sub sformat {
     my ($class, $string) = splice @_, 0, 2;

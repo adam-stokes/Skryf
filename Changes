@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Pull in configuration parameters from user defined config
 
 0.007_2  2013-07-09 15:25:38 EDT
     - Just a test version
