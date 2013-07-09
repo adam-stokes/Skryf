@@ -1,6 +1,7 @@
 package App::skryf::Command::repost;
 
-use strictures 1;
+use strict;
+use warnings;
 use v5.16;
 use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';

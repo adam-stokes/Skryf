@@ -1,14 +1,13 @@
 package App::skryf::Command::newpage;
 
-use strictures 1;
+use strict;
+use warnings;
 use v5.16;
 use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
 use DateTime;
 use App::skryf::Util;
-
-# VERSION
 
 has description => "Create a new static page.\n";
 has usage => <<"EOF";
