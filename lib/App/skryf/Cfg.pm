@@ -1,5 +1,7 @@
 package App::skryf::Cfg;
 
+our $VERSION = '0.007';
+
 use Carp 'confess';
 
 sub TITLE ()    {0}
