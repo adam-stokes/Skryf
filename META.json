@@ -37,6 +37,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "Data::Printer" : "0",
             "DateTime" : "0",
             "DateTime::Format::ISO8601" : "0",
             "File::ShareDir" : "0",
@@ -53,7 +54,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/battlemidget/App-skryf/issues"
@@ -65,6 +66,6 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.007"
+   "version" : "0.007_1"
 }
 

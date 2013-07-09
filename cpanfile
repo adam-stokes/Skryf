@@ -12,6 +12,7 @@ requires 'Mojolicious::Plugin::Gravatar';
 requires 'Path::Tiny';
 requires 'Pithub';
 requires 'Text::Markdown';
+requires 'Data::Printer';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';

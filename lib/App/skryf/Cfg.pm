@@ -1,7 +1,5 @@
 package App::skryf::Cfg;
 
-# VERSION
-
 use Carp 'confess';
 
 sub TITLE ()    {0}
@@ -14,7 +12,6 @@ sub SITE ()     {5}
 sub author      { $_[0]->[AUTHOR] }
 sub contact     { $_[0]->[CONTACT] }
 sub title       { $_[0]->[TITLE] }
-sub version     {$::VERSION}
 sub description { $_[0]->[DESC] }
 sub gravatar    { $_[0]->[GRAVATAR] }
 sub site        { $_[0]->[SITE] }
