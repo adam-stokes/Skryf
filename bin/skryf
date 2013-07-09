@@ -23,7 +23,7 @@ my $cfgfile = path($ENV{HOME}, ".skryf.conf");
 path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
   unless $cfgfile->exists;
 
-plugin 'gravatar';
+plugin 'Gravatar';
 plugin 'GoogleAnalytics';
 plugin 'Disqus::Tiny';
 plugin 'Config' => {file => $cfgfile};
