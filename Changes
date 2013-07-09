@@ -1,6 +1,8 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+
+0.007_3  2013-07-09 15:39:51 EDT
     - Pull in configuration parameters from user defined config
 
 0.007_2  2013-07-09 15:25:38 EDT
