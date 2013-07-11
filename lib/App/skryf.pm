@@ -41,14 +41,15 @@ and I<template_directory>.
     ##   %bindir%   (path to executable's dir)
     ##   %homedir%  (current $HOME)
     post_directory     => '%homedir%/blog/posts',
+    static_directory   => '%homedir%/blog/static',
     template_directory => '%homedir%/blog/templates',
     media_directory    => '%homedir%/blog/public',
 
 You'll want to make sure that files exist that reflect the template configuration options.
 
-    post_template  => 'post',
-    index_template => 'index',
-    about_template => 'about',
+    post_template   => 'post',
+    index_template  => 'index',
+    static_template => 'static',
 
 So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/public/style.css>
 
@@ -64,7 +65,7 @@ So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/p
 
 =head1 RUN (Development)
 
-    $ morbo `which skryf`
+    $ skryf daemon
 
 =head1 RUN (Production)
 
