@@ -10,7 +10,7 @@ __END__
 
 =head1 NAME
 
-App-skryf - perl blogger
+App-skryf - i kno rite. another perl blogging engine.
 
 =head1 DESCRIPTION
 
