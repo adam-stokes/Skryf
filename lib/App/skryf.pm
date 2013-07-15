@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package App::skryf;
 
-our $VERSION = '0.007_4';
+our $VERSION = '0.008';
 
 1;
 
