@@ -1,6 +1,6 @@
 # NAME
 
-App-skryf - perl blogger
+App-skryf - i kno rite. another perl blogging engine.
 
 # DESCRIPTION
 
@@ -11,10 +11,9 @@ a more streamlined deployable approach.
 
 I like [http://perlbrew.pl](http://perlbrew.pl), but, whatever you're comfortable with. I won't judge.
 
-# INSTALLATION (SOURCE)
+# INSTALLATION (BLEEDING EDGE)
 
-    $ git clone git://github.com/battlemidget/App-skryf.git
-    $ cpanm --installdeps .
+    $ cpanm git://github.com/battlemidget/App-skryf.git
 
 # SETUP
 
@@ -42,6 +41,14 @@ You'll want to make sure that files exist that reflect the template configuratio
     static_template => 'static',
 
 So __~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}__ and __~/blog/public/style.css__
+
+# NEW POST
+
+    $ skryf newpost a-new-blog-post
+
+# NEW PAGE
+
+    $ skryf newpage an-about-page
 
 # DEPLOY
 
