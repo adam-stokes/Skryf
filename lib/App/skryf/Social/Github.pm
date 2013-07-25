@@ -1,6 +1,7 @@
+use strict;
+use warnings;
 package App::skryf::Social::Github;
 
-use strictures 1;
 use Pithub;
 
 sub repos {
