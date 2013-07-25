@@ -10,7 +10,7 @@ use DateTime;
 use App::skryf::Util;
 
 has description => "Create a new static page.\n";
-has usage => <<"EOF";
+has usage       => <<"EOF";
 Usage: $0 newpage page-name
 
 page-name Should be in the 'a-z 0-9 _ -' set.
@@ -41,8 +41,7 @@ sub run {
     die "Page exists at $file, maybe you wanted 'repost'?\n"
       if $file->exists;
 
-    my $dest =
-      $staticdir->child($page . ".markdown");
+    my $dest = $staticdir->child($page . ".markdown");
     die "Page already published at $dest\n" if $dest->exists;
 
     print "Topic: ";

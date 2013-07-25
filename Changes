@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Adding Mongo support
 
 0.008  2013-07-14 23:59:05 EDT
     - New release, adds following:

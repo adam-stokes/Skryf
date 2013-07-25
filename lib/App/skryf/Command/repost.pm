@@ -13,7 +13,7 @@ use App::skryf::Util;
 # VERSION
 
 has description => "Edit pending posts.\n";
-has datetime => sub {
+has datetime    => sub {
     my $self = shift;
     DateTime->now->set_time_zone($self->app->config->{skryfcfg}->{tz});
 };

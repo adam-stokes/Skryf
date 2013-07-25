@@ -1,8 +1,9 @@
 use strict;
 use warnings;
+
 package App::skryf;
 
-our $VERSION = '0.008';
+our $VERSION = '0.009';
 
 1;
 
@@ -14,8 +15,25 @@ App-skryf - i kno rite. another perl blogging engine.
 
 =head1 DESCRIPTION
 
-Another blog engine utilizing Mojolicious, Markdown, Hypnotoad, Rex, and Ubic for
-a more streamlined deployable approach.
+Another blog engine which utilizes
+
+=over 8
+
+=item Mojolicious
+
+=item Markdown
+
+=item Hypnotoad
+
+=item Rex
+
+=item Ubic 
+
+=item Mongo
+
+=back
+
+For a more streamlined deployable approach.
 
 =head1 PREREQS
 
@@ -28,27 +46,16 @@ I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't jud
 =head1 SETUP
 
 By default B<skryf> will look in dist_dir for templates and media. To override that
-make sure I<~/.skryf.conf> points to the locations of your templates, posts, and media.
-For example, this is a simple directory structure for managing your blog.
+make sure I<~/.skryf.conf> points to the locations of your templates and media.
+For example, this is a simple directory structure for managing your blog media and templates.
 
-    $ mkdir -p ~/blog/{posts,templates,public}
+    $ mkdir -p ~/blog/{templates,public}
 
-Edit ~/.skryf.conf to reflect those directories in I<media_directory>, I<post_directory>,
-and I<template_directory>.
+Edit ~/.skryf.conf to reflect those directories in I<media_directory> and 
+I<public_directory>.
 
-    ## Available vars:
-    ##   %bindir%   (path to executable's dir)
-    ##   %homedir%  (current $HOME)
-    post_directory     => '%homedir%/blog/posts',
-    static_directory   => '%homedir%/blog/static',
-    template_directory => '%homedir%/blog/templates',
-    media_directory    => '%homedir%/blog/public',
-
-You'll want to make sure that files exist that reflect the template configuration options.
-
-    post_template   => 'post',
-    index_template  => 'index',
-    static_template => 'static',
+    template_directory => '~/blog/templates',
+    media_directory    => '~/blog/public',
 
 So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/public/style.css>
 
@@ -98,8 +105,8 @@ Copyright 2013- Adam Stokes
 
 =head1 DISCLAIMER
 
-Jon Portnoy [avenj at cobaltirc.org](http://www.cobaltirc.org) is original author of blagger
-in which this code is based heavily off of.
+Jon Portnoy [avenj at cobaltirc.org](http://www.cobaltirc.org) is original 
+author of blagger in which this code is morphed heavily off of.
 
 =head1 LICENSE
 

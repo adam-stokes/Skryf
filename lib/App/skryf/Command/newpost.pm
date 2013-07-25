@@ -2,7 +2,7 @@ package App::skryf::Command::newpost;
 
 use strict;
 use warnings;
-use v5.16;
+use 5.016;
 use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
@@ -12,7 +12,7 @@ use App::skryf::Util;
 # VERSION
 
 has description => "Create blog post.\n";
-has usage => <<"EOF";
+has usage       => <<"EOF";
 Usage: $0 newpost new-blog-entry
 
 new-blog-entry Should be in the 'a-z 0-9 _ -' set.

@@ -4,10 +4,10 @@ use strictures 1;
 use Pithub;
 
 sub repos {
-  my ($self, $username) = @_;
-  my $repos = Pithub::Repos->new;
+    my ($self, $username) = @_;
+    my $repos = Pithub::Repos->new;
 
-  return $repos->list(user => $username);;
+    return $repos->list(user => $username);
 }
 
 1;

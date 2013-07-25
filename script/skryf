@@ -1,23 +1,18 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
-use v5.16.3;
-
-use FindBin '$Bin';
-use Path::Tiny;
-use File::ShareDir ':ALL';
-
-use App::skryf::Cfg;
-use App::skryf::Util;
+use 5.016;
 use App::skryf::Post;
-use App::skryf::PostList;
-
+use Carp;
+use File::ShareDir ':ALL';
 use Mojolicious::Lite;
+use Path::Tiny;
+use Mango;
 
 ###############################################################################
 # Setup configuration
 ###############################################################################
-my $cfgfile = path($ENV{HOME}, ".skryf.conf");
+my $cfgfile = path("~/.skryf.conf");
 
 path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
   unless $cfgfile->exists;
@@ -26,56 +21,51 @@ plugin 'Config' => {file => $cfgfile};
 
 my $cfghash = app->config->{skryfcfg} || +{};
 
-# Load extra plugins
+###############################################################################
+# Load plugins
+###############################################################################
 for (keys $cfghash->{extra_modules}) {
     plugin "$_" if $cfghash->{extra_modules}{$_} > 0;
 }
 
-# Setup template and static paths
+###############################################################################
+# Define template, media, static paths
+###############################################################################
 my $template_directory = $cfghash->{template_directory};
-$template_directory = path(App::skryf::Util->sformat($template_directory, bindir => $Bin));
+my $media_directory    = $cfghash->{media_directory};
+my $static_directory   = $cfghash->{static_directory};
 
-my $media_directory = $cfghash->{media_directory};
-$media_directory = path(App::skryf::Util->sformat($media_directory, bindir => $Bin));
+croak("A template|media|static directory must be defined.")
+  unless $template_directory->is_dir
+  && $media_directory->is_dir
+  && $static_directory->is_dir;
 
-if ($template_directory->is_dir) {
-    push @{app->renderer->paths}, $template_directory;
-}
-else {
-    push @{app->renderer->paths}, path(dist_dir('App-skryf'), 'templates');
-}
+push @{app->renderer->paths}, $template_directory;
+push @{app->static->paths},   $media_directory;
 
-if ($media_directory->is_dir) {
-    push @{app->static->paths}, $media_directory;
-}
-else {
-    push @{app->static->paths}, path(dist_dir('App-skryf'), 'public');
-}
-
+###############################################################################
 # use App::skryf::Command namespace
+###############################################################################
 push @{app->commands->namespaces}, 'App::skryf::Command';
 
 ###############################################################################
-# Pull all blog posts
+# Mongo setup
 ###############################################################################
-my $postdir = $cfghash->{post_directory} || '%homedir%/blog/posts';
-$postdir = App::skryf::Util->sformat($postdir, bindir => $Bin);
-my $postlist = App::skryf::PostList->from_dir($postdir);
+my $mango = Mango->new($cfghash->{db}{dsn});
+my $dbc =
+  $mango->db($cfghash->{db}{name})->collection($cfghash->{db}{collection});
 
 ###############################################################################
-# Pull static pages
+# Routing
 ###############################################################################
-my $staticdir = $cfghash->{static_directory} || '%homedir%/blog/static';
-$staticdir = App::skryf::Util->sformat($staticdir, bindir => $Bin);
-my $staticlist = App::skryf::PostList->from_dir($staticdir);
-
 my $skryfcfg = App::skryf::Cfg->new(%$cfghash);
 helper skryfconf => sub {$skryfcfg};
 
 get '/' => sub {
-    my $self = shift;
+    my $self   = shift;
+    my $_posts = $dbc->all;
 
-    $self->stash(postlist => $postlist->scan);
+    $self->stash(postlist => $_posts);
 
     my $tmpl = $cfghash->{index_template} || 'index';
     $self->render($tmpl);
@@ -85,56 +75,42 @@ get '/' => sub {
 get '/feeds/:category/atom.xml' => sub {
     my $self     = shift;
     my $category = $self->param('category');
-    my $_posts   = $postlist->scan;
-    $self->stash(postlist => $_posts->by_cat($category));
+    my $_posts   = $dbc->find({category => $category})->all;
+    $self->stash(postlist => $_posts);
     $self->render(template => 'atom', format => 'xml');
 };
 
 # atom.xml
 get '/atom.xml' => sub {
-    my $self = shift;
+    my $self   = shift;
+    my $_posts = $dbc->all;
 
-    my $_posts = $postlist->scan;
-
-    $self->stash(postlist => $_posts->by_date);
+    $self->stash(postlist => $_posts);
     $self->render(template => 'atom', format => 'xml');
 };
 
-get '/:staticpage' => sub {
-    my $self = shift;
-    my $staticpage = $self->param('staticpage');
-    my $tmpl = $cfghash->{static_template} || 'static';
-    my $post = $staticlist->get($staticpage);
-    $self->stash(post => $post);
+get '/:slug' => sub {
+    my $self  = shift;
+    my $slug  = $self->param('slug');
+    my $tmpl  = $cfghash->{static_template} || 'static';
+    my $_post = $dbc->find_one({slug => $slug});
+    $self->stash(post => $_post);
     $self->render($tmpl);
 };
 
-get '/post/:id' => sub {
+get '/post/:slug' => sub {
     my $self = shift;
 
-    my $id = $self->param('id');
-    unless ($id =~ /^[A-Za-z0-9_-]+$/) {
+    my $slug = $self->param('slug');
+    unless ($slug =~ /^[A-Za-z0-9_-]+$/) {
         $self->render(text => 'Invalid post name!', status => 404);
         return;
     }
-
-    my ($post, $retry);
-  FETCH_POST: {
-        $post = $postlist->get($id);
-
-        unless ($post) {
-            if ($retry) {
-                $self->render(text => 'No such post!', status => 404);
-                return;
-            }
-            ## FIXME try to load this specific post instead of re-scanning
-            $postlist->scan;
-            ++$retry;
-            redo FETCH_POST;
-        }
+    my $_post = $dbc->find_one({slug => $slug});
+    unless ($_post) {
+        $self->render(text => 'No post found!', status => 404);
     }
-
-    $self->stash(post => $post);
+    $self->stash(post => $_post);
 
     my $tmpl = $cfghash->{post_template} || 'post';
     $self->render($tmpl);
