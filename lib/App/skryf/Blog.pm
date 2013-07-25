@@ -1,10 +1,12 @@
 package App::skryf::Blog;
 use Mojo::Base 'Mojolicious::Controller';
 use App::skryf::Model::Post;
+use App::skryf::Model::User;
+use Data::Printer;
 
 sub index {
     my $self  = shift;
-    my $model = App::skryf::Model::Post->new;
+    my $model = App::skryf::Model::Post->new(db => $self->db);
 
     $self->stash(postlist => $model->all);
     my $tmpl = $self->cfg->{index_template} || 'index';
@@ -14,7 +16,7 @@ sub index {
 sub feeds_by_cat {
     my $self     = shift;
     my $category = $self->param('category');
-    my $_posts   = $self->db->find({category => $category})->all;
+    my $_posts   = $self->mgo->find({category => $category})->all;
     $self->stash(postlist => $_posts);
     $self->render(template => 'atom', format => 'xml');
 }
@@ -56,6 +58,28 @@ sub post_page {
 
     my $tmpl = $self->cfg->{post_template} || 'post';
     $self->render($tmpl);
+}
+
+sub login {
+  my $self = shift;
+  $self->render('login');
+}
+
+sub logout {
+  my $self = shift;
+  $self->session(expires => 1);
+  $self->redirect_to('index');
+}
+
+sub auth {
+  my $self = shift;
+  my $user = $self->param('username');
+  my $pass = $self->param('password');
+
+  my $model = App::skryf::Model::User->new(username => $user);
+  if ($model->check($pass)) {
+      $self->session(user => 1);
+  }
 }
 
 1;

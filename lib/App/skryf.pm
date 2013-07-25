@@ -3,10 +3,13 @@ use warnings;
 package App::skryf;
 
 use Mojo::Base 'Mojolicious';
+use App::skryf::Model::User;
+
 use Carp;
 use File::ShareDir ':ALL';
-use Path::Tiny;
 use Mango;
+use Path::Tiny;
+use Data::Printer;
 
 our $VERSION = '0.009';
 
@@ -35,8 +38,8 @@ sub startup {
 ###############################################################################
 # Define template, media, static paths
 ###############################################################################
-    my $template_directory = $cfg->{template_directory};
-    my $media_directory    = $cfg->{media_directory};
+    my $template_directory = path($cfg->{template_directory});
+    my $media_directory    = path($cfg->{media_directory});
 
     croak("A template|media|static directory must be defined.")
       unless $template_directory->is_dir
@@ -48,16 +51,20 @@ sub startup {
 ###############################################################################
 # Mongo setup
 ###############################################################################
-    my $mango = Mango->new($cfg->{db}{dsn});
-    my $dbc =
-      $mango->db($cfg->{db}{name})
-      ->collection($cfg->{db}{collection});
-    $self->helper(db => sub {$dbc});
+    $self->attr(db => sub {Mango->new($cfg->{db}{dsn})});
+    $self->app->db->default_db('skryf');
+    $self->app->db->db->collection('blog');
+    $self->helper('db' => sub { shift->app->db->db->collection('blog') });
 
 ###############################################################################
 # Configuration helper
 ###############################################################################
     $self->helper(cfg => sub {$cfg});
+
+###############################################################################
+# User Model helper
+###############################################################################
+    $self->helper(users => sub { state $users = App::skryf::Model::User->new(db => $self->db) });
 
 ###############################################################################
 # Routing
@@ -69,6 +76,16 @@ sub startup {
     $r->get('/atom.xml')->to('blog#feeds')->name('feeds');
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
     $r->get('/post/:slug')->to('blog#post_page')->name('post_page');
+    $r->get('/login')->to('blog#login')->name('login');
+    $r->post('/auth')->to('blog#auth')->name('auth');
+    $r->get('/logout')->to('blog#logout')->name('logout');
+    my $logged_in = $r->under(
+        sub {
+            my $self = shift;
+            return $self->session('user') || !$self->redirect_to('login');
+        }
+    );
+    $logged_in->get('/admin')->to('admin#index')->name('admin_index');
 }
 
 1;

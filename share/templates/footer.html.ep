@@ -1,0 +1,16 @@
+<div id="footer">
+  <p>
+  <i>
+    <a href="https://github.com/battlemidget/App-skryf">
+      skryf
+    </a>
+  </i>
+  :: 
+  <a href="/atom.xml"><img src="/rss.png" /></a>
+  <i><%= skryfconf->author %></i>
+    :: <%== skryfconf->contact %>
+  </p>
+</div>
+
+</body>
+</html>

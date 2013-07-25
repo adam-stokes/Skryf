@@ -1,17 +1,6 @@
 % use DateTime::Format::ISO8601;
 % my $fmt = DateTime::Format::ISO8601->new();
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= $post->topic %></title>
-  <link rel="stylesheet"  href="/style.css"
-       type="text/css"
-       media="screen"
-       title="Style Sheet"
-  />
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-</head>
-
+%= include "head"
 <body>
 %= include "nav"
 <h2><%= $post->topic %></h2>
@@ -32,6 +21,5 @@
  </p>
 </div>
 
-</body>
-</html>
+%= include "footer"
 

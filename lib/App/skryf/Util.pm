@@ -9,3 +9,4 @@ sub parse_content {
     markdown($contents, {tab_width => 2});
 }
 
+1;

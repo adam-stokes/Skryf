@@ -4,7 +4,7 @@
       "Adam Stokes <adamjs@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.2, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -26,7 +26,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.024"
+            "Module::Build::Tiny" : "0.025"
          }
       },
       "develop" : {
@@ -37,12 +37,12 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "Data::Printer" : "0",
             "DateTime" : "0",
             "DateTime::Format::ISO8601" : "0",
             "File::ShareDir" : "0",
             "FindBin" : "0",
             "List::Objects::WithUtils" : "0",
+            "Mango" : "0",
             "Mojo::Base" : "0",
             "Mojolicious::Lite" : "0",
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
@@ -66,6 +66,9 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.008"
+   "version" : "0.009",
+   "x_contributors" : [
+      "Adam Stokes <adam.stokes@ubuntu.com>"
+   ]
 }
 

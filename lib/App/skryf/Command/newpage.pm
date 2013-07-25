@@ -19,7 +19,7 @@ EOF
 
 has datetime => sub {
     my $self = shift;
-    DateTime->now->set_time_zone($self->app->config->{skryfcfg}->{tz});
+    DateTime->now->set_time_zone($self->config->{skryf}->{tz});
 };
 
 sub run {
@@ -31,7 +31,7 @@ sub run {
           "Page names should be in the 'a-z 0-9 _ -' set";
     }
 
-    my $staticdir = $self->app->config->{skryfcfg}->{static_directory};
+    my $staticdir = $self->config->{skryf}->{static_directory};
     die "No static_directory configured\n" unless $staticdir;
     $staticdir = path(App::skryf::Util->sformat($staticdir, bindir => $Bin));
     my $pendingdir = $staticdir->child('pending');

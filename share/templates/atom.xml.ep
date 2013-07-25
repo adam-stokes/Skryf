@@ -12,7 +12,7 @@
     <name><![CDATA[<%= skryfconf->author %>]]></name>
     <% if (skryfconf->contact) { %><email><![CDATA[<%= skryfconf->contact %>]]></email><% } %>
   </author>
-  <generator uri="https://github.com/battlemidget/App-skryf/">skryf - perl blog engine</generator>
+  <generator uri="https://github.com/battlemidget/App-skryf/">skryf - a perl blog engine.</generator>
   % for my $post ($postlist->all) {
   <entry>
     <title type="html"><![CDATA[<%= $post->topic %>]]></title>

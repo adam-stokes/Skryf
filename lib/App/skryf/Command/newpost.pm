@@ -7,6 +7,7 @@ use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';
 use Path::Tiny;
 use DateTime;
+
 use App::skryf::Util;
 
 # VERSION
@@ -21,7 +22,7 @@ EOF
 
 has datetime => sub {
     my $self = shift;
-    DateTime->now->set_time_zone($self->app->config->{skryfcfg}->{tz});
+    DateTime->now->set_time_zone($self->config->{skryf}->{tz});
 };
 
 sub run {
@@ -33,7 +34,7 @@ sub run {
           "Post names should be in the 'a-z 0-9 _ -' set";
     }
 
-    my $postdir = $self->app->config->{skryfcfg}->{post_directory};
+    my $postdir = $self->app->config->{skryf}->{post_directory};
     die "No post_directory configured\n" unless $postdir;
     $postdir = path(App::skryf::Util->sformat($postdir, bindir => $Bin));
     my $pendingdir = $postdir->child('pending');

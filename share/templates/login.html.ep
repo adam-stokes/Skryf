@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet"  href="/style.css"
+       type="text/css"
+       media="screen"
+       title="Style Sheet"
+  />
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+</head>
+
+<body>
+%= include "nav"
+<div id="container" class="login">
+%= form_for '/auth' => ( method => 'POST' ) => begin
+    <label>Login</label>
+    %= text_field 'login', type => 'text'
+    <br />
+    <label>Password</label>
+    %= password_field 'password'
+    <br />
+    %= submit_button 'Login'
+% end
+</div>
+
+%= include "footer"
+</body>
+</html>
+

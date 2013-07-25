@@ -1,15 +1,6 @@
 % use DateTime::Format::ISO8601;
 % my $fmt = DateTime::Format::ISO8601->new();
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= skryfconf->title %></title>
-  <link rel="stylesheet"  href="/style.css"
-       type="text/css" 
-       media="screen" 
-       title="Style Sheet"
-  />
-</head>
+%= include "head"
 
 <body>
 %= include "nav"
@@ -30,20 +21,5 @@
 <div class="clearfix">&nbsp;</div>
 </div>
 
-<div id="footer">
-  <p>
-  <i>
-    <a href="https://github.com/battlemidget/App-skryf">
-      skryf <%= skryfconf->version %>
-    </a>
-  </i>
-  :: 
-  <a href="/atom.xml"><img src="/rss.png" /></a>
-  <i><%= skryfconf->author %></i>
-    :: <%== skryfconf->contact %>
-  </p>
-</div>
 
-</body>
-</html>
-
+%= include "footer"

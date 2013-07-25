@@ -6,7 +6,7 @@ use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
 require Mojolicious::Commands;
-Mojolicious::Commands->start_app->('App::skryf');
+Mojolicious::Commands->start_app('App::skryf');
 
 __END__
 

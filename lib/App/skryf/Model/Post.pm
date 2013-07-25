@@ -6,11 +6,13 @@ package App::skryf::Model::Post;
 use Mojo::Base -base;
 use List::Objects::WithUtils;
 use App::skryf::Util;
+use Data::Printer;
+use Mango;
 
-has [qw(slug html mtime topic date category contents)] => '';
+has [qw(db slug mtime topic date category contents)] => sub {};
 has ret   => 0;
-has orig  => hash();
-has posts => array();
+has orig  => sub { hash() };
+has posts => sub { array() };
 has html => sub {
     my ($self) = @_;
     App::skryf::Util->parse_content($self->contents);
@@ -38,10 +40,10 @@ sub one {
 
 sub all {
     my ($self) = @_;
-    my $_posts = $self->db->all;
-    foreach (@{$_posts}) {
+    my $_posts = $self->db->find({bar => 'baz'});
+    foreach ($_posts) {
         $self->orig($_)->_merge;
-        push @$self->posts,
+        push $self->posts,
           { $self->category, $self->contents, $self->mtime,
             $self->topic,    $self->date,     $self->ret,
           };
