@@ -37,12 +37,10 @@ sub startup {
 ###############################################################################
     my $template_directory = $cfg->{template_directory};
     my $media_directory    = $cfg->{media_directory};
-    my $static_directory   = $cfg->{static_directory};
 
     croak("A template|media|static directory must be defined.")
       unless $template_directory->is_dir
-      && $media_directory->is_dir
-      && $static_directory->is_dir;
+      && $media_directory->is_dir;
 
     push @{$self->renderer->paths}, $template_directory;
     push @{$self->static->paths},   $media_directory;
