@@ -1,4 +1,5 @@
 % use DateTime::Format::ISO8601;
+% use Data::Printer;
 % my $fmt = DateTime::Format::ISO8601->new();
 %= include "head"
 
@@ -7,7 +8,7 @@
 
 <div id="container">
   <ul>
-  % for my $post ($postlist->by_date->all) {
+  % for my $post ($postlist) {
   % my $dt = $fmt->parse_datetime($post->date);
   <li class="postbox">
       <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />

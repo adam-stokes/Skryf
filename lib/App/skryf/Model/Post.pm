@@ -40,13 +40,15 @@ sub one {
 
 sub all {
     my ($self) = @_;
-    my $_posts = $self->db->find({bar => 'baz'});
+    my $_posts = $self->db->find();
     foreach ($_posts) {
+        p($_);
         $self->orig($_)->_merge;
-        push $self->posts,
-          { $self->category, $self->contents, $self->mtime,
-            $self->topic,    $self->date,     $self->ret,
-          };
+        $self->posts->push(
+            {   $self->category, $self->contents, $self->mtime,
+                $self->topic,    $self->date,     $self->ret,
+            }
+        );
     }
 }
 

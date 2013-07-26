@@ -3,20 +3,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[<%= skryfconf->title %>]]></title>
-  <link href="<%= skryfconf->site %><%= url_for %>" rel="self"/>
-  <link href="<%= skryfconf->site %>/"/>
+  <title><![CDATA[<%= cfg->{title} %>]]></title>
+  <link href="<%= cfg->{site} %><%= url_for %>" rel="self"/>
+  <link href="<%= cfg->{site} %>/"/>
   <updated><%= $lt->datetime() %>Z</updated>
-  <id><%= skryfconf->site %>/</id>
+  <id><%= cfg->{site} %>/</id>
   <author>
-    <name><![CDATA[<%= skryfconf->author %>]]></name>
-    <% if (skryfconf->contact) { %><email><![CDATA[<%= skryfconf->contact %>]]></email><% } %>
+    <name><![CDATA[<%= cfg->{author} %>]]></name>
+    <% if (cfg->{contact}) { %><email><![CDATA[<%= cfg->{contact} %>]]></email><% } %>
   </author>
   <generator uri="https://github.com/battlemidget/App-skryf/">skryf - a perl blog engine.</generator>
   % for my $post ($postlist->all) {
   <entry>
     <title type="html"><![CDATA[<%= $post->topic %>]]></title>
-    <link href="<%= skryfconf->site %>/post/<%= $post->id %>"/>
+    <link href="<%= cfg->{site} %>/post/<%= $post->id %>"/>
     <updated><%= $post->date %></updated>
     <id><%= skryfconf->site %>/<%= $post->id %></id>
     <content type="html"><![CDATA[<%== $post->html %>]]></content>

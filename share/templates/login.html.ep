@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-  <link rel="stylesheet"  href="/style.css"
-       type="text/css"
-       media="screen"
-       title="Style Sheet"
-  />
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
-</head>
-
+%= include "head"
 <body>
 %= include "nav"
 <div id="container" class="login">
@@ -25,6 +14,4 @@
 </div>
 
 %= include "footer"
-</body>
-</html>
 

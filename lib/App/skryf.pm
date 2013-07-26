@@ -51,10 +51,10 @@ sub startup {
 ###############################################################################
 # Mongo setup
 ###############################################################################
-    $self->attr(db => sub {Mango->new($cfg->{db}{dsn})});
-    $self->app->db->default_db('skryf');
-    $self->app->db->db->collection('blog');
-    $self->helper('db' => sub { shift->app->db->db->collection('blog') });
+    $self->attr(mango => sub {Mango->new($cfg->{db}{dsn})});
+    $self->app->mango->default_db('skryf');
+    $self->app->mango->db->collection('blog');
+    $self->helper('db' => sub { shift->app->mango->db->collection('blog') });
 
 ###############################################################################
 # Configuration helper
@@ -64,7 +64,10 @@ sub startup {
 ###############################################################################
 # User Model helper
 ###############################################################################
-    $self->helper(users => sub { state $users = App::skryf::Model::User->new(db => $self->db) });
+    $self->helper(
+        users =>
+          sub { state $users = App::skryf::Model::User->new(db => $self->db) }
+    );
 
 ###############################################################################
 # Routing
@@ -77,8 +80,8 @@ sub startup {
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
     $r->get('/post/:slug')->to('blog#post_page')->name('post_page');
     $r->get('/login')->to('blog#login')->name('login');
-    $r->post('/auth')->to('blog#auth')->name('auth');
     $r->get('/logout')->to('blog#logout')->name('logout');
+    $r->post('/auth')->to('blog#auth')->name('auth');
     my $logged_in = $r->under(
         sub {
             my $self = shift;

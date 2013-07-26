@@ -3,12 +3,12 @@
 </div>
 <div id="header">
   <div class="logo">
-    <%= gravatar skryfconf->contact %>
+    <%= gravatar cfg->{contact} %>
   </div>
   <div class="title">
-    <h2><%= skryfconf->title %></h2>
+    <h2><%= cfg->{title} %></h2>
   </div>
-<h4><%= skryfconf->description %></h4>
+<h4><%= cfg->{description} %></h4>
 <div class="clearfix"></div>
 </div>
 

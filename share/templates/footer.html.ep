@@ -7,8 +7,8 @@
   </i>
   :: 
   <a href="/atom.xml"><img src="/rss.png" /></a>
-  <i><%= skryfconf->author %></i>
-    :: <%== skryfconf->contact %>
+  <i><%= cfg->{author} %></i>
+    :: <%== cfg->{contact} %>
   </p>
 </div>
 

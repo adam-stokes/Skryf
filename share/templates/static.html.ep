@@ -14,7 +14,7 @@
  <%== $post->html %>
 </div>
 
-<div id="footer">
+<div id="bottom-nav">
  <p>
    <h2><a href="/" class="align-left">&larr;</a></h2>
    <b><a href="/" class="align-right">Back to index</a></b>
