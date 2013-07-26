@@ -11,9 +11,12 @@ Makefile
 Makefile.old
 MANIFEST.bak
 META.yml
-MYMETA.yml
+MYMETA.*
 nytprof.out
 pm_to_blib
 App-skryf*
 lib/Rex
 !META.json
+.tidyall.d
+_build_params
+perltidy.LOG
