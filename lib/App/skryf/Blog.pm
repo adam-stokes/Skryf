@@ -9,8 +9,7 @@ sub index {
     my $model = App::skryf::Model::Post->new(db => $self->db);
     my $posts = $model->all;
     $self->stash(postlist => $posts);
-    my $tmpl = $self->cfg->{index_template};
-    $self->render($tmpl);
+    $self->render('index');
 }
 
 sub feeds_by_cat {
@@ -39,8 +38,7 @@ sub static_page {
         $self->render(text => 'No page found!', status => 404);
     }
     $self->stash(post => $_post);
-    my $tmpl = $self->cfg->{static_template};
-    $self->render($tmpl);
+    $self->render('static');
 }
 
 sub post_page {
@@ -56,8 +54,7 @@ sub post_page {
     }
     $self->stash(post => $_post);
 
-    my $tmpl = $self->cfg->{post_template};
-    $self->render($tmpl);
+    $self->render('post');
 }
 
 1;
