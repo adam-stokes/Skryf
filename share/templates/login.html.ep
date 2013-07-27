@@ -1,10 +1,12 @@
-%= include "head"
-<body>
-%= include "nav"
+% layout 'auth';
 <div id="container" class="login">
+  % if (my $msg = flash 'message') {
+  <b><%= $msg %></b>
+  % }
+  <h3>Secret hideout</h3>
 %= form_for '/auth' => ( method => 'POST' ) => begin
     <label>Login</label>
-    %= text_field 'login', type => 'text'
+    %= text_field 'username', type => 'text'
     <br />
     <label>Password</label>
     %= password_field 'password'
@@ -12,6 +14,3 @@
     %= submit_button 'Login'
 % end
 </div>
-
-%= include "footer"
-

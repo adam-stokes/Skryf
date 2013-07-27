@@ -4,10 +4,10 @@ use App::skryf::Model::Post;
 
 sub index {
     my $self  = shift;
-    my $model = App::skryf::Model::Post->new;
+    my $model = App::skryf::Model::Post->new(db => $self->db);
 
     $self->stash(postlist => $model->all);
-    $self->render(template => 'admin_index');
+    $self->render(template => 'admin/index');
 }
 
 1;

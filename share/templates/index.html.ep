@@ -1,26 +1,14 @@
-% use DateTime::Format::ISO8601;
-% use Data::Printer;
-% my $fmt = DateTime::Format::ISO8601->new();
-%= include "head"
-
-<body>
-%= include "nav"
-
+% layout 'main';
 <div id="container">
   <ul>
-  % for my $post ($postlist) {
-  % my $dt = $fmt->parse_datetime($post->date);
+  % foreach (@{$postlist}) {
   <li class="postbox">
-      <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />
-
-      <b><a href="/post/<%= $post->id %>">
-          <%= $post->topic %>
+      <b><i class="postdate"><%= $_->{date} %></i></b><br />
+      <b><a href="/post/<%= $_->{slug} %>">
+          <%= $_->{topic} %>
       </a></b>
       </li>
   % }
 </ul>
 <div class="clearfix">&nbsp;</div>
 </div>
-
-
-%= include "footer"

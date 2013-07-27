@@ -1,20 +1,15 @@
-% use DateTime::Format::ISO8601;
-% my $fmt = DateTime::Format::ISO8601->new();
-%= include "head"
-<body>
-%= include "nav"
-<h2><%= $post->topic %></h2>
+% layout 'main';
+<h2><%= $post->{topic} %></h2>
 
 <h3>
-  % my $dt = $fmt->parse_datetime($post->date);
-  <i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i><br />
-  <i class="categories">Posted under: <%= $post->category %></i>
+  <i class="postdate"><%= $post->{date} %></i><br />
+  <i class="categories">Posted under: <%= $post->{category} %></i>
   <a href="/" class="align-right">&larr; index</a>
 </h3>
 
 <div id="container" class="post-item">
 
- <%== $post->html %>
+ <%== $post->{contents} %>
 
  <%= disqus_inc cfg->{social}{disqus} %>
 
@@ -24,6 +19,3 @@
    <b><a href="/" class="align-right">Back to index</a></b>
  </p>
 </div>
-
-%= include "footer"
-

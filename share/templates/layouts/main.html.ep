@@ -7,3 +7,22 @@
 <%= javascript "https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst" %>
 <%= analytics_inc 'UA-23169268-1' %>
 </head>
+<body>
+%= include 'nav'
+<%= content %>
+<div id="footer">
+  <p>
+  <i>
+    <a href="https://github.com/battlemidget/App-skryf">
+      skryf
+    </a>
+  </i>
+  :: 
+  <a href="/atom.xml"><img src="/rss.png" /></a>
+  <i><%= cfg->{author} %></i>
+    :: <%== cfg->{contact} %>
+  </p>
+</div>
+
+</body>
+</html>

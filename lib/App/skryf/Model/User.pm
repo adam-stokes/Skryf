@@ -4,6 +4,7 @@ use warnings;
 package App::skryf::Model::User;
 
 use Mojo::Base -base;
+use Data::Printer;
 
 has [
     qw(username
@@ -14,37 +15,13 @@ has [
       googleanalytics
       coderwall
       github
-      orig)
+      db)
 ] => sub {};
-has db => sub {};
-
-sub _merge {
-    my ($self) = @_;
-    $self->disqus($self->orig->{disqus});
-    $self->googleplus($self->orig->{googleplus});
-    $self->stackoverflow($self->orig->{stackoverflow});
-    $self->googleanalytics($self->orig->{googleanalytics});
-    $self->coderwall($self->orig->{coderwall});
-    $self->github($self->orig->{github});
-    $self->username($self->orig->{username});
-    $self->password($self->orig->{password});
-}
 
 sub check {
     my ($self, $password) = @_;
-    $self->one;
-    if ($self->username) {
-      return 1 if $self->password eq $password;
-    }
-    return undef;
-}
-
-sub one {
-    my ($self) = @_;
-    $self->orig($self->db->find_one({username => $self->username}));
-    if ($self->orig) {
-        $self->_merge;
-    }
+    my $user = $self->db->find_one({username => $self->username});
+    return 1 if $user->{password} eq $password;
     return undef;
 }
 

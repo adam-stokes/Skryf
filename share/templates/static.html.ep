@@ -1,9 +1,5 @@
-% use DateTime::Format::ISO8601;
-% my $fmt = DateTime::Format::ISO8601->new();
-%= include "head"
-<body>
-%= include "nav"
-<h2><%= $post->topic %></h2>
+% layout 'main';
+<h2><%= $post->{topic} %></h2>
 
 <h3>
   <a href="/" class="align-right">&larr; index</a>
@@ -11,7 +7,7 @@
 
 <div id="container" class="post-item">
 
- <%== $post->html %>
+ <%== $post->{html} %>
 </div>
 
 <div id="bottom-nav">
@@ -20,6 +16,3 @@
    <b><a href="/" class="align-right">Back to index</a></b>
  </p>
 </div>
-
-%= include "footer"
-

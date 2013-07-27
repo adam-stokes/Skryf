@@ -53,9 +53,7 @@ sub startup {
 ###############################################################################
     $self->attr(mango => sub {Mango->new($cfg->{db}{dsn})});
     $self->app->mango->default_db('skryf');
-    $self->app->mango->db->collection('blog');
     $self->helper('db' => sub { shift->app->mango->db->collection('blog') });
-
 ###############################################################################
 # Configuration helper
 ###############################################################################
@@ -65,23 +63,22 @@ sub startup {
 # User Model helper
 ###############################################################################
     $self->helper(
-        users =>
-          sub { state $users = App::skryf::Model::User->new(db => $self->db) }
+        users => sub {
+                shift->app->mango->db->collection('user');
+        }
     );
 
 ###############################################################################
 # Routing
 ###############################################################################
     my $r = $self->routes;
-    $r->get('/')->to('blog#index')->name('index');
+    $r->get('/atom.xml')->to('blog#feeds')->name('feeds');
     $r->get('/feeds/:category/atom.xml')->to('blog#feeds_by_cat')
       ->name('feeds_by_cat');
-    $r->get('/atom.xml')->to('blog#feeds')->name('feeds');
-    $r->get('/:slug')->to('blog#static_page')->name('static_page');
+    $r->get('/login')->to('login#login')->name('login');
+    $r->get('/logout')->to('login#logout')->name('logout');
+    $r->post('/auth')->to('login#auth')->name('auth');
     $r->get('/post/:slug')->to('blog#post_page')->name('post_page');
-    $r->get('/login')->to('blog#login')->name('login');
-    $r->get('/logout')->to('blog#logout')->name('logout');
-    $r->post('/auth')->to('blog#auth')->name('auth');
     my $logged_in = $r->under(
         sub {
             my $self = shift;
@@ -89,6 +86,8 @@ sub startup {
         }
     );
     $logged_in->get('/admin')->to('admin#index')->name('admin_index');
+    $r->get('/:slug')->to('blog#static_page')->name('static_page');
+    $r->get('/')->to('blog#index')->name('index');
 }
 
 1;
