@@ -49,7 +49,7 @@ sub startup {
     push @{$self->static->paths},   $media_directory;
 
 # use App::skryf::Command namespace
-push @{app->commands->namespaces}, 'App::skryf::Command';
+push @{$self->commands->namespaces}, 'App::skryf::Command';
 
 ###############################################################################
 # Mongo setup

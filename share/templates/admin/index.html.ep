@@ -1,4 +1,8 @@
 % layout 'auth';
-<div id="container" class="login">
-in like flint
-</div>
+%= tag 'div', id => 'container', class => 'admin_list_pages', => begin
+  %= tag 'ul' => begin
+    % foreach (@{$postlist}) {
+      %= tag 'li' => "$_->{topic}"
+    % }
+  %= end
+%= end

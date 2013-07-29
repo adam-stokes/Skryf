@@ -21,7 +21,6 @@ sub auth {
     my $model =
       App::skryf::Model::User->new(db => $self->users, username => $user);
     if ($model->check($pass)) {
-        p($self->session);
         $self->session(user => 1);
         $self->redirect_to('admin_index');
     } else {
