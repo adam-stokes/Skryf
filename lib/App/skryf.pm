@@ -48,6 +48,9 @@ sub startup {
     push @{$self->renderer->paths}, $template_directory;
     push @{$self->static->paths},   $media_directory;
 
+# use App::skryf::Command namespace
+push @{app->commands->namespaces}, 'App::skryf::Command';
+
 ###############################################################################
 # Mongo setup
 ###############################################################################
