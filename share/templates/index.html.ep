@@ -1,14 +1,14 @@
 % layout 'main';
-<div id="container">
-  <ul>
-  % foreach (@{$postlist}) {
-  <li class="postbox">
-      <b><i class="postdate"><%= $_->{date} %></i></b><br />
-      <b><a href="/post/<%= $_->{slug} %>">
-          <%= $_->{topic} %>
-      </a></b>
-      </li>
-  % }
-</ul>
-<div class="clearfix">&nbsp;</div>
-</div>
+%= tag 'div', id => 'container' => begin
+    %= tag 'ul' => begin
+      % foreach (@{$postlist}) {
+        %= tag 'li', class => 'postbox' => begin
+          <b><i class="postdate"><%= $_->{date} %></i></b><br />
+          <b><a href="/post/<%= $_->{slug} %>">
+              <%= $_->{topic} %>
+          </a></b>
+        %= end
+      % }
+    %= end
+  %= tag 'div', class => 'clearfix'
+%= end

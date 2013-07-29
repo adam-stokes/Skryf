@@ -1,5 +1,7 @@
 % layout 'auth';
-%= tag 'div', id => 'container', class => 'admin_list_pages', => begin
+%= t 'h2' => 'Administer pages/posts'
+%= t 'a', href => '/admin/posts/new' => 'New post'
+%= tag 'div', id => 'container', class => 'admin_list_pages' => begin
   %= tag 'ul' => begin
     % foreach (@{$postlist}) {
       %= tag 'li' => "$_->{topic}"
