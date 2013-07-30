@@ -1,21 +1,10 @@
 % layout 'main';
 <h2><%= $post->{topic} %></h2>
 
-<h3>
-  <i class="postdate"><%= $post->{date} %></i><br />
-  <i class="categories">Posted under: <%= $post->{category} %></i>
-  <a href="/" class="align-right">&larr; index</a>
-</h3>
-
 <div id="container" class="post-item">
 
- <%== $post->{contents} %>
+ <%== $post->{html} %>
 
  <%= disqus_inc cfg->{social}{disqus} %>
 
-<div id="bottom-nav">
- <p>
-   <h2><a href="/" class="align-left">&larr;</a></h2>
-   <b><a href="/" class="align-right">Back to index</a></b>
- </p>
 </div>

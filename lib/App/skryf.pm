@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+
 package App::skryf;
 
 use Mojo::Base 'Mojolicious';
@@ -19,10 +20,15 @@ sub startup {
 ###############################################################################
 # Setup configuration
 ###############################################################################
-    my $cfgfile = path("~/.skryf.conf");
-
-    path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
-      unless $cfgfile->exists;
+    my $cfgfile = undef;
+    if ($self->mode eq "development") {
+        $cfgfile = path(dist_dir('App-skryf'), 'skryf.conf');
+    }
+    else {
+        $cfgfile = path("~/.skryf.conf");
+        path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
+          unless $cfgfile->exists;
+    }
 
     $self->plugin('Config' => {file => $cfgfile});
 
@@ -38,8 +44,16 @@ sub startup {
 ###############################################################################
 # Define template, media, static paths
 ###############################################################################
-    my $template_directory = path($cfg->{template_directory});
-    my $media_directory    = path($cfg->{media_directory});
+    my $template_directory = undef;
+    my $media_directory    = undef;
+    if ($self->mode eq "development") {
+        $template_directory = path(dist_dir('App-skryf'), 'templates');
+        $media_directory    = path(dist_dir('App-skryf'), 'public');
+    }
+    else {
+        $template_directory = path($cfg->{template_directory});
+        $media_directory    = path($cfg->{media_directory});
+    }
 
     croak("A template|media|static directory must be defined.")
       unless $template_directory->is_dir
@@ -49,12 +63,12 @@ sub startup {
     push @{$self->static->paths},   $media_directory;
 
 # use App::skryf::Command namespace
-push @{$self->commands->namespaces}, 'App::skryf::Command';
+    push @{$self->commands->namespaces}, 'App::skryf::Command';
 
 ###############################################################################
 # Mongo setup
 ###############################################################################
-    $self->attr(mango => sub {Mango->new($cfg->{db}{dsn})});
+    $self->attr(mango => sub { Mango->new($cfg->{db}{dsn}) });
     $self->app->mango->default_db('skryf');
     $self->helper('db' => sub { shift->app->mango->db->collection('blog') });
 ###############################################################################
@@ -67,7 +81,7 @@ push @{$self->commands->namespaces}, 'App::skryf::Command';
 ###############################################################################
     $self->helper(
         users => sub {
-                shift->app->mango->db->collection('user');
+            shift->app->mango->db->collection('user');
         }
     );
 
@@ -75,12 +89,15 @@ push @{$self->commands->namespaces}, 'App::skryf::Command';
 # Routing
 ###############################################################################
     my $r = $self->routes;
+    # RSS
     $r->get('/atom.xml')->to('blog#feeds')->name('feeds');
     $r->get('/feeds/:category/atom.xml')->to('blog#feeds_by_cat')
       ->name('feeds_by_cat');
+    # Authentication
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
+    # Post view
     $r->get('/post/:slug')->to('blog#post_page')->name('post_page');
     my $logged_in = $r->under(
         sub {
@@ -89,7 +106,16 @@ push @{$self->commands->namespaces}, 'App::skryf::Command';
         }
     );
     $logged_in->get('/admin')->to('admin#index')->name('admin_index');
+    # Admin post additions/modifications
+    $logged_in->route('/admin/post/new')->via('GET POST')->to('admin#new_post')
+      ->name('admin_new_post');
+    $logged_in->route('/admin/post/edit/:slug')->via('GET POST')->to('admin#edit_post')
+      ->name('admin_edit_post');
+    $logged_in->post('/admin/post/delete/:slug')->to('admin#delete_post')
+      ->name('admin_delete_post');
+    # Static page view
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
+    # Root
     $r->get('/')->to('blog#index')->name('index');
 }
 

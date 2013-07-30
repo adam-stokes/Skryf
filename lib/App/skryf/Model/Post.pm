@@ -6,12 +6,7 @@ package App::skryf::Model::Post;
 use Mojo::Base -base;
 use App::skryf::Util;
 
-has [qw(db slug mtime topic date category contents published)] => sub {};
-has ret   => 0;
-has html => sub {
-    my ($self) = @_;
-    App::skryf::Util->parse_content($self->contents);
-};
+has db => sub {};
 
 sub all {
     my ($self) = @_;

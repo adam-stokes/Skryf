@@ -4,19 +4,9 @@ use warnings;
 package App::skryf::Model::User;
 
 use Mojo::Base -base;
-use Data::Printer;
 
-has [
-    qw(username
-      password
-      disqus
-      googleplus
-      stackoverflow
-      googleanalytics
-      coderwall
-      github
-      db)
-] => sub {};
+has 'db' => sub {};
+has 'username' => '';
 
 sub check {
     my ($self, $password) = @_;

@@ -1,14 +1,15 @@
+
 body {
   color: #000000;
   background-image: url('/brickwall.png');
   margin-left: 5%;
   margin-right: 5%;
-  font-family: 'Ubuntu';
+  font-family: 'Ubuntu', sans-serif;
   font-size: 1em;
 }
 
 #container {
-    width: 960px;
+    width: 100%;
     color: #666;
 }
 
@@ -37,13 +38,13 @@ a:active {
   text-decoration: none;
 }
 
-h1        { color: #666; }
+h1        { color: #333; font-family: 'Cabin Sketch', cursive; font-size: 48px; }
 h2        { color: #999; text-indent: 0.5em; }
 h3 { 
     color: rgb(40,0,0); 
     text-indent: 1em;
 }
-h4        { color: #aaa; }
+h4        { color: #aaa; text-indent: 1.2em;}
 
 p {
 
@@ -63,12 +64,12 @@ p {
     float:left;
 }
 
-.footer {
+#footer {
   width: 100%;
   border-top: 1px solid #000042;
   margin-top: 2em;
 }
-.footer p {
+#footer p {
   text-indent: 0em;
   font-size: 75%;
   clear: none;

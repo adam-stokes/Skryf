@@ -2,7 +2,6 @@ package App::skryf::Blog;
 use Mojo::Base 'Mojolicious::Controller';
 use App::skryf::Model::Post;
 use App::skryf::Model::User;
-use Data::Dumper;
 
 sub index {
     my $self  = shift;

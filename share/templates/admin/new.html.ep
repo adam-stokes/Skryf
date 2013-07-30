@@ -1,0 +1,13 @@
+% layout 'auth';
+
+%= t 'h2' => 'New content'
+
+%= form_for '/admin/post/new' => ( method => 'POST' ) => begin
+%= text_field 'topic', type => 'text'
+%= t 'br'
+%= text_area 'content', cols => 40
+%= t 'br
+%= text_field 'tags', type => 'text'
+%= t 'br'
+%= submit_button 'Add'
+%= end
