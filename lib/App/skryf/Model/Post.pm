@@ -14,7 +14,12 @@ sub all {
     $self->db->find->batch_size(2)->all;
 }
 
-sub new_post {
+sub get {
+    my ($self, $slug) = @_;
+    $self->db->find_one({slug => $slug});
+}
+
+sub do_post {
     my ($self, $topic, $content, $tags) = @_;
     my $slug = App::skryf::Util->slugify($topic);
     my $html = App::skryf::Util->convert($content);

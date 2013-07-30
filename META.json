@@ -4,7 +4,7 @@
       "Adam Stokes <adamjs@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -45,6 +45,7 @@
             "Mango" : "0",
             "Mojo::Base" : "0",
             "Mojolicious::Lite" : "0",
+            "Mojolicious::Plugin::CSRFDefender" : "0",
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
             "Mojolicious::Plugin::Gravatar" : "0",
@@ -67,9 +68,6 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.009",
-   "x_contributors" : [
-      "Adam Stokes <adam.stokes@ubuntu.com>"
-   ]
+   "version" : "0.009"
 }
 

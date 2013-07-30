@@ -9,6 +9,7 @@ requires 'Mojolicious::Lite';
 requires 'Mojolicious::Plugin::Disqus::Tiny';
 requires 'Mojolicious::Plugin::GoogleAnalytics';
 requires 'Mojolicious::Plugin::Gravatar';
+requires 'Mojolicious::Plugin::CSRFDefender';
 requires 'Path::Tiny';
 requires 'Pithub';
 requires 'Text::Markdown';
