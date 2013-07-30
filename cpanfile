@@ -13,6 +13,7 @@ requires 'Path::Tiny';
 requires 'Pithub';
 requires 'Text::Markdown';
 requires 'Mango';
+requires 'String::Dirify';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';

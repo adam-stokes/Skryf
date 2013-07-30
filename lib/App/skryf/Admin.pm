@@ -28,10 +28,28 @@ sub new_post {
 
 sub edit_post {
     my $self = shift;
+    my $model = $self->db->find_one({slug => $self->param('slug')});
+    if ($model) {
+        $self->stash(post => $model);
+        $self->render('admin/edit');
+    }
+    else {
+        $self->flash(message => 'Could not find post to update.');
+        $self->redirect_to('admin_index');
+    }
 }
 
 sub delete_post {
-    my $self = shift;
+    my $self  = shift;
+    my $slug  = $self->param('slug');
+    my $model = App::skryf::Model::Post->new(db => $self->db);
+    if ($model->delete_post($slug)) {
+        $self->flash(message => 'Removed.');
+    }
+    else {
+        $self->flash(message => 'Failed to remove post.');
+    }
+    $self->redirect_to('admin_index');
 }
 
 1;

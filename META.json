@@ -50,6 +50,7 @@
             "Mojolicious::Plugin::Gravatar" : "0",
             "Path::Tiny" : "0",
             "Pithub" : "0",
+            "String::Dirify" : "0",
             "Text::Markdown" : "0"
          }
       }

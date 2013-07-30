@@ -107,11 +107,11 @@ sub startup {
     );
     $logged_in->get('/admin')->to('admin#index')->name('admin_index');
     # Admin post additions/modifications
-    $logged_in->route('/admin/post/new')->via('GET POST')->to('admin#new_post')
+    $logged_in->route('/admin/post/new')->via(qw[GET POST])->to('admin#new_post')
       ->name('admin_new_post');
-    $logged_in->route('/admin/post/edit/:slug')->via('GET POST')->to('admin#edit_post')
+    $logged_in->route('/admin/post/edit/:slug')->via(qw[GET POST])->to('admin#edit_post')
       ->name('admin_edit_post');
-    $logged_in->post('/admin/post/delete/:slug')->to('admin#delete_post')
+    $logged_in->get('/admin/post/delete/:slug')->to('admin#delete_post')
       ->name('admin_delete_post');
     # Static page view
     $r->get('/:slug')->to('blog#static_page')->name('static_page');

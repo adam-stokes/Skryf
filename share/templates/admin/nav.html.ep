@@ -1,0 +1,4 @@
+%= t 'div', id => 'admin_nav' => begin
+  %= link_to 'Admin::Root' => 'admin_index'
+  %= link_to 'New Content' => 'admin_new_post'
+%= end
