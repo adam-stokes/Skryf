@@ -8,7 +8,6 @@ use App::skryf::Model::User;
 
 use Carp;
 use File::ShareDir ':ALL';
-use Mango;
 use Path::Tiny;
 use Data::Printer;
 
@@ -35,11 +34,17 @@ sub startup {
     my $cfg = $self->config->{skryf} || +{};
 
 ###############################################################################
-# Load plugins
+# Load global plugins
 ###############################################################################
     for (keys $cfg->{extra_modules}) {
         $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
     }
+###############################################################################
+# Load local plugins
+###############################################################################
+    push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
+    $self->plugin('model' => {dsn => $cfg->{db}{dsn},
+      authCondition => $self->session('user'));
 
 ###############################################################################
 # Define template, media, static paths
@@ -66,26 +71,6 @@ sub startup {
     push @{$self->commands->namespaces}, 'App::skryf::Command';
 
 ###############################################################################
-# Mongo setup
-###############################################################################
-    $self->attr(mango => sub { Mango->new($cfg->{db}{dsn}) });
-    $self->app->mango->default_db('skryf');
-    $self->helper('db' => sub { shift->app->mango->db->collection('blog') });
-###############################################################################
-# Configuration helper
-###############################################################################
-    $self->helper(cfg => sub {$cfg});
-
-###############################################################################
-# User Model helper
-###############################################################################
-    $self->helper(
-        users => sub {
-            shift->app->mango->db->collection('user');
-        }
-    );
-
-###############################################################################
 # Routing
 ###############################################################################
     my $r = $self->routes;
@@ -97,25 +82,7 @@ sub startup {
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
-    # Post view
-    $r->get('/post/:slug')->to('blog#post_page')->name('post_page');
-    my $logged_in = $r->under(
-        sub {
-            my $self = shift;
-            return $self->session('user') || !$self->redirect_to('login');
-        }
-    );
-    $logged_in->get('/admin')->to('admin#index')->name('admin_index');
-    # Admin post additions/modifications
-    $logged_in->route('/admin/post/new')->via(qw[GET POST])->to('admin#new_post')
-      ->name('admin_new_post');
-    $logged_in->route('/admin/post/edit/:slug')->via(qw[GET])->to('admin#edit_post')
-      ->name('admin_edit_post');
-    $logged_in->route('/admin/post/update')->via(qw[POST])->to('admin#update_post')
-      ->name('admin_update_post');
-    $logged_in->get('/admin/post/delete/:slug')->to('admin#delete_post')
-      ->name('admin_delete_post');
-    # Static page view
+   # Static page view
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
     # Root
     $r->get('/')->to('blog#index')->name('index');

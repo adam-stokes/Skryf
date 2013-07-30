@@ -1,0 +1,17 @@
+% layout 'blog_layout';
+
+<h2>Admin blog</h2>
+
+<div>
+  <% if (my $msg = flash 'message') { %>
+  <p>
+    <b><%= $msg %></b>
+  </p>
+  <% } %>
+</div>
+
+<ul>
+<% foreach (@{$postlist}) { %>
+<li>[<a href="<%= url_for('adminblogdeleteid', {id => $_->{id}}) %>">X</a>] <a href="<%= url_for('adminblogeditid', {id => $_->{id}}) %>"><%= $_->{title} %></a></li>
+<% } %>
+</ul>

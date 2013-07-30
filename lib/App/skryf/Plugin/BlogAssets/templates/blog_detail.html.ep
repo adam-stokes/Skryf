@@ -1,0 +1,10 @@
+% layout 'blog_layout';
+
+<h2>Blog Detail</h2>
+
+Viewing blog <%= $post->{title} %><br />
+Created: <%= $post->{created} %>
+
+<p>
+<%= $post->{body} %>
+</p>
