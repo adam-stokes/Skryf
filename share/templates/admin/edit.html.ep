@@ -4,7 +4,7 @@
 
 %= t 'h2' => 'New content'
 
-%= form_for "/admin/post/edit/$post->{slug}" => ( method => 'POST' ) => begin
+%= form_for "/admin/post/update" => ( method => 'POST' ) => begin
 %= text_field 'topic', type => 'text', value => $post->{topic}
 %= t 'br'
 %= text_area 'content', cols => 40 => begin

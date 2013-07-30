@@ -5,48 +5,47 @@ package App::skryf::Model::Post;
 
 use Mojo::Base -base;
 use App::skryf::Util;
+use Method::Signatures;
 use Data::Printer;
 
 has db => sub {};
 
-sub all {
-    my ($self) = @_;
+method all {
     $self->db->find->batch_size(2)->all;
 }
 
-sub get {
-    my ($self, $slug) = @_;
+method get ($slug) {
     $self->db->find_one({slug => $slug});
 }
 
-sub do_post {
-    my ($self, $topic, $content, $tags) = @_;
+method new_post ($topic, $content, $tags) {
     my $slug = App::skryf::Util->slugify($topic);
     my $html = App::skryf::Util->convert($content);
-    if (!$self->db->find_one({slug => $slug})) {
-        $self->db->insert(
-            {   slug    => $slug,
-                topic   => $topic,
-                content => $content,
-                tags    => $tags,
-                html    => $html,
-            }
-        );
-    }
-    else {
-        $self->db->update(
-            {slug => $slug},
-            {   topic   => $topic,
-                content => $content,
-                tags    => $tags,
-                html    => $html, 
-            }
-        );
-    }
+    $self->db->insert(
+        {   slug    => $slug,
+            topic   => $topic,
+            content => $content,
+            tags    => $tags,
+            html    => $html,
+        }
+    );
 }
 
-sub delete_post {
-    my ($self, $slug) = @_;
+method update_post ($topic, $content, $tags) {
+    my $slug = App::skryf::Util->slugify($topic);
+    my $html = App::skryf::Util->convert($content);
+    $self->db->update(
+        {slug => $slug},
+        {   topic   => $topic,
+            content => $content,
+            tags    => $tags,
+            html    => $html,
+        }
+    );
+}
+
+method delete_post ($slug) {
     $self->db->remove({slug => $slug});
 }
+
 1;

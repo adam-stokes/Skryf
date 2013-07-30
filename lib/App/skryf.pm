@@ -109,8 +109,10 @@ sub startup {
     # Admin post additions/modifications
     $logged_in->route('/admin/post/new')->via(qw[GET POST])->to('admin#new_post')
       ->name('admin_new_post');
-    $logged_in->route('/admin/post/edit/:slug')->via(qw[GET POST])->to('admin#edit_post')
+    $logged_in->route('/admin/post/edit/:slug')->via(qw[GET])->to('admin#edit_post')
       ->name('admin_edit_post');
+    $logged_in->route('/admin/post/update')->via(qw[POST])->to('admin#update_post')
+      ->name('admin_update_post');
     $logged_in->get('/admin/post/delete/:slug')->to('admin#delete_post')
       ->name('admin_delete_post');
     # Static page view
