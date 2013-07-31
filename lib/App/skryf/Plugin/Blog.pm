@@ -5,7 +5,6 @@ use warnings;
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
-use Mango;
 
 use App::skryf::Plugin::Blog::Controller;
 
@@ -13,10 +12,10 @@ my %defaults = (
 
     # Default routes
     indexPath       => '/post/',
-    archivePath     => '/post/archives',
     postPath        => '/post/:id',
+    feedPath        => '/atom.xml',
+    feedCatPath     => '/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post',
-    dsn             => undef,
 
     # Router namespace
     namespace => 'App::skryf::Plugin::Blog::Controller',
@@ -31,26 +30,21 @@ sub register {
 
     $app->helper(blogconf => sub { \%conf });
 
-###############################################################################
-# Mongo setup
-###############################################################################
-    $app->attr(mango => sub { Mango->new($conf{dsn}) });
-    $app->mango->default_db('skryf');
-    $app->helper('db' => sub { shift->app->mango->db->collection('blog') });
-    $app->helper(
-        users => sub {
-            shift->app->mango->db->collection('user');
-        }
-    );
-    $app->routes->route($conf{indexPath})->via('GET')->to(
+    $app->routes->route($conf{feedPath})->via('GET')->to(
         namespace  => $conf{namespace},
-        action     => 'blog_index',
+        action     => 'blog_feeds',
         _blog_conf => \%conf,
     );
 
-    $app->routes->route($conf{archivePath})->via('GET')->to(
+    $app->routes->route($conf{feedCatPath})->via('GET')->to(
         namespace  => $conf{namespace},
-        action     => 'blog_archive',
+        action     => 'blog_feeds_by_cat',
+        _blog_conf => \%conf,
+    );
+
+    $app->routes->route($conf{indexPath})->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'blog_index',
         _blog_conf => \%conf,
     );
 
@@ -71,11 +65,12 @@ sub register {
             _blog_conf => \%conf,
         );
 
-        $auth_r->route($conf{adminPathPrefix} . "/blog/new")->via(qw(GET POST))->to(
+        $auth_r->route($conf{adminPathPrefix} . "/blog/new")
+          ->via(qw(GET POST))->to(
             namespace  => $conf{namespace},
             action     => 'admin_blog_new',
             _blog_conf => \%conf,
-        );
+          );
         $auth_r->route($conf{adminPathPrefix} . "/blog/edit/:id")->via('GET')
           ->to(
             namespace  => $conf{namespace},
@@ -127,14 +122,12 @@ Mojolicious::Plugin::Blog - Mojolicious Plugin
 
   $self->plugin('Blog' => {
       authCondition => $conditions
-      dsn => "dbi:SQLite:dbname=db/myblog.db",
     }
   );
 
   # Mojolicious::Lite
   plugin 'Blog' => {
     authCondition => $conditions,
-    dsn => "dbi:SQLite:dbname=db/myblog.db",
   };
 
 
@@ -190,34 +183,9 @@ twitter, and others coming soon.
         twitter   => 'ajscg',
     },
 
-=head2 C<dsn>
-
-Database URI
-
-=head2 C<dbuser>
-
-Database User
-
-=head2 C<dbpass>
-
-Database password
-
-=head2 C<dbconn>
-
-Database connection, doesn't need to be manually set.
-
-=head2 C<dbrs>
-
-Database Resultset, again doesn't need to be set unless you
-implement your own database layer.
-
 =head2 C<indexPath>
 
 Blog index route
-
-=head2 C<archivePath>
-
-Blog archive path
 
 =head2 C<postPath>
 

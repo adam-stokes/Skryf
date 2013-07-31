@@ -1,14 +1,12 @@
+package App::skryf::Model::Post;
+
 use strict;
 use warnings;
 
-package App::skryf::Model::Post;
-
-use Mojo::Base -base;
+use App::skryf::Model::Base;
 use App::skryf::Util;
 use Method::Signatures;
 use Data::Printer;
-
-has db => sub {};
 
 method all {
     $self->db->find->batch_size(2)->all;

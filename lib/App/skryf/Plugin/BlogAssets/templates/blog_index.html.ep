@@ -1,9 +1,0 @@
-% layout 'blog_layout';
-
-<h2>Blog index</h2>
-
-<ul>
-<% foreach (@{$postlist}) { %>
-<li><a href="<%= url_for('blogid', {id => $_->{id}}) %>"><%= $_->{title} %></a></li>
-<% } %>
-</ul>

@@ -3,104 +3,101 @@ package App::skryf::Plugin::Blog::Controller;
 use strict;
 use warnings;
 use Mojo::Base 'Mojolicious::Controller';
-use Data::Dump qw[pp];
+use App::skryf::Model::Post;
 
 sub blog_index {
     my $self  = shift;
-    my $rs    = $self->blogconf->{dbrs};
-    my $posts = $rs->search({}, {limit => 15})
-      ->array_of_hash_rows(['id', 'title', 'body', 'created']);
-
+    my $model = App::skryf::Model::Post->new(db => $self->db);
+    my $posts = $model->all;
     $self->stash(postlist => $posts);
     $self->render('blog_index');
-}
-
-sub blog_archive {
-    my $self  = shift;
-    my $rs    = $self->blogconf->{dbrs};
-    my $posts = $rs->array_of_hash_rows(['id', 'title', 'body', 'created']);
-
-    $self->stash(postlist => $posts);
-    $self->render('blog_archive');
 }
 
 sub blog_detail {
     my $self   = shift;
     my $postid = $self->param('id');
-
-    my $rs = $self->blogconf->{dbrs};
-    my $post = $rs->search({id => $postid})
-      ->hash_row(['id', 'title', 'body', 'created']);
+    unless ($postid =~ /^[A-Za-z0-9_-]+$/) {
+        $self->render(text => 'Invalid post name!', status => 404);
+        return;
+    }
+    my $post = $self->db->find_one({slug => $postid});
+    unless ($post) {
+        $self->render(text => 'No post found!', status => $post);
+    }
 
     $self->stash(post => $post);
     $self->render('blog_detail');
 }
 
+sub blog_feeds_by_cat {
+    my $self     = shift;
+    my $category = $self->param('category');
+    my $_posts   = $self->mgo->find({category => $category})->all;
+    $self->stash(postlist => $_posts);
+    $self->render(template => 'atom', format => 'xml');
+}
+
+sub blog_feeds {
+    my $self  = shift;
+    my $model = App::skryf::Model::Post->new;
+
+    $self->stash(postlist => $model->all);
+    $self->render(template => 'atom', format => 'xml');
+}
+
 sub admin_blog_index {
     my $self  = shift;
-    my $rs    = $self->blogconf->{dbrs};
-    my $posts = $rs->search({}, {limit => 15})
-      ->array_of_hash_rows(['id', 'title', 'body', 'created']);
-
-    $self->stash(postlist => $posts);
-    $self->render('admin_blog_index');
+    my $model = App::skryf::Model::Post->new;
+    $self->stash(postlist => $model->all);
+    $self->render('admin/index');
 }
 
 sub admin_blog_new {
     my $self   = shift;
     my $method = $self->req->method;
     if ($method eq "POST") {
-        my $rs = $self->blogconf->{dbrs};
-        $rs->insert(
-            {   title => $self->param('title'),
-                body  => $self->param('body'),
-            }
-        );
-
-        $self->flash(
-            message => "New blog post " . $self->param('title') . " added.");
-        $self->redirect_to($self->url_for('adminblog'));
+        my $topic   = $self->param('topic');
+        my $content = $self->param('content');
+        my $tags    = $self->param('tags');
+        my $model   = App::skryf::Model::Post->new;
+        $model->new_post($topic, $content, $tags);
+        $self->redirect_to('admin/index');
     }
     else {
-        $self->render('admin_blog_new');
+        $self->render('admin/new');
     }
 }
 
 sub admin_blog_edit {
     my $self   = shift;
     my $postid = $self->param('id');
-
-    my $rs = $self->blogconf->{dbrs};
-    my $post = $rs->search({id => $postid})
-      ->hash_row(['id', 'title', 'body', 'created']);
-
-    $self->stash(post => $post);
-
-    $self->render('admin_blog_edit');
+    my $model   = App::skryf::Model::Post->new;
+    $self->stash(post => $model->get($postid));
+    $self->render('admin/edit');
 }
 
 sub admin_blog_update {
     my $self   = shift;
-    my $postid = $self->param('id');
-
-    my $rs = $self->blogconf->{dbrs};
-    my $post =
-      $rs->search({id => $postid})
-      ->update(
-        {title => $self->param('title'), body => $self->param('body')});
-    $self->flash(message => "Blog " . $self->param('title') . " updated.");
+    my $postid  = $self->param('id');
+    my $topic   = $self->param('topic');
+    my $content = $self->param('content');
+    my $tags    = $self->param('tags');
+    my $model   = App::skryf::Model::Post->new;
+    $model->update_post($topic, $content, $tags);
+    $self->flash(message => "Blog " . $self->param('topic') . " updated.");
     $self->redirect_to($self->url_for('adminblogeditid', {id => $postid}));
 }
 
 sub admin_blog_delete {
     my $self   = shift;
     my $postid = $self->param('id');
-
-    my $rs = $self->blogconf->{dbrs};
-    my $post =
-      $rs->search({id => $postid})
-      ->delete();
-    $self->flash(message => "Blog ".$postid." deleted.");
+    my $model = App::skryf::Model::Post->new;
+    if ($model->delete_post($postid)) {
+        $self->flash(message => 'Removed.');
+    }
+    else {
+        $self->flash(message => 'Failed to remove post.');
+    }
     $self->redirect_to($self->blogconf->{adminPathPrefix} . "/blog/");
 }
 

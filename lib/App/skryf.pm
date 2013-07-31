@@ -16,6 +16,7 @@ our $VERSION = '0.009';
 sub startup {
     my $self = shift;
     $self->secret("WHO CARES RITE?");
+
 ###############################################################################
 # Setup configuration
 ###############################################################################
@@ -28,9 +29,7 @@ sub startup {
         path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
           unless $cfgfile->exists;
     }
-
     $self->plugin('Config' => {file => $cfgfile});
-
     my $cfg = $self->config->{skryf} || +{};
 
 ###############################################################################
@@ -39,12 +38,17 @@ sub startup {
     for (keys $cfg->{extra_modules}) {
         $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
     }
+
 ###############################################################################
 # Load local plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    $self->plugin('model' => {dsn => $cfg->{db}{dsn},
-      authCondition => $self->session('user'));
+    $self->plugin(
+        'blog' => {
+            dsn           => $cfg->{db}{dsn},
+            authCondition => $self->session('user'),
+        }
+    );
 
 ###############################################################################
 # Define template, media, static paths
@@ -74,16 +78,17 @@ sub startup {
 # Routing
 ###############################################################################
     my $r = $self->routes;
+
     # RSS
-    $r->get('/atom.xml')->to('blog#feeds')->name('feeds');
-    $r->get('/feeds/:category/atom.xml')->to('blog#feeds_by_cat')
-      ->name('feeds_by_cat');
+
     # Authentication
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
-   # Static page view
+
+    # Static page view
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
+
     # Root
     $r->get('/')->to('blog#index')->name('index');
 }
