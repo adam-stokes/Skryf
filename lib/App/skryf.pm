@@ -1,21 +1,15 @@
-use strict;
-use warnings;
-
 package App::skryf;
 
 use Mojo::Base 'Mojolicious';
-use App::skryf::Model::User;
 
 use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
-use Data::Printer;
 
 our $VERSION = '0.009';
 
 sub startup {
     my $self = shift;
-    $self->secret("WHO CARES RITE?");
 
 ###############################################################################
 # Setup configuration
@@ -32,6 +26,7 @@ sub startup {
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
 
+    $self->secret($cfg->{secret});
 ###############################################################################
 # Load global plugins
 ###############################################################################
@@ -78,8 +73,6 @@ sub startup {
 # Routing
 ###############################################################################
     my $r = $self->routes;
-
-    # RSS
 
     # Authentication
     $r->get('/login')->to('login#login')->name('login');
@@ -147,14 +140,6 @@ I<public_directory>.
 
 So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/public/style.css>
 
-=head1 NEW POST
-
-    $ skryf newpost a-new-blog-post
-
-=head1 NEW PAGE
-
-    $ skryf newpage an-about-page
-
 =head1 DEPLOY
 
     $ export BLOGUSER=username
@@ -190,11 +175,6 @@ Adam Stokes E<lt>adamjs@cpan.orgE<gt>
 =head1 COPYRIGHT
 
 Copyright 2013- Adam Stokes
-
-=head1 DISCLAIMER
-
-Jon Portnoy [avenj at cobaltirc.org](http://www.cobaltirc.org) is original 
-author of blagger in which this code is morphed heavily off of.
 
 =head1 LICENSE
 

@@ -1,13 +1,11 @@
 package App::skryf::Plugin::Blog::Controller;
 
-use strict;
-use warnings;
 use Mojo::Base 'Mojolicious::Controller';
 use App::skryf::Model::Post;
 
 sub blog_index {
     my $self  = shift;
-    my $model = App::skryf::Model::Post->new(db => $self->db);
+    my $model = App::skryf::Model::Post->new;
     my $posts = $model->all;
     $self->stash(postlist => $posts);
     $self->render('blog_index');
@@ -20,7 +18,8 @@ sub blog_detail {
         $self->render(text => 'Invalid post name!', status => 404);
         return;
     }
-    my $post = $self->db->find_one({slug => $postid});
+    my $model = App::skryf::Model::Post->new;
+    my $post = $model->find_one({slug => $postid});
     unless ($post) {
         $self->render(text => 'No post found!', status => $post);
     }
@@ -32,7 +31,8 @@ sub blog_detail {
 sub blog_feeds_by_cat {
     my $self     = shift;
     my $category = $self->param('category');
-    my $_posts   = $self->mgo->find({category => $category})->all;
+    my $model = App::skryf::Model::Post->new;
+    my $_posts   = $model->find({category => $category})->all;
     $self->stash(postlist => $_posts);
     $self->render(template => 'atom', format => 'xml');
 }
@@ -85,7 +85,7 @@ sub admin_blog_update {
     my $model   = App::skryf::Model::Post->new;
     $model->update_post($topic, $content, $tags);
     $self->flash(message => "Blog " . $self->param('topic') . " updated.");
-    $self->redirect_to($self->url_for('adminblogeditid', {id => $postid}));
+    $self->redirect_to($self->url_for('admin_blog_edit', {id => $postid}));
 }
 
 sub admin_blog_delete {

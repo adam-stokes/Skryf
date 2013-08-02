@@ -39,14 +39,6 @@ _public\_directory_.
 
 So __~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}__ and __~/blog/public/style.css__
 
-# NEW POST
-
-    $ skryf newpost a-new-blog-post
-
-# NEW PAGE
-
-    $ skryf newpage an-about-page
-
 # DEPLOY
 
     $ export BLOGUSER=username
@@ -82,11 +74,6 @@ Adam Stokes <adamjs@cpan.org>
 # COPYRIGHT
 
 Copyright 2013- Adam Stokes
-
-# DISCLAIMER
-
-Jon Portnoy \[avenj at cobaltirc.org\](http://www.cobaltirc.org) is original 
-author of blagger in which this code is morphed heavily off of.
 
 # LICENSE
 

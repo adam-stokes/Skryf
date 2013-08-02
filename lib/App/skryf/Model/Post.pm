@@ -1,9 +1,7 @@
 package App::skryf::Model::Post;
 
-use strict;
-use warnings;
+use Mojo::Base 'App::skryf::Model::Base';
 
-use App::skryf::Model::Base;
 use App::skryf::Util;
 use Method::Signatures;
 use Data::Printer;

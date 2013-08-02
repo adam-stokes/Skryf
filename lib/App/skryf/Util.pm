@@ -1,17 +1,17 @@
 package App::skryf::Util;
+
 use strict;
 use warnings;
 
+use Method::Signatures;
 use Text::Markdown 'markdown';
 use String::Dirify 'dirify';
 
-sub convert {
-    my ($self, $content) = @_;
+method convert ($content) {
     markdown($content, {tab_width => 2});
 }
 
-sub slugify {
-  my ($self, $topic) = @_;
+method slugify ($topic) {
   dirify($topic, '-');
 }
 

@@ -1,16 +1,10 @@
-use strict;
-use warnings;
-
 package App::skryf::Model::User;
 
-use Mojo::Base -base;
+use Mojo::Base 'App::skryf::Model::Base';
+use Method::Signatures;
 
-has 'db' => sub {};
-has 'username' => '';
-
-sub check {
-    my ($self, $password) = @_;
-    my $user = $self->db->find_one({username => $self->username});
+method check ($username, $password) {
+    my $user = $self->db->find_one({username => $username});
     return 1 if $user->{password} eq $password;
     return undef;
 }

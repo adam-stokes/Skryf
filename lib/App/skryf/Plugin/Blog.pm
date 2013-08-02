@@ -1,7 +1,5 @@
 package App::skryf::Plugin::Blog;
 
-use strict;
-use warnings;
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
@@ -13,8 +11,8 @@ my %defaults = (
     # Default routes
     indexPath       => '/post/',
     postPath        => '/post/:id',
-    feedPath        => '/atom.xml',
-    feedCatPath     => '/feeds/:category/atom.xml',
+    feedPath        => '/post/atom.xml',
+    feedCatPath     => '/post/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post',
 
     # Router namespace
@@ -34,25 +32,25 @@ sub register {
         namespace  => $conf{namespace},
         action     => 'blog_feeds',
         _blog_conf => \%conf,
-    );
+    )->name('blog_feeds');
 
     $app->routes->route($conf{feedCatPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_feeds_by_cat',
         _blog_conf => \%conf,
-    );
+    )->name('blog_cat_feeds');
 
     $app->routes->route($conf{indexPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_index',
         _blog_conf => \%conf,
-    );
+    )->name('blog_index');
 
     $app->routes->route($conf{postPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_detail',
         _blog_conf => \%conf,
-    );
+    )->name('blog_detail');
 
     my $auth_r;
     if ($conf{authCondition}) {
@@ -63,32 +61,32 @@ sub register {
             namespace  => $conf{namespace},
             action     => 'admin_blog_index',
             _blog_conf => \%conf,
-        );
+        )->name('admin_blog_index');
 
         $auth_r->route($conf{adminPathPrefix} . "/blog/new")
           ->via(qw(GET POST))->to(
             namespace  => $conf{namespace},
             action     => 'admin_blog_new',
             _blog_conf => \%conf,
-          );
+          )->name('admin_blog_new');
         $auth_r->route($conf{adminPathPrefix} . "/blog/edit/:id")->via('GET')
           ->to(
             namespace  => $conf{namespace},
             action     => 'admin_blog_edit',
             _blog_conf => \%conf,
-          );
+          )->name('admin_blog_edit');
         $auth_r->route($conf{adminPathPrefix} . "/blog/update/:id")
           ->via('POST')->to(
             namespace  => $conf{namespace},
             action     => 'admin_blog_update',
             _blog_conf => \%conf,
-          );
+          )->name('admin_blog_update');
         $auth_r->route($conf{adminPathPrefix} . "/blog/delete/:id")
           ->via('GET')->to(
             namespace  => $conf{namespace},
             action     => 'admin_blog_delete',
             _blog_conf => \%conf,
-          );
+          )->name('admin_blog_delete');
     }
     return;
 }
