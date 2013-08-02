@@ -11,6 +11,5 @@ install:
 - sudo apt-get update
 - sudo apt-get install mongodb-10gen
 - cpanm --notest Dist::Milla
-- milla install
 script:
 - milla test
