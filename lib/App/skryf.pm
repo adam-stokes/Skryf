@@ -93,6 +93,7 @@ __END__
 =head1 NAME
 
 App-skryf - i kno rite. another perl blogging engine.
+
 [![Build Status](https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango)](https://travis-ci.org/battlemidget/App-skryf)
 
 =head1 DESCRIPTION
