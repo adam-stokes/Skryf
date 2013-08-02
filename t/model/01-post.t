@@ -43,6 +43,7 @@ diag('Re-query for updated post');
 $post = $model->get($topic_b_slug);
 ok $post;
 ok $post->{topic} eq $topic_b;
+ok $post->{slug} eq $topic_b_slug;
 
 ok $model->remove($topic_b_slug);
 
