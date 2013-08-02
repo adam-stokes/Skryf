@@ -6,18 +6,22 @@ use App::skryf::Util;
 use Method::Signatures;
 use Data::Printer;
 
+method posts {
+    $self->mgo->db->collection('posts');
+}
+
 method all {
-    $self->db->find->batch_size(2)->all;
+    $self->posts->find->batch_size(2)->all;
 }
 
 method get ($slug) {
-    $self->db->find_one({slug => $slug});
+    $self->posts->find_one({slug => $slug});
 }
 
-method new_post ($topic, $content, $tags) {
+method create ($topic, $content, $tags) {
     my $slug = App::skryf::Util->slugify($topic);
     my $html = App::skryf::Util->convert($content);
-    $self->db->insert(
+    $self->posts->insert(
         {   slug    => $slug,
             topic   => $topic,
             content => $content,
@@ -27,21 +31,14 @@ method new_post ($topic, $content, $tags) {
     );
 }
 
-method update_post ($topic, $content, $tags) {
-    my $slug = App::skryf::Util->slugify($topic);
-    my $html = App::skryf::Util->convert($content);
-    $self->db->update(
-        {slug => $slug},
-        {   topic   => $topic,
-            content => $content,
-            tags    => $tags,
-            html    => $html,
-        }
-    );
+method save ($post) {
+    $post->{slug} = App::skryf::Util->slugify($post->{topic});
+    $post->{html} = App::skryf::Util->convert($post->{content});
+    $self->posts->save($post);
 }
 
-method delete_post ($slug) {
-    $self->db->remove({slug => $slug});
+method remove ($slug) {
+    $self->posts->remove({slug => $slug});
 }
 
 1;

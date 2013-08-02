@@ -3,8 +3,12 @@ package App::skryf::Model::User;
 use Mojo::Base 'App::skryf::Model::Base';
 use Method::Signatures;
 
+method users {
+    $self->mgo->db->collection('user');
+}
+
 method check ($username, $password) {
-    my $user = $self->db->find_one({username => $username});
+    my $user = $self->users->find_one({username => $username});
     return 1 if $user->{password} eq $password;
     return undef;
 }
