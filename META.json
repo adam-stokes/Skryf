@@ -1,5 +1,5 @@
 {
-   "abstract" : "i kno rite. another perl blogging engine.",
+   "abstract" : "i kno rite. another perl blogging engine.\n[![Build Status](https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango)](https://travis-ci.org/battlemidget/App-skryf)",
    "author" : [
       "Adam Stokes <adamjs@cpan.org>"
    ],
