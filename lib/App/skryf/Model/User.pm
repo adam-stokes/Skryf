@@ -7,6 +7,28 @@ method users {
     $self->mgo->db->collection('user');
 }
 
+method create ($username, $password) {
+    my $user = $self->users->find_one({username => $username});
+    if (!$user) {
+        $self->users->insert(
+            {   username => $username,
+                password => $password,
+            }
+        );
+    }
+    else {
+        return undef;
+    }
+}
+
+method get($username) {
+  $self->users->find_one({username => $username});
+}
+
+method remove ($username) {
+    $self->users->remove({username => $username});
+}
+
 method check ($username, $password) {
     my $user = $self->users->find_one({username => $username});
     return 1 if $user->{password} eq $password;

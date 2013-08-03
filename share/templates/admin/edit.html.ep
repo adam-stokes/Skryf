@@ -5,6 +5,7 @@
 %= t 'h2' => 'New content'
 
 %= form_for "/admin/post/update" => ( method => 'POST' ) => begin
+%= hidden_field slug => $post->{slug}
 %= text_field 'topic', type => 'text', value => $post->{topic}
 %= t 'br'
 %= text_area 'content', cols => 40 => begin

@@ -8,6 +8,7 @@ use Mojo::Base 'Mojolicious::Command';
 use Carp;
 use Path::Tiny;
 use DateTime;
+use App::skryf::Model::User;
 use Data::Printer;
 
 has description => "Setup your blog.\n";
@@ -21,7 +22,7 @@ EOF
 
 sub run {
     my ($self, $blog_name) = @_;
-    my $user_collection = $self->app->mango->db->collection('user');
+    my $model = App::skryf::Model::User->new;
     die $self->usage unless $blog_name;
 
     unless ($blog_name =~ /^[A-Za-z0-9_-]+$/) {
@@ -36,12 +37,12 @@ sub run {
     print "Password: ";
     my $password = <STDIN>;
     chomp $password;
-    if ($user_collection->find_one({username => $username})) {
+    if ($model->get({username => $username})) {
         croak
           "The user: $username already exists in the database.\n",
           "Please remove if you wish to re-auth";
     }
-    $user_collection->insert({username => $username, password => $password});
+    $model->create($username, $password);
     say
       "\nBlog setup complete, run perldoc App::skryf ",
       "for information on server configuration";

@@ -5,6 +5,7 @@ use Mojo::Base 'Mojolicious';
 use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
+use Data::Printer;
 
 our $VERSION = '0.009';
 
@@ -25,6 +26,7 @@ sub startup {
     }
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
+    p($cfg);
 
     $self->secret($cfg->{secret});
 ###############################################################################
@@ -34,16 +36,17 @@ sub startup {
         $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
     }
 
+    p($self->plugin);
 ###############################################################################
 # Load local plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
     $self->plugin(
         'blog' => {
-            dsn           => $cfg->{db}{dsn},
             authCondition => $self->session('user'),
-        }
+        },
     );
+    p($self->plugin);
 
 ###############################################################################
 # Define template, media, static paths
@@ -68,6 +71,8 @@ sub startup {
 
 # use App::skryf::Command namespace
     push @{$self->commands->namespaces}, 'App::skryf::Command';
+
+    $self->helper(cfg => $cfg);
 
 ###############################################################################
 # Routing
@@ -94,7 +99,11 @@ __END__
 
 App-skryf - i kno rite. another perl blogging engine.
 
-[![Build Status](https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango)](https://travis-ci.org/battlemidget/App-skryf)
+=begin html
+
+<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master />
+
+=end html
 
 =head1 DESCRIPTION
 

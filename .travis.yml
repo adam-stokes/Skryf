@@ -1,8 +1,9 @@
 ---
 language: perl
 perl:
-- '5.16'
-- '5.18'
+- '5.14.4'
+- '5.16.3'
+- '5.18.0'
 notifications:
   email: false
 install:
@@ -11,5 +12,6 @@ install:
 - sudo apt-get update
 - sudo apt-get install mongodb-10gen
 - cpanm --notest Dist::Milla
+- milla install
 script:
 - milla test
