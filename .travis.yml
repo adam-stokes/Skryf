@@ -8,7 +8,7 @@ notifications:
   email: false
 install:
 - sudo service mongodb start
-- cpanm --notest Dist::Milla
+- cpanm --notest --mirror-only Dist::Milla
 - cpanm --notest .
 script:
 - prove -r t

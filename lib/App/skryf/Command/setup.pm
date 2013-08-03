@@ -9,7 +9,6 @@ use Carp;
 use Path::Tiny;
 use DateTime;
 use App::skryf::Model::User;
-use Data::Printer;
 
 has description => "Setup your blog.\n";
 has usage       => <<"EOF";

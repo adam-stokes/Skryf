@@ -4,7 +4,6 @@ use strict;
 use warnings;
 
 use Test::More;
-use Data::Printer;
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 

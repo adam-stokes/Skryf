@@ -4,7 +4,6 @@ use Mojo::Base 'App::skryf::Model::Base';
 
 use App::skryf::Util;
 use Method::Signatures;
-use Data::Printer;
 
 method posts {
     $self->mgo->db->collection('posts');

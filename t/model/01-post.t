@@ -2,7 +2,6 @@
 
 use strict;
 use warnings;
-use Data::Printer;
 use Test::More tests => 12;
 
 use FindBin;

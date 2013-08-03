@@ -5,7 +5,6 @@ use Mojo::Base 'Mojolicious';
 use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
-use Data::Printer;
 
 our $VERSION = '0.009';
 
@@ -26,7 +25,6 @@ sub startup {
     }
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
-    p($cfg);
 
     $self->secret($cfg->{secret});
 ###############################################################################
@@ -36,7 +34,6 @@ sub startup {
         $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
     }
 
-    p($self->plugin);
 ###############################################################################
 # Load local plugins
 ###############################################################################
@@ -46,7 +43,6 @@ sub startup {
             authCondition => $self->session('user'),
         },
     );
-    p($self->plugin);
 
 ###############################################################################
 # Define template, media, static paths
