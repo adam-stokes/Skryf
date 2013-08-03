@@ -1,17 +1,14 @@
 ---
 language: perl
 perl:
-- '5.14.4'
-- '5.16.3'
-- '5.18.0'
+- '5.14'
+- '5.16'
+- '5.18'
 notifications:
   email: false
 install:
-- sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-- echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
-- sudo apt-get update
-- sudo apt-get install mongodb-10gen
-- cpanm --notest Dist::Milla
-- milla install
+- sudo service mongodb start
+- cpanm -S --notest Dist::Milla
+- sudo milla install
 script:
-- milla test
+- sudo milla test
