@@ -1,10 +1,7 @@
 package App::skryf::Command::setup;
 
-use strict;
-use warnings;
-use 5.014;
-use FindBin '$Bin';
 use Mojo::Base 'Mojolicious::Command';
+use FindBin '$Bin';
 use Carp;
 use Path::Tiny;
 use DateTime;

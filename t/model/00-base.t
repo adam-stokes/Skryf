@@ -7,6 +7,7 @@ use Test::More;
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 
+diag('Testing base model');
 use_ok('App::skryf::Model::Base');
 my $model;
 

@@ -1,17 +1,17 @@
 <div id="navbar">
   <a href="/">Root</a>
-  % if ((my $user = session 'user') == 1) {
+  % if (session 'user' && (my $user = session 'user') == 1) {
     <a href="/admin">Admin</a>
   % }
 </div>
 <div id="header">
   <div class="logo">
-    <%= gravatar cfg->{contact} %>
+    <%= gravatar config->{contact} %>
   </div>
   <div class="title">
-    <h2><%= cfg->{title} %></h2>
+    <h2><%= config->{title} %></h2>
   </div>
-<h4><%= cfg->{description} %></h4>
+<h4><%= config->{description} %></h4>
 <div class="clearfix"></div>
 </div>
 

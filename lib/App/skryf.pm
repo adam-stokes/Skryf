@@ -25,7 +25,7 @@ sub startup {
     }
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
-
+    $cfg->{version} = $VERSION;
     $self->secret($cfg->{secret});
 ###############################################################################
 # Load global plugins
@@ -38,11 +38,7 @@ sub startup {
 # Load local plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    $self->plugin(
-        'blog' => {
-            authCondition => $self->session('user'),
-        },
-    );
+    $self->plugin('Blog' => {authentication => $self->session('user')});
 
 ###############################################################################
 # Define template, media, static paths
@@ -68,11 +64,10 @@ sub startup {
 # use App::skryf::Command namespace
     push @{$self->commands->namespaces}, 'App::skryf::Command';
 
-    $self->helper(cfg => $cfg);
-
 ###############################################################################
 # Routing
 ###############################################################################
+    $self->helper(config => sub {$cfg});
     my $r = $self->routes;
 
     # Authentication
@@ -82,9 +77,6 @@ sub startup {
 
     # Static page view
     $r->get('/:slug')->to('blog#static_page')->name('static_page');
-
-    # Root
-    $r->get('/')->to('blog#index')->name('index');
 }
 
 1;

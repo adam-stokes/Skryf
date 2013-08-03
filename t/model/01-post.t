@@ -2,11 +2,12 @@
 
 use strict;
 use warnings;
-use Test::More tests => 12;
+use Test::More;
 
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 
+diag("Testing posts model");
 use_ok('App::skryf::Model::Post');
 my $model;
 
@@ -20,7 +21,6 @@ $model =
 ok $model;
 ok $model->posts;
 
-diag("Creating post");
 ok $model->create(
   $topic_a,
     'some content for the test',
@@ -30,20 +30,16 @@ ok $model->create(
 ok $model->all;
 
 # Single post tests, basic add/update/delete/get
-diag('Getting post');
 my $post = $model->get($topic_a_slug);
 ok $post;
 ok $post->{topic} eq $topic_a;
 $post->{topic} = $topic_b;
-diag('Saving routine');
 ok $model->save($post);
 
-diag('Re-query for updated post');
 $post = $model->get($topic_b_slug);
 ok $post;
 ok $post->{topic} eq $topic_b;
 ok $post->{slug} eq $topic_b_slug;
 
-diag('Removing post');
 ok $model->remove($topic_b_slug);
-
+done_testing();

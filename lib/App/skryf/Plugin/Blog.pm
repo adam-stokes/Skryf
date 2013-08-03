@@ -9,11 +9,11 @@ use App::skryf::Plugin::Blog::Controller;
 my %defaults = (
 
     # Default routes
-    indexPath       => '/post/',
+    indexPath       => '/',
     postPath        => '/post/:id',
     feedPath        => '/post/atom.xml',
     feedCatPath     => '/post/feeds/:category/atom.xml',
-    adminPathPrefix => '/admin/post',
+    adminPathPrefix => '/admin/post/',
 
     # Router namespace
     namespace => 'App::skryf::Plugin::Blog::Controller',
@@ -52,42 +52,38 @@ sub register {
         _blog_conf => \%conf,
     )->name('blog_detail');
 
-    my $auth_r;
-    if ($conf{authCondition}) {
-        $auth_r = $app->routes->under($conf{authCondition}->{authenticated});
-    }
-    if ($auth_r) {
-        $auth_r->route($conf{adminPathPrefix} . "/blog/")->via('GET')->to(
-            namespace  => $conf{namespace},
-            action     => 'admin_blog_index',
-            _blog_conf => \%conf,
-        )->name('admin_blog_index');
+    my $auth_r = $app->routes->under(
+      sub {
+        my $self = shift;
+        return $self->session('user') || !$self->redirect_to('login');
+      }
+    );
+    $auth_r->route($conf{adminPathPrefix} . "")->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_blog_index',
+        _blog_conf => \%conf,
+    )->name('admin_blog_index');
 
-        $auth_r->route($conf{adminPathPrefix} . "/blog/new")
-          ->via(qw(GET POST))->to(
-            namespace  => $conf{namespace},
-            action     => 'admin_blog_new',
-            _blog_conf => \%conf,
-          )->name('admin_blog_new');
-        $auth_r->route($conf{adminPathPrefix} . "/blog/edit/:id")->via('GET')
-          ->to(
-            namespace  => $conf{namespace},
-            action     => 'admin_blog_edit',
-            _blog_conf => \%conf,
-          )->name('admin_blog_edit');
-        $auth_r->route($conf{adminPathPrefix} . "/blog/update/:id")
-          ->via('POST')->to(
-            namespace  => $conf{namespace},
-            action     => 'admin_blog_update',
-            _blog_conf => \%conf,
-          )->name('admin_blog_update');
-        $auth_r->route($conf{adminPathPrefix} . "/blog/delete/:id")
-          ->via('GET')->to(
-            namespace  => $conf{namespace},
-            action     => 'admin_blog_delete',
-            _blog_conf => \%conf,
-          )->name('admin_blog_delete');
-    }
+    $auth_r->route($conf{adminPathPrefix} . "new")->via(qw(GET POST))->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_blog_new',
+        _blog_conf => \%conf,
+    )->name('admin_blog_new');
+    $auth_r->route($conf{adminPathPrefix} . "edit/:id")->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_blog_edit',
+        _blog_conf => \%conf,
+    )->name('admin_blog_edit');
+    $auth_r->route($conf{adminPathPrefix} . "update/:id")->via('POST')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_blog_update',
+        _blog_conf => \%conf,
+    )->name('admin_blog_update');
+    $auth_r->route($conf{adminPathPrefix} . "delete/:id")->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_blog_delete',
+        _blog_conf => \%conf,
+    )->name('admin_blog_delete');
     return;
 }
 

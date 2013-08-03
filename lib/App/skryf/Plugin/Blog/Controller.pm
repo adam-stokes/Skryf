@@ -8,7 +8,7 @@ method blog_index {
     my $model = App::skryf::Model::Post->new;
     my $posts = $model->all;
     $self->stash(postlist => $posts);
-    $self->render('blog_index');
+    $self->render('index');
 }
 
 method blog_detail {
@@ -100,7 +100,7 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::Blog::Controller - blog plugin controller
+App::skryf::Plugin::Blog::Controller - blog plugin controller
 
 =head1 DESCRIPTION
 

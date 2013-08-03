@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><%= cfg->{title} %></title>
+<title><%= $config->{title} %></title>
   <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu' rel='stylesheet' type='text/css'>
 <%= stylesheet "/style.css" %>
 <%= analytics_inc 'UA-23169268-1' %>

@@ -2,11 +2,12 @@
 
 use strict;
 use warnings;
-use Test::More tests => 6;
+use Test::More;
 
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 
+diag("Testing user models");
 use_ok('App::skryf::Model::User');
 my $model;
 
@@ -18,7 +19,6 @@ $model =
 ok $model;
 ok $model->users;
 
-diag("Creating user");
 ok $model->create(
   $username,
   $password,
@@ -27,6 +27,7 @@ ok $model->create(
 ok $model->check($username, $password);
 
 # Single post tests, basic add/update/delete/get
-diag('Deleting user');
 ok $model->remove($username);
+
+done_testing();
 
