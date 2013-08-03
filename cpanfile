@@ -15,6 +15,7 @@ requires 'Pithub';
 requires 'Text::Markdown';
 requires 'Mango';
 requires 'String::Dirify';
+requires 'Data::Printer';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';
