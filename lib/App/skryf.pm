@@ -99,12 +99,6 @@ __END__
 
 App-skryf - i kno rite. another perl blogging engine.
 
-=begin html
-
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master />
-
-=end html
-
 =head1 DESCRIPTION
 
 Another blog engine which utilizes
@@ -190,5 +184,11 @@ Copyright 2013- Adam Stokes
 =head1 LICENSE
 
 Licensed under the same terms as Perl.
+
+=begin html
+
+<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango" />
+
+=end html
 
 =cut

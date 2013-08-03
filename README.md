@@ -2,8 +2,6 @@
 
 App-skryf - i kno rite. another perl blogging engine.
 
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master />
-
 # DESCRIPTION
 
 Another blog engine which utilizes
@@ -80,3 +78,5 @@ Copyright 2013- Adam Stokes
 # LICENSE
 
 Licensed under the same terms as Perl.
+
+<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango" />
