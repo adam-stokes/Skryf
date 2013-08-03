@@ -43,6 +43,7 @@
             "FindBin" : "0",
             "List::Objects::WithUtils" : "0",
             "Mango" : "0",
+            "Method::Signatures" : "0",
             "Mojo::Base" : "0",
             "Mojolicious::Lite" : "0",
             "Mojolicious::Plugin::CSRFDefender" : "0",
