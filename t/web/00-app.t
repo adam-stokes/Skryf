@@ -31,11 +31,14 @@ $t->post_ok(
     '/admin/post/new' => form => {
         topic   => 'a new topic',
         content => 'auto content posted',
-        tags    => 'ubuntu',
+        tags    => 'ubuntu, blog, test',
     }
 )->status_is(302);
 
 $t->get_ok('/post/a-new-topic')->status_is(200)
   ->content_like(qr/auto content posted/, 'right content');
+
+$t->get_ok('/post/feeds/ubuntu/atom.xml')->status_is(200);
+$t->get_ok('/admin/post/delete/a-new-topic')->status_is(302);
 
 done_testing();
