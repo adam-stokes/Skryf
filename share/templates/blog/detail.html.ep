@@ -5,6 +5,6 @@
 
  <%== $post->{html} %>
 
- <%= disqus_inc cfg->{social}{disqus} %>
+ <%= disqus_inc $config->{social}{disqus} || 'imnotset' %>
 
 </div>

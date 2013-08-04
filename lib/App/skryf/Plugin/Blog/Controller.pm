@@ -8,29 +8,29 @@ method blog_index {
     my $model = App::skryf::Model::Post->new;
     my $posts = $model->all;
     $self->stash(postlist => $posts);
-    $self->render('index');
+    $self->render('blog/index');
 }
 
 method blog_detail {
-    my $slug = $self->param('id');
+    my $slug = $self->param('slug');
     unless ($slug =~ /^[A-Za-z0-9_-]+$/) {
         $self->render(text => 'Invalid post name!', status => 404);
         return;
     }
     my $model = App::skryf::Model::Post->new;
-    my $post = $model->find_one({slug => $slug});
+    my $post = $model->get($slug);
     unless ($post) {
         $self->render(text => 'No post found!', status => $post);
     }
 
     $self->stash(post => $post);
-    $self->render('blog_detail');
+    $self->render('blog/detail');
 }
 
 method blog_feeds_by_cat {
     my $category = $self->param('category');
     my $model = App::skryf::Model::Post->new;
-    my $posts   = $model->find({category => $category})->all;
+    my $posts   = $model->feeds_by_cat($category);
     $self->stash(postlist => $posts);
     $self->render(template => 'atom', format => 'xml');
 }
@@ -56,7 +56,7 @@ method admin_blog_new {
         my $tags    = $self->param('tags');
         my $model   = App::skryf::Model::Post->new;
         $model->create($topic, $content, $tags);
-        $self->redirect_to('admin/index');
+        $self->redirect_to('admin_blog_index');
     }
     else {
         $self->render('admin/new');
@@ -64,7 +64,7 @@ method admin_blog_new {
 }
 
 method admin_blog_edit {
-    my $slug = $self->param('id');
+    my $slug = $self->param('slug');
     my $model   = App::skryf::Model::Post->new;
     $self->stash(post => $model->get($slug));
     $self->render('admin/edit');

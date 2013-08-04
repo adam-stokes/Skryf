@@ -3,12 +3,14 @@
 %= include 'admin/nav'
 
 %= t 'h2' => 'New content'
-
+  % if (my $msg = flash 'message') {
+  <b><%= $msg %></b>
+  % }
 %= form_for "/admin/post/update" => ( method => 'POST' ) => begin
 %= hidden_field slug => $post->{slug}
 %= text_field 'topic', type => 'text', value => $post->{topic}
 %= t 'br'
-%= text_area 'content', cols => 40 => begin
+%= text_area 'content', cols => 75, rows => 15 => begin
 <%= $post->{content} %>
 %= end
 %= t 'br'

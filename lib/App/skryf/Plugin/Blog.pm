@@ -10,7 +10,7 @@ my %defaults = (
 
     # Default routes
     indexPath       => '/',
-    postPath        => '/post/:id',
+    postPath        => '/post/:slug',
     feedPath        => '/post/atom.xml',
     feedCatPath     => '/post/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post/',
@@ -69,17 +69,17 @@ sub register {
         action     => 'admin_blog_new',
         _blog_conf => \%conf,
     )->name('admin_blog_new');
-    $auth_r->route($conf{adminPathPrefix} . "edit/:id")->via('GET')->to(
+    $auth_r->route($conf{adminPathPrefix} . "edit/:slug")->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_edit',
         _blog_conf => \%conf,
     )->name('admin_blog_edit');
-    $auth_r->route($conf{adminPathPrefix} . "update/:id")->via('POST')->to(
+    $auth_r->route($conf{adminPathPrefix} . "update")->via('POST')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_update',
         _blog_conf => \%conf,
     )->name('admin_blog_update');
-    $auth_r->route($conf{adminPathPrefix} . "delete/:id")->via('GET')->to(
+    $auth_r->route($conf{adminPathPrefix} . "delete/:slug")->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_delete',
         _blog_conf => \%conf,
