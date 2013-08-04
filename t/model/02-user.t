@@ -15,7 +15,7 @@ my $username = 'joebob';
 my $password = 'sillyman';
 
 $model =
-  App::skryf::Model::User->new(dsn => 'mongodb://localhost:27017/testdb');
+  App::skryf::Model::User->new;
 ok $model;
 ok $model->users;
 
@@ -26,8 +26,7 @@ ok $model->create(
 
 ok $model->check($username, $password);
 
-# Single post tests, basic add/update/delete/get
-ok $model->remove($username);
+#ok $model->remove($username);
 
 done_testing();
 

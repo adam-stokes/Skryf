@@ -22,6 +22,7 @@ sub auth {
     my $model =
       App::skryf::Model::User->new;
     if ($model->check($user, $pass)) {
+        $self->flash(message => 'authenticated.');
         $self->session(user => 1);
         $self->redirect_to('admin_blog_index');
     } else {

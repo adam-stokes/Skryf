@@ -41,8 +41,7 @@ method remove ($slug) {
 }
 
 method by_cat ($category) {
-  my $model = App::skryf::Model::Post->new;
-  $model->by_cat($category);
+  $self->posts->find({category => $category});
 }
 
 1;

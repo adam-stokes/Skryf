@@ -12,7 +12,7 @@ use_ok('App::skryf::Model::Base');
 my $model;
 
 $model =
-  App::skryf::Model::Base->new(dsn => 'mongodb://localhost:27017/testdb');
+  App::skryf::Model::Base->new;
 ok($model);
 ok($model->mgo);
 

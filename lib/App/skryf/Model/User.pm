@@ -4,7 +4,7 @@ use Mojo::Base 'App::skryf::Model::Base';
 use Method::Signatures;
 
 method users {
-    $self->mgo->db->collection('user');
+    $self->mgo->db->collection('users');
 }
 
 method create ($username, $password) {
@@ -16,13 +16,11 @@ method create ($username, $password) {
             }
         );
     }
-    else {
-        return undef;
-    }
+    return 1;
 }
 
-method get($username) {
-  $self->users->find_one({username => $username});
+method get ($username) {
+    $self->users->find_one({username => $username});
 }
 
 method remove ($username) {

@@ -17,14 +17,14 @@ my $topic_b = 'an updated test post';
 my $topic_b_slug = 'an-updated-test-post';
 
 $model =
-  App::skryf::Model::Post->new(dsn => 'mongodb://localhost:27017/testdb');
+  App::skryf::Model::Post->new;
 ok $model;
 ok $model->posts;
 
 ok $model->create(
   $topic_a,
     'some content for the test',
-    'a few, tags, for, test'
+    'a few, tags, for, test',
 );
 
 ok $model->all;
