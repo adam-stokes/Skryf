@@ -30,7 +30,7 @@ method blog_detail {
 method blog_feeds_by_cat {
     my $category = $self->param('category');
     my $model = App::skryf::Model::Post->new;
-    my $posts   = $model->feeds_by_cat($category);
+    my $posts   = $model->by_cat($category);
     $self->stash(postlist => $posts);
     $self->render(template => 'atom', format => 'xml');
 }
