@@ -1,6 +1,8 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+
+0.009_01  2013-08-05 13:28:36 EDT
     - Add unittests to cover ui, post model and user model
     - Add administration section for adding posts via the web
 
