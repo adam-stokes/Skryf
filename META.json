@@ -51,7 +51,8 @@
             "Mojolicious::Plugin::Gravatar" : "0",
             "Path::Tiny" : "0",
             "String::Dirify" : "0",
-            "Text::Markdown" : "0"
+            "Text::Markdown" : "0",
+            "XML::Atom::SimpleFeed" : "0"
          }
       }
    },

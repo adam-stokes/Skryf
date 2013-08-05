@@ -14,6 +14,7 @@ requires 'String::Dirify';
 requires 'Method::Signatures';
 requires 'DateTime';
 requires 'DateTime::Format::RFC3339';
+requires 'XML::Atom::SimpleFeed';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';
