@@ -3,6 +3,9 @@ package App::skryf::Plugin::Blog::Controller;
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
 use App::skryf::Model::Post;
+use XML::Atom::SimpleFeed;
+use DateTime::Format::RFC3339;
+use Encode;
 
 method blog_index {
     my $model = App::skryf::Model::Post->new;
@@ -29,16 +32,72 @@ method blog_detail {
 
 method blog_feeds_by_cat {
     my $category = $self->param('category');
-    my $model = App::skryf::Model::Post->new;
-    my $posts   = $model->by_cat($category);
-    $self->stash(postlist => $posts);
-    $self->render(template => 'atom', format => 'xml');
+    my $model    = App::skryf::Model::Post->new;
+    my $posts    = $model->by_cat($category);
+    my $rfc3339  = DateTime::Format::RFC3339->new;
+    my $feed     = XML::Atom::SimpleFeed->new(
+        title => $self->config->{title},
+        link  => $self->config->{site},
+        link  => {
+            rel  => 'self',
+            href => $self->config->{site} . $self->url_for('blog_feeds'),
+        },
+        author => $self->config->{author},
+        id     => $self->config->{site},
+    );
+    for my $post (@{$posts}) {
+        my $utime;
+        if ($post->{created} =~ /^.+Z/) {
+            my $utime = $rfc3339->parse_datetime($post->{created});
+        }
+        else {
+            my $utime = $rfc3339->format_datetime($post->{created});
+        }
+        $feed->add_entry(
+            title => $post->{topic},
+            link  => $self->config->{site}
+              . $self->url_for('blog_detail', {slug => $post->{slug}}),
+            id => $self->config->{site}
+              . $self->url_for('blog_detail', {slug => $post->{slug}}),
+            content => decode_utf8($post->{html}),
+            updated => $utime,
+        );
+    }
+    $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method blog_feeds {
-    my $model = App::skryf::Model::Post->new;
-    $self->stash(postlist => $model->all);
-    $self->render(template => 'atom', format => 'xml');
+    my $model   = App::skryf::Model::Post->new;
+    my $rfc3339 = DateTime::Format::RFC3339->new;
+    my $feed    = XML::Atom::SimpleFeed->new(
+        title => $self->config->{title},
+        link  => $self->config->{site},
+        link  => {
+            rel  => 'self',
+            href => $self->config->{site} . $self->url_for('blog_feeds'),
+        },
+        author => $self->config->{author},
+        id     => $self->config->{site},
+    );
+    for my $post (@{$model->all}) {
+        my $utime;
+        if ($post->{created} =~ /^.+Z/) {
+            my $utime = $rfc3339->parse_datetime($post->{created});
+        }
+        else {
+            my $utime = $rfc3339->format_datetime($post->{created});
+        }
+        $feed->add_entry(
+            title => $post->{topic},
+            link  => $self->config->{site}
+              . $self->url_for('blog_detail', {slug => $post->{slug}}),
+            id => $self->config->{site}
+              . $self->url_for('blog_detail', {slug => $post->{slug}}),
+            content => decode_utf8($post->{html}),
+            updated => $utime,
+        );
+    }
+    $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method admin_blog_index {

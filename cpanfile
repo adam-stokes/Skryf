@@ -9,10 +9,10 @@ requires 'Mojolicious::Plugin::Gravatar';
 requires 'Mojolicious::Plugin::CSRFDefender';
 requires 'Path::Tiny';
 requires 'Text::Markdown';
-requires 'Time::Piece::ISO';
 requires 'Mango';
 requires 'String::Dirify';
 requires 'Method::Signatures';
+requires 'DateTime::Format::RFC3339';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';
