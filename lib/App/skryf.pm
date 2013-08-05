@@ -6,7 +6,7 @@ use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
 
-our $VERSION = '0.009_00';
+our $VERSION = '0.009';
 
 sub startup {
     my $self = shift;
@@ -118,6 +118,8 @@ I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't jud
     $ cpanm git://github.com/battlemidget/App-skryf.git
 
 =head1 SETUP
+
+    $ skryf setup
 
 By default B<skryf> will look in dist_dir for templates and media. To override that
 make sure I<~/.skryf.conf> points to the locations of your templates and media.

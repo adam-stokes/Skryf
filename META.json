@@ -37,11 +37,8 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
-            "DateTime" : "0",
-            "DateTime::Format::ISO8601" : "0",
             "File::ShareDir" : "0",
             "FindBin" : "0",
-            "List::Objects::WithUtils" : "0",
             "Mango" : "0",
             "Method::Signatures" : "0",
             "Mojo::Base" : "0",
@@ -51,13 +48,13 @@
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
             "Mojolicious::Plugin::Gravatar" : "0",
             "Path::Tiny" : "0",
-            "Pithub" : "0",
             "String::Dirify" : "0",
-            "Text::Markdown" : "0"
+            "Text::Markdown" : "0",
+            "Time::Piece::ISO" : "0"
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/battlemidget/App-skryf/issues"
@@ -69,7 +66,7 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.009_00",
+   "version" : "0.009",
    "x_contributors" : [
       "Adam Stokes <adam.stokes@ubuntu.com>"
    ]

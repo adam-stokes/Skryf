@@ -25,6 +25,8 @@ I like [http://perlbrew.pl](http://perlbrew.pl), but, whatever you're comfortabl
 
 # SETUP
 
+    $ skryf setup
+
 By default __skryf__ will look in dist\_dir for templates and media. To override that
 make sure _~/.skryf.conf_ points to the locations of your templates and media.
 For example, this is a simple directory structure for managing your blog media and templates.

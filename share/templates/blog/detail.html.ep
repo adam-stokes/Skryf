@@ -1,8 +1,15 @@
+% use Time::Piece::ISO;
+% my $dt = Time::Piece::ISO->strptime($post->{created});
 % layout 'main';
 <h2><%= $post->{topic} %></h2>
 
 <div id="container" class="post-item">
-Posted under: <%= join(', ', $post->{tags}) %>
+%= t 'p' => begin
+  Posted @ <%= $dt->strftime("%Y-%m-%d") %>
+  %= t 'br /'
+  <strong>Tags</strong> :<%= join(', ', $post->{tags}) %>
+
+%= end
 
  <%== $post->{html} %>
 

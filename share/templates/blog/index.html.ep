@@ -1,9 +1,11 @@
+% use Time::Piece::ISO;
 % layout 'main';
 %= tag 'div', id => 'container' => begin
     %= tag 'ul' => begin
       % foreach (@{$postlist}) {
         %= tag 'li', class => 'postbox' => begin
-          <b><i class="postdate"><%= $_->{date} %></i></b><br />
+          % my $dt = Time::Piece::ISO->strptime($_->{created});
+          <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />
           <b><a href="/post/<%= $_->{slug} %>">
               <%= $_->{topic} %>
           </a></b>
