@@ -18,7 +18,7 @@
     </a>
   </i>
   :: v<%= config->{version} %>
-  <a href="/atom.xml"><img src="/rss.png" /></a>
+  <a href="<%= url_for("blog_feeds") %>" ><img src="/rss.png" /></a>
   <i><%= config->{author} %></i>
     :: <%== config->{contact} %>
   </p>

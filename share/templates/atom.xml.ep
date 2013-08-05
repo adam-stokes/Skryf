@@ -1,12 +1,12 @@
-% use DateTime;
-% my $lt = DateTime->now;
+% use Time::Piece::ISO;
+% my $lt = localtime;
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[<%= config->{title} %>]]></title>
   <link href="<%= config->{site} %><%= url_for %>" rel="self"/>
   <link href="<%= config->{site} %>/"/>
-  <updated><%= $lt->datetime() %>Z</updated>
+  <updated><%= $lt->iso %></updated>
   <id><%= config->{site} %>/</id>
   <author>
     <name><![CDATA[<%= config->{author} %>]]></name>
@@ -18,7 +18,7 @@
     <title type="html"><![CDATA[<%= $post->{topic} %>]]></title>
     <link href="<%= config->{site} %>/post/<%= $post->{slug} %>"/>
     <updated><%= $post->{created} %></updated>
-    <id><%= config->{site} %>/<%= $post->{slug} %></id>
+    <id><%== config->{site} %>/<%= $post->{slug} %></id>
     <content type="html"><![CDATA[<%== $post->{html} %>]]></content>
   </entry>
   % }
