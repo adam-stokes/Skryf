@@ -12,6 +12,7 @@ requires 'Text::Markdown';
 requires 'Mango';
 requires 'String::Dirify';
 requires 'Method::Signatures';
+requires 'DateTime';
 requires 'DateTime::Format::RFC3339';
 
 on develop => sub {

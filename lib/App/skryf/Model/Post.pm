@@ -4,7 +4,7 @@ use Mojo::Base 'App::skryf::Model::Base';
 
 use App::skryf::Util;
 use Method::Signatures;
-use Time::Piece::ISO;
+use DateTime;
 
 method posts {
     $self->mgo->db->collection('posts');
@@ -18,7 +18,7 @@ method get ($slug) {
     $self->posts->find_one({slug => $slug});
 }
 
-method create ($topic, $content, $tags, $created = localtime) {
+method create ($topic, $content, $tags, $created = DateTime->now) {
     my $slug = App::skryf::Util->slugify($topic);
     my $html = App::skryf::Util->convert($content);
     $self->posts->insert(
@@ -26,7 +26,7 @@ method create ($topic, $content, $tags, $created = localtime) {
             topic   => $topic,
             content => $content,
             tags    => $tags,
-            created => $created,
+            created => $created->strftime('%Y-%m-%dT%H:%M:%SZ'),
             html    => $html,
         }
     );

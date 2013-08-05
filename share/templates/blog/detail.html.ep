@@ -1,11 +1,12 @@
-% use Time::Piece::ISO;
-% my $dt = Time::Piece::ISO->strptime($post->{created});
+% use DateTime::Format::RFC3339;
 % layout 'main';
 <h2><%= $post->{topic} %></h2>
 
 <div id="container" class="post-item">
 %= t 'p' => begin
-  Posted @ <%= $dt->strftime("%Y-%m-%d") %>
+  % my $f = DateTime::Format::RFC3339->new;
+  % my $dt = $f->parse_datetime($post->{created});
+  Posted @ <%= $dt->strftime('%c') %>
   %= t 'br /'
   <strong>Tags</strong> :<%= join(', ', $post->{tags}) %>
 

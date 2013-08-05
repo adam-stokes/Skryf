@@ -1,8 +1,5 @@
 <div id="navbar">
   <a href="/">Root</a>
-  % if (session 'user' && (my $user = session 'user') == 1) {
-    <a href="/admin">Admin</a>
-  % }
 </div>
 <div id="header">
   <div class="logo">

@@ -35,7 +35,7 @@ ok $post;
 ok $post->{topic} eq $topic_a;
 $post->{topic} = $topic_b;
 ok $model->save($post);
-
+#
 $post = $model->get($topic_b_slug);
 ok $post;
 ok $post->{topic} eq $topic_b;

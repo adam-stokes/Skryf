@@ -34,69 +34,14 @@ method blog_feeds_by_cat {
     my $category = $self->param('category');
     my $model    = App::skryf::Model::Post->new;
     my $posts    = $model->by_cat($category);
-    my $rfc3339  = DateTime::Format::RFC3339->new;
-    my $feed     = XML::Atom::SimpleFeed->new(
-        title => $self->config->{title},
-        link  => $self->config->{site},
-        link  => {
-            rel  => 'self',
-            href => $self->config->{site} . $self->url_for('blog_feeds'),
-        },
-        author => $self->config->{author},
-        id     => $self->config->{site},
-    );
-    for my $post (@{$posts}) {
-        my $utime;
-        if ($post->{created} =~ /^.+Z/) {
-            my $utime = $rfc3339->parse_datetime($post->{created});
-        }
-        else {
-            my $utime = $rfc3339->format_datetime($post->{created});
-        }
-        $feed->add_entry(
-            title => $post->{topic},
-            link  => $self->config->{site}
-              . $self->url_for('blog_detail', {slug => $post->{slug}}),
-            id => $self->config->{site}
-              . $self->url_for('blog_detail', {slug => $post->{slug}}),
-            content => decode_utf8($post->{html}),
-            updated => $utime,
-        );
-    }
+    my $feed = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method blog_feeds {
     my $model   = App::skryf::Model::Post->new;
-    my $rfc3339 = DateTime::Format::RFC3339->new;
-    my $feed    = XML::Atom::SimpleFeed->new(
-        title => $self->config->{title},
-        link  => $self->config->{site},
-        link  => {
-            rel  => 'self',
-            href => $self->config->{site} . $self->url_for('blog_feeds'),
-        },
-        author => $self->config->{author},
-        id     => $self->config->{site},
-    );
-    for my $post (@{$model->all}) {
-        my $utime;
-        if ($post->{created} =~ /^.+Z/) {
-            my $utime = $rfc3339->parse_datetime($post->{created});
-        }
-        else {
-            my $utime = $rfc3339->format_datetime($post->{created});
-        }
-        $feed->add_entry(
-            title => $post->{topic},
-            link  => $self->config->{site}
-              . $self->url_for('blog_detail', {slug => $post->{slug}}),
-            id => $self->config->{site}
-              . $self->url_for('blog_detail', {slug => $post->{slug}}),
-            content => decode_utf8($post->{html}),
-            updated => $utime,
-        );
-    }
+    my $posts = $model->all;
+    my $feed = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 

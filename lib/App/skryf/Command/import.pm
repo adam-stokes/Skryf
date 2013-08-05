@@ -4,8 +4,8 @@ use Mojo::Base 'Mojolicious::Command';
 use FindBin '$Bin';
 use Carp;
 use Path::Tiny;
-use Data::Printer;
 use App::skryf::Model::Post;
+use DateTime::Format::RFC3339;
 
 has description => "Import blog posts from another service\n";
 has usage       => <<"EOF";
@@ -18,6 +18,15 @@ Usage: $0 import [service] [static posts]
     - skryf (pre 0.009 releases)
 
 EOF
+
+sub format_date {
+  my ($self, $date) = @_;
+  my $dt = DateTime::Format::RFC3339->new;
+  if ( $date !~ /\d+:\d+:\d+Z/ ) {
+    return $dt->parse_datetime($date.'T00:00:59Z');
+  }
+  return $dt->parse_datetime($date);
+}
 
 sub run {
     my ($self, $service, @args) = @_;
@@ -35,7 +44,7 @@ sub run {
         my ($tags) = $post =~ /Category:\s+(.*)/;
         my ($content) = $post =~ /^\n(.*)/ms;
         say "processing $topic";
-        $model->create($topic, $content, $tags, $date);
+        $model->create($topic, $content, $tags, $self->format_date($date));
       }
     }
     say

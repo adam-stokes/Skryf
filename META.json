@@ -37,6 +37,7 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "DateTime" : "0",
             "DateTime::Format::RFC3339" : "0",
             "File::ShareDir" : "0",
             "FindBin" : "0",

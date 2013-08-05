@@ -1,11 +1,12 @@
-% use Time::Piece::ISO;
+% use DateTime::Format::RFC3339;
 % layout 'main';
 %= tag 'div', id => 'container' => begin
     %= tag 'ul' => begin
       % foreach (@{$postlist}) {
         %= tag 'li', class => 'postbox' => begin
-          % my $dt = Time::Piece::ISO->strptime($_->{created});
-          <b><i class="postdate"><%= $dt->strftime("%Y-%m-%d") %></i></b><br />
+          % my $f = DateTime::Format::RFC3339->new;
+          % my $dt = $f->parse_datetime($_->{created});
+          <b><i class="postdate"><%= $dt->strftime('%Y-%m-%d') %></i></b><br />
           <b><a href="/post/<%= $_->{slug} %>">
               <%= $_->{topic} %>
           </a></b>
