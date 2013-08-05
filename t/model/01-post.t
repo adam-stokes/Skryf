@@ -5,6 +5,7 @@ use warnings;
 use Test::More;
 
 use FindBin;
+use List::Util qw(first);
 use lib "$FindBin::Bin../../lib";
 
 diag("Testing posts model");
@@ -15,7 +16,7 @@ my $topic_a = 'a sluggable test post';
 my $topic_a_slug = 'a-sluggable-test-post';
 my $topic_b = 'an updated test post';
 my $topic_b_slug = 'an-updated-test-post';
-my $tags = ['ubuntu', 'test', 'blog'];
+my $tags = 'ubuntu, test, blog';
 
 $model =
   App::skryf::Model::Post->new;
@@ -39,7 +40,9 @@ $post = $model->get($topic_b_slug);
 ok $post;
 ok $post->{topic} eq $topic_b;
 ok $post->{slug} eq $topic_b_slug;
-ok $model->by_cat('ubuntu');
-
+my $post_by_cat = $model->by_cat('ubuntu');
+ok scalar @{$post_by_cat} > 0;
+ok $post_by_cat;
+ok ref $post_by_cat eq "ARRAY";
 ok $model->remove($topic_b_slug);
 done_testing();

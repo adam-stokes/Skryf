@@ -26,9 +26,9 @@ method create ($topic, $content, $tags) {
         {   slug    => $slug,
             topic   => $topic,
             content => $content,
-            tags    => split(/,/, $tags),
-            html    => $html,
+            tags    => $tags,
             created => $lt->datetime(),
+            html    => $html,
         }
     );
 }
@@ -48,7 +48,7 @@ method remove ($slug) {
 method by_cat ($category) {
   my $_filtered = [];
   foreach ( @{$self->all} ) {
-    if ( grep { !/$category/ } $_->{tags} ) {;
+    if ( ( my $found = $_->{tags} ) =~ /$category/ ) {
       push @{$_filtered}, $_;
     }
   }

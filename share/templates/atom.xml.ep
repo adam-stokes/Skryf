@@ -15,11 +15,11 @@
   <generator uri="https://github.com/battlemidget/App-skryf/">skryf - a perl blog engine.</generator>
   % for my $post (@{$postlist}) {
   <entry>
-    <title type="html"><![CDATA[<%= $post->topic %>]]></title>
-    <link href="<%= config->{site} %>/post/<%= $post->id %>"/>
-    <updated><%= $post->date %></updated>
-    <id><%= skryfconf->site %>/<%= $post->id %></id>
-    <content type="html"><![CDATA[<%== $post->html %>]]></content>
+    <title type="html"><![CDATA[<%= $post->{topic} %>]]></title>
+    <link href="<%= config->{site} %>/post/<%= $post->{slug} %>"/>
+    <updated><%= $post->{created} %></updated>
+    <id><%= config->{site} %>/<%= $post->{slug} %></id>
+    <content type="html"><![CDATA[<%== $post->{html} %>]]></content>
   </entry>
   % }
 </feed>

@@ -175,7 +175,7 @@ Licensed under the same terms as Perl.
 
 =begin html
 
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango" />
+<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master" />
 
 =end html
 

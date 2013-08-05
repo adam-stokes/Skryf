@@ -37,7 +37,6 @@ method blog_feeds_by_cat {
 
 method blog_feeds {
     my $model = App::skryf::Model::Post->new;
-
     $self->stash(postlist => $model->all);
     $self->render(template => 'atom', format => 'xml');
 }

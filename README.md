@@ -79,4 +79,4 @@ Copyright 2013- Adam Stokes
 
 Licensed under the same terms as Perl.
 
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=feature-mango" />
+<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master" />
