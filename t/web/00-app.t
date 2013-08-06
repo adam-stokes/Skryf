@@ -46,7 +46,7 @@ $t->get_ok('/post/a-new-topic')->status_is(200)
 # take a look at the feeds
 $t->get_ok('/post/feeds/ubuntu/atom.xml')->status_is(200)
   ->content_like(qr/auto content posted/, 'xml content found');
-$t->get_ok('/post/atom.xml')->status_is(200)
+$t->get_ok('/post/feeds/atom.xml')->status_is(200)
   ->content_like(qr/auto content posted/, 'xml content found');
 
 # update the post and verify it is updated and the feeds are corrected
@@ -61,7 +61,7 @@ $t->post_ok(
 
 $t->get_ok('/post/a-new-topic-edited')->status_is(200)
   ->content_like(qr/a new topic edited/, 'edited content found');
-$t->get_ok('/post/atom.xml')->status_is(200)
+$t->get_ok('/post/feeds/atom.xml')->status_is(200)
   ->content_like(qr/a new topic edit/, 'xml updated feed content found');
 
 # delete it

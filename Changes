@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Add fallback on dist's template directory
 
 0.009_02  2013-08-05 23:03:21 EDT
     - New default theme
