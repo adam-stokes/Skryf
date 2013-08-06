@@ -35,8 +35,8 @@ method create ($topic, $content, $tags, $created = DateTime->now) {
 method save ($post) {
     $post->{slug} = App::skryf::Util->slugify($post->{topic});
     $post->{html} = App::skryf::Util->convert($post->{content});
-    my $lt = localtime;
-    $post->{modified} = $lt;
+    my $lt = DateTime->now;
+    $post->{modified} = $lt->strftime('%Y-%m-%dT%H:%M:%SZ');
     $self->posts->save($post);
 }
 

@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title><%= $config->{title} %></title>
-  <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu' rel='stylesheet' type='text/css'>
-<%= stylesheet "/style.css" %>
-<%= analytics_inc 'UA-23169268-1' %>
-</head>
-<body>
-<%= content %>
-<div id="footer">
-  <p>
-  <i>
-    <a href="https://github.com/battlemidget/App-skryf">
-      skryf
-    </a>
-  </i>
-  </p>
-</div>
-
-</body>
-</html>
+%= t 'html' => begin
+  %= t 'head' => begin
+    %= t 'title' => config->{title}
+      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
+      %= stylesheet '/style.css'
+      %= javascript "https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"
+      <%= analytics_inc 'UA-23169268-1' %>
+  %= end
+  %= t 'body' => begin
+    %= t 'div', id => 'container' => begin
+      %= include 'nav'
+      <%= content %>
+      %= include 'footer'
+    %= end
+  %= end
+%= end

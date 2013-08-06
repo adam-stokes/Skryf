@@ -1,17 +1,17 @@
 % layout 'auth';
-%= t 'h2' => 'Administer pages/posts'
-% if (my $msg = flash 'message') {
-  <h4><%= $msg %></h4>
-% }
-%= include 'admin/nav'
-%= tag 'div', id => 'container', class => 'admin_list_pages' => begin
-  %= tag 'ul' => begin
-    % foreach (@{$postlist}) {
-      %= tag 'li' => begin
-        %= link_to "/admin/post/edit/$_->{slug}" => begin 
-          <%= $_->{topic} %>
-        %= end 
-      %= end
-    % }
-  %= end
+%= t 'div', class => 'post-body' => begin
+  %= include 'admin/nav'
+  %= t 'h2' => 'Administer pages/posts'
+  % if (my $msg = flash 'message') {
+    <h4><%= $msg %></h4>
+  % }
+    %= tag 'ul' => begin
+      % foreach (@{$postlist}) {
+        %= tag 'li' => begin
+          %= link_to "/admin/post/edit/$_->{slug}" => begin 
+            <%= $_->{topic} %>
+          %= end 
+        %= end
+      % }
+    %= end
 %= end

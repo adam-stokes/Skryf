@@ -1,5 +1,5 @@
 %= t 'div', id => 'admin_nav' => begin
   %= link_to 'Admin::Root' => 'admin_blog_index'
-   :: 
+   &rarr; 
   %= link_to 'New Content' => 'admin_blog_new'
 %= end

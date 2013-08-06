@@ -1,5 +1,4 @@
 % layout 'auth';
-<div id="container" class="login">
   % if (my $msg = flash 'message') {
   <b><%= $msg %></b>
   % }
@@ -13,4 +12,3 @@
     <br />
     %= submit_button 'Login'
 % end
-</div>

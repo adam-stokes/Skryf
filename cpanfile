@@ -8,13 +8,14 @@ requires 'Mojolicious::Plugin::GoogleAnalytics';
 requires 'Mojolicious::Plugin::Gravatar';
 requires 'Mojolicious::Plugin::CSRFDefender';
 requires 'Path::Tiny';
-requires 'Text::Markdown';
+requires 'Text::MultiMarkdown';
 requires 'Mango';
 requires 'String::Dirify';
 requires 'Method::Signatures';
 requires 'DateTime';
 requires 'DateTime::Format::RFC3339';
 requires 'XML::Atom::SimpleFeed';
+requires 'String::Util';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';

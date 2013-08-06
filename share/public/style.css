@@ -2,20 +2,69 @@
 body {
   color: #000000;
   background-image: url('/brickwall.png');
-  margin-left: 5%;
-  margin-right: 5%;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu Mono', 'Droid Sans Mono', sans-serif;
   font-size: 1em;
 }
 
 #container {
-    width: 100%;
-    color: #666;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #000;
+    background-color: #fff;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+}
+
+#container p {
+  padding: 15px;
+}
+
+#container .post-body {
+  padding: 15px;
+}
+
+#container .post-body p {
+  padding: 2px;
+}
+
+#container .post-list {
+  padding: 15px;
+}
+
+#container .post-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#container .post-list li .postdate {
+  background-color: #ddd;
+}
+
+#container .blog-form {
+  width: 100%;
+}
+
+#container .blog-form .blog-form-control {
+  width: 100%;
+  border: 1px solid #000;
+  font-family: 'Ubuntu Mono', sans-serif;
+}
+
+#container .blog-form .blog-form-control-textarea {
+  height: 400px;
+}
+
+#container .blog-form .btn {
+  width: 75px;
+  height: 45px;
 }
 
 #container a {
     font-weight: bold;
     color: black;
+
 }
 
 .clearfix {
@@ -38,23 +87,12 @@ a:active {
   text-decoration: none;
 }
 
-h1        { color: #333; font-family: 'Cabin Sketch', cursive; font-size: 48px; }
-h2        { color: #999; text-indent: 0.5em; }
+h1        { color: #333; font-family: 'Cabin Sketch', cursive; font-size: 42px; }
+h2        { color: #999; }
 h3 { 
     color: rgb(40,0,0); 
-    text-indent: 1em;
 }
-h4        { color: #aaa; text-indent: 1.2em;}
-
-p {
-
-  margin-left: 1em;
-  margin-top: 0.50em;
-  margin-bottom: 0.50em;
-}
-.rcs {
-  margin-top: 2em;
-}
+h4        { color: #aaa; }
 
 #header {
     clear:both;
@@ -62,79 +100,40 @@ p {
 
 #header .logo {
     float:left;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#header .logo img {
+  border-radius: 10px;
 }
 
 #footer {
-  width: 100%;
-  border-top: 1px solid #000042;
-  margin-top: 2em;
+  background-color: #000;
 }
+
+#footer a {
+  color: #fff;
+}
+
 #footer p {
   text-indent: 0em;
   font-size: 75%;
   clear: none;
 }
 
-i.postdate {
-  color: rgb(50,0,0);
-  font-size: 0.8em;
-}
-
-i.categories {
-  color: #bbb;
-  font-size: .85em;
-}
-
-.posttopic {
-    font-size: 90%;
-}
-
-.post-item {
-
-}
-
-.post-item ul {
-    list-style-type: square;
-    display: block;
-}
-
-
-ul {
-  list-style-type: none;
-  display: inline;
-}
-
-#container li.postbox {
-    width: 310px;
-    height: 125px;
-    padding: 5px;
-    float:left;
-}
-
-#container li.postbox a {
-    font-size: 0.95em;
-    color: rgb(140,0,0);
-}
-
-li.postbox i.postdate {
-  font-size: 1em;
-  font-style: normal;
-}
-
-dt {
-  font-weight: bold;
-  font-size: 110%;
-}
-
-pre { 
-    font-size: 1em;
-    font-family: 'Ubuntu Mono';
-}
-.align-right { float:right; margin: 0 0 15px 15px; }
-.align-left { float:left; margin: 0 15px 15px 0; }
-
 /* navbar */
 
 #navbar {
+  background-color: #000;
+}
 
+#navbar p {
+  text-indent: 0em;
+  font-size: 75%;
+  clear: none;
+}
+
+#navbar a {
+  color: #fff;
 }

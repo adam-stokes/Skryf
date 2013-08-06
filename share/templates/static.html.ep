@@ -1,12 +1,3 @@
 % layout 'main';
-<h2><%= $post->{topic} %></h2>
-
-<h3>
-  <a href="/" class="align-right">&larr; index</a>
-</h3>
-
-<div id="container" class="post-item">
-
- <%== $post->{html} %>
-</div>
-
+%= t 'h2' => $post->{topic}
+<%== $post->{html} %>

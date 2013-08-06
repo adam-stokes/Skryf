@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - New default theme
 
 0.009_01  2013-08-05 13:28:36 EDT
     - Add unittests to cover ui, post model and user model

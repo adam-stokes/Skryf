@@ -1,20 +1,21 @@
 % layout 'auth';
 
-%= include 'admin/nav'
-
-%= t 'h2' => 'New content'
-  % if (my $msg = flash 'message') {
-  <b><%= $msg %></b>
-  % }
-%= form_for "/admin/post/update" => ( method => 'POST' ) => begin
-%= hidden_field slug => $post->{slug}
-%= text_field 'topic', type => 'text', value => $post->{topic}
-%= t 'br'
-%= text_area 'content', cols => 75, rows => 15 => begin
-<%= $post->{content} %>
-%= end
-%= t 'br'
-%= text_field 'tags', type => 'text', value => $post->{tags}
-%= t 'br'
-%= submit_button 'Update'
+%= t 'div', class => 'post-body' => begin
+  %= include 'admin/nav'
+  %= t 'h2' => 'Update: '. $post->{topic}
+    % if (my $msg = flash 'message') {
+    <b><%= $msg %></b>
+    % }
+  %= form_for "/admin/post/update", class => 'blog-form' => ( method => 'POST' ) => begin
+  %= hidden_field slug => $post->{slug}
+  %= text_field 'topic', type => 'text', class => 'blog-form-control', value => $post->{topic}
+  %= t 'br'
+  %= text_area 'content', class => 'blog-form-control blog-form-control-textarea' => begin
+  <%== $post->{content} %>
+  %= end
+  %= t 'br'
+  %= text_field 'tags', type => 'text', class => 'blog-form-control', value => $post->{tags}
+  %= t 'br'
+  %= submit_button 'Update', class => 'btn'
+  %= end
 %= end

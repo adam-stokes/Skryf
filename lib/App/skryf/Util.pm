@@ -4,14 +4,14 @@ use strict;
 use warnings;
 
 use Method::Signatures;
-use Text::Markdown 'markdown';
+use Text::MultiMarkdown 'markdown';
 use String::Dirify 'dirify';
 use XML::Atom::SimpleFeed;
 use Encode;
 use DateTime::Format::RFC3339;
 
 method convert ($content) {
-    markdown($content, {tab_width => 2});
+    markdown($content);
 }
 
 method slugify ($topic, $auto = 0) {
