@@ -8,6 +8,6 @@
     %= t 'br'
     <strong>Tags</strong>: (<i><%= join(', ', $post->{tags}) %></i>)
     <%== $post->{html} %>
-    <%= disqus_inc $config->{social}{disqus} || 'imnotset' %>
+    <%= disqus_inc config->{social}{disqus} || 'imnotset' %>
   %= end
 
