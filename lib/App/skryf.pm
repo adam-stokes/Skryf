@@ -45,7 +45,7 @@ sub startup {
 ###############################################################################
     my $template_directory = undef;
     my $media_directory    = undef;
-    if ($self->mode eq "development") {
+    if ($self->mode eq "development" || !defined($cfg->{template_directory})) {
         $template_directory = path(dist_dir('App-skryf'), 'templates');
         $media_directory    = path(dist_dir('App-skryf'), 'public');
     }

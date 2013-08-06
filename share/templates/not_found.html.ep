@@ -1,4 +1,5 @@
 % layout 'maint';
-
-%= t 'h1' => '404 >:('
+%= t 'div', class => 'post-body' => begin
+  %= t 'h1' => '404 >:('
+%= end
 

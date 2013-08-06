@@ -11,7 +11,7 @@ my %defaults = (
     # Default routes
     indexPath       => '/',
     postPath        => '/post/:slug',
-    feedPath        => '/post/atom.xml',
+    feedPath        => '/post/feeds/atom.xml',
     feedCatPath     => '/post/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post/',
 
