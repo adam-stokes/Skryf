@@ -7,6 +7,10 @@ use FindBin;
 use lib "$FindBin::Bin../../lib";
 
 use Test::More;
+if ( ! -x "/usr/bin/mongo" ) {
+  plan skip_all => 'No mongo found';
+} 
+
 use Test::Mojo;
 
 diag('Testing application functionality');

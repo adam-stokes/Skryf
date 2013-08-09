@@ -4,7 +4,7 @@
       "Adam Stokes <adamjs@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140",
+   "generated_by" : "Dist::Milla version v1.0.3, Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.131560",
    "license" : [
       "perl_5"
    ],
@@ -69,9 +69,6 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.010",
-   "x_contributors" : [
-      "Adam Stokes <adam.stokes@ubuntu.com>"
-   ]
+   "version" : "0.010"
 }
 
