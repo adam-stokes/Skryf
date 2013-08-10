@@ -7,9 +7,8 @@ use Test::More;
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 
-if (!-x "/usr/bin/mongo") {
-    plan skip_all => 'No mongo found';
-}
+plan skip_all => 'set TEST_ONLINE to enable this test'
+  unless $ENV{TEST_ONLINE};
 
 diag("Testing page model");
 use_ok('App::skryf::Model::Page');
@@ -23,6 +22,8 @@ my $content = '= heading 1';
 $model = App::skryf::Model::Page->new;
 ok $model;
 ok $model->pages;
+#cleanup
+ok $model->pages->drop();
 ok $model->create($topic, $content);
 my $page = $model->get($slug);
 ok $page;

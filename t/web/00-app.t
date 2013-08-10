@@ -7,9 +7,9 @@ use FindBin;
 use lib "$FindBin::Bin../../lib";
 
 use Test::More;
-if ( ! -x "/usr/bin/mongo" ) {
-  plan skip_all => 'No mongo found';
-} 
+
+plan skip_all => 'set TEST_ONLINE to enable this test'
+  unless $ENV{TEST_ONLINE};
 
 use Test::Mojo;
 
