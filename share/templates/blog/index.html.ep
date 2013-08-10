@@ -6,7 +6,7 @@
       %= tag 'li' => begin
         % my $f = DateTime::Format::RFC3339->new;
         % my $dt = $f->parse_datetime($_->{created});
-        <span class="postdate"><strong><%= $dt->strftime('%Y-%m-%d') %></strong></span>
+        <span class="date"><strong><%= $dt->strftime('%Y-%m-%d') %></strong></span>
         <b><a href="/post/<%= $_->{slug} %>">
             <%= $_->{topic} %>
         </a></b>

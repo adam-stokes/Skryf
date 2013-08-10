@@ -7,18 +7,21 @@ body {
 }
 
 #container {
-    width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px;
     color: #000;
     background-color: #fff;
     -moz-box-shadow: 0 0 5px #888;
     -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 15px #888 inset;
 }
 
 #container p {
   padding: 15px;
+}
+
+#container .date {
+  background-color: #ddd;
+  font-style: italics;
 }
 
 #container .post-body {
@@ -38,12 +41,14 @@ body {
   padding: 0;
 }
 
-#container .post-list li .postdate {
-  background-color: #ddd;
-}
 
 #container .wiki-body {
   padding: 15px;
+}
+
+#container .wiki-body ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 #container .blog-form {
@@ -51,9 +56,11 @@ body {
 }
 
 #container .blog-form .blog-form-control {
-  width: 100%;
-  border: 1px solid #000;
+  width: 90%;
+  border: 3px solid #000;
+  padding: 5px;
   font-family: 'Ubuntu Mono', sans-serif;
+  font-size: 14px;
 }
 
 #container .blog-form .blog-form-control-textarea {
@@ -63,6 +70,8 @@ body {
 #container .blog-form .btn {
   width: 75px;
   height: 45px;
+  border-radius: 10px;
+  border: 2px solid #eee;
 }
 
 #container a {
@@ -113,7 +122,7 @@ h4        { color: #aaa; }
 }
 
 #footer {
-  background-color: #000;
+  background-image: url('/dark_dotted.png');
 }
 
 #footer a {
@@ -129,7 +138,8 @@ h4        { color: #aaa; }
 /* navbar */
 
 #navbar {
-  background-color: #000;
+  background-image: url('/dark_dotted.png');
+  color: #ff0000;
 }
 
 #navbar p {

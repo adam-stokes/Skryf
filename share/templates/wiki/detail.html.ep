@@ -8,7 +8,14 @@
     %= t 'br'
     <%== $page->{html} %>
     %= t 'hr'
-    % $dt = $f->parse_datetime($page->{modified});
-    Last Modified: <%= $dt->strftime('%Y-%m-%d %H:%M:%S') %>
+    % if ($page->{modified}) {
+      % $dt = $f->parse_datetime($page->{modified});
+      Last Modified: <%= $dt->strftime('%Y-%m-%d %H:%M:%S') %>
+    % }
+    % if ( (my $user = session 'user') == 1 ) {
+      &infin;
+      %= link_to "Edit" => url_for('admin_wiki_edit', { slug => $page->{slug} })
+    % }
+    <%= disqus_inc config->{social}{disqus} || 'imnotset' %>
   %= end
 

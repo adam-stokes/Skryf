@@ -12,6 +12,7 @@ use App::skryf::Plugin::Wiki::Controller;
 my %defaults = (
   indexPath => '/pages/',
   pagesPath => '/pages/:slug',
+  adminPathPrefix => '/admin/pages/',
   namespace => 'App::skryf::Plugin::Wiki::Controller',
   authCondition => undef,
 );
@@ -39,6 +40,27 @@ sub register {
       return $self->session('user') || !$self->redirect_to('login');
     }
   );
+    $auth_r->route($conf{adminPathPrefix} . "new")->via(qw(GET POST))->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_wiki_new',
+        _wiki_conf => \%conf,
+    )->name('admin_wiki_new');
+    $auth_r->route($conf{adminPathPrefix} . "edit/:slug")->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_wiki_edit',
+        _wiki_conf => \%conf,
+    )->name('admin_wiki_edit');
+    $auth_r->route($conf{adminPathPrefix} . "update")->via('POST')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_wiki_update',
+        _wiki_conf => \%conf,
+    )->name('admin_wiki_update');
+    $auth_r->route($conf{adminPathPrefix} . "delete/:slug")->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_wiki_delete',
+        _wiki_conf => \%conf,
+    )->name('admin_wiki_delete');
+  return; 
 }
 
 1;

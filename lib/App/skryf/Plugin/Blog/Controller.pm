@@ -49,7 +49,7 @@ method blog_feeds {
 method admin_blog_index {
     my $model = App::skryf::Model::Post->new;
     $self->stash(postlist => $model->all);
-    $self->render('admin/index');
+    $self->render('blog/admin_index');
 }
 
 method admin_blog_new {
@@ -63,7 +63,7 @@ method admin_blog_new {
         $self->redirect_to('admin_blog_index');
     }
     else {
-        $self->render('admin/new');
+        $self->render('blog/new');
     }
 }
 
@@ -71,7 +71,7 @@ method admin_blog_edit {
     my $slug = $self->param('slug');
     my $model   = App::skryf::Model::Post->new;
     $self->stash(post => $model->get($slug));
-    $self->render('admin/edit');
+    $self->render('blog/edit');
 }
 
 method admin_blog_update {

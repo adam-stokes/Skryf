@@ -1,0 +1,15 @@
+% layout 'auth';
+
+
+%= t 'div', class => 'wiki-body' => begin
+  %= include 'admin/nav'
+  %= t 'h2' => 'New wiki page'
+
+  %= form_for url_for('admin_wiki_new'), class => 'blog-form' => ( method => 'POST' ) => begin
+  %= text_field 'topic', type => 'text', class => 'blog-form-control'
+  %= t 'br'
+  %= text_area 'content', class => 'blog-form-control blog-form-control-textarea'
+  %= t 'br'
+  %= submit_button 'Add', class => 'btn'
+  %= end
+%= end

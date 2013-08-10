@@ -1,6 +1,18 @@
 <div id="navbar">
   <p>
-  <a href="/">Root</a>
+  %= link_to "Root" => "/"
+  &infin;
+  %= link_to "Wiki" => url_for('wiki_index')
+    % if ( ( my $user = session 'user' ) == 1 ) {
+    [ ADMIN: 
+      &infin;
+      %= link_to "New Post" => url_for('admin_blog_new')
+      &infin;
+      %= link_to "New Wiki Page" => url_for('admin_wiki_new')
+      &infin;
+      %= link_to "Logout" => url_for("logout")
+    ]
+    % }
   </p>
 </div>
 <div id="header">

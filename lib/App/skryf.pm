@@ -120,17 +120,17 @@ I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't jud
 
 By default B<skryf> will look in dist_dir for templates and media. To override that
 make sure I<~/.skryf.conf> points to the locations of your templates and media.
-For example, this is a simple directory structure for managing your blog media and templates.
+For example: 
 
     $ mkdir -p ~/blog/{templates,public}
 
 Edit ~/.skryf.conf to reflect those directories in I<media_directory> and 
-I<public_directory>.
+I<media_directory>.
 
     template_directory => '~/blog/templates',
     media_directory    => '~/blog/public',
 
-So B<~/blog/templates/{post.html.ep,index.html.ep,about.html.ep}> and B<~/blog/public/style.css>
+So B<~/blog/templates/blog/detail.html.ep> and B<~/blog/public/style.css>
 
 =head1 DEPLOY
 
