@@ -9,6 +9,7 @@ requires 'Mojolicious::Plugin::Gravatar';
 requires 'Mojolicious::Plugin::CSRFDefender';
 requires 'Path::Tiny';
 requires 'Text::MultiMarkdown';
+requires 'Text::WikiCreole';
 requires 'Mango';
 requires 'String::Dirify';
 requires 'Method::Signatures';

@@ -39,6 +39,7 @@ sub startup {
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
     $self->plugin('Blog' => {authentication => $self->session('user')});
+    $self->plugin('Wiki' => {authentication => $self->session('user')});
 
 ###############################################################################
 # Define template, media, static paths
@@ -74,11 +75,7 @@ sub startup {
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
-
-    # Static page view
-    $r->get('/:slug')->to('blog#static_page')->name('static_page');
-}
-
+  }
 1;
 
 __END__

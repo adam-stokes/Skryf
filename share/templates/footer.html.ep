@@ -2,9 +2,7 @@
   %= t 'p' => begin
     <%= link_to 'http://perl.org' => begin %><img src="/perl.png" /><% end %>
     <%= link_to url_for("blog_feeds") => begin %><img src="/rss.png" /><% end %>
-    %= link_to "https://github.com/battlemidget/App-skryf" => begin
-        Skryf :: v<%= config->{version} %>
-    %= end
+    <%= link_to "https://github.com/battlemidget/App-skryf" => begin %>Skryf :: v<%= config->{version} %><% end %>
     <%= link_to url_for("login") => begin %>&Pi;<% end %>
   %= end
 %= end

@@ -42,6 +42,10 @@ body {
   background-color: #ddd;
 }
 
+#container .wiki-body {
+  padding: 15px;
+}
+
 #container .blog-form {
   width: 100%;
 }

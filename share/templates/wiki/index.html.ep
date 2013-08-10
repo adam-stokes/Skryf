@@ -1,0 +1,4 @@
+% layout 'main';
+%= t 'div', class => 'wiki-index' => begin
+  %= t 'h2' => "Wiki"
+%= end
