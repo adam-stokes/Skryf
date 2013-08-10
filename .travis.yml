@@ -10,4 +10,4 @@ install:
   - sudo service mongodb start
   - cpanm --notest .
 script:
-  - TEST_ONLINE=mongodb://localhost:27017/test_database prove -r t
+  - prove -r t
