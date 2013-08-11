@@ -3,36 +3,36 @@ package App::skryf::Plugin::Wiki::Controller;
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
 use App::skryf::Model::Page;
-use String::Util 'trim';
+use App::skryf::Util;
 
 method wiki_index {
-    my $model = App::skryf::Model::Page->new;
-    my $pages = $model->all;
-    $self->stash(pages => $pages);
-    $self->render('wiki/index');
+    $self->redirect_to('wiki_detail', {slug => 'IndexPage' });
 }
 
 method wiki_detail {
     my $slug  = $self->param('slug');
     my $model = App::skryf::Model::Page->new;
     my $page  = $model->get($slug);
-    unless ($page) {
-        $self->render(text => 'No page found', status => 404);
+    if (! $page) {
+        $self->redirect_to('admin_wiki_new');
+    } else {
+      $page->{html} = App::skryf::Util->convert($page->{content});
+      $self->stash(page => $page);
+      $self->render('wiki/detail');
     }
-    $self->stash(page => $page);
-    $self->render('wiki/detail');
 }
 
 method admin_wiki_new {
     my $method = $self->req->method;
     if ($method eq 'POST') {
-        my $topic   = $self->param('topic');
+        my $slug   = $self->param('slug');
         my $content = $self->param('content');
         my $model   = App::skryf::Model::Page->new;
-        $model->create($topic, $content);
+        $model->create($slug, $content);
         $self->redirect_to('wiki_index');
     }
     else {
+        $self->stash(slug => $self->param('slug'));
         $self->render('wiki/new');
     }
 }
@@ -48,8 +48,8 @@ method admin_wiki_update {
     my $slug  = $self->param('slug');
     my $model = App::skryf::Model::Page->new;
     my $page  = $model->get($slug);
-    $page->{topic}   = $self->param('topic');
-    $page->{content} = trim($self->param('content'));
+    $page->{slug}   = $self->param('slug');
+    $page->{content} = $self->param('content');
     $model->save($page);
     $self->flash(message => "Saved: " . $self->param('topic'));
     $self->redirect_to(

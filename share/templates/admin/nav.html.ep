@@ -1,5 +1,3 @@
 %= t 'div', id => 'admin_nav' => begin
-  %= link_to 'Admin::Root' => url_for('admin_blog_index')
-   &rarr; 
-  %= link_to 'Wiki Pages' => url_for('wiki_index')
+  %= link_to 'List Posts' => url_for('admin_blog_index')
 %= end

@@ -8,10 +8,8 @@
     % }
   %= form_for url_for("admin_wiki_update"), class => 'blog-form' => ( method => 'post' ) => begin
   %= hidden_field slug => $page->{slug}
-  %= text_field 'topic', type => 'text', class => 'blog-form-control', value => $page->{topic}
-  %= t 'br'
   %= text_area "content",  class => "blog-form-control blog-form-control-textarea" => begin
-  <%== $page->{content} %>
+  <%= $page->{content} %>
   %= end
   %= t 'br'
   %= submit_button 'Update', class => 'btn'

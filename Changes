@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Convert Wiki words to proper slugs
 
 0.011_1  2013-08-10 18:31:30 EDT
     - Extend wiki admin

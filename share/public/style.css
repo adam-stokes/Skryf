@@ -51,6 +51,10 @@ body {
   padding: 0;
 }
 
+#container .wiki-body p {
+  padding: 2px;
+}
+
 #container .blog-form {
   width: 100%;
 }

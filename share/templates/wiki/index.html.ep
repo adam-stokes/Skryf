@@ -12,7 +12,7 @@
         % my $dt = $f->parse_datetime($_->{created});
         <span class="date"><strong><%= $dt->strftime('%Y-%m-%d') %></strong></span>
         <b><a href="/pages/<%= $_->{slug} %>">
-            <%= $_->{topic} %>
+            <%= $_->{slug} %>
         </a></b>
       %= end
     % }

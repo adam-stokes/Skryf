@@ -6,7 +6,6 @@ use App::skryf::Model::Post;
 use XML::Atom::SimpleFeed;
 use DateTime::Format::RFC3339;
 use Encode;
-use String::Util 'trim';
 
 method blog_index {
     my $model = App::skryf::Model::Post->new;
@@ -79,7 +78,7 @@ method admin_blog_update {
     my $model = App::skryf::Model::Post->new;
     my $post  = $model->get($slug);
     $post->{topic}   = $self->param('topic');
-    $post->{content} = trim($self->param('content'));
+    $post->{content} = $self->param('content');
     $post->{tags}    = $self->param('tags');
     $model->save($post);
     $self->flash(message => "Blog " . $self->param('topic') . " updated.");

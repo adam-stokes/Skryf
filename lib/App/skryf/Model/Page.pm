@@ -3,9 +3,10 @@ package App::skryf::Model::Page;
 use Mojo::Base 'App::skryf::Model::Base';
 
 use App::skryf::Util;
-use Text::WikiCreole;
 use Method::Signatures;
 use DateTime;
+
+use constant USE_WIKILINKS => 1;
 
 method pages {
     $self->mgo->db->collection('pages');
@@ -19,23 +20,17 @@ method get ($slug) {
     $self->pages->find_one({slug => $slug});
 }
 
-method create ($topic, $content, $created = DateTime->now) {
-    my $slug = App::skryf::Util->slugify($topic);
-    creole_tag("pre", "open", "<pre class='prettyprint'>");
-    my $html = creole_parse($content);
+method create ($slug, $content, $created = DateTime->now) {
     $self->pages->insert(
-        {   slug    => $slug,
-            topic   => $topic,
+      {
+            slug => $slug,
             content => $content,
             created => $created->strftime('%Y-%m-%dT%H:%M:%SZ'),
-            html    => $html,
         }
     );
 }
 
 method save ($page) {
-    $page->{slug} = App::skryf::Util->slugify($page->{topic});
-    $page->{html} = creole_parse($page->{content});
     my $lt = DateTime->now;
     $page->{modified} = $lt->strftime('%Y-%m-%dT%H:%M:%SZ');
     $self->pages->save($page);

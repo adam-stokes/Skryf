@@ -11,7 +11,7 @@
   %= text_field 'topic', type => 'text', class => 'blog-form-control', value => $post->{topic}
   %= t 'br'
   %= text_area 'content', class => 'blog-form-control blog-form-control-textarea' => begin
-  <%== $post->{content} %>
+  <%= $post->{content} %>
   %= end
   %= t 'br'
   %= text_field 'tags', type => 'text', class => 'blog-form-control', value => $post->{tags}

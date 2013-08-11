@@ -40,7 +40,7 @@ sub register {
       return $self->session('user') || !$self->redirect_to('login');
     }
   );
-    $auth_r->route($conf{adminPathPrefix} . "new")->via(qw(GET POST))->to(
+    $auth_r->route($conf{adminPathPrefix} . "new/:slug")->via(qw(GET POST))->to(
         namespace  => $conf{namespace},
         action     => 'admin_wiki_new',
         _wiki_conf => \%conf,
@@ -50,7 +50,7 @@ sub register {
         action     => 'admin_wiki_edit',
         _wiki_conf => \%conf,
     )->name('admin_wiki_edit');
-    $auth_r->route($conf{adminPathPrefix} . "update")->via('POST')->to(
+    $auth_r->route($conf{adminPathPrefix} . "update/:slug")->via('POST')->to(
         namespace  => $conf{namespace},
         action     => 'admin_wiki_update',
         _wiki_conf => \%conf,

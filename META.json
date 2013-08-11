@@ -44,7 +44,7 @@
             "Mango" : "0",
             "Method::Signatures" : "0",
             "Mojo::Base" : "0",
-            "Mojolicious::Lite" : "0",
+            "Mojolicious" : "0",
             "Mojolicious::Plugin::CSRFDefender" : "0",
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
@@ -53,7 +53,6 @@
             "String::Dirify" : "0",
             "String::Util" : "0",
             "Text::MultiMarkdown" : "0",
-            "Text::WikiCreole" : "0",
             "XML::Atom::SimpleFeed" : "0"
          }
       }
@@ -70,6 +69,6 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.011_1"
+   "version" : "0.011_2"
 }
 
