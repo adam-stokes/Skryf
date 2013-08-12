@@ -12,7 +12,7 @@ use Encode;
 use DateTime::Format::RFC3339;
 
 method convert ($content, $use_wikilinks=0) {
-    markdown(trim($content), {
+    markdown($content, {
     empty_element_suffix => '>',
     tab_width => 2,
     use_wikilinks => $use_wikilinks,

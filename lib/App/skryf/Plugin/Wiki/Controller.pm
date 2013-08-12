@@ -3,7 +3,6 @@ package App::skryf::Plugin::Wiki::Controller;
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
 use App::skryf::Model::Page;
-use App::skryf::Util;
 
 method wiki_index {
     $self->redirect_to('wiki_detail', {slug => 'IndexPage' });
@@ -16,7 +15,6 @@ method wiki_detail {
     if (! $page) {
         $self->redirect_to('admin_wiki_new');
     } else {
-      $page->{html} = App::skryf::Util->convert($page->{content});
       $self->stash(page => $page);
       $self->render('wiki/detail');
     }
