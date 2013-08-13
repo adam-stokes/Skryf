@@ -6,7 +6,7 @@ use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
 
-our $VERSION = '0.011_4';
+our $VERSION = '0.011_5';
 
 sub startup {
     my $self = shift;
