@@ -2,7 +2,11 @@
   <p>
   %= link_to "Root" => "/"
   &infin;
+  %= link_to "Blog" => url_for('blog_index')
+  &infin;
   %= link_to "Wiki" => url_for('wiki_index')
+  &infin;
+  %= link_to "Search" => url_for('search_index')
     % if ( ( my $user = session 'user' ) == 1 ) {
     [ ADMIN: 
       &infin;

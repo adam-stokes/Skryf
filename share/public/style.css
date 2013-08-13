@@ -55,6 +55,14 @@ body {
   padding: 2px;
 }
 
+#container .search-body {
+  padding: 15px;
+}
+
+#container .search-body p {
+  padding: 2px;
+}
+
 #container .blog-form {
   width: 100%;
 }

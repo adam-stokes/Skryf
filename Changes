@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Early release of search plugin
 
 0.011_3  2013-08-11 21:27:52 EDT
     - Dont pad textarea
