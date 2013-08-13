@@ -23,8 +23,8 @@
   </div>
   <div class="title">
     <h2><%= config->{title} %></h2>
+    <h4><%= config->{description} %></h4>
   </div>
-<h4><%= config->{description} %></h4>
 <div class="clearfix"></div>
 </div>
 

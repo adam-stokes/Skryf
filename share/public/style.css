@@ -1,7 +1,7 @@
 
 body {
   color: #000000;
-  background-image: url('/brickwall.png');
+  background-image: url('/binding_dark.png');
   font-family: 'Ubuntu Mono', 'Droid Sans Mono', sans-serif;
   font-size: 1em;
 }
@@ -9,10 +9,9 @@ body {
 #container {
     margin: 20px;
     color: #000;
-    background-color: #fff;
-    -moz-box-shadow: 0 0 5px #888;
-    -webkit-box-shadow: 0 0 5px#888;
-    box-shadow: 0 0 15px #888 inset;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 15px #333 inset;
+    border-radius: 5px;
 }
 
 #container p {
@@ -47,8 +46,7 @@ body {
 }
 
 #container .wiki-body ul {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: square;
 }
 
 #container .wiki-body p {
@@ -81,9 +79,16 @@ body {
 
 #container .blog-form .btn {
   width: 75px;
-  height: 45px;
-  border-radius: 10px;
-  border: 2px solid #eee;
+  height: 35px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  background-color: #00424B;
+  color: #fff;
+  box-shadow: 0 0 15px #333 inset;
+}
+
+#container .blog-form .btn :hover {
+  box-shadow: 0 0 15px #333;
 }
 
 #container a {
@@ -113,11 +118,16 @@ a:active {
 }
 
 h1        { color: #333; font-family: 'Cabin Sketch', cursive; font-size: 42px; }
-h2        { color: #999; }
+h2        { color: #D80000; font-family: 'Cabin Sketch', cursive;}
 h3 { 
     color: rgb(40,0,0); 
 }
 h4        { color: #aaa; }
+
+.title h4 {
+  font-style: italic;
+  padding: 0px;
+}
 
 #header {
     clear:both;
@@ -134,7 +144,9 @@ h4        { color: #aaa; }
 }
 
 #footer {
-  background-image: url('/dark_dotted.png');
+  background-color: #00424B;
+  border-radius: 0 0 5px 5px;
+  color: #fff;
 }
 
 #footer a {
@@ -150,8 +162,9 @@ h4        { color: #aaa; }
 /* navbar */
 
 #navbar {
-  background-image: url('/dark_dotted.png');
+  background-color: #00424B;
   color: #ff0000;
+  border-radius: 5px 5px 0 0;
 }
 
 #navbar p {

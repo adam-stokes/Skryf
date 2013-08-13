@@ -1,6 +1,8 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Update style
+    - Extend search to use tapir
 
 0.011_4  2013-08-12 20:09:22 EDT
     - Early release of search plugin
