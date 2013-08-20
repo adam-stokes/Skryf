@@ -1,6 +1,8 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+
+0.011_6  2013-08-19 21:32:38 EDT
     - Make use of title in search results
 
 0.011_5  2013-08-12 23:37:40 EDT
