@@ -35,7 +35,8 @@ hr {
 
 .date .date-day {
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
+  font-family: 'Ubuntu';
 }
 
 #page-body {
@@ -80,7 +81,6 @@ hr {
 	position: relative;
 	background: #262626;
 	border: 4px solid #ff8500;
-  height: 75px;
   margin-left: 35px;
   padding-top: 25px;
   padding-left: 25px;
