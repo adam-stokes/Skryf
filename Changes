@@ -1,6 +1,7 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+    - Make use of title in search results
 
 0.011_5  2013-08-12 23:37:40 EDT
     - Update style

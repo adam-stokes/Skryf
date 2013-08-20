@@ -9,15 +9,15 @@
     %= t 'br'
     %= submit_button 'Search', class => 'btn'
   %= end
-  % if (defined($results) && scalar @{$results} > 0) {
+  % if (defined($results)) {
     %= t 'h2' => begin
-      &infin; Search Results &infin;
+      &infin; Search Results (found &rarr; <%= scalar @{$results} %>) &infin;
     %= end
     %= t 'hr'
     <ul>
-    % foreach (@{$results}) {
-    <li><%= link_to $_->{topic} => $_->{link} %></li> 
-    % }
+      % foreach (@{$results}) {
+        <li><%= link_to $_->{title} => $_->{link} %></li> 
+      % }
     </ul>
   % } else {
     %= t 'h2' => begin
