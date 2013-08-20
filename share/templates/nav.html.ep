@@ -1,6 +1,6 @@
 <div id="navbar">
   <div class="links">
-  <%= gravatar config->{contact}, size => 16 %>
+  <%= gravatar config->{contact}, size => 24 %>
   <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
   &infin;
