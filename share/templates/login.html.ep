@@ -1,17 +1,15 @@
 % layout 'auth';
 
-%= t 'div', class => 'post-body' => begin
   % if (my $msg = flash 'message') {
   <b><%= $msg %></b>
   % }
   <h3>Secret hideout</h3>
-  %= form_for '/auth' => ( method => 'POST' ) => begin
+  %= form_for '/auth' => ( method => 'POST' ), class => 'blog-form' => begin
       <label>Login</label>
       %= text_field 'username', type => 'text'
       <br />
       <label>Password</label>
       %= password_field 'password'
       <br />
-      %= submit_button 'Login'
+      %= submit_button 'Login', class => 'btn'
   % end
-%= end

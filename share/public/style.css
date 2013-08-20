@@ -1,26 +1,53 @@
 
 body {
-  color: #000000;
-  background-image: url('/binding_dark.png');
+  color: #fff;
+/*  background-image: url('/binding_dark.png');*/
+  background-color: #000;
   font-family: 'Ubuntu Mono', 'Droid Sans Mono', sans-serif;
   font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
+hr {
+  border: 1px solid #333;
+}
+
+/* artifacts */
+.date {
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  background:linear-gradient(to bottom, #ffc200, #f90);
+  margin-right: 25px;
+  float: left;
+}
+
+.date .date-month {
+  text-align: center;
+  line-height: 35px;
+  font-weight bold;
+  font-size: 16px;
+  font-family: 'Ubuntu';
+}
+
+.date .date-day {
+  text-align: center;
+  font-size: 12px;
+}
+
+#page-body {
+  margin-top: 65px;
 }
 
 #container {
-    margin: 20px;
-    color: #000;
-    background-color: #f0f0f0;
-    box-shadow: 0 0 15px #333 inset;
-    border-radius: 5px;
+    color: #fff;
 }
 
 #container p {
   padding: 15px;
-}
-
-#container .date {
-  background-color: #ddd;
-  font-style: italics;
 }
 
 #container .post-body {
@@ -37,9 +64,14 @@ body {
 
 #container .post-list ul {
   list-style-type: none;
+  display: inline;
   padding: 0;
 }
 
+#container .post-list li {
+  clear:both;
+  margin-bottom: 25px;
+}
 
 #container .wiki-body {
   padding: 15px;
@@ -78,22 +110,29 @@ body {
 }
 
 #container .blog-form .btn {
-  width: 75px;
-  height: 35px;
-  border-radius: 5px;
-  border: 2px solid #000;
-  background-color: #00424B;
-  color: #fff;
-  box-shadow: 0 0 15px #333 inset;
+  display: inline-block;
+  margin: 10px;
+  padding: 8px 15px;
+  background: rgb(255, 214, 0);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  transition: all 0.3s ease-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 2px 2px rgba(0,0,0,0.3),
+    0 0 4px 1px rgba(0,0,0,0.2);
+
+  /* Font styles */
+  text-decoration: none;
+  text-shadow: 0 1px rgba(255,255,255,0.7);
 }
 
-#container .blog-form .btn :hover {
-  box-shadow: 0 0 15px #333;
+#container .blog-form .btn:hover  {
+  background-color: #ff8500;
 }
 
 #container a {
     font-weight: bold;
-    color: black;
 
 }
 
@@ -102,7 +141,7 @@ body {
 }
 
 a {
-  color: rgb(80,0,0);
+  color: rgb(255, 214, 0);
 }
 a:link {
   text-decoration: none; 
@@ -117,10 +156,23 @@ a:active {
   text-decoration: none;
 }
 
-h1        { color: #333; font-family: 'Cabin Sketch', cursive; font-size: 42px; }
-h2        { color: #D80000; font-family: 'Cabin Sketch', cursive;}
+h1        { color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive; font-size: 42px; }
+h2        { 
+
+  color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive;
+}
+
+h3:before, h2:before {
+    content: "\25BA";
+    font-size: 60%;
+    display: inline-block;
+    padding-right: 10px;
+    pointer-events: none;
+    vertical-align: middle;
+}
+
 h3 { 
-    color: rgb(40,0,0); 
+    color: rgb(255, 214,0); 
 }
 h4        { color: #aaa; }
 
@@ -131,48 +183,55 @@ h4        { color: #aaa; }
 
 #header {
     clear:both;
+    margin-top: 60px;
 }
 
-#header .logo {
-    float:left;
-    margin-left: 15px;
-    margin-right: 15px;
-}
 
 #header .logo img {
   border-radius: 10px;
 }
 
 #footer {
-  background-color: #00424B;
-  border-radius: 0 0 5px 5px;
-  color: #fff;
+  color: #ffffff;
+  text-shadow: 0px 0px 5px #000;
+  text-indent: 3em;
+  font-size: 75%;
+  height: 35px;
+  padding-top: 15px;
+  clear: both;
 }
 
 #footer a {
   color: #fff;
 }
 
-#footer p {
-  text-indent: 0em;
-  font-size: 75%;
-  clear: none;
+#footer img {
+  vertical-align: middle;
 }
 
 /* navbar */
 
 #navbar {
-  background-color: #00424B;
-  color: #ff0000;
-  border-radius: 5px 5px 0 0;
+  background-color: #ff8500;
+  color: #ffffff;
+  text-shadow: 0px 0px 5px #000;
+  text-indent: 3em;
+  font-size: 75%;
+  height: 35px;
+  padding-top: 15px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 #navbar p {
-  text-indent: 0em;
-  font-size: 75%;
-  clear: none;
 }
 
 #navbar a {
   color: #fff;
+}
+
+#navbar img {
+  vertical-align: middle;
 }

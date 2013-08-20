@@ -1,14 +1,12 @@
 %= t 'div', id => 'footer' => begin
-  %= t 'p' => begin
-    <%= link_to 'http://perl.org' => begin %><img src="/perl.png" /><% end %>
-    <%= link_to url_for("blog_feeds") => begin %><img src="/rss.png" /><% end %>
-    Powered by &rarr;
-    <%= link_to "https://github.com/battlemidget/App-skryf" => begin %>Skryf (<%= config->{version} %>)<% end %>
-    &infin;
-    <%= link_to "http://mojolicio.us" => begin %>Mojolicious (<%= $Mojolicious::VERSION %>)<% end %>
-    &infin;
-    <%= link_to "http://mongodb.org" => begin %>MongoDB<% end %>
-    &infin;
-    <%= link_to url_for("login") => begin %>&Pi;<% end %>
- %= end
+  <%= link_to url_for("blog_feeds") => begin %><img src="/rss.png" /><% end %>
+  <%= link_to 'http://perl.org' => begin %><img src="/perl.png" /><% end %>
+  &rarr;
+  <%= link_to "https://github.com/battlemidget/App-skryf" => begin %>Skryf (<%= config->{version} %>)<% end %>
+  &infin;
+  <%= link_to "http://mojolicio.us" => begin %>Mojolicious (<%= $Mojolicious::VERSION %>)<% end %>
+  &infin;
+  <%= link_to "http://mongodb.org" => begin %>Mongo<% end %>
+  &infin;
+  <%= link_to url_for("login") => begin %>&Pi;<% end %>
 %= end

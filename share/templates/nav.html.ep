@@ -1,5 +1,6 @@
 <div id="navbar">
-  <p>
+  <%= gravatar config->{contact}, size => 16 %>
+  <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
   &infin;
   %= link_to "Blog" => url_for('blog_index')
@@ -15,17 +16,6 @@
       %= link_to "Logout" => url_for("logout")
     ]
     % }
-  </p>
-</div>
-<div id="header">
-  <div class="logo">
-    <%= gravatar config->{contact} %>
-  </div>
-  <div class="title">
-    <h2><%= config->{title} %></h2>
-    <h4><%= config->{description} %></h4>
-  </div>
-<div class="clearfix"></div>
 </div>
 
 

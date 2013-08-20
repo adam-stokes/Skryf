@@ -6,10 +6,17 @@
       %= tag 'li' => begin
         % my $f = DateTime::Format::RFC3339->new;
         % my $dt = $f->parse_datetime($_->{created});
-        <span class="date"><strong><%= $dt->strftime('%Y-%m-%d') %></strong></span>
-        <b><a href="/post/<%= $_->{slug} %>">
-            <%= $_->{topic} %>
-        </a></b>
+        <div class="date">
+          <div class="date-month"><%= $dt->strftime('%b') %></div>
+          <div class="date-day"><%= $dt->strftime('%d') %></div>
+        </div>
+        <div class="post-body">
+          <div class="post-link">
+            <a href="/post/<%= $_->{slug} %>">
+                <%= $_->{topic} %>
+            </a>
+          </div>
+        </div>
       %= end
     % }
   %= end

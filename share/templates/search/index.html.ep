@@ -11,7 +11,7 @@
   %= end
   % if (defined($results)) {
     %= t 'h2' => begin
-      &infin; Search Results (found &rarr; <%= scalar @{$results} %>) &infin;
+      Search Results found &rarr; <%= scalar @{$results} %>;
     %= end
     %= t 'hr'
     <ul>
@@ -21,7 +21,7 @@
     </ul>
   % } else {
     %= t 'h2' => begin
-      &infin; No Search Results Found &infin;
+      No Search Results Found
     %= end
   % }
 %= end
