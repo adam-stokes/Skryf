@@ -180,7 +180,6 @@ pre {
 }
 
 .blog-form-small .blog-form-control-small {
-  width: 30%;
   border: 1px solid #000;
   padding: 2px;
   font-family: 'Ubuntu Mono', sans-serif;
@@ -297,7 +296,6 @@ h4        { color: #aaa; }
   background-color: #ff8500;
   color: #ffffff;
   text-shadow: 0px 0px 5px #000;
-  text-indent: 3em;
   font-size: 1em;
   height: 35px;
   padding-top: 15px;
