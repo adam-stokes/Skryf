@@ -6,7 +6,6 @@
   % }
   %= form_for url_for('search_index'), class => 'blog-form' => ( method => "POST" ) => begin
     %= text_field 'search_query', type => 'text', class => 'blog-form-control'
-    %= t 'br'
     %= submit_button 'Search', class => 'btn'
   %= end
   % if (defined($results)) {

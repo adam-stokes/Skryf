@@ -1,4 +1,5 @@
 <div id="navbar">
+  <div class="links">
   <%= gravatar config->{contact}, size => 16 %>
   <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
@@ -7,7 +8,10 @@
   &infin;
   %= link_to "Wiki" => url_for('wiki_index')
   &infin;
-  %= link_to "Search" => url_for('search_index')
+  %= form_for url_for('search_index'), class => 'blog-form-small' => ( method => "POST" ) => begin
+    %= text_field 'search_query', type => 'text', class => 'blog-form-control-small'
+    %= submit_button 'Search', class => 'btn-small'
+  %= end
     % if ( ( my $user = session 'user' ) == 1 ) {
     [ ADMIN: 
       &infin;
@@ -16,6 +20,7 @@
       %= link_to "Logout" => url_for("logout")
     ]
     % }
+  </div>
 </div>
 
 

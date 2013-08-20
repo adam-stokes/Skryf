@@ -44,6 +44,9 @@ hr {
 
 #container {
     color: #fff;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #container p {
@@ -73,6 +76,41 @@ hr {
   margin-bottom: 25px;
 }
 
+#container .post-title {
+	position: relative;
+	background: #262626;
+	border: 4px solid #ff8500;
+  height: 75px;
+  margin-left: 35px;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+#container .post-title:after, #container .post-title:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+#container .post-title:after {
+	border-color: rgba(38, 38, 38, 0);
+	border-right-color: #262626;
+	border-width: 30px;
+	top: 50%;
+	margin-top: -30px;
+}
+#container .post-title:before {
+	border-color: rgba(245, 136, 27, 0);
+	border-right-color: #ff8500;
+	border-width: 36px;
+	top: 50%;
+	margin-top: -36px;
+}
+
 #container .wiki-body {
   padding: 15px;
 }
@@ -98,7 +136,7 @@ hr {
 }
 
 #container .blog-form .blog-form-control {
-  width: 90%;
+  width: 60%;
   border: 3px solid #000;
   padding: 5px;
   font-family: 'Ubuntu Mono', sans-serif;
@@ -115,7 +153,7 @@ hr {
   padding: 8px 15px;
   background: rgb(255, 214, 0);
   border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 4px;
+  border-radius: 1px;
   transition: all 0.3s ease-out;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.5),
@@ -125,11 +163,50 @@ hr {
   /* Font styles */
   text-decoration: none;
   text-shadow: 0 1px rgba(255,255,255,0.7);
+  font-family: 'Ubuntu Mono', sans-serif;
 }
 
 #container .blog-form .btn:hover  {
-  background-color: #ff8500;
+  background-color: rgba(255,214,0,0.7);;
 }
+
+.blog-form-small {
+  float: right;
+  padding: 0;
+}
+
+.blog-form-small .blog-form-control-small {
+  width: 30%;
+  border: 1px solid #000;
+  padding: 2px;
+  font-family: 'Ubuntu Mono', sans-serif;
+  font-size: 12px;
+}
+
+.blog-form-small .btn-small {
+  display: inline-block;
+  margin: 1px;
+  padding: 1px 4px;
+  background: rgb(255, 214, 0);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 1px;
+  transition: all 0.3s ease-out;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.5),
+    0 1px 1px rgba(0,0,0,0.3),
+    0 0 1px 1px rgba(0,0,0,0.2);
+
+  /* Font styles */
+  text-decoration: none;
+  text-shadow: 0 1px rgba(255,255,255,0.7);
+  font-family: 'Ubuntu Mono', sans-serif;
+  font-size: 12px;
+}
+
+.blog-form-small .btn-small:hover  {
+  background-color: rgba(255,214,0,0.7);;
+}
+
 
 #container a {
     font-weight: bold;
@@ -194,11 +271,13 @@ h4        { color: #aaa; }
 #footer {
   color: #ffffff;
   text-shadow: 0px 0px 5px #000;
-  text-indent: 3em;
   font-size: 75%;
   height: 35px;
   padding-top: 15px;
   clear: both;
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #footer a {
@@ -225,7 +304,10 @@ h4        { color: #aaa; }
   width: 100%;
 }
 
-#navbar p {
+#navbar .links {
+  width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #navbar a {

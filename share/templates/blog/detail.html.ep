@@ -1,13 +1,17 @@
 % use DateTime::Format::RFC3339;
 % layout 'main';
   %= t 'div', class => 'post-body' => begin
-    %= t 'h2' => $post->{topic}
-    % my $f = DateTime::Format::RFC3339->new;
-    % my $dt = $f->parse_datetime($post->{created});
-    Posted <strong>on</strong> <%= $dt->strftime('%Y-%m-%d') %> <strong>@</strong> <%= $dt->strftime('%H:%M:%S') %>
-    %= t 'br'
-    <strong>Tags</strong>: (<i><%= join(', ', $post->{tags}) %></i>)
+  % my $f = DateTime::Format::RFC3339->new;
+  % my $dt = $f->parse_datetime($post->{created});
+    %= t 'h1', class => 'post-title' => begin 
+      <div class="date">
+        <div class="date-month"><%= $dt->strftime('%b') %></div>
+        <div class="date-day"><%= $dt->strftime('%d') %></div>
+      </div>
+      <%= $post->{topic} %>
+    %= end
     <%== $post->{html} %>
+    <strong>Tags</strong>: (<i><%= join(', ', $post->{tags}) %></i>)
     <%= disqus_inc config->{social}{disqus} || 'imnotset' %>
   %= end
 
