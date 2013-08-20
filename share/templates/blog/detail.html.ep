@@ -3,15 +3,19 @@
   %= t 'div', class => 'post-body' => begin
   % my $f = DateTime::Format::RFC3339->new;
   % my $dt = $f->parse_datetime($post->{created});
-    %= t 'h1', class => 'post-title' => begin 
-      <div class="date">
-        <div class="date-month"><%= $dt->strftime('%b') %></div>
-        <div class="date-day"><%= $dt->strftime('%d') %></div>
-      </div>
+  <div class="post-title">
+    <div class="date">
+      <div class="date-month"><%= $dt->strftime('%b') %></div>
+      <div class="date-day"><%= $dt->strftime('%d') %></div>
+    </div>
+    %= t 'h1' => begin 
       <%= $post->{topic} %>
     %= end
+      <p>
+      <strong>Tags</strong>: <i><%= join(', ', $post->{tags}) %></i>
+      </p>
+    </div>
     <%== $post->{html} %>
-    <strong>Tags</strong>: (<i><%= join(', ', $post->{tags}) %></i>)
     <%= disqus_inc config->{social}{disqus} || 'imnotset' %>
   %= end
 
