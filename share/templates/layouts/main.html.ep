@@ -3,8 +3,8 @@
   %= t 'head' => begin
     <meta name="viewport" content="width=device-width" />
     %= t 'title' => config->{title}
-      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
       %= stylesheet '/style.css'
+      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
       %= javascript "https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=doxy"
       <%= analytics_inc 'UA-23169268-1' %>
   %= end
