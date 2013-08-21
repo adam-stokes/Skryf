@@ -14,9 +14,8 @@
     % if ( ( my $user = session 'user' ) == 1 ) {
     &infin;
     [ ADMIN: 
-      &infin;
       %= link_to "Dashboard" => url_for('admin_dashboard')
-      &infin;
+      /
       %= link_to "Logout" => url_for("logout")
     ]
     % }
