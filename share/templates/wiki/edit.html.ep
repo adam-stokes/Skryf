@@ -1,7 +1,6 @@
 % layout 'auth';
 
 %= t 'div', class => 'wiki-body' => begin
-  %= include 'admin/nav'
   %= t 'h2' => 'Update: '. $page->{slug}
     % if (my $msg = flash 'message') {
     <b><%= $msg %></b>

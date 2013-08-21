@@ -2,7 +2,7 @@
 body {
   color: #fff;
 /*  background-image: url('/binding_dark.png');*/
-  background-color: #000;
+  background-color: ghostwhite;
   font-family: 'Ubuntu Mono', 'Droid Sans Mono', sans-serif;
   font-size: 1em;
   padding: 0;
@@ -44,10 +44,10 @@ hr {
 }
 
 #container {
-    color: #fff;
+    color: black;
     width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 200px;
+    margin-top: -50px;
 }
 
 #container p {
@@ -140,7 +140,7 @@ hr {
 }
 
 #container .blog-form .blog-form-control {
-  width: 60%;
+  width: 100%;
   border: 3px solid #000;
   padding: 5px;
   font-family: 'Ubuntu Mono', sans-serif;
@@ -151,7 +151,7 @@ hr {
   height: 400px;
 }
 
-#container .blog-form .btn {
+.btn {
   display: inline-block;
   margin: 10px;
   padding: 8px 15px;
@@ -168,10 +168,12 @@ hr {
   text-decoration: none;
   text-shadow: 0 1px rgba(255,255,255,0.7);
   font-family: 'Ubuntu Mono', sans-serif;
+  color: black;
 }
 
-#container .blog-form .btn:hover  {
+.btn:hover  {
   background-color: rgba(255,214,0,0.7);;
+  text-decoration: none;
 }
 
 .blog-form-small {
@@ -186,7 +188,7 @@ hr {
   font-size: 12px;
 }
 
-.blog-form-small .btn-small {
+.btn-small {
   display: inline-block;
   margin: 1px;
   padding: 1px 4px;
@@ -221,7 +223,7 @@ hr {
 }
 
 a {
-  color: rgb(255, 214, 0);
+  color: royalblue;
 }
 a:link {
   text-decoration: none; 
@@ -236,14 +238,11 @@ a:active {
   text-decoration: none;
 }
 
-h1        { color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive; font-size: 42px; }
-h2        { 
-
-  color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive;
-}
+h1        { color: dodgerblue; font-family: cursive; font-size: 32pt/42pt; }
+h2        { color: dodgerblue; font-family: cursive; font-size: 28pt/32pt; }
 
 h3:before, h2:before {
-    content: "\25BA";
+    content: ">";
     font-size: 60%;
     display: inline-block;
     padding-right: 10px;
@@ -293,23 +292,22 @@ h4        { color: #aaa; }
 /* navbar */
 
 #navbar {
-  background-color: #ff8500;
-  color: #ffffff;
+  background-color: royalblue;
+  color: white;
   text-shadow: 0px 0px 5px #000;
   font-size: 1em;
-  height: 35px;
-  padding-top: 15px;
+  height: 28px;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   font-family: 'Ubuntu', sans-serif;
+  z-index: 99999;
 }
 
 #navbar .links {
-  width: 960px;
-  margin-left: auto;
-  margin-right: auto;
+  text-indent: 3em;
+  line-height: 30px;
 }
 
 #navbar a {
@@ -319,3 +317,44 @@ h4        { color: #aaa; }
 #navbar img {
   vertical-align: middle;
 }
+
+#navbar-sub {
+  background-color: royalblue;
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  top:29px;
+  left:0;
+  color: #ffffff;
+  text-shadow: 0px 0px 5px #000;
+  font-size: 1em;
+  margin-top: -17px;
+}
+
+#navbar-sub ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 1em;
+}
+
+#navbar-sub ul li {
+
+}
+
+#navbar-sub .item-header {
+  background-color: cornflowerblue;
+  font-size: 2em;
+  padding-left: 10px;
+  margin-left: -10px;
+  border-radius: 4px 0 0 4px;
+  font-weight: bolder;
+}
+
+#navbar-sub a {
+  color: #fff;
+}
+
+/* data table */
+th { text-align: left; padding: 5px; background-color: skyblue}
+td { width: 25%; text-align: left; border: 0;}
+

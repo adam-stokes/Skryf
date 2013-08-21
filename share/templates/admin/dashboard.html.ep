@@ -1,0 +1,5 @@
+% layout 'auth';
+%= t 'div', class  => 'post-body' => begin
+  %= t 'h2' => 'Dashboard'
+  Widgets of some sort will be placed here.
+%= end

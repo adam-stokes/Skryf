@@ -1,6 +1,5 @@
 % layout 'auth';
 %= t 'div', class => 'post-body' => begin
-  %= include 'admin/nav'
   %= t 'h2' => 'New content'
 
   %= form_for '/admin/post/new', class => 'blog-form' => ( method => 'POST' ) => begin

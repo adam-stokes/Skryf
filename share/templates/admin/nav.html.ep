@@ -1,3 +1,30 @@
-%= t 'div', id => 'admin_nav' => begin
-  %= link_to 'List Posts' => url_for('admin_blog_index')
+%= t 'div', id => 'navbar' => begin
+<div class="links">
+  %= link_to 'Skryf::Admin' => url_for('admin_dashboard')
+  &infin;
+  %= link_to 'View Site' => url_for('blog_index')
+</div>
 %= end
+<div id="navbar-sub">
+  <div class="links">
+    <ul>
+      <li class="item-header">
+      Core
+      </li>
+        <ul class="item-list">
+          <li>
+            %= link_to 'Posts' => url_for('admin_blog_index')
+          </li>
+          <li>
+            %= link_to 'Pages' => url_for('admin_wiki_index')
+          </li>
+        </ul>
+      <li class="item-header">
+        Plugins
+      </li>
+      <ul class="item-list">
+        <li>None at this time</li>
+      </ul>
+    </ul>
+  </div>
+</div>

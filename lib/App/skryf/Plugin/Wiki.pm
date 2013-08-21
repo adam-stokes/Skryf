@@ -40,6 +40,11 @@ sub register {
       return $self->session('user') || !$self->redirect_to('login');
     }
   );
+  $auth_r->route($conf{adminPathPrefix})->via(qw(GET))->to(
+      namespace  => $conf{namespace},
+      action     => 'admin_wiki_index',
+      _wiki_conf => \%conf,
+  )->name('admin_wiki_index');
     $auth_r->route($conf{adminPathPrefix} . "new/:slug")->via(qw(GET POST))->to(
         namespace  => $conf{namespace},
         action     => 'admin_wiki_new',

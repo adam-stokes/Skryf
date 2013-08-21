@@ -38,8 +38,9 @@ sub startup {
 # Load local plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    $self->plugin('Blog' => {authentication => $self->session('user')});
-    $self->plugin('Wiki' => {authentication => $self->session('user')});
+    $self->plugin('Admin' => {authentication => $self->session('user')});
+    $self->plugin('Blog'  => {authentication => $self->session('user')});
+    $self->plugin('Wiki'  => {authentication => $self->session('user')});
     $self->plugin(
         'Search' => {
             tapir_token  => $cfg->{social}{tapir},

@@ -95,7 +95,7 @@ method admin_blog_delete {
     else {
         $self->flash(message => 'Failed to remove post.');
     }
-    $self->redirect_to('admin_post_index');
+    $self->redirect_to('admin_blog_index');
 }
 
 1;

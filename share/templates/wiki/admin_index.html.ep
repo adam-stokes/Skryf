@@ -1,0 +1,25 @@
+% layout 'auth';
+<div class="wiki-body">
+%= t 'h2' => 'Pages'
+% if (my $msg = flash 'message') {
+  <h4><%= $msg %></h4>
+% }
+<table border="0">
+  <tbody>
+  <tr>
+    <th>Page</th>
+    <th>Created</th>
+    <th>Action</th>
+  </tr>
+  % foreach (@{$pageslist}) {
+    <tr>
+      <td>
+        <%= link_to $_->{slug} => url_for("admin_wiki_edit", slug => $_->{slug}) %>
+      </td>
+      <td><%= $_->{created} %></td>
+      <td><%= link_to "Delete" => url_for("admin_wiki_delete", slug => $_->{slug}) %></td>
+    </tr>
+  % }
+  </tbody>
+</table>
+</div>
