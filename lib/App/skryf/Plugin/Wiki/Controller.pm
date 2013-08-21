@@ -72,3 +72,44 @@ method admin_wiki_delete {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::skryf::Plugin::Wiki::Controller - Wiki plugin controller
+
+=head1 DESCRIPTION
+
+Wiki controller
+
+=head1 CONTROLLERS
+
+=head2 B<wiki_index>
+
+Index view
+
+=head2 B<wiki_detail>
+
+Detail view of wiki
+
+=head2 B<admin_wiki_index>
+
+Index controller for admin dashboard
+
+=head2 B<admin_wiki_delete>
+
+Delete action
+
+=head2 B<admin_wiki_update>
+
+Update action
+
+=head2 B<admin_wiki_edit>
+
+Edit action
+
+=head2 B<admin_wiki_new>
+
+New action
+
+=cut

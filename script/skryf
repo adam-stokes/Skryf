@@ -12,10 +12,10 @@ __END__
 
 =head1 NAME
 
-skryf - blogging gateway
+Skryf - Pluggable CMS
 
 =head1 DESCRIPTION
 
-This is where the magic happens.
+This is where the magic happens. You can see a live preview at L<http://astokes.org>.
 
 =cut

@@ -55,3 +55,31 @@ method by_cat ($category) {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::skryf::Model::Post - Post Model Skryf
+
+=head1 DESCRIPTION
+
+Post model 
+
+=head1 METHODS
+
+=head2 B<posts>
+
+Posts collection
+
+=head1 SEE ALSO
+
+L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>. L<Mango>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -42,15 +42,15 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::Admin - Mojolicious Plugin
+App::skryf::Plugin::Admin - Mojolicious Plugin
 
 =head1 DESCRIPTION
 
-L<App::skryf::Plugin::Admin> is a L<Mojolicious> plugin. 
+L<App::skryf::Plugin::Admin> is a L<Mojolicious> plugin.
 
 =head1 METHODS
 
-L<Mojolicious::Plugin::Blog> inherits all methods from
+L<App::skryf::Plugin::Admin> inherits all methods from
 L<Mojolicious::Plugin> and implements the following new ones.
 
 =head2 register

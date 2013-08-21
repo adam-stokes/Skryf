@@ -89,29 +89,12 @@ __END__
 
 =head1 NAME
 
-App-skryf - i kno rite. another perl blogging engine.
+App-skryf - i kno rite. another perl cms.
 
 =head1 DESCRIPTION
 
-Another blog engine which utilizes
-
-=over 8
-
-=item Mojolicious
-
-=item Markdown
-
-=item Hypnotoad
-
-=item Rex
-
-=item Ubic 
-
-=item Mongo
-
-=back
-
-For a more streamlined deployable approach.
+Another CMS platform which utilizes Mojolicious, Markdown, hypnotoad, Rex, Ubic,
+and Mongo.
 
 =head1 PREREQS
 
@@ -131,7 +114,7 @@ For example:
 
     $ mkdir -p ~/blog/{templates,public}
 
-Edit ~/.skryf.conf to reflect those directories in I<media_directory> and 
+Edit ~/.skryf.conf to reflect those directories in I<template_directory> and 
 I<media_directory>.
 
     template_directory => '~/blog/templates',

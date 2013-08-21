@@ -28,3 +28,36 @@ sub register {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::skryf::Plugin::Search - Mojolicious Plugin
+
+=head1 DESCRIPTION
+
+L<App::skryf::Plugin::Search> is a L<Mojolicious> plugin.
+
+=head1 METHODS
+
+L<App::skryf::Plugin::Search> inherits all methods from
+L<Mojolicious::Plugin> and implements the following new ones.
+
+=head2 register
+
+  $plugin->register(Mojolicious->new);
+
+Register plugin in L<Mojolicious> application.
+
+=head1 SEE ALSO
+
+L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

@@ -1,5 +1,5 @@
 {
-   "abstract" : "i kno rite. another perl blogging engine.",
+   "abstract" : "i kno rite. another perl cms.",
    "author" : [
       "Adam Stokes <adamjs@cpan.org>"
    ],
@@ -69,6 +69,6 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.011_10"
+   "version" : "0.011_11"
 }
 

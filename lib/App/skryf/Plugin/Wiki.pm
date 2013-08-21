@@ -71,35 +71,34 @@ sub register {
 1;
 __END__
 
-=encoding utf-8
-
 =head1 NAME
 
-App::skryf::Plugin::Wiki - Wiki namespace for Skryf
-
-=head1 SYNOPSIS
-
-  use App::skryf::Plugin::Wiki;
+App::skryf::Plugin::Wiki - Mojolicious Plugin
 
 =head1 DESCRIPTION
 
-App::skryf::Plugin::Wiki is a wiki plugin for App::skryf that allows for
-composition of wiki pages and understands the usage of widgets to extend
-the dynamic capabilities of the wiki.
+L<App::skryf::Plugin::Wiki> is a L<Mojolicious> plugin.
 
-=head1 AUTHOR
+=head1 METHODS
 
-Adam Stokes E<lt>adamjs@cpan.org<gt>
+L<App::skryf::Plugin::Wiki> inherits all methods from
+L<Mojolicious::Plugin> and implements the following new ones.
 
-=head1 COPYRIGHT
+=head2 register
 
-Copyright 2013- Adam Stokes
+  $plugin->register(Mojolicious->new);
 
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+Register plugin in L<Mojolicious> application.
 
 =head1 SEE ALSO
+
+L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

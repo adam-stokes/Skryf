@@ -26,3 +26,20 @@ method search_index {
 }
 
 1;
+__END__
+
+=head1 NAME
+
+App::skryf::Plugin::Search::Controller - Search plugin controller
+
+=head1 DESCRIPTION
+
+Search controller
+
+=head1 CONTROLLERS
+
+=head2 B<search_index>
+
+Renders search page
+
+=cut

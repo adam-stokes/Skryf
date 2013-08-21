@@ -34,31 +34,47 @@ method check ($username, $password) {
 }
 
 1;
-
 __END__
 
-=head1 Model Attributes
+=head1 NAME
 
-The user model contains these attributes
+App::skryf::Model::User - User Model Skryf
 
-=over 8
+=head1 DESCRIPTION
 
-=item Username
+User model 
 
-=item Password
+=head1 METHODS
 
-=item Disqus
+=head2 B<users>
 
-=item GooglePlus
+Grabs user collection from Mongo
 
-=item Stackoverflow
+=head2 B<check>
 
-=item GoogleAnalytics
+Checks username/password against database
 
-=item Coderwall
+=head2 B<create>
 
-=item Github
+Creates a user
 
-=back
+=head2 B<get>
+
+Gets single user
+
+=head2 B<remove>
+
+Removes user
+
+=head1 SEE ALSO
+
+L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>. L<Mango>.
+
+=head1 COPYRIGHT AND LICENSE
+
+This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut

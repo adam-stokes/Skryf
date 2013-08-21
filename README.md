@@ -1,19 +1,11 @@
 # NAME
 
-App-skryf - i kno rite. another perl blogging engine.
+App-skryf - i kno rite. another perl cms.
 
 # DESCRIPTION
 
-Another blog engine which utilizes
-
-- Mojolicious
-- Markdown
-- Hypnotoad
-- Rex
-- Ubic 
-- Mongo
-
-For a more streamlined deployable approach.
+Another CMS platform which utilizes Mojolicious, Markdown, hypnotoad, Rex, Ubic,
+and Mongo.
 
 # PREREQS
 
@@ -33,7 +25,7 @@ For example:
 
     $ mkdir -p ~/blog/{templates,public}
 
-Edit ~/.skryf.conf to reflect those directories in _media\_directory_ and 
+Edit ~/.skryf.conf to reflect those directories in _template\_directory_ and 
 _media\_directory_.
 
     template_directory => '~/blog/templates',
