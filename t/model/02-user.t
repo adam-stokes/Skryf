@@ -23,8 +23,13 @@ ok $model;
 ok $model->users;
 
 ok $model->create(
-  $username,
-  $password,
+    $username,
+    $password,
+    {   launchpad => {
+            token        => 'aaaa',
+            token_secret => 'bbbb',
+        },
+    },
 );
 
 ok $model->check($username, $password);

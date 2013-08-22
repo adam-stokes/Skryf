@@ -2,12 +2,25 @@ package App::skryf::Plugin::Admin::Controller;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
-use Data::Printer;
+use App::skryf::Model::User;
 
 method admin_dashboard {
-  p($self->app->admin_menu);
   $self->render('admin/dashboard');
 }
+
+method admin_dashboard_profile {
+  my $req = $self->req->method;
+  my $model = App::skryf::Model::User->new;
+  my $user = $model->get($self->session->{username});
+  if ($req eq "POST") {
+    $model->save($user);
+    $self->flash(message => 'User profile saved.');
+    $self->redirect_to('admin_dashboard_profile');
+  }
+  $self->stash(profile => $user);
+  $self->render('admin/dashboard_profile');
+}
+
 
 1;
 __END__

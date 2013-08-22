@@ -1,5 +1,5 @@
 % layout 'auth';
 %= t 'div', class  => 'post-body' => begin
   %= t 'h2' => 'Dashboard'
-  Widgets of some sort will be placed here.
+  %= link_to "Profile" => url_for('admin_dashboard_profile') => class => 'btn'
 %= end

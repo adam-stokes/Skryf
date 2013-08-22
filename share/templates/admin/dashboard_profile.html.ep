@@ -1,0 +1,16 @@
+% layout 'auth';
+%= t 'div', class  => 'post-body' => begin
+  %= t 'h2' => 'Profile for '. $profile->{username}
+  % if (my $msg = flash 'message') {
+    <h4><%= $msg %></h4>
+  % }
+  %= form_for "/admin/profile", class => 'blog-form' => ( method => 'POST' ) => begin
+    Password
+    %= t 'br'
+    %= password_field 'password', class => 'blog-form-control blog-form-control-medium', value => $profile->{password}
+    %= t 'br'
+    Social Attributes
+    %= t 'br'
+    %= submit_button 'Save Profile', class => 'btn'
+  %= end
+%= end
