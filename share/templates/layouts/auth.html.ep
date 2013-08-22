@@ -2,9 +2,10 @@
 %= t 'html' => begin
   %= t 'head' => begin
     %= t 'title' => config->{title}
-      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
-      %= stylesheet '/style.admin.css'
-      <%= analytics_inc 'UA-23169268-1' %>
+    %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
+    %= stylesheet '/style.admin.css'
+    <%= content_for 'extrahead' %>
+    <%= analytics_inc 'UA-23169268-1' %>
   %= end
   %= t 'body' => begin
     %= include 'admin/nav'

@@ -9,17 +9,12 @@ use App::skryf::Plugin::Blog::Controller;
 my %defaults = (
 
     # Default routes
-    indexPath       => '/',
+    indexPath       => '/post/',
     postPath        => '/post/:slug',
     feedPath        => '/post/feeds/atom.xml',
     feedCatPath     => '/post/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post/',
-
-    # Router namespace
     namespace => 'App::skryf::Plugin::Blog::Controller',
-
-    # Set this to the under route for blog administration
-    authCondition => undef,
 );
 
 sub register {
@@ -58,7 +53,7 @@ sub register {
         return $self->session('user') || !$self->redirect_to('login');
       }
     );
-    $auth_r->route($conf{adminPathPrefix} . "")->via('GET')->to(
+    $auth_r->route($conf{adminPathPrefix})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_index',
         _blog_conf => \%conf,
@@ -84,6 +79,10 @@ sub register {
         action     => 'admin_blog_delete',
         _blog_conf => \%conf,
     )->name('admin_blog_delete');
+
+    # register menu item
+    $app->admin_menu->{Posts} = 'admin_blog_index';
+    $app->frontend_menu->{Blog} = 'blog_index';
     return;
 }
 

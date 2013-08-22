@@ -1,8 +1,5 @@
 package App::skryf::Plugin::Wiki;
 
-use strict;
-use warnings;
-
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
@@ -14,7 +11,6 @@ my %defaults = (
   pagesPath => '/pages/:slug',
   adminPathPrefix => '/admin/pages/',
   namespace => 'App::skryf::Plugin::Wiki::Controller',
-  authCondition => undef,
 );
 
 sub register {
@@ -65,6 +61,10 @@ sub register {
         action     => 'admin_wiki_delete',
         _wiki_conf => \%conf,
     )->name('admin_wiki_delete');
+
+    # register menu item
+    $app->admin_menu->{Pages} = 'admin_wiki_index';
+    $app->frontend_menu->{Wiki} = 'wiki_index';
   return; 
 }
 

@@ -1,8 +1,5 @@
 package App::skryf::Plugin::Search;
 
-use strict;
-use warnings;
-
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';

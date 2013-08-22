@@ -1,9 +1,10 @@
 % layout 'auth';
 
+%= t 'div', class  => 'post-body' => begin
   % if (my $msg = flash 'message') {
   <b><%= $msg %></b>
   % }
-  <h3>Secret hideout</h3>
+  <h2>Secret hideout</h2>
   %= form_for '/auth' => ( method => 'POST' ), class => 'blog-form' => begin
       <label>Login</label>
       %= text_field 'username', type => 'text'
@@ -13,3 +14,4 @@
       <br />
       %= submit_button 'Login', class => 'btn'
   % end
+%= end

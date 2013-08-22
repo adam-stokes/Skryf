@@ -6,7 +6,17 @@ use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
 
-our $VERSION = '0.011_11';
+our $VERSION = '0.011_12';
+
+has admin_menu => sub {
+  my $self = shift;
+  return +{};
+};
+
+has frontend_menu => sub {
+  my $self = shift;
+  return +{};
+};
 
 sub startup {
     my $self = shift;
@@ -30,17 +40,14 @@ sub startup {
 ###############################################################################
 # Load global plugins
 ###############################################################################
+    push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
     for (keys $cfg->{extra_modules}) {
         $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
     }
 
 ###############################################################################
-# Load local plugins
+# Load Core plugins
 ###############################################################################
-    push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    $self->plugin('Admin' => {authentication => $self->session('user')});
-    $self->plugin('Blog'  => {authentication => $self->session('user')});
-    $self->plugin('Wiki'  => {authentication => $self->session('user')});
     $self->plugin(
         'Search' => {
             tapir_token  => $cfg->{social}{tapir},
@@ -82,6 +89,11 @@ sub startup {
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
+    # Todo make splashpage overridable
+    $r->get('/')->to(
+        namespace => 'App::skryf::Plugin::Blog::Controller',
+        action    => 'blog_index'
+    )->name('splashpage');
   }
 1;
 

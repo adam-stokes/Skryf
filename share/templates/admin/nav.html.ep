@@ -9,22 +9,15 @@
   <div class="links">
     <ul>
       <li class="item-header">
-      Core
+      Site
       </li>
         <ul class="item-list">
+          % foreach my $item (keys app->admin_menu) {
           <li>
-            %= link_to 'Posts' => url_for('admin_blog_index')
+            %= link_to $item => url_for(app->admin_menu->{$item})
           </li>
-          <li>
-            %= link_to 'Pages' => url_for('admin_wiki_index')
-          </li>
+          % }
         </ul>
-      <li class="item-header">
-        Plugins
-      </li>
-      <ul class="item-list">
-        <li>None at this time</li>
-      </ul>
     </ul>
   </div>
 </div>

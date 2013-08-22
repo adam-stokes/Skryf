@@ -4,15 +4,15 @@
   <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
   &infin;
-  %= link_to "Blog" => url_for('blog_index')
-  &infin;
-  %= link_to "Wiki" => url_for('wiki_index')
+  % foreach my $item (keys app->frontend_menu) {
+    %= link_to $item => url_for(app->frontend_menu->{$item})
+    &infin;
+  % }
   %= form_for url_for('search_index'), class => 'blog-form-small' => ( method => "POST" ) => begin
     %= text_field 'search_query', type => 'text', class => 'blog-form-control-small'
     %= submit_button 'Search', class => 'btn-small'
   %= end
     % if ( ( my $user = session 'user' ) == 1 ) {
-    &infin;
     [ ADMIN: 
       %= link_to "Dashboard" => url_for('admin_dashboard')
       /
@@ -21,5 +21,4 @@
     % }
   </div>
 </div>
-
 

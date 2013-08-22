@@ -13,9 +13,6 @@ my %defaults = (
 
     # Router namespace
     namespace => 'App::skryf::Plugin::Admin::Controller',
-
-    # Set this to the under route for blog administration
-    authCondition => undef,
 );
 
 sub register {
