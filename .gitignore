@@ -20,3 +20,4 @@ lib/Rex
 .tidyall.d
 _build_params
 perltidy.LOG
+cached_bugs
