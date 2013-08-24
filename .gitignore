@@ -21,3 +21,4 @@ lib/Rex
 _build_params
 perltidy.LOG
 cached_bugs
+status_bugs
