@@ -6,7 +6,7 @@ use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
 
-our $VERSION = '0.011_12';
+our $VERSION = '0.011_13';
 
 has admin_menu => sub {
   my $self = shift;

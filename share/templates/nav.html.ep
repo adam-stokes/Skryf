@@ -4,7 +4,7 @@
   <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
   &infin;
-  % foreach my $item (keys app->frontend_menu) {
+  % foreach my $item (sort (keys app->frontend_menu)) {
     %= link_to $item => url_for(app->frontend_menu->{$item})
     &infin;
   % }

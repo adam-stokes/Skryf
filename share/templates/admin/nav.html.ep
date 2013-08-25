@@ -12,7 +12,7 @@
       Site
       </li>
         <ul class="item-list">
-          % foreach my $item (keys app->admin_menu) {
+          % foreach my $item (sort(keys app->admin_menu)) {
           <li>
             %= link_to $item => url_for(app->admin_menu->{$item})
           </li>

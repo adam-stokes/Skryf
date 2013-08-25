@@ -1,4 +1,4 @@
-% layout 'auth';
+% layout 'main';
 
 %= t 'div', class  => 'post-body' => begin
   % if (my $msg = flash 'message') {
