@@ -81,6 +81,14 @@ hr {
 
 #container .post-list {
   padding: 15px;
+  width: 400px;
+  float:left;
+}
+
+#container .post-social {
+    width: 400px;
+    padding: 15px;
+    float:right;
 }
 
 #container .post-list ul {
@@ -92,18 +100,24 @@ hr {
 #container .post-list li {
   clear:both;
   margin-bottom: 25px;
+  width: 400px;
+  transition: all 0.3s ease-out;
+  text-align:right;
+}
+#container .post-list li:hover {
+    width: 405px;
+}
+#container .post-list .post-link {
+    width: 370px;
 }
 
 #container .post-list a {
     color: white;
     font-size: 12pt;
-    transition: all 0.3s ease-out;
 }
 
 #container .post-list a:hover {
     text-decoration: none;
-    text-shadow: 0px 0px 5px #000;
-    margin-left: 15px;
 }
 
 #container .post-title {

@@ -22,3 +22,21 @@
     % }
   %= end
 %= end
+%= t 'div', class => 'post-social' => begin
+	%= t 'h3' => 'Resources'
+	<ul>
+	  <li>
+	    <a href="http://askubuntu.com">Ask Ubuntu</a>
+	  </li>
+	  <li>
+	    <a href="http://forums.ubuntu.org">Ubuntu Forums</a>
+	  </li>
+	  <li>
+	    <a href="http://planet.ubuntu.com">Planet Ubuntu</a>
+	  </li>
+	  <li>
+	    <a href="http://omgubuntu.co.uk">OMG! Ubuntu</a>
+	  </li>
+
+	</ul>
+%= end
