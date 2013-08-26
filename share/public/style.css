@@ -1,6 +1,5 @@
 body {
   color: #fff;
-/*  background-image: url('/binding_dark.png');*/
   background-color: #000;
   font-family: 'Ubuntu Mono', 'Droid Sans Mono', sans-serif;
   font-size: 1em;
@@ -9,18 +8,20 @@ body {
 }
 
 hr {
-  border: 1px solid #333;
+    border: 1px solid #862d0e;
 }
 
 /* artifacts */
 .date {
-  color: #fff;
-  text-shadow: 0 0 5px #000;
+  color: #000;
+  text-shadow: 0 0 5px #fff;
   border-radius: 50%;
   width: 55px;
   height: 55px;
   background:linear-gradient(to bottom, #ffc200, #f90);
   margin-right: 25px;
+  margin-top: -3px;
+  margin-left: -15px;
   float: left;
 }
 
@@ -55,6 +56,23 @@ hr {
 
 #container .post-body {
   padding: 15px;
+  background-color: #2C001E;
+  border-radius: 5px;
+  font-size: 13pt;
+}
+
+#container .post-body h1 {
+    color: white
+    font-size: 2pt;
+    text-shadow: 0 0 5px darkviolet;
+}
+
+#container .post-body h2 {
+    color: #dd4814;
+    font-family:'Ubuntu';
+    border-bottom: 1px solid #862d0e;
+    font-size: 16pt;
+    line-height: 18px;
 }
 
 #container .post-body p {
@@ -76,13 +94,25 @@ hr {
   margin-bottom: 25px;
 }
 
+#container .post-list a {
+    color: white;
+    font-size: 12pt;
+    transition: all 0.3s ease-out;
+}
+
+#container .post-list a:hover {
+    text-decoration: none;
+    text-shadow: 0px 0px 5px #000;
+    margin-left: 15px;
+}
+
 #container .post-title {
-	position: relative;
-	background: #262626;
-	border: 4px solid #ff8500;
-  padding-top: 15px;
-  padding-left: 25px;
-  z-index: -9999;
+    position: relative;
+    background: #0f0f0f;
+    border: 4px solid #DD4814;
+    padding-top: 15px;
+    padding-left: 25px;
+    z-index: 1;
 }
 
 #container .post-title:after, #container .post-title:before {
@@ -97,14 +127,14 @@ hr {
 
 #container .post-title:after {
 	border-color: rgba(38, 38, 38, 0);
-	border-right-color: #262626;
+	border-right-color: #DD4814;
 	border-width: 30px;
 	top: 50%;
 	margin-top: -30px;
 }
 #container .post-title:before {
 	border-color: rgba(245, 136, 27, 0);
-	border-right-color: #ff8500;
+	border-right-color: #DD4814;
 	border-width: 36px;
 	top: 50%;
 	margin-top: -36px;
@@ -220,7 +250,8 @@ hr {
 }
 
 a {
-  color: rgb(255, 214, 0);
+  color: #DD4814;
+  transition: all 0.3s ease-out;
 }
 a:link {
   text-decoration: none; 
@@ -229,19 +260,20 @@ a:visited {
   text-decoration: none;
 }
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: white;
 }
 a:active {
   text-decoration: none;
 }
 
-h1        { color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive; font-size: 42px; }
+h1        { color: white; font-family: 'Cabin Sketch', cursive; font-size: 42px; }
 h2        { 
 
-  color: rgb(255, 214, 0); font-family: 'Cabin Sketch', cursive;
+  color: white; font-family: 'Cabin Sketch', cursive;
 }
 
-h3:before, h2:before {
+h3:before {
     content: "\25BA";
     font-size: 60%;
     display: inline-block;
@@ -272,7 +304,7 @@ h4        { color: #aaa; }
 
 #footer {
   color: #ffffff;
-  text-shadow: 0px 0px 5px #ff8500;
+  text-shadow: 0px 0px 5px #000;
   padding-top: 15px;
   width: 960px;
   margin-left: auto;
@@ -282,7 +314,12 @@ h4        { color: #aaa; }
 }
 
 #footer a {
-  color: #fff;
+  color: #DD4814;
+}
+
+#footer a:hover {
+  transition: all 0.3s ease-out;
+  color: white;
 }
 
 #footer img {
@@ -292,7 +329,7 @@ h4        { color: #aaa; }
 /* navbar */
 
 #navbar {
-  background-color: #ff8500;
+  background-color: #DD4814;
   color: #ffffff;
   text-shadow: 0px 0px 5px #000;
   font-size: 1em;
@@ -303,6 +340,7 @@ h4        { color: #aaa; }
   left: 0;
   width: 100%;
   font-family: 'Ubuntu', sans-serif;
+  z-index: 99999;
 }
 
 #navbar .links {
@@ -313,6 +351,11 @@ h4        { color: #aaa; }
 
 #navbar a {
   color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+#navbar a:hover {
+    text-shadow: 0 0 15px black;
 }
 
 #navbar img {

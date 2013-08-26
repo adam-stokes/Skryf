@@ -7,11 +7,16 @@ use XML::Atom::SimpleFeed;
 use DateTime::Format::RFC3339;
 use Encode;
 
+method blog_splash {
+    my $model = App::skryf::Model::Post->new;
+    my $posts = $model->this_year;
+    $self->render('blog/splash', postlist => $posts);
+}
+
 method blog_index {
     my $model = App::skryf::Model::Post->new;
     my $posts = $model->all;
-    $self->stash(postlist => $posts);
-    $self->render('blog/index');
+    $self->render('blog/index', postlist => $posts);
 }
 
 method blog_detail {
@@ -21,7 +26,7 @@ method blog_detail {
         return;
     }
     my $model = App::skryf::Model::Post->new;
-    my $post = $model->get($slug);
+    my $post  = $model->get($slug);
     unless ($post) {
         $self->render(text => 'No post found!', status => $post);
     }
@@ -34,14 +39,14 @@ method blog_feeds_by_cat {
     my $category = $self->param('category');
     my $model    = App::skryf::Model::Post->new;
     my $posts    = $model->by_cat($category);
-    my $feed = App::skryf::Util->feed($self->config, $posts);
+    my $feed     = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method blog_feeds {
-    my $model   = App::skryf::Model::Post->new;
+    my $model = App::skryf::Model::Post->new;
     my $posts = $model->all;
-    my $feed = App::skryf::Util->feed($self->config, $posts);
+    my $feed  = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 
@@ -67,8 +72,8 @@ method admin_blog_new {
 }
 
 method admin_blog_edit {
-    my $slug = $self->param('slug');
-    my $model   = App::skryf::Model::Post->new;
+    my $slug  = $self->param('slug');
+    my $model = App::skryf::Model::Post->new;
     $self->stash(post => $model->get($slug));
     $self->render('blog/edit');
 }
@@ -87,10 +92,10 @@ method admin_blog_update {
 }
 
 method admin_blog_delete {
-    my $slug = $self->param('slug');
+    my $slug  = $self->param('slug');
     my $model = App::skryf::Model::Post->new;
     if ($model->remove($slug)) {
-        $self->flash(message => 'Removed: '. $slug);
+        $self->flash(message => 'Removed: ' . $slug);
     }
     else {
         $self->flash(message => 'Failed to remove post.');

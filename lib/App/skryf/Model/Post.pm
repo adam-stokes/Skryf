@@ -11,14 +11,23 @@ method posts {
 }
 
 method all {
-   $self->posts->find->sort({created => -1})->all;
+    $self->posts->find->sort({created => -1})->all;
+}
+
+method this_year ($limit = 5) {
+    my $year = DateTime->now->year;
+    $self->posts->find({created => qr/$year/})->sort({created => -1})->limit($limit)->all;
+}
+
+method by_year ($year = DateTime->now->year, $limit = -1) {
+    $self->posts->find({created => qr/$year/})->sort({created => -1})->limit($limit)->all;
 }
 
 method get ($slug) {
     $self->posts->find_one({slug => $slug});
 }
 
-method create ($topic, $content, $tags, $created = DateTime->now) {
+method create ($topic, $content, $tags, $public = 0, $created = DateTime->now) {
     my $slug = App::skryf::Util->slugify($topic);
     my $html = App::skryf::Util->convert($content);
     $self->posts->insert(
@@ -26,6 +35,7 @@ method create ($topic, $content, $tags, $created = DateTime->now) {
             topic   => $topic,
             content => $content,
             tags    => $tags,
+            public  => $public,
             created => $created->strftime('%Y-%m-%dT%H:%M:%SZ'),
             html    => $html,
         }
@@ -45,13 +55,13 @@ method remove ($slug) {
 }
 
 method by_cat ($category) {
-  my $_filtered = [];
-  foreach ( @{$self->all} ) {
-    if ( ( my $found = $_->{tags} ) =~ /$category/ ) {
-      push @{$_filtered}, $_;
+    my $_filtered = [];
+    foreach (@{$self->all}) {
+        if ((my $found = $_->{tags}) =~ /$category/) {
+            push @{$_filtered}, $_;
+        }
     }
-  }
-  return $_filtered;
+    return $_filtered;
 }
 
 1;

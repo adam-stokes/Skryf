@@ -4,6 +4,8 @@
   <%= config->{title} %> &rarr;
   %= link_to "Root" => "/"
   &infin;
+  %= link_to "About Me" => url_for('wiki_detail', slug => 'AboutMe')
+  &infin;
   % foreach my $item (sort (keys app->frontend_menu)) {
     %= link_to $item => url_for(app->frontend_menu->{$item})
     &infin;

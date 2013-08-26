@@ -6,7 +6,7 @@ use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
 
-our $VERSION = '0.011_13';
+our $VERSION = '0.011_14';
 
 has admin_menu => sub {
   my $self = shift;
@@ -92,7 +92,7 @@ sub startup {
     # Todo make splashpage overridable
     $r->get('/')->to(
         namespace => 'App::skryf::Plugin::Blog::Controller',
-        action    => 'blog_index'
+        action    => 'blog_splash'
     )->name('splashpage');
   }
 1;

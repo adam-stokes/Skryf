@@ -1,14 +1,11 @@
 % use DateTime::Format::RFC3339;
 % layout 'main';
-  %= t 'div', class => 'wiki-body' => begin
+  %= t 'div', class => 'post-body' => begin
     % my $f = DateTime::Format::RFC3339->new;
-    % my $dt = $f->parse_datetime($page->{created});
-    Created <strong>on</strong> <%= $dt->strftime('%Y-%m-%d') %> <strong>@</strong> <%= $dt->strftime('%H:%M:%S') %>
-    %= t 'br'
     <%== $page->{html} %>
     %= t 'hr'
     % if ($page->{modified}) {
-      % $dt = $f->parse_datetime($page->{modified});
+      % my $dt = $f->parse_datetime($page->{modified});
       Last Modified: <%= $dt->strftime('%Y-%m-%d %H:%M:%S') %>
     % }
     % if ( (my $user = session 'user') == 1 ) {

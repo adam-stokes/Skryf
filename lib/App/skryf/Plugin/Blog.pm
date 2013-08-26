@@ -82,7 +82,7 @@ sub register {
 
     # register menu item
     $app->admin_menu->{Posts} = 'admin_blog_index';
-    $app->frontend_menu->{Blog} = 'blog_index';
+    $app->frontend_menu->{Archives} = 'blog_index';
     return;
 }
 
