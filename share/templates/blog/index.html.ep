@@ -1,9 +1,10 @@
 % use DateTime::Format::RFC3339;
 % layout 'main';
+%= t 'h1' => 'Archives'
 %= t 'div', class => 'post-list' => begin
   %= tag 'ul' => begin
     % foreach (@{$postlist}) {
-      %= tag 'li' => begin
+      %= tag 'li', class => 'expander' => begin
         % my $f = DateTime::Format::RFC3339->new;
         % my $dt = $f->parse_datetime($_->{created});
         <div class="date">
