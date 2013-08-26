@@ -12,26 +12,27 @@ method wiki_detail {
     my $slug  = $self->param('slug');
     my $model = App::skryf::Model::Page->new;
     my $page  = $model->get($slug);
-    if (! $page) {
+    if (!$page) {
         $self->redirect_to('admin_wiki_new');
-    } else {
-      $self->stash(page => $page);
-      $self->render('wiki/detail');
+    }
+    else {
+        $self->stash(page => $page);
+        $self->render('wiki/detail');
     }
 }
 
 method admin_wiki_index {
-  my $model = App::skryf::Model::Page->new;
-  my $pages = $model->all;
-  $self->stash(pageslist => $pages);
-  $self->render('wiki/admin_index');
+    my $model = App::skryf::Model::Page->new;
+    my $pages = $model->all;
+    $self->stash(pageslist => $pages);
+    $self->render('wiki/admin_index');
 }
 
 
 method admin_wiki_new {
     my $method = $self->req->method;
     if ($method eq 'POST') {
-        my $slug   = $self->param('slug');
+        my $slug    = $self->param('slug');
         my $content = $self->param('content');
         my $model   = App::skryf::Model::Page->new;
         $model->create($slug, $content);
@@ -54,12 +55,12 @@ method admin_wiki_update {
     my $slug  = $self->param('slug');
     my $model = App::skryf::Model::Page->new;
     my $page  = $model->get($slug);
-    $page->{slug}   = $self->param('slug');
+    $page->{slug}    = $self->param('slug');
     $page->{content} = $self->param('content');
     $model->save($page);
-    $self->flash(message => "Saved: " . $self->param('topic'));
+    $self->flash(message => sprintf("Saved: %s", $page->{slug}));
     $self->redirect_to(
-        $self->url_for('wiki_detail', {slug => $page->{slug}}));
+        $self->url_for('admin_wiki_edit', {slug => $page->{slug}}));
 }
 
 method admin_wiki_delete {
