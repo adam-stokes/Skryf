@@ -60,7 +60,8 @@ sub startup {
 ###############################################################################
     my $template_directory = undef;
     my $media_directory    = undef;
-    if ($self->mode eq "development" || !defined($cfg->{template_directory})) {
+    if ($self->mode eq "development" || !defined($cfg->{template_directory}))
+    {
         $template_directory = path(dist_dir('App-skryf'), 'templates');
         $media_directory    = path(dist_dir('App-skryf'), 'public');
     }
@@ -89,12 +90,13 @@ sub startup {
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
+
     # Todo make splashpage overridable
     $r->get('/')->to(
         namespace => 'App::skryf::Plugin::Blog::Controller',
         action    => 'blog_splash'
     )->name('splashpage');
-  }
+}
 1;
 
 __END__

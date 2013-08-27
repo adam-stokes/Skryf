@@ -29,6 +29,9 @@
 	    <a href="http://askubuntu.com">Ask Ubuntu</a>
 	  </li>
 	  <li>
+	    <a href="http://ubuntu-discourse.org">Ubuntu Discourse</a>
+	  </li>
+	  <li>
 	    <a href="http://forums.ubuntu.com">Ubuntu Forums</a>
 	  </li>
 	  <li>
@@ -37,7 +40,6 @@
 	  <li>
 	    <a href="http://omgubuntu.co.uk">OMG! Ubuntu</a>
 	  </li>
-
 	</ul>
 
 	%= t 'h3' => 'Site'

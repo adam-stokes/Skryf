@@ -5,20 +5,25 @@ use Method::Signatures;
 use App::skryf::Model::User;
 
 method admin_dashboard {
-  $self->render('admin/dashboard');
+    $self->render('admin/dashboard');
 }
 
 method admin_dashboard_profile {
-  my $req = $self->req->method;
-  my $model = App::skryf::Model::User->new;
-  my $user = $model->get($self->session->{username});
-  if ($req eq "POST") {
-    $model->save($user);
-    $self->flash(message => 'User profile saved.');
-    $self->redirect_to('admin_dashboard_profile');
-  }
-  $self->stash(profile => $user);
-  $self->render('admin/dashboard_profile');
+    my $req   = $self->req->method;
+    my $model = App::skryf::Model::User->new;
+    my $user  = $model->get($self->session->{username});
+    if ($req eq "POST") {
+        $user->{attrs}{email}              = $self->param('email');
+        $user->{attrs}{facebook}{username} = $self->param('facebook');
+        $user->{attrs}{twitter}{username}  = $self->param('twitter');
+        $user->{attrs}{gplus}{username}    = $self->param('gplus');
+        $user->{attrs}{github}{username}   = $self->param('github');
+        $model->save($user);
+        $self->flash(message => 'User profile saved.');
+        $self->redirect_to('admin_dashboard_profile');
+    }
+    $self->stash(profile => $user);
+    $self->render('admin/dashboard_profile');
 }
 
 

@@ -5,11 +5,29 @@
     <h4><%= $msg %></h4>
   % }
   %= form_for "/admin/profile", class => 'blog-form' => ( method => 'POST' ) => begin
+    Email
+    %= t 'br'
+    %= text_field 'email' => $profile->{attrs}{email}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
     Password
     %= t 'br'
     %= password_field 'password', class => 'blog-form-control blog-form-control-medium', value => $profile->{password}
+    %= t 'h3' => 'Social Attributes'
+    Facebook
     %= t 'br'
-    Social Attributes
+    %= text_field 'facebook' => $profile->{attrs}{facebook}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
+    Twitter
+    %= t 'br'
+    %= text_field 'twitter' => $profile->{attrs}{twitter}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
+    Google+
+    %= t 'br'
+    %= text_field 'gplus' => $profile->{attrs}{gplus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
+    Github
+    %= t 'br'
+    %= text_field 'github' => $profile->{attrs}{github}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
     %= t 'br'
     %= submit_button 'Save Profile', class => 'btn'
   %= end
