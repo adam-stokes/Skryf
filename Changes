@@ -1,6 +1,8 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+
+0.011_14  2013-08-31 17:31:37 EDT
     - Dynamic menu generation from plugins
     - Profile attributes addition
     - New frontend style
