@@ -87,11 +87,12 @@ sub startup {
     my $r = $self->routes;
 
     # Authentication
+    # TODO: make pluggable
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/logout')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
 
-    # Todo make splashpage overridable
+    # TODO: make splashpage overridable
     $r->get('/')->to(
         namespace => 'App::skryf::Plugin::Blog::Controller',
         action    => 'blog_splash'

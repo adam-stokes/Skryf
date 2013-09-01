@@ -1,6 +1,8 @@
 use Rex::Lang::Perl::Perlbrew;
 use Rex::Commands::Rsync;
 
+use constant PERLV => 5.18.1;
+
 die "No environment set." unless $ENV{BLOGUSER};
 
 set perlbrew => root => "/home/$ENV{BLOGUSER}/perl5/perlbrew";
@@ -13,7 +15,7 @@ desc "Restart blog service";
 task "restart",
   group => "webserver",
   sub {
-    perlbrew -use => "perl-5.16.3";
+    perlbrew -use => PERLV;
     say "Restarting blog";
     run "ubic restart stokesblog";
   };
@@ -22,16 +24,8 @@ desc "Does a full software upgrade and dependency check";
 task "upgrade",
   group => "webserver",
   sub {
-    perlbrew -use => "perl-5.16.3";
+    perlbrew -use => PERLV;
     say "cpan update";
     run "cpanm -q --notest App::skryf";
     do_task "restart";
-  };
-
-desc "Sync posts";
-task "deploy",
-  group => 'webserver',
-  sub {
-    sync "$ENV{HOME}/blog/*", "/home/$ENV{BLOGUSER}/blog",
-      {parameters => '-C --exclude=\'pending\' --exclude=\'README.pod\' --delete',};
   };

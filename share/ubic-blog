@@ -1,9 +1,9 @@
 use Ubic::Service::SimpleDaemon;
 my $service = Ubic::Service::SimpleDaemon->new(
     bin => "hypnotoad -f `which skryf`",
-    cwd => "/home/uzr",
+    cwd => "/home/$ENV{USER}",
     stdout => "/tmp/blog.log",
     stderr => "/tmp/blog.err.log",
     ubic_log => "/tmp/blog.ubic.log",
-    user => "uzr"
+    user => $ENV{USER},
 );

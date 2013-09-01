@@ -7,45 +7,46 @@ use File::Spec::Functions 'catdir';
 use App::skryf::Plugin::Wiki::Controller;
 
 my %defaults = (
-  indexPath => '/pages/',
-  pagesPath => '/pages/:slug',
-  adminPathPrefix => '/admin/pages/',
-  namespace => 'App::skryf::Plugin::Wiki::Controller',
+    indexPath       => '/pages/',
+    pagesPath       => '/pages/:slug',
+    adminPathPrefix => '/admin/pages/',
+    namespace       => 'App::skryf::Plugin::Wiki::Controller',
 );
 
 sub register {
-  my ($self, $app) = @_;
-  my (%conf) = (%defaults, %{$_[2] || {}});
+    my ($self, $app) = @_;
+    my (%conf) = (%defaults, %{$_[2] || {}});
 
-  $app->helper(wiki => sub { \%conf });
+    $app->helper(wiki => sub { \%conf });
 
-  $app->routes->route($conf{indexPath})->via('GET')->to(
-    namespace => $conf{namespace},
-    action => 'wiki_index',
-    _wiki_conf => \%conf,
-  )->name('wiki_index');
-  $app->routes->route($conf{pagesPath})->via('GET')->to(
-    namespace => $conf{namespace},
-    action => 'wiki_detail',
-    _wiki_conf => \%conf,
-  )->name('wiki_detail');
+    $app->routes->route($conf{indexPath})->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'wiki_index',
+        _wiki_conf => \%conf,
+    )->name('wiki_index');
+    $app->routes->route($conf{pagesPath})->via('GET')->to(
+        namespace  => $conf{namespace},
+        action     => 'wiki_detail',
+        _wiki_conf => \%conf,
+    )->name('wiki_detail');
 
-  my $auth_r = $app->routes->under(
-    sub {
-      my $self = shift;
-      return $self->session('user') || !$self->redirect_to('login');
-    }
-  );
-  $auth_r->route($conf{adminPathPrefix})->via(qw(GET))->to(
-      namespace  => $conf{namespace},
-      action     => 'admin_wiki_index',
-      _wiki_conf => \%conf,
-  )->name('admin_wiki_index');
-    $auth_r->route($conf{adminPathPrefix} . "new/:slug")->via(qw(GET POST))->to(
+    my $auth_r = $app->routes->under(
+        sub {
+            my $self = shift;
+            return $self->session('user') || !$self->redirect_to('login');
+        }
+    );
+    $auth_r->route($conf{adminPathPrefix})->via(qw(GET))->to(
+        namespace  => $conf{namespace},
+        action     => 'admin_wiki_index',
+        _wiki_conf => \%conf,
+    )->name('admin_wiki_index');
+    $auth_r->route($conf{adminPathPrefix} . "new/:slug")->via(qw(GET POST))
+      ->to(
         namespace  => $conf{namespace},
         action     => 'admin_wiki_new',
         _wiki_conf => \%conf,
-    )->name('admin_wiki_new');
+      )->name('admin_wiki_new');
     $auth_r->route($conf{adminPathPrefix} . "edit/:slug")->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_wiki_edit',
@@ -63,9 +64,9 @@ sub register {
     )->name('admin_wiki_delete');
 
     # register menu item
-    $app->admin_menu->{Pages} = 'admin_wiki_index';
+    $app->admin_menu->{Pages}   = 'admin_wiki_index';
     $app->frontend_menu->{Wiki} = 'wiki_index';
-  return; 
+    return;
 }
 
 1;

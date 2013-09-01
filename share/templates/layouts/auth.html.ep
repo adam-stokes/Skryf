@@ -2,6 +2,7 @@
 %= t 'html' => begin
   %= t 'head' => begin
     %= t 'title' => config->{title}
+    %= javascript '/jquery-2.0.3.min.js'
     %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
     %= stylesheet '/style.admin.css'
     <%= content_for 'extrahead' %>
