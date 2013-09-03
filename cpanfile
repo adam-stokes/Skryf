@@ -19,4 +19,5 @@ requires 'String::Util';
 
 on develop => sub {
     requires 'Test::Pod', '1.41';
+    requires 'Test::Mojo';
 };
