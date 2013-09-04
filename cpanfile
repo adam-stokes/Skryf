@@ -7,6 +7,7 @@ requires 'Mojolicious::Plugin::Disqus::Tiny';
 requires 'Mojolicious::Plugin::GoogleAnalytics';
 requires 'Mojolicious::Plugin::Gravatar';
 requires 'Mojolicious::Plugin::CSRFProtect';
+requires 'Mojolicious::Plugin::HTMLLint';
 requires 'Path::Tiny';
 requires 'Text::MultiMarkdown';
 requires 'Mango';

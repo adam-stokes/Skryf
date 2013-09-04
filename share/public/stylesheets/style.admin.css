@@ -338,7 +338,7 @@ blockquote {
   background-color: Silver; }
 
 .wmd-input {
-  height: 300px;
+  height: 500px;
   width: 100%;
   background-color: Gainsboro;
   border: 1px solid DarkGray; }
@@ -396,7 +396,8 @@ blockquote {
 
 .wmd-prompt-dialog {
   border: 1px solid #999999;
-  background-color: #F5F5F5; }
+  background-color: #F5F5F5;
+  color: #000; }
 
 .wmd-prompt-dialog > div {
   font-size: 0.8em;

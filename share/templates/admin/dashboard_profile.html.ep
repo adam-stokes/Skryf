@@ -13,23 +13,15 @@
     %= t 'br'
     %= password_field 'password', class => 'blog-form-control blog-form-control-medium', value => $profile->{password}
     %= t 'h3' => 'Social Attributes'
-    Facebook
-    %= t 'br'
+    %= t 'div' => 'Facebook'
     %= text_field 'facebook' => $profile->{attrs}{facebook}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
-    %= t 'br'
-    Twitter
-    %= t 'br'
+    %= t 'div' => 'Twitter'
     %= text_field 'twitter' => $profile->{attrs}{twitter}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
-    %= t 'br'
-    Google+
-    %= t 'br'
+    %= t 'div' => 'Google+'
     %= text_field 'gplus' => $profile->{attrs}{gplus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
-    %= t 'br'
-    Github
-    %= t 'br'
+    %= t 'div' => 'Github'
     %= text_field 'github' => $profile->{attrs}{github}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
-    %= t 'br'
-    Disqus
+    %= t 'div' => 'Disqus'
     %= text_field 'disqus' => $profile->{attrs}{disqus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
     %= t 'br'
     %= submit_button 'Save Profile', class => 'btn'

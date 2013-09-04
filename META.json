@@ -50,6 +50,7 @@
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
             "Mojolicious::Plugin::Gravatar" : "0",
+            "Mojolicious::Plugin::HTMLLint" : "0",
             "Path::Tiny" : "0",
             "String::Dirify" : "0",
             "String::Util" : "0",

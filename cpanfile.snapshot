@@ -1306,6 +1306,44 @@ DISTRIBUTIONS
       File::Spec 0.80
       Test::More 0.47
       perl 5.005
+  HTML-Lint-2.20
+    pathname: P/PE/PETDANCE/HTML-Lint-2.20.tar.gz
+    provides:
+      HTML::Lint 2.20
+      HTML::Lint::Error undef
+      HTML::Lint::HTML4 undef
+      HTML::Lint::Parser 2.20
+      Test::HTML::Lint 2.20
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Find 0
+      HTML::Entities 0
+      HTML::Parser 3.47
+      HTML::Tagset 3.03
+      Test::Builder 0
+      Test::More 0
+  HTML-Parser-3.71
+    pathname: G/GA/GAAS/HTML-Parser-3.71.tar.gz
+    provides:
+      HTML::Entities 3.69
+      HTML::Filter 3.57
+      HTML::HeadParser 3.71
+      HTML::LinkExtor 3.69
+      HTML::Parser 3.71
+      HTML::PullParser 3.57
+      HTML::TokeParser 3.69
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTML::Tagset 3
+      XSLoader 0
+      perl 5.008
+  HTML-Tagset-3.20
+    pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
+    provides:
+      HTML::Tagset 3.20
+    requirements:
+      ExtUtils::MakeMaker 0
   Hook-LexWrap-0.24
     pathname: C/CH/CHORNY/Hook-LexWrap-0.24.tar.gz
     provides:
@@ -1587,6 +1625,14 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 3.97
       Test::More 0
+  Mojolicious-Plugin-HTMLLint-0.04
+    pathname: K/KO/KOORCHIK/Mojolicious-Plugin-HTMLLint-0.04.tar.gz
+    provides:
+      Mojolicious::Plugin::HTMLLint 0.04
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTML::Lint 0
+      Mojolicious 2.88
   Moose-2.1005
     pathname: E/ET/ETHER/Moose-2.1005.tar.gz
     provides:
