@@ -1,6 +1,6 @@
 %= t 'div', id => 'footer' => begin
-  <%= link_to url_for("blog_feeds") => begin %><img src="/rss.png" /><% end %>
-  <%= link_to 'http://perl.org' => begin %><img src="/perl.png" /><% end %>
+  <%= link_to url_for("blog_feeds") => begin %><img src="/images/rss.png" height="13" width="13" alt="RSS Feed" /><% end %>
+  <%= link_to 'http://perl.org' => begin %><img src="/images/perl.png" height="15" width="80" alt="Perl Powered" /><% end %>
   &rarr;
   <%= link_to "https://github.com/battlemidget/App-skryf" => begin %>Skryf (<%= config->{version} %>)<% end %>
   &infin;

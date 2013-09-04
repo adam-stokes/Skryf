@@ -59,7 +59,7 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/battlemidget/App-skryf/issues"
@@ -71,7 +71,7 @@
          "web" : "https://github.com/battlemidget/App-skryf"
       }
    },
-   "version" : "0.012",
+   "version" : "0.013_01",
    "x_contributors" : [
       "Adam Stokes <adam.stokes@ubuntu.com>"
    ]

@@ -3,7 +3,7 @@
 build: css js img
 	@milla build
 
-release:
+release: build
 	@milla release
 
 install: build
@@ -11,6 +11,9 @@ install: build
 
 test: install
 	TEST_ONLINE=mongodb://localhost:27017/testdb prove -r t
+
+run: build
+	@morbo script/skryf
 
 css:
 	@scss _includes/stylesheets/style.scss > share/public/stylesheets/style.css
