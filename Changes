@@ -1,9 +1,12 @@
 Revision history for App-skryf
 
 {{$NEXT}}
+
+0.012  2013-09-04 01:22:50 EDT
     - New release.
     - Pagedown markdown editor integrated
     - Switched to using CSRFProtect
+    - use included highlight.js for automated syntax highlighting
 
 0.011_14  2013-08-31 17:31:37 EDT
     - Dynamic menu generation from plugins
