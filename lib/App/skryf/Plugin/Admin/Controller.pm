@@ -18,6 +18,7 @@ method admin_dashboard_profile {
         $user->{attrs}{twitter}{username}  = $self->param('twitter');
         $user->{attrs}{gplus}{username}    = $self->param('gplus');
         $user->{attrs}{github}{username}   = $self->param('github');
+        $user->{attrs}{disqus}{username}   = $self->param('disqus');
         $model->save($user);
         $self->flash(message => 'User profile saved.');
         $self->redirect_to('admin_dashboard_profile');

@@ -1554,6 +1554,14 @@ DISTRIBUTIONS
       Test::Class 0
       Test::Mojo 0
       Test::More 0
+  Mojolicious-Plugin-CSRFProtect-0.14
+    pathname: K/KO/KOORCHIK/Mojolicious-Plugin-CSRFProtect-0.14.tar.gz
+    provides:
+      Mojolicious::Plugin::CSRFProtect 0.14
+    requirements:
+      ExtUtils::MakeMaker 0
+      Mojolicious 3.85
+      perl 5.01
   Mojolicious-Plugin-Disqus-Tiny-1.000
     pathname: A/AD/ADAMJS/Mojolicious-Plugin-Disqus-Tiny-1.000.tar.gz
     provides:

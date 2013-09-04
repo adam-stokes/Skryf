@@ -1,33 +1,28 @@
 #!/usr/bin/env perl
 
-use strict;
-use warnings;
-
+use Mojo::Base -strict;
+use Test::Mojo;
+use Test::More;
 use FindBin;
 use lib "$FindBin::Bin../../lib";
 
-use Test::More;
-
 plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
-
-use Test::Mojo;
 
 diag('Testing application functionality');
 my $t = Test::Mojo->new('App::skryf');
 
 # verify we can get to some pages
 $t->get_ok('/')->status_is(200)->content_like(qr/Root/, 'i see homepage');
-$t->get_ok('/login')->status_is(200)
-  ->content_like(qr/name="username"/, 'i see login page');
-$t->get_ok('/logout')->status_is(302);
 $t->get_ok('/admin/post')->status_is(302);
 
 # login
+$t->get_ok('/login')->status_is(200)
+  ->content_like(qr/name="csrftoken"/, 'i see login page with csrftoken');
 $t->post_ok(
     '/auth' => form => {
-        username => 'joebob',
-        password => 'sillyman',
+        username  => 'joebob',
+        password  => 'sillyman',
     }
 )->status_is(302);
 
@@ -70,5 +65,6 @@ $t->get_ok('/post/feeds/atom.xml')->status_is(200)
 
 # delete it
 $t->get_ok('/admin/post/delete/a-new-topic-edited')->status_is(302);
+$t->get_ok('/logout')->status_is(302);
 
 done_testing();

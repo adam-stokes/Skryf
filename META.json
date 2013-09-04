@@ -46,7 +46,7 @@
             "Method::Signatures" : "0",
             "Mojo::Base" : "0",
             "Mojolicious" : "0",
-            "Mojolicious::Plugin::CSRFDefender" : "0",
+            "Mojolicious::Plugin::CSRFProtect" : "0",
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
             "Mojolicious::Plugin::Gravatar" : "0",

@@ -23,24 +23,28 @@ method get ($slug) {
 method create ($slug, $content, $created = DateTime->now) {
     my $html = App::skryf::Util->convert($content, USE_WIKILINKS);
     $self->pages->insert(
-      {
-            slug => $slug,
+        {   slug    => $slug,
             content => $content,
             created => $created->strftime('%Y-%m-%dT%H:%M:%SZ'),
-            html => $html,
+            html    => $html,
         }
     );
 }
 
 method save ($page) {
     my $lt = DateTime->now;
-    $page->{html} = App::skryf::Util->convert($page->{content}, USE_WIKILINKS);
+    $page->{html} =
+      App::skryf::Util->convert($page->{content}, USE_WIKILINKS);
     $page->{modified} = $lt->strftime('%Y-%m-%dT%H:%M:%SZ');
     $self->pages->save($page);
 }
 
 method remove ($slug) {
     $self->pages->remove({slug => $slug});
+}
+
+method search ($kwds) {
+    $self->pages->find({content => qr/$kwds/})->all;
 }
 
 1;

@@ -7,8 +7,10 @@
     % }
   %= form_for url_for("admin_wiki_update"), class => 'blog-form' => ( method => 'post' ) => begin
   %= hidden_field slug => $page->{slug}
-  %= text_area "content" => $page->{content},  class => "blog-form-control blog-form-control-textarea"
-  %= t 'br'
+  <div class="wmd-panel">
+    <div id='wmd-button-bar'></div>
+    %= text_area "content" => $page->{content},  class => "wmd-input", id => 'wmd-input'
+  </div>
   %= submit_button 'Update', class => 'btn'
   %= end
 %= end

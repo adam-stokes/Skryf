@@ -1,7 +1,7 @@
 % use DateTime::Format::RFC3339;
 % layout 'main';
 %= t 'h1' => 'Archives'
-%= t 'div', class => 'post-list' => begin
+%= t 'div', class => 'archive-list' => begin
   %= tag 'ul' => begin
     % foreach (@{$postlist}) {
       %= tag 'li' => begin

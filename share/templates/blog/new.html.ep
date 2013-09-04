@@ -4,8 +4,10 @@
 
   %= form_for '/admin/post/new', class => 'blog-form' => ( method => 'POST' ) => begin
   %= text_field 'topic', type => 'text', class => 'blog-form-control'
-  %= t 'br'
-  %= text_area 'content', class => 'blog-form-control blog-form-control-textarea'
+  <div class="wmd-panel">
+    <div id='wmd-button-bar'></div>
+    %= text_area 'content', class => 'wmd-input', id => 'wmd-input'
+  </div>
   %= t 'br'
   %= text_field 'tags', type => 'text', class => 'blog-form-control'
   %= t 'br'

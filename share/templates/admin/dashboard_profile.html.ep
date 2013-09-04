@@ -29,6 +29,9 @@
     %= t 'br'
     %= text_field 'github' => $profile->{attrs}{github}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
     %= t 'br'
+    Disqus
+    %= text_field 'disqus' => $profile->{attrs}{disqus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
     %= submit_button 'Save Profile', class => 'btn'
   %= end
 %= end

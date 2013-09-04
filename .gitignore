@@ -24,3 +24,4 @@ cached_bugs
 status_bugs
 local/
 vendor/
+.sass-cache/
