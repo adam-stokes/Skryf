@@ -41,7 +41,7 @@ method feed ($config, $posts) {
             title   => $post->{topic},
             link    => $config->{site} . '/post/' . $post->{slug},
             id      => $config->{site} . '/post/' . $post->{slug},
-            content => decode_utf8($post->{html}),
+            content => $post->{html},
             updated => $f->format_datetime($dt),
         );
     }
