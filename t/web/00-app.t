@@ -12,6 +12,18 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
 diag('Testing application functionality');
 my $t = Test::Mojo->new('App::skryf');
 
+# Get token
+my $csrftoken =
+  $t->ua->get('/')->res->dom->at('meta[name=csrftoken]')->attr('content');
+
+# Add header with csrftoken to every request automatically
+$t->ua->on(
+    start => sub {
+        my ($ua, $tx) = @_;
+        $tx->req->headers->header('X-CSRF-Token', $csrftoken);
+    }
+);
+
 # verify we can get to some pages
 $t->get_ok('/')->status_is(200)->content_like(qr/Root/, 'i see homepage');
 $t->get_ok('/admin/post')->status_is(302);
@@ -21,6 +33,7 @@ $t->get_ok('/login')->status_is(200)
   ->content_like(qr/name="csrftoken"/, 'i see login page with csrftoken');
 $t->post_ok(
     '/auth' => form => {
+        csrftoken => $csrftoken,
         username  => 'joebob',
         password  => 'sillyman',
     }
@@ -28,7 +41,7 @@ $t->post_ok(
 
 # see if we have access to admin section
 $t->get_ok('/admin/post')->status_is(200)
-  ->content_like(qr/Administer pages\/posts/, 'i see admin page');
+  ->content_like(qr/Skryf::Admin/, 'i see admin page');
 
 # Post new topic
 $t->post_ok(
