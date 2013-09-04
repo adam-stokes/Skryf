@@ -5,8 +5,7 @@
     <h4><%= $msg %></h4>
   % }
   %= form_for "/admin/profile", class => 'blog-form' => ( method => 'POST' ) => begin
-    Email
-    %= t 'br'
+    %= t 'div' => 'Email eg. ("Fullname" <email@address.com>)'
     %= text_field 'email' => $profile->{attrs}{email}, type => 'text', class => 'blog-form-control blog-form-control-medium'
     %= t 'br'
     Password
