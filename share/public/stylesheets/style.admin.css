@@ -45,9 +45,6 @@ hr {
 #container p {
   padding: 15px; }
 
-#container .post-body {
-  padding: 15px; }
-
 #container .post-body p {
   padding: 2px; }
 
@@ -99,9 +96,6 @@ hr {
 
 #container .post-title h1 {
   margin: 0; }
-
-#container .wiki-body {
-  padding: 15px; }
 
 #container .wiki-body ul {
   list-style-type: square; }
