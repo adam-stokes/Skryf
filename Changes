@@ -2,6 +2,9 @@ Revision history for App-skryf
 
 {{$NEXT}}
 
+0.013_02  2013-09-05 22:35:38 EDT
+    - Add widget helpers
+
 0.012  2013-09-04 01:22:50 EDT
     - New release.
     - Pagedown markdown editor integrated
