@@ -23,23 +23,23 @@ sub register {
     my (%conf) = (%defaults, %{$_[2] || {}});
 
     $app->routes->route($conf{feedPath})->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'blog_feeds',
+        namespace => $conf{namespace},
+        action    => 'blog_feeds',
     )->name('blog_feeds');
 
     $app->routes->route($conf{feedCatPath})->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'blog_feeds_by_cat',
+        namespace => $conf{namespace},
+        action    => 'blog_feeds_by_cat',
     )->name('blog_cat_feeds');
 
     $app->routes->route($conf{indexPath})->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'blog_index',
+        namespace => $conf{namespace},
+        action    => 'blog_index',
     )->name('blog_index');
 
     $app->routes->route($conf{postPath})->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'blog_detail',
+        namespace => $conf{namespace},
+        action    => 'blog_detail',
     )->name('blog_detail');
 
     my $auth_r = $app->routes->under(
@@ -49,33 +49,40 @@ sub register {
         }
     );
     $auth_r->route($conf{adminPathPrefix})->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'admin_blog_index',
+        namespace => $conf{namespace},
+        action    => 'admin_blog_index',
     )->name('admin_blog_index');
 
     $auth_r->route($conf{adminPathPrefix} . "new")->via(qw(GET POST))->to(
-        namespace  => $conf{namespace},
-        action     => 'admin_blog_new',
+        namespace => $conf{namespace},
+        action    => 'admin_blog_new',
     )->name('admin_blog_new');
     $auth_r->route($conf{adminPathPrefix} . "edit/:slug")->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'admin_blog_edit',
+        namespace => $conf{namespace},
+        action    => 'admin_blog_edit',
     )->name('admin_blog_edit');
     $auth_r->route($conf{adminPathPrefix} . "update")->via('POST')->to(
-        namespace  => $conf{namespace},
-        action     => 'admin_blog_update',
+        namespace => $conf{namespace},
+        action    => 'admin_blog_update',
     )->name('admin_blog_update');
     $auth_r->route($conf{adminPathPrefix} . "delete/:slug")->via('GET')->to(
-        namespace  => $conf{namespace},
-        action     => 'admin_blog_delete',
+        namespace => $conf{namespace},
+        action    => 'admin_blog_delete',
     )->name('admin_blog_delete');
 
     # register menu item
-    $app->admin_menu = {
-        Posts      => 'admin_blog_index',
-        PluginConf => bson_true,
-    };
-    $app->frontend_menu->{Archives} = 'blog_index';
+    push @{$app->admin_menu},
+      { menu => {
+            name   => 'Posts',
+            action => 'admin_blog_index',
+        }
+      };
+    push @{$app->frontend_menu},
+      { menu => {
+            name   => 'Archives',
+            action => 'blog_index'
+        }
+      };
     return;
 }
 

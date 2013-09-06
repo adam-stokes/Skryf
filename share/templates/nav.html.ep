@@ -6,8 +6,8 @@
   &infin;
   %= link_to "About Me" => url_for('wiki_detail', slug => 'AboutMe')
   &infin;
-  % foreach my $item (sort (keys app->frontend_menu)) {
-    %= link_to $item => url_for(app->frontend_menu->{$item})
+  % foreach my $item (sort (@{app->frontend_menu})) {
+    %= link_to $item->{menu}{name} => url_for($item->{menu}{action})
     &infin;
   % }
   %= form_for url_for('search_index'), class => 'blog-form-small' => ( method => "POST" ) => begin

@@ -10,12 +10,12 @@ our $VERSION = '0.013_02';
 
 has admin_menu => sub {
   my $self = shift;
-  return +{};
+  return [];
 };
 
 has frontend_menu => sub {
   my $self = shift;
-  return +{};
+  return [];
 };
 
 sub startup {

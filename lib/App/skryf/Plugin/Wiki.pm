@@ -3,6 +3,7 @@ package App::skryf::Plugin::Wiki;
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
+use Mango::BSON ':bson';
 
 use App::skryf::Plugin::Wiki::Controller;
 
@@ -64,8 +65,19 @@ sub register {
     )->name('admin_wiki_delete');
 
     # register menu item
-    $app->admin_menu->{Pages}   = 'admin_wiki_index';
-    $app->frontend_menu->{Wiki} = 'wiki_index';
+    push @{$app->admin_menu},
+      { menu => {
+            name   => 'Pages',
+            action => 'admin_wiki_index',
+        }
+      };
+    push @{$app->frontend_menu},
+      { menu => {
+            name   => 'Wiki',
+            action => 'wiki_index'
+        }
+      };
+
     return;
 }
 
