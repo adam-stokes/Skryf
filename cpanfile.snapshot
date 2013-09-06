@@ -1470,8 +1470,8 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-4.30
-    pathname: S/SR/SRI/Mojolicious-4.30.tar.gz
+  Mojolicious-4.31
+    pathname: S/SR/SRI/Mojolicious-4.31.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1532,7 +1532,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::CookieJar undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.30
+      Mojolicious 4.31
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1600,14 +1600,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 3.85
       perl 5.01
-  Mojolicious-Plugin-Disqus-Tiny-1.001
-    pathname: A/AD/ADAMJS/Mojolicious-Plugin-Disqus-Tiny-1.001.tar.gz
+  Mojolicious-Plugin-Disqus-Tiny-1.003
+    pathname: A/AD/ADAMJS/Mojolicious-Plugin-Disqus-Tiny-1.003.tar.gz
     provides:
-      Mojolicious::Plugin::Disqus::Tiny 1.001
+      Mojolicious::Plugin::Disqus::Tiny 1.003
     requirements:
       Module::Build::Tiny 0.026
-      Mojolicious 0
-      perl 5.008005
+      Mojo::Base 0
+      Mojolicious::Lite 0
+      Test::Mojo 0
+      Test::More 0
   Mojolicious-Plugin-GoogleAnalytics-1.004
     pathname: A/AD/ADAMJS/Mojolicious-Plugin-GoogleAnalytics-1.004.tar.gz
     provides:
