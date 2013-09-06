@@ -3,6 +3,7 @@ package App::skryf::Plugin::Blog;
 use Mojo::Base 'Mojolicious::Plugin';
 use File::Basename 'dirname';
 use File::Spec::Functions 'catdir';
+use Mango::BSON ':bson';
 
 use App::skryf::Plugin::Blog::Controller;
 
@@ -14,74 +15,66 @@ my %defaults = (
     feedPath        => '/post/feeds/atom.xml',
     feedCatPath     => '/post/feeds/:category/atom.xml',
     adminPathPrefix => '/admin/post/',
-    namespace => 'App::skryf::Plugin::Blog::Controller',
+    namespace       => 'App::skryf::Plugin::Blog::Controller',
 );
 
 sub register {
     my ($self, $app) = @_;
     my (%conf) = (%defaults, %{$_[2] || {}});
 
-    $app->helper(blogconf => sub { \%conf });
-
     $app->routes->route($conf{feedPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_feeds',
-        _blog_conf => \%conf,
     )->name('blog_feeds');
 
     $app->routes->route($conf{feedCatPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_feeds_by_cat',
-        _blog_conf => \%conf,
     )->name('blog_cat_feeds');
 
     $app->routes->route($conf{indexPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_index',
-        _blog_conf => \%conf,
     )->name('blog_index');
 
     $app->routes->route($conf{postPath})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'blog_detail',
-        _blog_conf => \%conf,
     )->name('blog_detail');
 
     my $auth_r = $app->routes->under(
-      sub {
-        my $self = shift;
-        return $self->session('user') || !$self->redirect_to('login');
-      }
+        sub {
+            my $self = shift;
+            return $self->session('user') || !$self->redirect_to('login');
+        }
     );
     $auth_r->route($conf{adminPathPrefix})->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_index',
-        _blog_conf => \%conf,
     )->name('admin_blog_index');
 
     $auth_r->route($conf{adminPathPrefix} . "new")->via(qw(GET POST))->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_new',
-        _blog_conf => \%conf,
     )->name('admin_blog_new');
     $auth_r->route($conf{adminPathPrefix} . "edit/:slug")->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_edit',
-        _blog_conf => \%conf,
     )->name('admin_blog_edit');
     $auth_r->route($conf{adminPathPrefix} . "update")->via('POST')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_update',
-        _blog_conf => \%conf,
     )->name('admin_blog_update');
     $auth_r->route($conf{adminPathPrefix} . "delete/:slug")->via('GET')->to(
         namespace  => $conf{namespace},
         action     => 'admin_blog_delete',
-        _blog_conf => \%conf,
     )->name('admin_blog_delete');
 
     # register menu item
-    $app->admin_menu->{Posts} = 'admin_blog_index';
+    $app->admin_menu = {
+        Posts      => 'admin_blog_index',
+        PluginConf => bson_true,
+    };
     $app->frontend_menu->{Archives} = 'blog_index';
     return;
 }
@@ -91,115 +84,48 @@ __END__
 
 =head1 NAME
 
-App::skryf::Plugin::Blog - Mojolicious Plugin
+App::skryf::Plugin::Blog - Skryf Plugin
 
 =head1 SYNOPSIS
 
   # Mojolicious
-
-  # Set authentication condition
-  my $conditions = {
-    authenticated => sub {
-        my $self = shift;
-        unless ($self->session('authenticated')) {
-            $self->flash(
-                class   => 'alert alert-info',
-                message => 'Please log in first!'
-            );
-            $self->redirect_to('/login');
-            return;
-        }
-        return 1;
-    },
-  };
-
-  $self->plugin('Blog' => {
-      authCondition => $conditions
-    }
-  );
+  $self->plugin('Blog');
 
   # Mojolicious::Lite
-  plugin 'Blog' => {
-    authCondition => $conditions,
-  };
+  plugin 'Blog';
 
-
-  # Pre-populate db
-  ./bin/mojo-blog-db sqlite db/myblog.db
-
-  # Running the example
-  morbo ./eg/tiniblog
-
-  # See available routes
-  ./eg/tiniblog routes
+  # skryf.conf
+  extra_modules => {Blog => 1}
 
 =head1 DESCRIPTION
 
-L<App::skryf::Plugin::Blog> is a L<Mojolicious> plugin. The database layer is using L<DBIx::ResultSet> so
-support for most databases is available. The examples in this distribution utilize Postgres.
+L<App::skryf::Plugin::Blog> is a L<App::skryf> plugin.
 
 =head1 OPTIONS
 
-The blog options provide the gateway into defining your routes,
-database connection, authentication conditions, blog title, slogan,
-and more.
-
-=head2 C<title>
-
-Your blog title.
-
-=head2 C<slogan>
-
-Blog slogan.
-
-=head2 C<author>
-
-Who are you?
-
-=head2 C<contact>
-
-Your email
-
-=head2 C<tz>
-
-What timezone are you? e.g. 'America/New_York' for EST.
-
-=head2 C<social>
-
-Not implemented yet. However, support for integrating github, coderwall,
-twitter, and others coming soon.
-
-    # Social Integration options
-    social => {
-        github    => 'battlemidget',
-        coderwall => 'battlemidget',
-        twitter   => 'ajscg',
-    },
-
-=head2 C<indexPath>
+=head2 indexPath
 
 Blog index route
 
-=head2 C<postPath>
+=head2 postPath
 
 Blog detail post path
 
-=head2 C<adminPathPrefix>
+=head2 adminPathPrefix
 
 Blog admin prefix route
 
-=head2 C<namespace>
+=head2 feedPath
+
+Path to RSS feed
+
+=head2 feedCatPath
+
+Path to categorized RSS feed
+
+=head2 namespace
 
 Blog controller namespace.
-
-=head2 C<authCondition>
-
-Router bridge for authencating the blog admin section. See the SYNOPSIS for example.
-
-=head2 C<renderType>
-
-Not Implemented, however the thought behind this was to allow return JSON in case
-someone wanted to override existing templates.
 
 =head1 METHODS
 
@@ -212,46 +138,20 @@ L<Mojolicious::Plugin> and implements the following new ones.
 
 Register plugin in L<Mojolicious> application.
 
-=head1 WHAT WORKS
+=head1 AUTHOR
 
-Examples are included to show a working copy of the blog plugin for
-viewing blog posts, creating/updating/deleting posts. As well as a
-elementary way of authenticating to show the working admin portion.
+Adam Stokes E<lt>adamjs@cpan.orgE<gt>
 
-=head1 TODO
+=head1 COPYRIGHT
 
-=over 8
+Copyright 2013- Adam Stokes
 
-=item * Add form validation
+=head1 LICENSE
 
-=item * Make default pages look less 1990s.
-
-=back
-
-=head1 GOALS
-
-Hopefully make this as database agnostic as possible and the overall
-plugin a useful starting point for those wishing to implement a blog in
-Mojolicious.
-
-=head1 PATCHES
-
-I love patches and community involvement, so please get involved and submit
-pull requests and issues at
-
-L<https://github.com/battlemidget/Mojolicious-Plugin-Blog>
+Licensed under the same terms as Perl.
 
 =head1 SEE ALSO
 
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-L<Mojolicious> is copyright (c) 2013 Sebastian Riedel <sri@cpan.org>
+L<App::skryf>, L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
 
 =cut

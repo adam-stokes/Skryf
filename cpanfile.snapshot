@@ -1600,23 +1600,22 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       Mojolicious 3.85
       perl 5.01
-  Mojolicious-Plugin-Disqus-Tiny-1.000
-    pathname: A/AD/ADAMJS/Mojolicious-Plugin-Disqus-Tiny-1.000.tar.gz
+  Mojolicious-Plugin-Disqus-Tiny-1.001
+    pathname: A/AD/ADAMJS/Mojolicious-Plugin-Disqus-Tiny-1.001.tar.gz
     provides:
-      Mojolicious::Plugin::Disqus::Tiny 1.000
+      Mojolicious::Plugin::Disqus::Tiny 1.001
     requirements:
-      Module::Build::Tiny 0.024
-      Mojo::Base 0
-      Mojolicious::Lite 0
-      Test::Mojo 0
-      Test::More 0
-      strictures 1
-  Mojolicious-Plugin-GoogleAnalytics-1.003
-    pathname: A/AD/ADAMJS/Mojolicious-Plugin-GoogleAnalytics-1.003.tar.gz
+      Module::Build::Tiny 0.026
+      Mojolicious 0
+      perl 5.008005
+  Mojolicious-Plugin-GoogleAnalytics-1.004
+    pathname: A/AD/ADAMJS/Mojolicious-Plugin-GoogleAnalytics-1.004.tar.gz
     provides:
-      Mojolicious::Plugin::GoogleAnalytics 1.003
+      Mojolicious::Plugin::GoogleAnalytics 1.004
     requirements:
-      Module::Build::Tiny 0.025
+      Module::Build::Tiny 0.026
+      Mojolicious 0
+      perl 5.008005
   Mojolicious-Plugin-Gravatar-0.04
     pathname: K/KO/KOORCHIK/Mojolicious-Plugin-Gravatar-0.04.tar.gz
     provides:
