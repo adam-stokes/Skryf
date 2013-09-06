@@ -9,6 +9,6 @@ notifications:
   email: false
 install:
   - sudo service mongodb start
-  - cpanm --notest -q mirror-only .
+  - cpanm --notest -q --mirror-only .
 script:
   - prove -r t
