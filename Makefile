@@ -12,7 +12,7 @@ install: build
 test: install
 	TEST_ONLINE=mongodb://localhost:27017/testdb prove -r t
 
-run: build
+run: install
 	@morbo script/skryf
 
 css:

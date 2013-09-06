@@ -23,6 +23,8 @@
   %= end
 %= end
 %= t 'div', class => 'post-social' => begin
+	%= t 'h3' => 'Me'
+	<%= widget_aboutme 'adam.stokes' %>
 	%= t 'h3' => 'Resources'
 	<ul>
 	  <li>

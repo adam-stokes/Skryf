@@ -91,7 +91,7 @@ __END__
 
 =head1 NAME
 
-Mojolicious::Plugin::Blog - Mojolicious Plugin
+App::skryf::Plugin::Blog - Mojolicious Plugin
 
 =head1 SYNOPSIS
 
@@ -135,7 +135,7 @@ Mojolicious::Plugin::Blog - Mojolicious Plugin
 
 =head1 DESCRIPTION
 
-L<Mojolicious::Plugin::Blog> is a L<Mojolicious> plugin. The database layer is using L<DBIx::ResultSet> so
+L<App::skryf::Plugin::Blog> is a L<Mojolicious> plugin. The database layer is using L<DBIx::ResultSet> so
 support for most databases is available. The examples in this distribution utilize Postgres.
 
 =head1 OPTIONS
@@ -203,7 +203,7 @@ someone wanted to override existing templates.
 
 =head1 METHODS
 
-L<Mojolicious::Plugin::Blog> inherits all methods from
+L<App::skryf::Plugin::Blog> inherits all methods from
 L<Mojolicious::Plugin> and implements the following new ones.
 
 =head2 register

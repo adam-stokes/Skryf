@@ -9,7 +9,7 @@ use Encode;
 
 method blog_splash {
     my $model = App::skryf::Model::Post->new;
-    my $posts = $model->this_year;
+    my $posts = $model->this_year(7);
     $self->render('blog/splash', postlist => $posts);
 }
 
