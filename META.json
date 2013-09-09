@@ -59,7 +59,7 @@
          }
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/skryf/App-skryf/issues"
@@ -71,7 +71,7 @@
          "web" : "https://github.com/skryf/App-skryf"
       }
    },
-   "version" : "0.013_02",
+   "version" : "0.013",
    "x_contributors" : [
       "Adam Stokes <adam.stokes@ubuntu.com>"
    ]
