@@ -2,7 +2,6 @@ package App::skryf::Plugin::Wiki::Controller;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
-use App::skryf::Model::Page;
 
 method wiki_index {
     $self->redirect_to('wiki_detail', {slug => 'IndexPage'});
@@ -10,7 +9,7 @@ method wiki_index {
 
 method wiki_detail {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Page->new;
+    my $model = $self->db('Page');
     my $page  = $model->get($slug);
     if (!$page) {
         $self->redirect_to('admin_wiki_new');
@@ -22,7 +21,7 @@ method wiki_detail {
 }
 
 method admin_wiki_index {
-    my $model = App::skryf::Model::Page->new;
+    my $model = $self->db('Page');
     my $pages = $model->all;
     $self->stash(pageslist => $pages);
     $self->render('wiki/admin_index');
@@ -34,7 +33,7 @@ method admin_wiki_new {
     if ($method eq 'POST') {
         my $slug    = $self->param('slug');
         my $content = $self->param('content');
-        my $model   = App::skryf::Model::Page->new;
+        my $model   = $self->db('Page');
         $model->create($slug, $content);
         $self->redirect_to('wiki_index');
     }
@@ -46,14 +45,14 @@ method admin_wiki_new {
 
 method admin_wiki_edit {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Page->new;
+    my $model = $self->db('Page');
     $self->stash(page => $model->get($slug));
     $self->render('wiki/edit');
 }
 
 method admin_wiki_update {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Page->new;
+    my $model = $self->db('Page');
     my $page  = $model->get($slug);
     $page->{slug}    = $self->param('slug');
     $page->{content} = $self->param('content');
@@ -65,7 +64,7 @@ method admin_wiki_update {
 
 method admin_wiki_delete {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Page->new;
+    my $model = $self->db('Page');
     if ($model->remove($slug)) {
         $self->flash(message => $slug . ' removed');
     }

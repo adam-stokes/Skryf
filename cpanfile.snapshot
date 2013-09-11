@@ -17,6 +17,49 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.30
       Moose 0
+  App-skryf-0.013
+    pathname: A/AD/ADAMJS/App-skryf-0.013.tar.gz
+    provides:
+      App::skryf 0.013
+      App::skryf::Command::import undef
+      App::skryf::Command::setup undef
+      App::skryf::Login undef
+      App::skryf::Model::Base undef
+      App::skryf::Model::Page undef
+      App::skryf::Model::PluginConf undef
+      App::skryf::Model::Post undef
+      App::skryf::Model::User undef
+      App::skryf::Plugin::Admin undef
+      App::skryf::Plugin::Admin::Controller undef
+      App::skryf::Plugin::Blog undef
+      App::skryf::Plugin::Blog::Controller undef
+      App::skryf::Plugin::Search undef
+      App::skryf::Plugin::Search::Controller undef
+      App::skryf::Plugin::Widget undef
+      App::skryf::Plugin::Wiki undef
+      App::skryf::Plugin::Wiki::Controller undef
+      App::skryf::Util undef
+    requirements:
+      Carp 0
+      DateTime 0
+      DateTime::Format::RFC3339 0
+      File::ShareDir 0
+      FindBin 0
+      Mango 0.12
+      Method::Signatures 0
+      Module::Build::Tiny 0.026
+      Mojo::Base 0
+      Mojolicious 0
+      Mojolicious::Plugin::CSRFProtect 0
+      Mojolicious::Plugin::Disqus::Tiny 0
+      Mojolicious::Plugin::GoogleAnalytics 0
+      Mojolicious::Plugin::Gravatar 0
+      Mojolicious::Plugin::HTMLLint 0
+      Path::Tiny 0
+      String::Dirify 0
+      String::Util 0
+      Text::MultiMarkdown 0
+      XML::Atom::SimpleFeed 0
   B-Hooks-EndOfScope-0.12
     pathname: B/BO/BOBTFISH/B-Hooks-EndOfScope-0.12.tar.gz
     provides:
@@ -50,15 +93,6 @@ DISTRIBUTIONS
       Test::More 0
       parent 0
       perl 5.008001
-  Class-Accessor-0.34
-    pathname: K/KA/KASEI/Class-Accessor-0.34.tar.gz
-    provides:
-      Class::Accessor 0.34
-      Class::Accessor::Fast 0.34
-      Class::Accessor::Faster 0.34
-    requirements:
-      ExtUtils::MakeMaker 0
-      base 1.01
   Class-Inspector-1.28
     pathname: A/AD/ADAMK/Class-Inspector-1.28.tar.gz
     provides:
@@ -133,10 +167,10 @@ DISTRIBUTIONS
       Class::Singleton 1.4
     requirements:
       ExtUtils::MakeMaker 0
-  Clone-0.34
-    pathname: G/GA/GARU/Clone-0.34.tar.gz
+  Clone-0.35
+    pathname: G/GA/GARU/Clone-0.35.tar.gz
     provides:
-      Clone 0.34
+      Clone 0.35
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -1306,6 +1340,26 @@ DISTRIBUTIONS
       File::Spec 0.80
       Test::More 0.47
       perl 5.005
+  File-Slurp-9999.19
+    pathname: U/UR/URI/File-Slurp-9999.19.tar.gz
+    provides:
+      File::Slurp 9999.19
+      FileSlurp_12 9999.13
+    requirements:
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      Fcntl 0
+      POSIX 0
+  File-Temp-0.2301
+    pathname: D/DA/DAGOLDEN/File-Temp-0.2301.tar.gz
+    provides:
+      File::Temp 0.2301
+    requirements:
+      ExtUtils::MakeMaker 6.30
+      Fcntl 1.03
+      File::Path 2.06
+      File::Spec 0.8
   HTML-Lint-2.20
     pathname: P/PE/PETDANCE/HTML-Lint-2.20.tar.gz
     provides:
@@ -1420,11 +1474,11 @@ DISTRIBUTIONS
       Test::More 0.82
       Test::Warn 0.10
       perl v5.8.1
-  Module-Build-Tiny-0.026
-    pathname: L/LE/LEONT/Module-Build-Tiny-0.026.tar.gz
+  Module-Build-Tiny-0.027
+    pathname: L/LE/LEONT/Module-Build-Tiny-0.027.tar.gz
     provides:
       DistGen 0.01
-      Module::Build::Tiny 0.026
+      Module::Build::Tiny 0.027
     requirements:
       CPAN::Meta 0
       Exporter 5.57
@@ -1470,8 +1524,8 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-4.31
-    pathname: S/SR/SRI/Mojolicious-4.31.tar.gz
+  Mojolicious-4.35
+    pathname: S/SR/SRI/Mojolicious-4.35.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1532,7 +1586,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::CookieJar undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.31
+      Mojolicious 4.35
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1578,20 +1632,7 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
-  Mojolicious-Plugin-CSRFDefender-0.0.8
-    pathname: S/SH/SHIBAZAKI/Mojolicious-Plugin-CSRFDefender-0.0.8.tar.gz
-    provides:
-      Mojolicious::Plugin::CSRFDefender 0.000008
-    requirements:
-      Class::Accessor::Fast 0
-      ExtUtils::MakeMaker 6.36
-      Mojolicious 1.43
-      Mojolicious::Lite 0
-      Path::Class 0
-      String::Random 0
-      Test::Class 0
-      Test::Mojo 0
-      Test::More 0
+      perl 5.010001
   Mojolicious-Plugin-CSRFProtect-0.14
     pathname: K/KO/KOORCHIK/Mojolicious-Plugin-CSRFProtect-0.14.tar.gz
     provides:
@@ -1986,20 +2027,19 @@ DISTRIBUTIONS
       Test::Requires 0
       strict 0
       warnings 0
-  Package-Stash-0.35
-    pathname: D/DO/DOY/Package-Stash-0.35.tar.gz
+  Package-Stash-0.36
+    pathname: D/DO/DOY/Package-Stash-0.36.tar.gz
     provides:
-      CompileTime undef
-      Package::Stash 0.35
-      Package::Stash::PP 0.35
-      inc::DistMeta undef
-      inc::MMPackageStash undef
+      Package::Stash 0.36
+      Package::Stash::PP 0.36
     requirements:
       B 0
       Carp 0
+      Config 0
       Dist::CheckConflicts 0.02
       ExtUtils::MakeMaker 6.30
       File::Find 0
+      File::Spec 0
       File::Temp 0
       Getopt::Long 0
       Module::Implementation 0.06
@@ -2009,8 +2049,10 @@ DISTRIBUTIONS
       Test::Fatal 0
       Test::More 0.88
       Test::Requires 0
+      Text::ParseWords 0
       base 0
       constant 0
+      lib 0
       strict 0
       warnings 0
   Package-Stash-XS-0.28
@@ -2069,36 +2111,10 @@ DISTRIBUTIONS
       strict 0
       vars 0
       warnings 0
-  Path-Class-0.32
-    pathname: K/KW/KWILLIAMS/Path-Class-0.32.tar.gz
+  Path-Tiny-0.032
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.032.tar.gz
     provides:
-      Path::Class 0.32
-      Path::Class::Dir 0.32
-      Path::Class::Entity 0.32
-      Path::Class::File 0.32
-    requirements:
-      Carp 0
-      Cwd 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Path 0
-      File::Spec 3.26
-      File::Temp 0
-      File::stat 0
-      IO::Dir 0
-      IO::File 0
-      Module::Build 0.3601
-      Scalar::Util 0
-      Test 0
-      Test::More 0
-      base 0
-      overload 0
-      strict 0
-      warnings 0
-  Path-Tiny-0.031
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.031.tar.gz
-    provides:
-      Path::Tiny 0.031
+      Path::Tiny 0.032
     requirements:
       Carp 0
       Cwd 0
@@ -2126,12 +2142,6 @@ DISTRIBUTIONS
       Module::Build 0.36
       Test::More 0
       Test::Pod 0
-  String-Random-0.22
-    pathname: S/ST/STEVE/String-Random-0.22.tar.gz
-    provides:
-      String::Random 0.22
-    requirements:
-      Test::More 0
   String-Util-1.21
     pathname: M/MI/MIKO/String-Util-1.21.tar.gz
     provides:
@@ -2202,24 +2212,6 @@ DISTRIBUTIONS
       Scalar::Util 1.14
       Test::More 0.42
       perl 5.005
-  Test-Class-0.39
-    pathname: A/AD/ADIE/Test-Class-0.39.tar.gz
-    provides:
-      Test::Class 0.39
-      Test::Class::Load 0.35
-      Test::Class::MethodInfo 0.34
-    requirements:
-      Attribute::Handlers 0.77
-      IO::File 1.09
-      MRO::Compat 0.11
-      Module::Build 0.38
-      Storable 2.04
-      Test::Builder 0.78
-      Test::Builder::Tester 1.02
-      Test::Exception 0.25
-      Test::More 0.78
-      Test::Simple 0.78
-      perl 5.006001
   Test-Differences-0.61
     pathname: O/OV/OVID/Test-Differences-0.61.tar.gz
     provides:
@@ -2380,13 +2372,17 @@ DISTRIBUTIONS
       Test::More 0.42
       Text::Markdown v1.0.26
       perl 5.008
-  Tree-DAG_Node-1.13
-    pathname: R/RS/RSAVAGE/Tree-DAG_Node-1.13.tgz
+  Tree-DAG_Node-1.16
+    pathname: R/RS/RSAVAGE/Tree-DAG_Node-1.16.tgz
     provides:
-      Tree::DAG_Node 1.13
+      Tree::DAG_Node 1.16
     requirements:
+      File::Slurp 9999.19
+      File::Spec 3.4
+      File::Temp 0.2301
       Module::Build 0.38
       Test::More 0.98
+      perl 5.008001
       strict 0
       warnings 0
   Try-Tiny-0.18
@@ -2467,9 +2463,3 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  strictures-1.004004
-    pathname: E/ET/ETHER/strictures-1.004004.tar.gz
-    provides:
-      strictures 1.004004
-    requirements:
-      ExtUtils::MakeMaker 0

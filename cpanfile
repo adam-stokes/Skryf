@@ -1,4 +1,5 @@
 requires 'Carp';
+requires 'Class::Load';
 requires 'File::ShareDir';
 requires 'FindBin';
 requires 'Mojo::Base';

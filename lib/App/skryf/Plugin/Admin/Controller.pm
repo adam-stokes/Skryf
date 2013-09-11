@@ -2,7 +2,6 @@ package App::skryf::Plugin::Admin::Controller;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
-use App::skryf::Model::User;
 
 method admin_dashboard {
     $self->render('admin/dashboard');
@@ -10,7 +9,7 @@ method admin_dashboard {
 
 method admin_dashboard_profile {
     my $req   = $self->req->method;
-    my $model = App::skryf::Model::User->new;
+    my $model = $self->db('User');
     my $user  = $model->get($self->session->{username});
     if ($req eq "POST") {
         $user->{attrs}{email}              = $self->param('email');

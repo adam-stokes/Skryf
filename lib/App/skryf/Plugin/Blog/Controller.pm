@@ -2,20 +2,17 @@ package App::skryf::Plugin::Blog::Controller;
 
 use Mojo::Base 'Mojolicious::Controller';
 use Method::Signatures;
-use App::skryf::Model::Post;
 use XML::Atom::SimpleFeed;
 use DateTime::Format::RFC3339;
 use Encode;
 
 method blog_splash {
-    my $model = App::skryf::Model::Post->new;
-    my $posts = $model->this_year(7);
+    my $posts = $self->db('Post')->this_year(7);
     $self->render('blog/splash', postlist => $posts);
 }
 
 method blog_index {
-    my $model = App::skryf::Model::Post->new;
-    my $posts = $model->all;
+    my $posts = $self->db('Post')->all;
     $self->render('blog/index', postlist => $posts);
 }
 
@@ -25,8 +22,7 @@ method blog_detail {
         $self->render(text => 'Invalid post name!', status => 404);
         return;
     }
-    my $model = App::skryf::Model::Post->new;
-    my $post  = $model->get($slug);
+    my $post  = $self->db('Post')->get($slug);
     unless ($post) {
         $self->render(text => 'No post found!', status => $post);
     }
@@ -37,22 +33,19 @@ method blog_detail {
 
 method blog_feeds_by_cat {
     my $category = $self->param('category');
-    my $model    = App::skryf::Model::Post->new;
-    my $posts    = $model->by_cat($category);
+    my $posts    = $self->db('Post')->by_cat($category);
     my $feed     = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method blog_feeds {
-    my $model = App::skryf::Model::Post->new;
-    my $posts = $model->all;
+    my $posts = $self->db('Post')->all;
     my $feed  = App::skryf::Util->feed($self->config, $posts);
     $self->render(text => $feed->as_string, format => 'xml');
 }
 
 method admin_blog_index {
-    my $model = App::skryf::Model::Post->new;
-    $self->stash(postlist => $model->all);
+    $self->stash(postlist => $self->db('Post')->all);
     $self->render('blog/admin_index');
 }
 
@@ -62,8 +55,7 @@ method admin_blog_new {
         my $topic   = $self->param('topic');
         my $content = $self->param('content');
         my $tags    = $self->param('tags');
-        my $model   = App::skryf::Model::Post->new;
-        $model->create($topic, $content, $tags);
+        $self->db('Post')->create($topic, $content, $tags);
         $self->redirect_to('admin_blog_index');
     }
     else {
@@ -73,14 +65,13 @@ method admin_blog_new {
 
 method admin_blog_edit {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Post->new;
-    $self->stash(post => $model->get($slug));
+    $self->stash(post => $self->db('Post')->get($slug));
     $self->render('blog/edit');
 }
 
 method admin_blog_update {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Post->new;
+    my $model = $self->db('Post');
     my $post  = $model->get($slug);
     $post->{topic}   = $self->param('topic');
     $post->{content} = $self->param('content');
@@ -93,7 +84,7 @@ method admin_blog_update {
 
 method admin_blog_delete {
     my $slug  = $self->param('slug');
-    my $model = App::skryf::Model::Post->new;
+    my $model = $self->db('Post');
     if ($model->remove($slug)) {
         $self->flash(message => 'Removed: ' . $slug);
     }

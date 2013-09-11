@@ -5,6 +5,7 @@ use Mojo::Base 'Mojolicious';
 use Carp;
 use File::ShareDir ':ALL';
 use Path::Tiny;
+use Class::Load ':all';
 
 our $VERSION = '0.014_01';
 
@@ -35,8 +36,22 @@ sub startup {
     }
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
-    $cfg->{version} = $VERSION;
+    $cfg->{version} = eval $VERSION;
     $self->secret($cfg->{secret});
+    use Data::Printer;
+
+###############################################################################
+# Database Helper
+###############################################################################
+    $self->helper(
+        db => sub {
+            my $self       = shift;
+            my $collection = shift;
+            my $store      = "App::skryf::Model::$collection";
+            load_class($store);
+            $store->new(dbname => $cfg->{dbname});
+        }
+    );
 ###############################################################################
 # Load global plugins
 ###############################################################################
