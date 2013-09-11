@@ -38,7 +38,6 @@ sub startup {
     my $cfg = $self->config->{skryf} || +{};
     $cfg->{version} = eval $VERSION;
     $self->secret($cfg->{secret});
-    use Data::Printer;
 
 ###############################################################################
 # Database Helper

@@ -14,8 +14,6 @@ EOF
 
 sub run {
     my ($self, @args) = @_;
-    use Data::Printer;
-    p(@args);
     my $model = $self->app->db('User');
 
     say "CMS Setup";
