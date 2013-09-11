@@ -8,14 +8,14 @@ method users {
     $self->mgo->db->collection('users');
 }
 
-method create ($username, $password, $attrs) {
+method create ($username, $password, $attrs = {}) {
     my $user = $self->users->find_one({username => $username});
-    my $bson = {
+    my $bson = bson_doc
       now => bson_time,
       username => $username,
       password => $password,
-      attrs => $attrs,
-    };
+      attrs => $attrs;
+
     if (!$user) {
         $self->users->insert($bson);
     }
@@ -28,12 +28,6 @@ method get ($username) {
 
 method remove ($username) {
     $self->users->remove({username => $username});
-}
-
-method check ($username, $password) {
-    my $user = $self->users->find_one({username => $username});
-    return 1 if $user->{password} eq $password;
-    return undef;
 }
 
 method save ($user) {

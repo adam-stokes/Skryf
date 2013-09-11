@@ -34,8 +34,8 @@ $t->get_ok('/login')->status_is(200)
 $t->post_ok(
     '/auth' => form => {
         csrftoken => $csrftoken,
-        username  => 'joebob',
-        password  => 'sillyman',
+        username  => 'adam',
+        password  => 'password',
     }
 )->status_is(302);
 
@@ -74,7 +74,7 @@ $t->post_ok(
 $t->get_ok('/post/a-new-topic-edited')->status_is(200)
   ->content_like(qr/a new topic edited/, 'edited content found');
 $t->get_ok('/post/feeds/atom.xml')->status_is(200)
-  ->content_like(qr/a new topic edit/, 'xml updated feed content found');
+  ->content_like(qr/auto content posted/, 'xml updated feed content found');
 
 # delete it
 $t->get_ok('/admin/post/delete/a-new-topic-edited')->status_is(302);

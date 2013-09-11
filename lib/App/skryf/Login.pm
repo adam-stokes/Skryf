@@ -1,7 +1,6 @@
 package App::skryf::Login;
 
 use Mojo::Base 'Mojolicious::Controller';
-use App::skryf::Model::User;
 
 sub login {
   my $self = shift;
@@ -16,12 +15,11 @@ sub logout {
 
 sub auth {
     my $self = shift;
-    my $user = $self->param('username');
-    my $pass = $self->param('password');
+    my $model = $self->db('User');
+    my $user = $model->get($self->param('username'));
+    my $entered_pass = $self->param('password');
 
-    my $model =
-      App::skryf::Model::User->new;
-    if ($model->check($user, $pass)) {
+    if ($self->bcrypt_validate($entered_pass, $user->{password})) {
         $self->flash(message => 'authenticated.');
         $self->session(user => 1);
         $self->session(username => $user);

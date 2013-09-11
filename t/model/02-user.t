@@ -32,8 +32,6 @@ ok $model->create(
     },
 );
 
-ok $model->check($username, $password);
-
 #ok $model->remove($username);
 
 done_testing();

@@ -27,7 +27,7 @@ sub startup {
 ###############################################################################
     my $cfgfile = undef;
     if ($self->mode eq "development") {
-        $cfgfile = path(dist_dir('App-skryf'), 'skryf.conf');
+        $cfgfile = path(dist_dir('App-skryf'), 'app/config/development.conf');
     }
     else {
         $cfgfile = path("~/.skryf.conf");
@@ -57,7 +57,7 @@ sub startup {
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
     for (keys $cfg->{extra_modules}) {
-        $self->plugin("$_") if $cfg->{extra_modules}{$_} > 0;
+        $self->plugin($_) if $cfg->{extra_modules}{$_} > 0;
     }
 
 ###############################################################################
@@ -77,8 +77,8 @@ sub startup {
     my $media_directory    = undef;
     if ($self->mode eq "development" || !defined($cfg->{template_directory}))
     {
-        $template_directory = path(dist_dir('App-skryf'), 'templates');
-        $media_directory    = path(dist_dir('App-skryf'), 'public');
+        $template_directory = path(dist_dir('App-skryf'), 'app/templates');
+        $media_directory    = path(dist_dir('App-skryf'), 'app/public');
     }
     else {
         $template_directory = path($cfg->{template_directory});

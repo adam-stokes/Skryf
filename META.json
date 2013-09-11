@@ -38,14 +38,17 @@
       "runtime" : {
          "requires" : {
             "Carp" : "0",
+            "Class::Load" : "0",
             "DateTime" : "0",
             "DateTime::Format::RFC3339" : "0",
             "File::ShareDir" : "0",
             "FindBin" : "0",
+            "IO::Prompt" : "0",
             "Mango" : "0.12",
             "Method::Signatures" : "0",
             "Mojo::Base" : "0",
             "Mojolicious" : "0",
+            "Mojolicious::Plugin::Bcrypt" : "0",
             "Mojolicious::Plugin::CSRFProtect" : "0",
             "Mojolicious::Plugin::Disqus::Tiny" : "0",
             "Mojolicious::Plugin::GoogleAnalytics" : "0",
@@ -55,6 +58,7 @@
             "String::Dirify" : "0",
             "String::Util" : "0",
             "Text::MultiMarkdown" : "0",
+            "Text::Sass::XS" : "0",
             "XML::Atom::SimpleFeed" : "0"
          }
       }
