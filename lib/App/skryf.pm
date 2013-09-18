@@ -31,7 +31,7 @@ sub startup {
     }
     else {
         $cfgfile = path("~/.skryf.conf");
-        path(dist_dir('App-skryf'), "skryf.conf")->copy($cfgfile)
+        path(dist_dir('App-skryf'), 'app/config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     $self->plugin('Config' => {file => $cfgfile});
