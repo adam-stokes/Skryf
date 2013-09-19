@@ -25,15 +25,8 @@ sub startup {
 ###############################################################################
 # Setup configuration
 ###############################################################################
-    my $cfgfile = undef;
-    if ($self->mode eq "development") {
-        $cfgfile = path(dist_dir('App-skryf'), 'app/config/development.conf');
-    }
-    else {
-        $cfgfile = path("~/.skryf.conf");
-        path(dist_dir('App-skryf'), 'app/config/production.conf')->copy($cfgfile)
-          unless $cfgfile->exists;
-    }
+    my $cfgfile = path($self->home, 'app/config', $self->mode . '.conf');
+    say $cfgfile;
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
     $cfg->{version} = eval $VERSION;
@@ -72,19 +65,9 @@ sub startup {
 ###############################################################################
 # Define template, media, static paths
 ###############################################################################
-    my $template_directory = undef;
-    my $media_directory    = undef;
-    if ($self->mode eq "development" || !defined($cfg->{template_directory}))
-    {
-        $template_directory = path(dist_dir('App-skryf'), 'app/templates');
-        $media_directory    = path(dist_dir('App-skryf'), 'app/public');
-    }
-    else {
-        $template_directory = path($cfg->{template_directory});
-        $media_directory    = path($cfg->{media_directory});
-    }
-
-    croak("A template|media|static directory must be defined.")
+    my $template_directory = path($self->home, 'app/templates');
+    my $media_directory    = path($self->home, 'app/public');
+    croak("A template|public directory must exist under your app/ directory.")
       unless $template_directory->is_dir
       && $media_directory->is_dir;
 

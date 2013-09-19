@@ -5,7 +5,7 @@ use warnings;
 use Test::More;
 
 use FindBin;
-use lib "$FindBin::Bin../../lib";
+BEGIN { unshift @INC, "$FindBin::Bin/../../../lib" }
 
 plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};

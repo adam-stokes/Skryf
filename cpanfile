@@ -1,5 +1,6 @@
 requires 'Carp';
 requires 'Class::Load';
+requires 'Class::XSAccessor';
 requires 'File::ShareDir';
 requires 'FindBin';
 requires 'Mojo::Base';
@@ -21,8 +22,11 @@ requires 'XML::Atom::SimpleFeed';
 requires 'String::Util';
 requires 'Text::Sass::XS';
 requires 'IO::Prompt';
+requires 'Rex';
+requires 'Ubic';
 
 on develop => sub {
+  requires 'Test::Base';
     requires 'Test::Pod', '1.41';
     requires 'Test::Mojo';
 };

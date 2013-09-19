@@ -1,11 +1,7 @@
-use Rex::Lang::Perl::Perlbrew;
 use Rex::Commands::Rsync;
+use Carp;
 
-use constant PERLV => 5.18.1;
-
-die "No environment set." unless $ENV{BLOGUSER};
-
-set perlbrew => root => "/home/$ENV{BLOGUSER}/perl5/perlbrew";
+croak("No server defined set.") unless $ENV{BLOGSERVER};
 
 user $ENV{BLOGUSER} || "skryf";
 
@@ -15,7 +11,6 @@ desc "Restart blog service";
 task "restart",
   group => "webserver",
   sub {
-    perlbrew -use => PERLV;
     say "Restarting blog";
     run "ubic restart stokesblog";
   };
@@ -24,7 +19,6 @@ desc "Does a full software upgrade and dependency check";
 task "upgrade",
   group => "webserver",
   sub {
-    perlbrew -use => PERLV;
     say "cpan update";
     run "cpanm -q --notest App::skryf";
     do_task "restart";

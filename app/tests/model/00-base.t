@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 use FindBin;
-use lib "$FindBin::Bin../../lib";
+BEGIN { unshift @INC, "$FindBin::Bin/../../../lib" }
 
 diag('Testing base model');
 use_ok('App::skryf::Model::Base');
