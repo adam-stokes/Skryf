@@ -74,6 +74,15 @@ sub startup {
     push @{$self->renderer->paths}, $template_directory;
     push @{$self->static->paths},   $media_directory;
 
+###############################################################################
+# Load Theme
+###############################################################################
+    my $theme = $self->db('Site')->get;
+    if (!$theme->{theme}) {
+      $theme = { theme => $cfg->{theme} };
+    }
+    $self->plugin($theme->{theme});
+
 # use App::skryf::Command namespace
     push @{$self->commands->namespaces}, 'App::skryf::Command';
 

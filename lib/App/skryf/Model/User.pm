@@ -43,7 +43,7 @@ App::skryf::Model::User - User Model Skryf
 
 =head1 DESCRIPTION
 
-User model 
+User model
 
 =head1 METHODS
 
