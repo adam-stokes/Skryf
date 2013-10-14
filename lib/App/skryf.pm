@@ -55,7 +55,7 @@ sub startup {
 # Load global plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    for (keys $cfg->{extra_modules}) {
+    for (keys %{$cfg->{extra_modules}}) {
         $self->plugin($_) if $cfg->{extra_modules}{$_} > 0;
     }
 
