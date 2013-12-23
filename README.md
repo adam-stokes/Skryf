@@ -9,7 +9,7 @@ and Mongo.
 
 # PREREQS
 
-I like [http://perlbrew.pl](http://perlbrew.pl), but, whatever you're comfortable with. I won't judge.
+[http://perlbrew.pl](http://perlbrew.pl) or [https://github.com/tokuhirom/plenv/](https://github.com/tokuhirom/plenv/).
 
 # INSTALLATION (BLEEDING EDGE)
 
@@ -32,16 +32,6 @@ _media\_directory_.
     media_directory    => '~/blog/public',
 
 So __~/blog/templates/blog/detail.html.ep__ and __~/blog/public/style.css__
-
-# DEPLOY
-
-    $ export BLOGUSER=username
-    $ export BLOGSERVER=example.com
-
-    If perlbrew is installed Rex will autoload that environment to use remotely.
-    Otherwise more tinkering is required to handle the perl environment remotely.
-    $ rexify --use=Rex::Lang::Perl::Perlbrew
-    $ rex deploy
 
 # RUN (Development)
 
@@ -72,5 +62,3 @@ Copyright 2013- Adam Stokes
 # LICENSE
 
 Licensed under the same terms as Perl.
-
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master" />

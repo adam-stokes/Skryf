@@ -37,7 +37,7 @@ sub startup {
     $self->plugin('Config' => {file => $cfgfile});
     my $cfg = $self->config->{skryf} || +{};
     $cfg->{version} = eval $VERSION;
-    $self->secret($cfg->{secret});
+    $self->secrets($cfg->{secret});
 
 ###############################################################################
 # Database Helper
@@ -127,7 +127,7 @@ and Mongo.
 
 =head1 PREREQS
 
-I like L<http://perlbrew.pl>, but, whatever you're comfortable with. I won't judge.
+L<http://perlbrew.pl> or L<https://github.com/tokuhirom/plenv/>.
 
 =head1 INSTALLATION (BLEEDING EDGE)
 
@@ -150,16 +150,6 @@ I<media_directory>.
     media_directory    => '~/blog/public',
 
 So B<~/blog/templates/blog/detail.html.ep> and B<~/blog/public/style.css>
-
-=head1 DEPLOY
-
-    $ export BLOGUSER=username
-    $ export BLOGSERVER=example.com
-
-    If perlbrew is installed Rex will autoload that environment to use remotely.
-    Otherwise more tinkering is required to handle the perl environment remotely.
-    $ rexify --use=Rex::Lang::Perl::Perlbrew
-    $ rex deploy
 
 =head1 RUN (Development)
 
@@ -190,11 +180,5 @@ Copyright 2013- Adam Stokes
 =head1 LICENSE
 
 Licensed under the same terms as Perl.
-
-=begin html
-
-<img src="https://travis-ci.org/battlemidget/App-skryf.png?branch=master" />
-
-=end html
 
 =cut

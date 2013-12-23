@@ -4,7 +4,7 @@
       "Adam Stokes <adamjs@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.4, Dist::Zilla version 4.300038, CPAN::Meta::Converter version 2.132510",
+   "generated_by" : "Dist::Milla version v1.0.4, Dist::Zilla version 5.006, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -26,7 +26,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.027"
+            "Module::Build::Tiny" : "0.030"
          }
       },
       "develop" : {
@@ -77,7 +77,9 @@
    },
    "version" : "0.014_01",
    "x_contributors" : [
-      "Adam Stokes <adam.stokes@ubuntu.com>"
+      "Adam Stokes <adam.stokes@ubuntu.com>",
+      "Adam Stokes <battlemidget@users.noreply.github.com>",
+      "mudler <mudler@dark-lab.net>"
    ]
 }
 
