@@ -37,6 +37,7 @@
       },
       "runtime" : {
          "requires" : {
+            "App::skryf::Plugin::Blog" : "0.02_1",
             "Carp" : "0",
             "Class::Load" : "0",
             "DateTime" : "0",
