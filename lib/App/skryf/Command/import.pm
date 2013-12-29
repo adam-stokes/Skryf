@@ -1,5 +1,7 @@
 package App::skryf::Command::import;
 
+# VERSION
+
 use Mojo::Base 'Mojolicious::Command';
 use FindBin '$Bin';
 use Carp;

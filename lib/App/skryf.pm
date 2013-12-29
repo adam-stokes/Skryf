@@ -7,7 +7,7 @@ use File::ShareDir ':ALL';
 use Path::Tiny;
 use Class::Load ':all';
 
-our $VERSION = '0.014_01';
+# VERSION
 
 has admin_menu => sub {
   my $self = shift;
