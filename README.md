@@ -1,6 +1,6 @@
 # NAME
 
-App-skryf - i kno rite. another perl cms.
+App-skryf - Perl CMS/CMF.
 
 # DESCRIPTION
 

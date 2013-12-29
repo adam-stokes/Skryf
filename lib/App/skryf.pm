@@ -35,9 +35,8 @@ sub startup {
           unless $cfgfile->exists;
     }
     $self->plugin('Config' => {file => $cfgfile});
-    my $cfg = $self->config->{skryf} || +{};
-    $cfg->{version} = eval $VERSION;
-    $self->secrets($cfg->{secret});
+    $self->config->{version} = eval $VERSION;
+    $self->secrets($self->config->{secret});
 
 ###############################################################################
 # Database Helper
@@ -48,48 +47,22 @@ sub startup {
             my $collection = shift;
             my $store      = "App::skryf::Model::$collection";
             load_class($store);
-            $store->new(dbname => $cfg->{dbname});
+            $store->new(dbname => $self->config->{dbname});
         }
     );
 ###############################################################################
 # Load global plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    for (keys %{$cfg->{extra_modules}}) {
-        $self->plugin($_) if $cfg->{extra_modules}{$_} > 0;
+    for (keys %{$self->config->{extra_modules}}) {
+        $self->plugin($_) if $self->config->{extra_modules}{$_} > 0;
     }
 
 ###############################################################################
-# Load Core plugins
+# Make sure a theme is available
 ###############################################################################
-    $self->plugin(
-        'Search' => {
-            tapir_token  => $cfg->{social}{tapir},
-            tapir_secret => $cfg->{social}{tapir_secret}
-        }
-    );
-
-###############################################################################
-# Define template, media, static paths
-###############################################################################
-    my $template_directory = undef;
-    my $media_directory    = undef;
-    if ($self->mode eq "development" || !defined($cfg->{template_directory}))
-    {
-        $template_directory = path(dist_dir('App-skryf'), 'app/templates');
-        $media_directory    = path(dist_dir('App-skryf'), 'app/public');
-    }
-    else {
-        $template_directory = path($cfg->{template_directory});
-        $media_directory    = path($cfg->{media_directory});
-    }
-
-    croak("A template|media|static directory must be defined.")
-      unless $template_directory->is_dir
-      && $media_directory->is_dir;
-
-    push @{$self->renderer->paths}, $template_directory;
-    push @{$self->static->paths},   $media_directory;
+    croak("No theme was defined/found.")
+      unless defined($self->config->{theme});
 
 # use App::skryf::Command namespace
     push @{$self->commands->namespaces}, 'App::skryf::Command';
@@ -97,13 +70,9 @@ sub startup {
 ###############################################################################
 # Routing
 ###############################################################################
-    $self->helper(config => sub {$cfg});
     my $r = $self->routes;
-
-    # Authentication
-    $r->get('/login')->to('login#login')->name('login');
-    $r->get('/logout')->to('login#logout')->name('logout');
-    $r->post('/auth')->to('login#auth')->name('auth');
+    # Default route
+    $r->get('/')->to('welcome#index')->name('welcome');
 }
 1;
 
@@ -111,7 +80,7 @@ __END__
 
 =head1 NAME
 
-App-skryf - i kno rite. another perl cms.
+App-skryf - Perl CMS/CMF.
 
 =head1 DESCRIPTION
 
