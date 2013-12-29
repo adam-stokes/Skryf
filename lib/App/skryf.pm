@@ -9,12 +9,7 @@ use Class::Load ':all';
 
 # VERSION
 
-has admin_menu => sub {
-  my $self = shift;
-  return [];
-};
-
-has frontend_menu => sub {
+has loaded_plugins => sub {
   my $self = shift;
   return [];
 };
@@ -59,10 +54,11 @@ sub startup {
     }
 
 ###############################################################################
-# Make sure a theme is available
+# Make sure a theme is available and load it.
 ###############################################################################
     croak("No theme was defined/found.")
       unless defined($self->config->{theme});
+    $self->plugin($self->config->{theme});
 
 # use App::skryf::Command namespace
     push @{$self->commands->namespaces}, 'App::skryf::Command';
