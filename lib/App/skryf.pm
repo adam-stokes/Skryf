@@ -84,34 +84,39 @@ App-skryf - Perl CMS/CMF.
 
 =head1 DESCRIPTION
 
-Another CMS platform which utilizes Mojolicious, Markdown, hypnotoad, Rex, Ubic,
-and Mongo.
+CMS/CMF platform for Perl.
 
 =head1 PREREQS
 
-L<http://perlbrew.pl> or L<https://github.com/tokuhirom/plenv/>.
+L<https://github.com/tokuhirom/plenv/>.
 
 =head1 INSTALLATION (BLEEDING EDGE)
 
-    $ cpanm git://github.com/battlemidget/App-skryf.git
+    $ cpanm https://github.com/skryf/App-skryf.git
 
 =head1 SETUP
 
     $ skryf setup
 
-By default B<skryf> will look in dist_dir for templates and media. To override that
-make sure I<~/.skryf.conf> points to the locations of your templates and media.
-For example: 
+=head2 Themes
 
-    $ mkdir -p ~/blog/{templates,public}
+Themes are installed via cpan, e.g:
 
-Edit ~/.skryf.conf to reflect those directories in I<template_directory> and 
-I<media_directory>.
+    $ cpanm https://github.com/skryf/App-skryf-Theme-Booshka.git
 
-    template_directory => '~/blog/templates',
-    media_directory    => '~/blog/public',
+Then specify the theme in your config:
 
-So B<~/blog/templates/blog/detail.html.ep> and B<~/blog/public/style.css>
+    theme => 'Booshka'
+
+=head2 Plugins
+
+Plugins are installed via cpan, e.g:
+
+    $ cpanm https://github.com/skryf/App-skryf-Plugin-Blog.git
+
+Then specify plugin in your config:
+
+    extra_modules => { 'Blog' => 1 }
 
 =head1 RUN (Development)
 
@@ -137,7 +142,7 @@ Adam Stokes E<lt>adamjs@cpan.orgE<gt>
 
 =head1 COPYRIGHT
 
-Copyright 2013- Adam Stokes
+Copyright 2013-2014 Adam Stokes
 
 =head1 LICENSE
 
