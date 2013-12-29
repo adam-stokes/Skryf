@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 
 sub index {
   my $self = shift;
-  $self->render(text => 'Welcome to your Skryf application.');
+  $self->render('welcome');
 }
 
 1;

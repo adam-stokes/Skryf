@@ -58,6 +58,7 @@ sub startup {
 ###############################################################################
     croak("No theme was defined/found.")
       unless defined($self->config->{theme});
+    push @{$self->plugins->namespaces}, 'App::skryf::Theme';
     $self->plugin($self->config->{theme});
 
 # use App::skryf::Command namespace
