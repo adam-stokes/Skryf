@@ -1,5 +1,7 @@
 package App::skryf::Model::User;
 
+# VERSION
+
 use Mojo::Base 'App::skryf::Model::Base';
 use Method::Signatures;
 use Mango::BSON ':bson';

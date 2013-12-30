@@ -9,11 +9,6 @@ use Class::Load ':all';
 
 # VERSION
 
-has loaded_plugins => sub {
-  my $self = shift;
-  return [];
-};
-
 sub startup {
     my $self = shift;
 
@@ -83,55 +78,17 @@ App-skryf - Perl CMS/CMF.
 
 CMS/CMF platform for Perl.
 
-=head1 PREREQS
+=head1 METHODS
 
-L<https://github.com/tokuhirom/plenv/>.
+L<App::skryf> inherits all methods from
+L<Mojolicious> and overloads the following:
 
-=head1 INSTALLATION (BLEEDING EDGE)
+=head2 startup
 
-    $ cpanm https://github.com/skryf/App-skryf.git
+This is your main hook into the application, it will be called at
+application startup. Meant to be overloaded in a subclass.
 
-=head1 SETUP
-
-    $ skryf setup
-
-=head2 Themes
-
-Themes are installed via cpan, e.g:
-
-    $ cpanm https://github.com/skryf/App-skryf-Theme-Booshka.git
-
-Then specify the theme in your config:
-
-    theme => 'Booshka'
-
-=head2 Plugins
-
-Plugins are installed via cpan, e.g:
-
-    $ cpanm https://github.com/skryf/App-skryf-Plugin-Blog.git
-
-Then specify plugin in your config:
-
-    extra_modules => { 'Blog' => 1 }
-
-=head1 RUN (Development)
-
-    $ skryf daemon
-
-=head1 RUN (Production)
-
-I use Ubic to manage the process
-
-     use Ubic::Service::SimpleDaemon;
-     my $service = Ubic::Service::SimpleDaemon->new(
-      bin => "hypnotoad -f `which skryf`",
-      cwd => "/home/username",
-      stdout => "/tmp/blog.log",
-      stderr => "/tmp/blog.err.log",
-      ubic_log => "/tmp/blog.ubic.log",
-      user => "username"
-     );
+Register plugin in L<Mojolicious> application.
 
 =head1 AUTHOR
 

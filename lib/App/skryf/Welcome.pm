@@ -1,5 +1,7 @@
 package App::skryf::Welcome;
 
+# VERSION
+
 use Mojo::Base 'Mojolicious::Controller';
 
 sub index {
