@@ -22,9 +22,9 @@ CMS/CMF platform for Perl.
 
 L<https://github.com/tokuhirom/plenv/>.
 
-=head1 INSTALLATION (BLEEDING EDGE)
+=head1 INSTALLATION
 
-    $ cpanm https://github.com/skryf/App-skryf.git
+    $ cpanm App::skryf
 
 =head1 SETUP
 
@@ -34,7 +34,7 @@ L<https://github.com/tokuhirom/plenv/>.
 
 Themes are installed via cpan, e.g:
 
-    $ cpanm https://github.com/skryf/App-skryf-Theme-Booshka.git
+    $ cpanm App::skryf::Theme::Booshka
 
 Then specify the theme in your config:
 
@@ -44,7 +44,7 @@ Then specify the theme in your config:
 
 Plugins are installed via cpan, e.g:
 
-    $ cpanm https://github.com/skryf/App-skryf-Plugin-Blog.git
+    $ cpanm App::skryf::Plugin::Blog
 
 Then specify plugin in your config:
 

@@ -10,9 +10,9 @@ CMS/CMF platform for Perl.
 
 [https://github.com/tokuhirom/plenv/](https://github.com/tokuhirom/plenv/).
 
-# INSTALLATION (BLEEDING EDGE)
+# INSTALLATION
 
-    $ cpanm https://github.com/skryf/App-skryf.git
+    $ cpanm App::skryf
 
 # SETUP
 
@@ -22,7 +22,7 @@ CMS/CMF platform for Perl.
 
 Themes are installed via cpan, e.g:
 
-    $ cpanm https://github.com/skryf/App-skryf-Theme-Booshka.git
+    $ cpanm App::skryf::Theme::Booshka
 
 Then specify the theme in your config:
 
@@ -32,11 +32,13 @@ Then specify the theme in your config:
 
 Plugins are installed via cpan, e.g:
 
-    $ cpanm https://github.com/skryf/App-skryf-Plugin-Blog.git
+    $ cpanm App::skryf::Plugin::Blog
 
 Then specify plugin in your config:
 
     extra_modules => { 'Blog' => 1 }
+
+A list of supported/tested plugins for Skryf can be found at [https://github.com/skryf](https://github.com/skryf)
 
 # RUN (Development)
 
