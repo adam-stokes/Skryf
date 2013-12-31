@@ -10,6 +10,10 @@ method users {
     $self->mgo->db->collection('users');
 }
 
+method all {
+    $self->users->find()->all;
+}
+
 method create ($username, $password, $attrs = {}) {
     my $user = $self->users->find_one({username => $username});
     my $bson = bson_doc
@@ -52,6 +56,10 @@ User model
 =head2 B<users>
 
 Grabs user collection from Mongo
+
+=head2 B<all>
+
+Returns all users
 
 =head2 B<check>
 

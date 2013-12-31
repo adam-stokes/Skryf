@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 use Test::More;
+use Mojo::Util qw(hmac_sha1_sum);
 
 use FindBin;
 use lib "$FindBin::Bin../../lib";
@@ -15,7 +16,7 @@ use_ok('App::skryf::Model::User');
 my $model;
 
 my $username = 'joebob';
-my $password = 'sillyman';
+my $password = hmac_sha1_sum('password', 'sillyman');
 
 $model =
   App::skryf::Model::User->new;
@@ -32,6 +33,9 @@ ok $model->create(
     },
 );
 
+my $user_check = $model->get($username);
+ok $username eq $user_check->{username};
+ok $password eq $user_check->{password};
 #ok $model->remove($username);
 
 done_testing();

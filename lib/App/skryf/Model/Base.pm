@@ -5,12 +5,17 @@ package App::skryf::Model::Base;
 use Mojo::Base -base;
 use Mango;
 use Method::Signatures;
+use DDP;
 
 has mpath => 'mongodb://localhost:27017/';
 has dbname => $ENV{TEST_ONLINE} || 'skryf';
 
 method mgo {
     Mango->new($self->mpath.$self->dbname);
+}
+
+method current_db {
+    return $self->dbname;
 }
 
 1;

@@ -46,7 +46,6 @@ sub startup {
 ###############################################################################
 # Load global plugins
 ###############################################################################
-
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
     for (keys %{$self->config->{extra_modules}}) {
         $self->log->debug('Loading plugin: ' . $_);
@@ -71,6 +70,10 @@ sub startup {
     my $r = $self->routes;
 
     # Default route
+    $r->get('/login')->to('login#login')->name('login');
+    $r->get('/logout')->to('login#logout')->name('logout');
+    $r->post('/auth')->to('login#auth')->name('auth');
+
     $r->get('/')->to('welcome#index')->name('welcome');
 }
 1;
