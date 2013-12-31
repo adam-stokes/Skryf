@@ -50,7 +50,9 @@ Then specify plugin in your config:
 
     extra_modules => { 'Blog' => 1 }
 
-A list of supported/tested plugins for Skryf can be found at L<https://github.com/skryf>
+Skryf comes bundled with the B<blog> and B<admin> plugins to help get
+you started. A list of supported/tested plugins for Skryf can be found
+at L<https://github.com/skryf>
 
 =head1 RUN (Development)
 

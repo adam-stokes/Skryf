@@ -38,7 +38,9 @@ Then specify plugin in your config:
 
     extra_modules => { 'Blog' => 1 }
 
-A list of supported/tested plugins for Skryf can be found at [https://github.com/skryf](https://github.com/skryf)
+Skryf comes bundled with the __blog__ and __admin__ plugins to help get
+you started. A list of supported/tested plugins for Skryf can be found
+at [https://github.com/skryf](https://github.com/skryf)
 
 # RUN (Development)
 
