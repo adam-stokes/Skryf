@@ -17,7 +17,7 @@ sub login {
 sub logout {
     my $self = shift;
     $self->session(expires => 1);
-    $self->redirect_to('welcome');
+    $self->redirect_to($self->app->config->{landing_page});
 }
 
 sub auth {
