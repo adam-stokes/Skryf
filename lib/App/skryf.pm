@@ -8,7 +8,7 @@ use Path::Tiny;
 use Class::Load ':all';
 use DDP;
 
-# VERSION
+our $VERSION = '0.99_1';
 
 has admin_menu => sub {
     my $self = shift;
@@ -23,7 +23,7 @@ sub startup {
 ###############################################################################
     my $cfgfile = undef;
     if ($self->mode eq "development") {
-        $cfgfile = path(dist_dir('App-skryf'), 'app/config/development.conf');
+        $cfgfile = path(dist_dir('App-skryf'), 'config/development.conf');
     }
     else {
         $cfgfile = path("~/.skryf.conf");
