@@ -1,11 +1,7 @@
 package App::skryf::Util;
 
-use strict;
-use warnings;
+use Mojo::Base -base;
 
-# VERSION
-
-use Method::Signatures;
 use Text::MultiMarkdown 'markdown';
 use String::Dirify 'dirify';
 use String::Util 'trim';
@@ -13,19 +9,24 @@ use XML::Atom::SimpleFeed;
 use Encode;
 use DateTime::Format::RFC3339;
 
-method convert ($content, $use_wikilinks=0) {
-    markdown($content, {
-    empty_element_suffix => '>',
-    tab_width => 2,
-    use_wikilinks => $use_wikilinks,
-  });
+sub convert {
+    my ($self, $content, $use_wikilinks) = @_;
+    markdown(
+        $content,
+        {   empty_element_suffix => '>',
+            tab_width            => 2,
+            use_wikilinks        => $use_wikilinks,
+        }
+    );
 }
 
-method slugify ($topic, $auto = 0) {
+sub slugify {
+    my ($self, $topic, $auto) = @_;
     dirify($topic, '-');
 }
 
-method feed ($config, $posts) {
+sub feed {
+    my ($self, $config, $posts) = @_;
     my $feed = XML::Atom::SimpleFeed->new(
         title => $config->{title},
         link  => $config->{site},
@@ -37,7 +38,7 @@ method feed ($config, $posts) {
         id     => $config->{site},
     );
     for my $post (@{$posts}) {
-        my $f = DateTime::Format::RFC3339->new();
+        my $f  = DateTime::Format::RFC3339->new();
         my $dt = $f->parse_datetime($post->{created});
         $feed->add_entry(
             title   => $post->{topic},

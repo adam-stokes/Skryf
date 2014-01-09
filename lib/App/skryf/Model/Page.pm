@@ -1,28 +1,30 @@
 package App::skryf::Model::Page;
 
-# VERSION
-
 use Mojo::Base 'App::skryf::Model::Base';
 
 use App::skryf::Util;
-use Method::Signatures;
 use DateTime;
 
 use constant USE_WIKILINKS => 1;
 
-method pages {
+sub pages {
+    my $self = shift;
     $self->mgo->db->collection('pages');
 }
 
-method all {
+sub all {
+    my $self = shift;
     $self->pages->find->sort({created => -1})->all;
 }
 
-method get ($slug) {
+sub get {
+    my ($self, $slug) = @_;
     $self->pages->find_one({slug => $slug});
 }
 
-method create ($slug, $content, $created = DateTime->now) {
+sub create {
+    my ($self, $slug, $content, $created) = @_;
+    $created = DateTime->now unless $created;
     my $html = App::skryf::Util->convert($content, USE_WIKILINKS);
     $self->pages->insert(
         {   slug    => $slug,
@@ -33,7 +35,8 @@ method create ($slug, $content, $created = DateTime->now) {
     );
 }
 
-method save ($page) {
+sub save {
+    my ($self, $page) = @_;
     my $lt = DateTime->now;
     $page->{html} =
       App::skryf::Util->convert($page->{content}, USE_WIKILINKS);
@@ -41,15 +44,18 @@ method save ($page) {
     $self->pages->save($page);
 }
 
-method remove ($slug) {
+sub remove {
+    my ($self, $slug) = @_;
     $self->pages->remove({slug => $slug});
 }
 
-method search ($kwds) {
+sub search {
+    my ($self, $kwds) = @_;
     $self->pages->find({content => qr/$kwds/})->all;
 }
 
 1;
+
 __END__
 
 =head1 NAME

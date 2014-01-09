@@ -1,26 +1,27 @@
 package App::skryf::Model::User;
 
-# VERSION
-
 use Mojo::Base 'App::skryf::Model::Base';
-use Method::Signatures;
 use Mango::BSON ':bson';
 
-method users {
+sub users {
+    my $self = shift;
     $self->mgo->db->collection('users');
 }
 
-method all {
+sub all {
+    my $self = shift;
     $self->users->find()->all;
 }
 
-method create ($username, $password, $attrs = {}) {
+sub create {
+    my ($self, $username, $password, $attrs) = @_;
+    $attrs = {} unless $attrs;
     my $user = $self->users->find_one({username => $username});
     my $bson = bson_doc
-      now => bson_time,
+      now      => bson_time,
       username => $username,
       password => $password,
-      attrs => $attrs;
+      attrs    => $attrs;
 
     if (!$user) {
         $self->users->insert($bson);
@@ -28,19 +29,23 @@ method create ($username, $password, $attrs = {}) {
     return 1;
 }
 
-method get ($username) {
+sub get {
+    my ($self, $username) = @_;
     $self->users->find_one({username => $username});
 }
 
-method remove ($username) {
+sub remove {
+    my ($self, $username) = @_;
     $self->users->remove({username => $username});
 }
 
-method save ($user) {
-  $self->users->save($user);
+sub save {
+    my ($self, $user) = @_;
+    $self->users->save($user);
 }
 
 1;
+
 __END__
 
 =head1 NAME
