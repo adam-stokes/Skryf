@@ -1,98 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>App-skryf by skryf</title>
 
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <title>App-skryf by skryf</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
+    <div class="wrapper">
+      <header>
         <h1>App-skryf</h1>
-        <h2>The Perl CMS.</h2>
-        <a href="https://github.com/skryf/App-skryf" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+        <p>The Perl CMS.</p>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+        <p class="view"><a href="https://github.com/skryf/App-skryf">View the Project on GitHub <small>skryf/App-skryf</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/skryf/App-skryf/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/skryf/App-skryf/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/skryf/App-skryf">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
 <a name="name" class="anchor" href="#name"><span class="octicon octicon-link"></span></a>NAME</h1>
 
-<p>App-skryf - i kno rite. another perl cms.</p>
+<p>App-skryf - Perl CMS/CMF.</p>
 
 <h1>
 <a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>DESCRIPTION</h1>
 
-<p>Another CMS platform which utilizes Mojolicious, Markdown, hypnotoad, Rex, Ubic,
-and Mongo.</p>
+<p>CMS/CMF platform for Perl.</p>
 
 <h1>
-<a name="prereqs" class="anchor" href="#prereqs"><span class="octicon octicon-link"></span></a>PREREQS</h1>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>METHODS</h1>
 
-<p><a href="http://perlbrew.pl">http://perlbrew.pl</a> or <a href="https://github.com/tokuhirom/plenv/">https://github.com/tokuhirom/plenv/</a>.</p>
+<p><a href="https://metacpan.org/pod/App::skryf">App::skryf</a> inherits all methods from
+<a href="https://metacpan.org/pod/Mojolicious">Mojolicious</a> and overloads the following:</p>
 
-<h1>
-<a name="installation-bleeding-edge" class="anchor" href="#installation-bleeding-edge"><span class="octicon octicon-link"></span></a>INSTALLATION (BLEEDING EDGE)</h1>
+<h2>
+<a name="startup" class="anchor" href="#startup"><span class="octicon octicon-link"></span></a>startup</h2>
 
-<pre><code>$ cpanm git://github.com/battlemidget/App-skryf.git
-</code></pre>
+<p>This is your main hook into the application, it will be called at
+application startup. Meant to be overloaded in a subclass.</p>
 
-<h1>
-<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>SETUP</h1>
-
-<pre><code>$ skryf setup
-</code></pre>
-
-<p>By default <strong>skryf</strong> will look in dist_dir for templates and media. To override that
-make sure <em>~/.skryf.conf</em> points to the locations of your templates and media.
-For example: </p>
-
-<pre><code>$ mkdir -p ~/blog/{templates,public}
-</code></pre>
-
-<p>Edit ~/.skryf.conf to reflect those directories in <em>template\</em>directory_ and 
-<em>media\</em>directory_.</p>
-
-<pre><code>template_directory =&gt; '~/blog/templates',
-media_directory    =&gt; '~/blog/public',
-</code></pre>
-
-<p>So <strong>~/blog/templates/blog/detail.html.ep</strong> and <strong>~/blog/public/style.css</strong></p>
-
-<h1>
-<a name="run-development" class="anchor" href="#run-development"><span class="octicon octicon-link"></span></a>RUN (Development)</h1>
-
-<pre><code>$ skryf daemon
-</code></pre>
-
-<h1>
-<a name="run-production" class="anchor" href="#run-production"><span class="octicon octicon-link"></span></a>RUN (Production)</h1>
-
-<p>I use Ubic to manage the process</p>
-
-<pre><code> use Ubic::Service::SimpleDaemon;
- my $service = Ubic::Service::SimpleDaemon-&gt;new(
-  bin =&gt; "hypnotoad -f `which skryf`",
-  cwd =&gt; "/home/username",
-  stdout =&gt; "/tmp/blog.log",
-  stderr =&gt; "/tmp/blog.err.log",
-  ubic_log =&gt; "/tmp/blog.ubic.log",
-  user =&gt; "username"
- );
-</code></pre>
+<p>Register plugin in <a href="https://metacpan.org/pod/Mojolicious">Mojolicious</a> application.</p>
 
 <h1>
 <a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>AUTHOR</h1>
@@ -102,31 +60,19 @@ media_directory    =&gt; '~/blog/public',
 <h1>
 <a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>COPYRIGHT</h1>
 
-<p>Copyright 2013- Adam Stokes</p>
+<p>Copyright 2013-2014 Adam Stokes</p>
 
 <h1>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE</h1>
 
 <p>Licensed under the same terms as Perl.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/skryf/App-skryf/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/skryf/App-skryf/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/skryf/App-skryf"></a> is maintained by <a href="https://github.com/skryf">skryf</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/skryf">skryf</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
-
-  
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
