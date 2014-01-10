@@ -1,9 +1,8 @@
 package App::skryf::Command::import;
 
-# VERSION
-
 use Mojo::Base 'Mojolicious::Command';
 use FindBin '$Bin';
+use feature qw[say];
 use Carp;
 use Path::Tiny;
 use App::skryf::Model::Post;
@@ -14,10 +13,9 @@ has usage       => <<"EOF";
 
 Usage: $0 import [service] [static posts]
 
-[skryf|jekyll] service is required
+[jekyll|octopress|hexo] service is required
   Supported Services:
     - jekyll/octopress
-    - skryf (pre 0.009 releases)
 
 EOF
 
@@ -35,7 +33,7 @@ sub run {
     my $model = App::skryf::Model::Post->new;
     croak($self->usage) unless $service =~ /skryf|jekyll/;
 
-    if ($service eq lc "skryf") {
+    if ($service eq lc "jekyll" || $service eq lc "octopress") {
       croak('Needs -d [posts] directory defined') unless $args[1];
       my $work_dir = path($args[1]);
       say "Starting import of posts in $args[1] ... Please wait.";
@@ -48,9 +46,13 @@ sub run {
         say "processing $topic";
         $model->create($topic, $content, $tags, $self->format_date($date));
       }
+      say "Import complete";
     }
-    say
-      "\nImport complete.";
+    elsif ($service eq lc "hexo") {
+      croak "Not implemented.";
+    } else {
+      croak "Unknown service: $service";
+    }
 }
 
 1;
