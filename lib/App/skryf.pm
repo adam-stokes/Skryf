@@ -83,7 +83,7 @@ sub startup {
         cb => sub {
             my $self = shift;
             if ($self->config->{landing_page}) {
-                $self->redirect_to($self->config->{landing_page});
+                $self->render($self->config->{landing_page});
             }
             else {
                 $self->render('welcome');
