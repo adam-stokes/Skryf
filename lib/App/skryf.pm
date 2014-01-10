@@ -27,7 +27,7 @@ sub startup {
     }
     else {
         $cfgfile = path("~/.skryf.conf");
-        path(dist_dir('App-skryf'), 'app/config/production.conf')
+        path(dist_dir('App-skryf'), 'config/production.conf')
           ->copy($cfgfile)
           unless $cfgfile->exists;
     }
