@@ -82,7 +82,12 @@ sub startup {
     $r->get('/')->to(
         cb => sub {
             my $self = shift;
-            $self->redirect_to($self->config->{landing_page});
+            if ($self->config->{landing_page}) {
+                $self->redirect_to($self->config->{landing_page});
+            }
+            else {
+                $self->render('welcome');
+            }
         }
     )->name('welcome');
 }
