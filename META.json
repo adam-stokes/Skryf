@@ -42,7 +42,6 @@
       },
       "runtime" : {
          "requires" : {
-            "App::skryf::Model::Post" : "0",
             "App::skryf::Plugin::Admin" : "0",
             "App::skryf::Plugin::Blog" : "0",
             "App::skryf::Theme::Booshka" : "0",
