@@ -1,4 +1,3 @@
-requires 'App::skryf::Model::Post';
 requires 'Class::Load';
 requires 'DDP';
 requires 'DateTime';
