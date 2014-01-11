@@ -1,3 +1,8 @@
+requires "App::skryf::Plugin::Admin", '0.02' => git =>
+  'git@github.com:skryf/App-skryf-Plugin-Admin.git', ref => '0.02';
+requires "App::skryf::Plugin::Blog", '0.02' => git =>
+  'git@github.com:skryf/App-skryf-Plugin-Blog.git', ref => '0.02';
+requires "App::skryf::Theme::Booshka", '0.02', git => 'git@github.com:skryf/App-skryf-Theme-Booshka.git';
 requires 'Class::Load';
 requires 'DDP';
 requires 'DateTime';
