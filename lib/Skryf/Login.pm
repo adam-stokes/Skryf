@@ -19,7 +19,7 @@ sub login {
 sub logout {
     my $self = shift;
     $self->session(expires => 1);
-    $self->redirect_to($self->app->config->{landing_page});
+    $self->redirect_to($self->config->{landing_page});
 }
 
 sub auth {

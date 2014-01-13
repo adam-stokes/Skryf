@@ -12,11 +12,11 @@ use Path::Tiny;
 use IO::Prompt;
 use Skryf::Model::User;
 
-our $VERISON = '0.99_4';
-
 eval Mojo::UserAgent->new->get(
     'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
 require App::cpanminus;
+
+our $VERSION = '0.99_5';
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";
@@ -63,7 +63,6 @@ sub run {
             $app_name_p->child(sprintf("config/%s.conf", $_conf))
               ->spew_utf8($rendered_conf);
         }
-        $app_name_p->child('models')->mkpath or die $!;
 
         # copy templates
         dircopy(path(dist_dir('Skryf'), 'theme/templates'),

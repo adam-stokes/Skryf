@@ -7,6 +7,7 @@ use File::ShareDir ':ALL';
 use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
+use DDP;
 
 our $VERSION = '0.99_5';
 
@@ -42,26 +43,24 @@ sub startup {
     $self->secrets($self->config->{secret});
 
 ###############################################################################
-# Database Helper
-###############################################################################
-    $self->helper(
-        db => sub {
-            my $self       = shift;
-            my $collection = shift;
-            my $store      = "models::$collection";
-            load_class($store);
-            $store->new(dbname => $self->config->{dbname});
-        }
-    );
-
-###############################################################################
 # Authentication helpers
 ###############################################################################
     $self->helper(
         is_admin => sub {
             my $self = shift;
-            return 1 if $self->app->session('user');
-            return undef;
+            unless ($self->session('user')) {
+                $self->flash(message => 'Please login first');
+                $self->redirect_to($self->url_for('login'));
+                return;
+            }
+            return 1;
+        }
+    );
+
+    $self->helper(
+        auth_r => sub {
+            my $self = shift;
+            return $self->app->routes->under($self->is_admin);
         }
     );
 
@@ -85,12 +84,24 @@ sub startup {
       path(dist_dir('Skryf'), 'theme/templates');
     push @{$self->static->paths},   path(dist_dir('Skryf'), 'theme/public');
 
-
 ###############################################################################
 # Routing
 ###############################################################################
     my $r = $self->routes;
 
+    # Administration
+    $r->get('/login')->to('login#login')->name('login');
+    $r->get('/logout')->to('login#logout')->name('logout');
+    $r->post('/auth')->to('login#auth')->name('auth');
+
+    if ($self->auth_r) {
+        $self->auth_r->route('/admin')->via('GET')->to(
+            cb => sub {
+                my $self = shift;
+                $self->render('/admin/dashboard');
+            }
+        )->name('admin_dashboard');
+    }
     $r->get('/')->to(
         cb => sub {
             my $self = shift;
@@ -102,20 +113,6 @@ sub startup {
             }
         }
     )->name('welcome');
-
-    # Administration
-    $r->get('/login')->to('login#login')->name('login');
-    $r->get('/login')->to('login#logout')->name('logout');
-    $r->post('/auth')->to('login#auth')->name('auth');
-    my $auth_r = $self->routes->under($self->is_admin);
-    if ($auth_r) {
-        $auth_r->route('/admin')->via('GET')->to(
-            cb => sub {
-                my $self = shift;
-                $self->render('/admin/dashboard');
-            }
-        )->name('admin_dashboard');
-    }
 }
 
 1;

@@ -83,15 +83,14 @@ sub register {
     )->name('blog_feed_category');
 
     # Admin hooks
-    my $auth_r = $app->routes->under($app->is_admin);
-    if ($auth_r) {
-        $auth_r->route('/admin/blog')->via('GET')->to(
+    if ($app->auth_r) {
+        $app->auth_r->route('/admin/blog')->via('GET')->to(
             cb => sub {
                 my $self = shift;
                 $self->render('/admin/blog/dashboard');
             }
         )->name('admin_blog_dashboard');
-        $auth_r->route('/admin/blog/edit/:slug')->via('GET')->to(
+        $app->auth_r->route('/admin/blog/edit/:slug')->via('GET')->to(
             cb => sub {
                 my $self = shift;
                 my $slug = $self->param('slug');
@@ -99,7 +98,7 @@ sub register {
                 $self->render('/admin/blog/edit');
             }
         )->name('admin_blog_edit');
-        $auth_r->route('/admin/blog/new')->via(qw[GET POST])->to(
+        $app->auth_r->route('/admin/blog/new')->via(qw[GET POST])->to(
             cb => sub {
                 my $self = shift;
                 if ($self->req->method eq "POST") {
@@ -111,7 +110,7 @@ sub register {
                 }
             }
         )->name('admin_blog_new');
-        $auth_r->route('/admin/blog/update/:slug')->via('POST')->to(
+        $app->auth_r->route('/admin/blog/update/:slug')->via('POST')->to(
             cb => sub {
                 my $self       = shift;
                 my $slug       = $self->param('slug');
@@ -129,7 +128,7 @@ sub register {
                     $self->url_for('admin_blog_edit', {slug => $slug}));
             }
         )->name('admin_blog_update');
-        $auth_r->route('/admin/blog/delete/:slug')->via('POST')->to(
+        $app->auth_r->route('/admin/blog/delete/:slug')->via('POST')->to(
             cb => sub {
                 my $self = shift;
                 my $slug = $self->param('slug');
