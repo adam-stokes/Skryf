@@ -5,7 +5,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 use Skryf::Model::Blog;
 use Skryf::Util;
 
-our $VERSION = '0.99_4';
+our $VERSION = '0.99_5';
 
 sub register {
     my ($self, $app) = @_;
