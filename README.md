@@ -28,8 +28,6 @@ Perl 5.14 or higher, [App::cpanminus](https://metacpan.org/pod/App::cpanminus) >
 This is your main hook into the application, it will be called at
 application startup. Meant to be overloaded in a subclass.
 
-Register plugin in [Mojolicious](https://metacpan.org/pod/Mojolicious) application.
-
 # AUTHOR
 
 Adam Stokes <adamjs@cpan.org>
