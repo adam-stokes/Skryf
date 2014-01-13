@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+%= t 'html' => begin
+  %= t 'head' => begin
+    <meta name="viewport" content="width=device-width" />
+    %= t 'title' => config->{title}
+      %= stylesheet '/css/admin-bundle.css'
+      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
+      %= javascript '/js/admin-min.js'
+  %= end
+  %= t 'body' => begin
+    %= t 'div', id => 'container' => begin
+    %= t 'h1' => 'Admin'
+        %= t 'div', id => 'page-body' => begin
+          <%= content %>
+        %= end
+    %= end
+    %= include 'footer'
+  %= end
+%= end
