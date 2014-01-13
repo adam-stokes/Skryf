@@ -1,14 +1,14 @@
 # NAME
 
-App-skryf - Perl CMS/CMF.
+Skryf - Perl on web.
 
 # DESCRIPTION
 
-CMS/CMF platform for Perl.
+Perl on web platform.
 
 # METHODS
 
-[App::skryf](https://metacpan.org/pod/App::skryf) inherits all methods from
+[Skryf](https://metacpan.org/pod/Skryf) inherits all methods from
 [Mojolicious](https://metacpan.org/pod/Mojolicious) and overloads the following:
 
 ## startup

@@ -12,7 +12,7 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag("Testing posts model");
-use_ok('App::skryf::Model::Post');
+use_ok('Skryf::Model::Post');
 my $model;
 
 my $topic_a      = 'a sluggable test post';
@@ -21,7 +21,7 @@ my $topic_b      = 'an updated test post';
 my $topic_b_slug = 'an-updated-test-post';
 my $tags         = 'ubuntu, test, blog';
 
-$model = App::skryf::Model::Post->new;
+$model = Skryf::Model::Post->new;
 ok $model;
 ok $model->posts;
 # cleanup

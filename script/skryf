@@ -5,36 +5,35 @@ use warnings;
 use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
-require Mojolicious::Commands;
-Mojolicious::Commands->start_app('App::skryf');
+use Mojolicious::Commands;
+my $commands = Mojolicious::Commands->new;
+push @{$commands->namespaces}, 'Skryf::Command';
+$commands->run(@ARGV);
 
 __END__
 
 =head1 NAME
 
-App-skryf - Perl CMS/CMF.
+Skryf - Perl on web.
 
 =head1 DESCRIPTION
 
-CMS/CMF platform for Perl.
-
-=head1 PREREQS
-
-L<https://github.com/tokuhirom/plenv/>.
+Perl on web, easy does it web development.
 
 =head1 INSTALLATION
 
-    $ cpanm App::skryf
+    $ cpanm git@github.com:skryf/Skryf.git
 
 =head1 SETUP
 
-    $ skryf setup
+    $ skryf new
 
 =head2 Themes
 
-Themes are installed via cpan, e.g:
+Themes are installed via carton and a cpanfile, in your B<cpanfile> add the following:
 
-    $ cpanm App::skryf::Theme::Booshka
+    requires 'Skryf::Theme::Booshka', '0', git => 'git@github.com:skryf/Skryf-Theme-Booshka.git';
+    $ carton install
 
 Then specify the theme in your config:
 
@@ -42,21 +41,20 @@ Then specify the theme in your config:
 
 =head2 Plugins
 
-Plugins are installed via cpan, e.g:
+Plugins are installed via carton and a cpanfile, in your B<cpanfile> add the following:
 
-    $ cpanm App::skryf::Plugin::Blog
+    requires 'Skryf::Plugin::Blog', '0', git => 'git@github.com:skryf/Skryf-Plugin-Blog.git';
 
 Then specify plugin in your config:
 
-    extra_modules => { 'Blog' => 1 }
+    plugins => { 'Blog' => 1 }
 
-Skryf comes bundled with the B<blog> and B<admin> plugins to help get
-you started. A list of supported/tested plugins for Skryf can be found
+A list of supported/tested plugins for Skryf can be found
 at L<https://github.com/skryf>
 
 =head1 RUN (Development)
 
-    $ skryf daemon
+    $ morbo script/app.pl
 
 =head1 RUN (Production)
 
@@ -64,12 +62,12 @@ I use Ubic to manage the process
 
      use Ubic::Service::SimpleDaemon;
      my $service = Ubic::Service::SimpleDaemon->new(
-      bin => "hypnotoad -f `which skryf`",
-      cwd => "/home/username",
-      stdout => "/tmp/blog.log",
-      stderr => "/tmp/blog.err.log",
-      ubic_log => "/tmp/blog.ubic.log",
-      user => "username"
+      bin => "hypnotoad -f script/app.pl",
+      cwd => $ENV{HOME} ."/skryf-application",
+      stdout => $ENV{HOME} ."/skryf-application/logs/app.log",
+      stderr => $ENV{HOME} ."/skryf-application/logs/app.err.log",
+      ubic_log => $ENV{HOME} ."/skryf-application/logs/app.ubic.log",
+      user => $ENV{USER}
      );
 
 =head1 AUTHOR

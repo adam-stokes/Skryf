@@ -10,7 +10,7 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag('Testing application functionality');
-my $t = Test::Mojo->new('App::skryf');
+my $t = Test::Mojo->new('Skryf');
 
 # Get token
 my $csrftoken =

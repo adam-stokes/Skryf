@@ -10,14 +10,14 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag("Testing page model");
-use_ok('App::skryf::Model::Page');
+use_ok('Skryf::Model::Page');
 
 my $model;
 
 my $slug = 'WikiWord';
 my $content = 'WikiWord';
 
-$model = App::skryf::Model::Page->new;
+$model = Skryf::Model::Page->new;
 ok $model;
 ok $model->pages;
 #cleanup

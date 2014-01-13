@@ -1,0 +1,26 @@
+% layout 'default';
+%= t 'div', class => 'search-body' => begin
+  %= t 'h1' => "Search"
+  % if (my $msg = flash 'message') {
+    <b><%= $msg %></b>
+  % }
+  %= form_for url_for('search_index'), class => 'blog-form' => ( method => "POST" ) => begin
+    %= text_field 'search_query', type => 'text', class => 'blog-form-control'
+    %= submit_button 'Search', class => 'btn'
+  %= end
+  % if (defined($results)) {
+    %= t 'h2' => begin
+      Search Results found &rarr; <%= scalar @{$results} %>;
+    %= end
+    %= t 'hr'
+    <ul>
+      % foreach (@{$results}) {
+        <li><%= link_to $_->{title} => $_->{link} %></li> 
+      % }
+    </ul>
+  % } else {
+    %= t 'h2' => begin
+      No Search Results Found
+    %= end
+  % }
+%= end

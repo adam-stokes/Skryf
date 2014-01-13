@@ -12,14 +12,14 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag("Testing user models");
-use_ok('App::skryf::Model::User');
+use_ok('Skryf::Model::User');
 my $model;
 
 my $username = 'joebob';
 my $password = hmac_sha1_sum('password', 'sillyman');
 
 $model =
-  App::skryf::Model::User->new;
+  Skryf::Model::User->new;
 ok $model;
 ok $model->users;
 

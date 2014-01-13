@@ -1,0 +1,5 @@
+%= t 'div', id => 'footer' => begin
+  <%= link_to 'http://perl.org' => begin %><img src="/img/perl.png" height="15" width="80" alt="Perl Powered" /><% end %>
+  &rarr;
+  <%= link_to "https://github.com/skryf/Skryf" => begin %>Skryf<% end %>
+%= end

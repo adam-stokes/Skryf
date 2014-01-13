@@ -1,10 +1,10 @@
 {
-   "abstract" : "Perl CMS/CMF.",
+   "abstract" : "Perl on web.",
    "author" : [
       "Adam Stokes <adamjs@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Milla version v1.0.4, Dist::Zilla version 5.008, CPAN::Meta::Converter version 2.133380",
+   "generated_by" : "Dist::Milla version v1.0.4, Dist::Zilla version 5.011, CPAN::Meta::Converter version 2.133380",
    "license" : [
       "perl_5"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "App-skryf",
+   "name" : "Skryf",
    "no_index" : {
       "directory" : [
          "t",
@@ -42,15 +42,13 @@
       },
       "runtime" : {
          "requires" : {
-            "App::skryf::Plugin::Admin" : "0.02",
-            "App::skryf::Plugin::Blog" : "0.02",
-            "App::skryf::Theme::Booshka" : "0.02",
             "Class::Load" : "0",
             "DDP" : "0",
             "DateTime" : "0",
             "DateTime::Format::RFC3339" : "0",
             "Encode" : "0",
             "File::ShareDir" : "0",
+            "File::chdir" : "0",
             "IO::Prompt" : "0",
             "List::Util" : "0",
             "Mango" : "0",
@@ -77,13 +75,13 @@
    "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/skryf/App-skryf/issues"
+         "web" : "https://github.com/skryf/Skryf/issues"
       },
-      "homepage" : "https://github.com/skryf/App-skryf",
+      "homepage" : "https://github.com/skryf/Skryf",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/skryf/App-skryf.git",
-         "web" : "https://github.com/skryf/App-skryf"
+         "url" : "https://github.com/skryf/Skryf.git",
+         "web" : "https://github.com/skryf/Skryf"
       }
    },
    "version" : "0.99_2",

@@ -4,6 +4,7 @@ requires 'DateTime';
 requires 'DateTime::Format::RFC3339';
 requires 'Encode';
 requires 'File::ShareDir';
+requires 'File::chdir';
 requires 'IO::Prompt';
 requires 'List::Util';
 requires 'Mango';

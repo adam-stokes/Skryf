@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious';
 
 use Carp;
 use File::ShareDir ':ALL';
+use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
 use DDP;
@@ -28,17 +29,17 @@ sub startup {
 ###############################################################################
     my $cfgfile = undef;
     if ($self->mode eq "development") {
-        $cfgfile = path("~/.skryf-dev.conf");
+        $cfgfile = path($CWD, "config/development.conf");
         path(dist_dir('Skryf'), 'config/development.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     elsif ($self->mode eq "staging") {
-        $cfgfile = path("~/.skryf-staging.conf");
+        $cfgfile = path($CWD, "config/staging.conf");
         path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     else {
-        $cfgfile = path("~/.skryf.conf");
+        $cfgfile = path($CWD, "config/production.conf");
         path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
@@ -69,14 +70,10 @@ sub startup {
     }
 
 ###############################################################################
-# Make sure a theme is available and load it.
+# Set renderer paths for template/static files
 ###############################################################################
-    croak("No theme was defined/found.")
-      unless defined($self->config->{theme});
-    push @{$self->plugins->namespaces}, 'Skryf::Theme';
-    $self->log->debug('Loading theme: ' . $self->config->{theme});
-    $self->plugin($self->config->{theme});
-
+    push @{$self->renderer->paths}, 'templates';
+    push @{$self->static->paths},   'public';
 
 ###############################################################################
 # Routing
@@ -106,11 +103,11 @@ __END__
 
 =head1 NAME
 
-Skryf - Perl CMS/CMF.
+Skryf - Perl on web.
 
 =head1 DESCRIPTION
 
-CMS/CMF platform for Perl.
+Perl on web platform.
 
 =head1 METHODS
 

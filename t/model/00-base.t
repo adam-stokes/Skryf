@@ -8,11 +8,11 @@ use FindBin;
 use lib "$FindBin::Bin../../lib";
 
 diag('Testing base model');
-use_ok('App::skryf::Model::Base');
+use_ok('Skryf::Model::Base');
 my $model;
 
 $model =
-  App::skryf::Model::Base->new;
+  Skryf::Model::Base->new;
 ok($model);
 ok($model->mgo);
 

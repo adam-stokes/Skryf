@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+%= t 'html' => begin
+  %= t 'head' => begin
+    <meta name="viewport" content="width=device-width" />
+    %= t 'title' => config->{title}
+      %= stylesheet '/css/bundle.css'
+      %= stylesheet 'http://fonts.googleapis.com/css?family=Cabin+Sketch:700|Ubuntu'
+      %= javascript '/js/app-min.js'
+  %= end
+  %= t 'body' => begin
+    %= t 'div', id => 'container' => begin
+      %= include 'nav'
+        %= t 'div', id => 'page-body' => begin
+          <%= content %>
+        %= end
+    %= end
+    %= include 'footer'
+  %= end
+%= end
