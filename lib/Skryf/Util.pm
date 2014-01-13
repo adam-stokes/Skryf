@@ -2,6 +2,7 @@ package Skryf::Util;
 
 use Mojo::Base -base;
 
+use Mojo::JSON;
 use Text::MultiMarkdown 'markdown';
 use String::Dirify 'dirify';
 use String::Util 'trim';
@@ -51,6 +52,11 @@ sub feed {
         );
     }
     return $feed;
+}
+
+sub json {
+    my $self = shift;
+    return Mojo::JSON->new;
 }
 
 1;
