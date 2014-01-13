@@ -6,6 +6,17 @@ Skryf - Perl on web.
 
 Perl on web platform.
 
+# PREREQS
+
+Perl 5.14 or higher and Mongo.
+
+# INSTALL
+
+    $ cpanm git@github.com:skryf/Skryf.git
+    $ skryf new [NAME]
+    $ cd [NAME]
+    $ morbo app.pl
+
 # METHODS
 
 [Skryf](https://metacpan.org/pod/Skryf) inherits all methods from
