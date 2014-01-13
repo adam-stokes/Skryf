@@ -111,14 +111,15 @@ Perl on web platform.
 
 =head1 PREREQS
 
-Perl 5.14 or higher and Mongo.
+Perl 5.14 or higher, L<App::cpanminus> >= 1.7102, and Mongo.
 
 =head1 INSTALL
 
     $ cpanm git@github.com:skryf/Skryf.git
     $ skryf new [NAME]
     $ cd [NAME]
-    $ morbo app.pl
+    $ carton install
+    $ carton exec morbo app.pl
 
 =head1 METHODS
 

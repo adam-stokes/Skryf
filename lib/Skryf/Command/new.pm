@@ -4,6 +4,7 @@ package Skryf::Command::new;
 
 use Mojo::Base 'Mojolicious::Commands';
 use Mojo::Util qw(hmac_sha1_sum);
+use Mojo::UserAgent;
 use File::ShareDir ':ALL';
 use File::chdir;
 use File::Copy::Recursive qw[fcopy dircopy];
@@ -11,6 +12,9 @@ use Carp;
 use Path::Tiny;
 use IO::Prompt;
 use Skryf::Model::User;
+
+eval Mojo::UserAgent->new->get('https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
+require App::cpanminus;
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";
@@ -44,6 +48,7 @@ sub run {
         dircopy(path(dist_dir('Skryf'), 'theme/public'),
             $app_name_p->child('public'));
 	fcopy(path(dist_dir('Skryf'), 'app.pl'), $app_name_p->child('app.pl'));
+	fcopy(path(dist_dir('Skryf'), 'cpanfile'), $app_name_p->child('cpanfile'));
     }
     my $model = Skryf::Model::User->new(dbname => $app_name);
     say '-' x 79;
@@ -58,6 +63,13 @@ sub run {
     }
     $model->create($username,
         hmac_sha1_sum($self->app->secrets->[0], $password));
+
+    say '-' x 79;
+    say "Installing dependencies ...";
+    # XXX: just until these guys are out of development phase to support git://
+    my $cpanm = App::cpanminus::script->new;
+    $cpanm->{argv} = ['App::cpanminus@1.7102', 'Module::CPANfile@1.0905', 'Carton@1.0.901'];
+    $cpanm->doit or exit(1);
     say '-' x 79;
     say "Skryf Setup completed.";
 }

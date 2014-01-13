@@ -8,14 +8,15 @@ Perl on web platform.
 
 # PREREQS
 
-Perl 5.14 or higher and Mongo.
+Perl 5.14 or higher, [App::cpanminus](https://metacpan.org/pod/App::cpanminus) >= 1.7102, and Mongo.
 
 # INSTALL
 
     $ cpanm git@github.com:skryf/Skryf.git
     $ skryf new [NAME]
     $ cd [NAME]
-    $ morbo app.pl
+    $ carton install
+    $ carton exec morbo app.pl
 
 # METHODS
 
