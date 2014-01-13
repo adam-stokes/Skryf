@@ -19,16 +19,27 @@ sub startup {
     my $self = shift;
 
 ###############################################################################
+# App::skryf::Command namespace
+###############################################################################
+    push @{$self->commands->namespaces}, 'App::skryf::Command';
+
+###############################################################################
 # Setup configuration
 ###############################################################################
     my $cfgfile = undef;
     if ($self->mode eq "development") {
-        $cfgfile = path(dist_dir('App-skryf'), 'config/development.conf');
+        $cfgfile = path("~/.skryf-dev.conf");
+        path(dist_dir('App-skryf'), 'config/development.conf')->copy($cfgfile)
+          unless $cfgfile->exists;
+    }
+    elsif ($self->mode eq "staging") {
+        $cfgfile = path("~/.skryf-staging.conf");
+        path(dist_dir('App-skryf'), 'config/production.conf')->copy($cfgfile)
+          unless $cfgfile->exists;
     }
     else {
         $cfgfile = path("~/.skryf.conf");
-        path(dist_dir('App-skryf'), 'config/production.conf')
-          ->copy($cfgfile)
+        path(dist_dir('App-skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     $self->plugin('Config' => {file => $cfgfile});
@@ -52,9 +63,9 @@ sub startup {
 # Load global plugins
 ###############################################################################
     push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
-    for (keys %{$self->config->{extra_modules}}) {
+    for (keys %{$self->config->{plugins}}) {
         $self->log->debug('Loading plugin: ' . $_);
-        $self->plugin($_) if $self->config->{extra_modules}{$_} > 0;
+        $self->plugin($_) if $self->config->{plugins}{$_} > 0;
     }
 
 ###############################################################################
@@ -66,8 +77,6 @@ sub startup {
     $self->log->debug('Loading theme: ' . $self->config->{theme});
     $self->plugin($self->config->{theme});
 
-# use App::skryf::Command namespace
-    push @{$self->commands->namespaces}, 'App::skryf::Command';
 
 ###############################################################################
 # Routing
