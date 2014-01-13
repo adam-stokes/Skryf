@@ -1,7 +1,5 @@
 package Skryf::Command::new;
 
-our $VERISON = '0.99_3';
-
 use Mojo::Base 'Mojolicious::Commands';
 use Mojo::Util qw(hmac_sha1_sum);
 use Mojo::UserAgent;
@@ -14,12 +12,15 @@ use Path::Tiny;
 use IO::Prompt;
 use Skryf::Model::User;
 
-eval Mojo::UserAgent->new->get('https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
+our $VERISON = '0.99_4';
+
+eval Mojo::UserAgent->new->get(
+    'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
 require App::cpanminus;
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";
-has attrs => sub { my $self = shift; return {} };
+has attrs       => sub { my $self = shift; return {} };
 has mt => sub { my $self = shift; Mojo::Template->new; };
 
 sub run {
@@ -107,7 +108,6 @@ sub run {
     say "Setting permissions";
     system("find " . $app_name_p . " -type f | xargs chmod u+rw");
     system("find " . $app_name_p . " -type d | xargs chmod u+r");
-    say '-' x 79;
     say "Skryf Setup completed.";
 }
 

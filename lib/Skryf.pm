@@ -77,11 +77,14 @@ sub startup {
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
+    push @{$self->renderer->paths}, 'templates';
+    push @{$self->static->paths},   'public';
+
+    # Fallback
     push @{$self->renderer->paths},
       path(dist_dir('Skryf'), 'theme/templates');
-    push @{$self->renderer->paths}, 'templates';
     push @{$self->static->paths},   path(dist_dir('Skryf'), 'theme/public');
-    push @{$self->static->paths},   'public';
+
 
 ###############################################################################
 # Routing
@@ -104,7 +107,6 @@ sub startup {
     $r->get('/login')->to('login#login')->name('login');
     $r->get('/login')->to('login#logout')->name('logout');
     $r->post('/auth')->to('login#auth')->name('auth');
-    my $admin  = $self->is_admin;
     my $auth_r = $self->routes->under($self->is_admin);
     if ($auth_r) {
         $auth_r->route('/admin')->via('GET')->to(

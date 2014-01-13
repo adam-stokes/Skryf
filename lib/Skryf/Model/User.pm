@@ -1,7 +1,8 @@
 package Skryf::Model::User;
 
 use Mojo::Base 'Skryf::Model::Base';
-use Mango::BSON ':bson';
+use Mojo::Util qw(hmac_sha1_sum);
+use DateTime;
 
 sub users {
     my $self = shift;
@@ -14,17 +15,16 @@ sub all {
 }
 
 sub create {
-    my ($self, $username, $password, $attrs) = @_;
-    $attrs = {} unless $attrs;
+    my ($self, $username, $password) = @_;
     my $user = $self->users->find_one({username => $username});
-    my $bson = bson_doc
-      now      => bson_time,
-      username => $username,
-      password => $password,
-      attrs    => $attrs;
-
     if (!$user) {
-        $self->users->insert($bson);
+        $self->users->insert(
+            {   created  => DateTime->now,
+                username => $username,
+                password =>
+                  hmac_sha1_sum($self->app->secrets->[0], $password),
+            }
+        );
     }
     return 1;
 }
