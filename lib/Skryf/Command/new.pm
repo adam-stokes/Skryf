@@ -76,7 +76,10 @@ sub run {
     my $cpanm = App::cpanminus::script->new;
     $cpanm->{argv} =
       ['App::cpanminus@1.7102', 'Module::CPANfile@1.0905', 'Carton@1.0.901'];
-    $cpanm->doit or exit(1);
+    $cpanm->doit;
+    say "Setting permissions";
+    system("find ". $app_name_p ." -type f | xargs chmod u+rw");
+    system("find ". $app_name_p ." -type d | xargs chmod u+r");
     say '-' x 79;
     say "Skryf Setup completed.";
 }
