@@ -1,13 +1,15 @@
 package Skryf::Login;
 
-# VERSION
-
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Util qw(hmac_sha1_sum);
 use Skryf::Model::User;
-use DDP;
 
-has model => sub { my $self = shift; Skryf::Model::User->new; };
+our $VERSION = '0.99_3';
+
+has model => sub {
+    my $self = shift;
+    Skryf::Model::User->new(dbname => $self->config->{dbname});
+};
 
 sub login {
     my $self = shift;

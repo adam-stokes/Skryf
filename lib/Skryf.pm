@@ -77,7 +77,9 @@ sub startup {
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
+    push @{$self->renderer->paths}, path(dist_dir('Skryf'), 'theme/templates');
     push @{$self->renderer->paths}, 'templates';
+    push @{$self->static->paths}, path(dist_dir('Skryf'), 'theme/public');
     push @{$self->static->paths},   'public';
 
 ###############################################################################
