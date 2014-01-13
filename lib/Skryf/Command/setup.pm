@@ -1,4 +1,4 @@
-package App::skryf::Command::setup;
+package Skryf::Command::setup;
 
 # VERSION
 
@@ -7,7 +7,7 @@ use Mojo::Util qw(hmac_sha1_sum);
 use FindBin '$Bin';
 use Carp;
 use IO::Prompt;
-use App::skryf::Model::User;
+use Skryf::Model::User;
 
 has description => "Setup Skryf.\n";
 has usage       => <<"EOF";
@@ -18,7 +18,7 @@ EOF
 
 sub run {
     my ($self, @args) = @_;
-    my $model = App::skryf::Model::User->new;
+    my $model = Skryf::Model::User->new;
 
     say "Skryf Setup";
     my $username = prompt('Username: ', -tty);

@@ -1,11 +1,11 @@
-package App::skryf::Command::import;
+package Skryf::Command::import;
 
 use Mojo::Base 'Mojolicious::Command';
 use FindBin '$Bin';
 use feature qw[say];
 use Carp;
 use Path::Tiny;
-use App::skryf::Model::Post;
+use Skryf::Model::Post;
 use DateTime::Format::RFC3339;
 
 has description => "Import blog posts from another service\n";
@@ -30,7 +30,7 @@ sub format_date {
 
 sub run {
     my ($self, $service, @args) = @_;
-    my $model = App::skryf::Model::Post->new;
+    my $model = Skryf::Model::Post->new;
     croak($self->usage) unless $service =~ /skryf|jekyll/;
 
     if ($service eq lc "jekyll" || $service eq lc "octopress") {

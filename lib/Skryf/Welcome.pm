@@ -1,4 +1,4 @@
-package App::skryf::Welcome;
+package Skryf::Welcome;
 
 # VERSION
 

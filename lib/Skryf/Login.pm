@@ -1,13 +1,13 @@
-package App::skryf::Login;
+package Skryf::Login;
 
 # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Util qw(hmac_sha1_sum);
-use App::skryf::Model::User;
+use Skryf::Model::User;
 use DDP;
 
-has model => sub { my $self = shift; App::skryf::Model::User->new; };
+has model => sub { my $self = shift; Skryf::Model::User->new; };
 
 sub login {
     my $self = shift;

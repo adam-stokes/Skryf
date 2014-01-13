@@ -1,4 +1,4 @@
-package App::skryf;
+package Skryf;
 
 use Mojo::Base 'Mojolicious';
 
@@ -19,9 +19,9 @@ sub startup {
     my $self = shift;
 
 ###############################################################################
-# App::skryf::Command namespace
+# Skryf::Command namespace
 ###############################################################################
-    push @{$self->commands->namespaces}, 'App::skryf::Command';
+    push @{$self->commands->namespaces}, 'Skryf::Command';
 
 ###############################################################################
 # Setup configuration
@@ -29,17 +29,17 @@ sub startup {
     my $cfgfile = undef;
     if ($self->mode eq "development") {
         $cfgfile = path("~/.skryf-dev.conf");
-        path(dist_dir('App-skryf'), 'config/development.conf')->copy($cfgfile)
+        path(dist_dir('Skryf'), 'config/development.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     elsif ($self->mode eq "staging") {
         $cfgfile = path("~/.skryf-staging.conf");
-        path(dist_dir('App-skryf'), 'config/production.conf')->copy($cfgfile)
+        path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     else {
         $cfgfile = path("~/.skryf.conf");
-        path(dist_dir('App-skryf'), 'config/production.conf')->copy($cfgfile)
+        path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
     $self->plugin('Config' => {file => $cfgfile});
@@ -53,7 +53,7 @@ sub startup {
         db => sub {
             my $self       = shift;
             my $collection = shift;
-            my $store      = "App::skryf::Model::$collection";
+            my $store      = "Skryf::Model::$collection";
             load_class($store);
             $store->new(dbname => $self->config->{dbname});
         }
@@ -62,7 +62,7 @@ sub startup {
 ###############################################################################
 # Load global plugins
 ###############################################################################
-    push @{$self->plugins->namespaces}, 'App::skryf::Plugin';
+    push @{$self->plugins->namespaces}, 'Skryf::Plugin';
     for (keys %{$self->config->{plugins}}) {
         $self->log->debug('Loading plugin: ' . $_);
         $self->plugin($_) if $self->config->{plugins}{$_} > 0;
@@ -73,7 +73,7 @@ sub startup {
 ###############################################################################
     croak("No theme was defined/found.")
       unless defined($self->config->{theme});
-    push @{$self->plugins->namespaces}, 'App::skryf::Theme';
+    push @{$self->plugins->namespaces}, 'Skryf::Theme';
     $self->log->debug('Loading theme: ' . $self->config->{theme});
     $self->plugin($self->config->{theme});
 
@@ -106,7 +106,7 @@ __END__
 
 =head1 NAME
 
-App-skryf - Perl CMS/CMF.
+Skryf - Perl CMS/CMF.
 
 =head1 DESCRIPTION
 
@@ -114,7 +114,7 @@ CMS/CMF platform for Perl.
 
 =head1 METHODS
 
-L<App::skryf> inherits all methods from
+L<Skryf> inherits all methods from
 L<Mojolicious> and overloads the following:
 
 =head2 startup

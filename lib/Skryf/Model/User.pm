@@ -1,6 +1,6 @@
-package App::skryf::Model::User;
+package Skryf::Model::User;
 
-use Mojo::Base 'App::skryf::Model::Base';
+use Mojo::Base 'Skryf::Model::Base';
 use Mango::BSON ':bson';
 
 sub users {
@@ -50,7 +50,7 @@ __END__
 
 =head1 NAME
 
-App::skryf::Model::User - User Model Skryf
+Skryf::Model::User - User Model Skryf
 
 =head1 DESCRIPTION
 

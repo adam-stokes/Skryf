@@ -1,4 +1,4 @@
-package App::skryf::Util;
+package Skryf::Util;
 
 use Mojo::Base -base;
 

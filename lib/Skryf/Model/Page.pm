@@ -1,8 +1,8 @@
-package App::skryf::Model::Page;
+package Skryf::Model::Page;
 
-use Mojo::Base 'App::skryf::Model::Base';
+use Mojo::Base 'Skryf::Model::Base';
 
-use App::skryf::Util;
+use Skryf::Util;
 use DateTime;
 
 use constant USE_WIKILINKS => 1;
@@ -25,7 +25,7 @@ sub get {
 sub create {
     my ($self, $slug, $content, $created) = @_;
     $created = DateTime->now unless $created;
-    my $html = App::skryf::Util->convert($content, USE_WIKILINKS);
+    my $html = Skryf::Util->convert($content, USE_WIKILINKS);
     $self->pages->insert(
         {   slug    => $slug,
             content => $content,
@@ -39,7 +39,7 @@ sub save {
     my ($self, $page) = @_;
     my $lt = DateTime->now;
     $page->{html} =
-      App::skryf::Util->convert($page->{content}, USE_WIKILINKS);
+      Skryf::Util->convert($page->{content}, USE_WIKILINKS);
     $page->{modified} = $lt->strftime('%Y-%m-%dT%H:%M:%SZ');
     $self->pages->save($page);
 }
@@ -60,7 +60,7 @@ __END__
 
 =head1 NAME
 
-App::skryf::Model::Page - Page Model Skryf
+Skryf::Model::Page - Page Model Skryf
 
 =head1 DESCRIPTION
 

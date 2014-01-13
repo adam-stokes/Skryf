@@ -1,4 +1,4 @@
-package App::skryf::Manual::Plugins::Developing;
+package Skryf::Manual::Plugins::Developing;
 
 our $VERSION = '0.99_1';
 
@@ -14,7 +14,7 @@ __END__
 
 =head1 NAME
 
-App::skryf::Manual::Plugins::Developing - A guide to writing Plugins for Skryf
+Skryf::Manual::Plugins::Developing - A guide to writing Plugins for Skryf
 
 =head1 PLUGIN METADATA
 
@@ -42,7 +42,7 @@ The REST interface api version
 
   has template_files => qw[index new edit detail];
 
-The template files used for rendering of content. These filename would match whatever your theme has, for example, L<App::skryf::Theme::Booshka> contains a sub-directory within its theme with the following layout:
+The template files used for rendering of content. These filename would match whatever your theme has, for example, L<Skryf::Theme::Booshka> contains a sub-directory within its theme with the following layout:
 
   templates/
        blog/
@@ -51,13 +51,13 @@ The template files used for rendering of content. These filename would match wha
             edit.html.ep
             detail.html.ep
 
-Take a look at the L<App::skryf::Manual::Themes::Developing> documentation for more info.
+Take a look at the L<Skryf::Manual::Themes::Developing> documentation for more info.
 
 =head1 SEE ALSO
 
-L<App::skryf::Manual::Plugins>
+L<Skryf::Manual::Plugins>
 
-L<App::skryf::Manual::Plugins::Using>
+L<Skryf::Manual::Plugins::Using>
 
 =head1 AUTHOR
 

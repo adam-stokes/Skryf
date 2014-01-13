@@ -1,4 +1,4 @@
-package App::skryf::Manual::Plugins;
+package Skryf::Manual::QuickStart;
 
 our $VERSION = '0.99_1';
 
@@ -14,13 +14,23 @@ __END__
 
 =head1 NAME
 
-App::skryf::Manual::Plugins - A guide to using and developing plugins
+Skryf::Manual::QuickStart - A quickstart guide to using Skryf
+
+=head1 INSTALLING
+
+  $ cpanm git://github.com/skryf/App-skryf
 
 =head1 SEE ALSO
 
-L<App::skryf::Manual::Plugins::Developing>
+L<Skryf::Manual::Plugins>
 
-L<App::skryf::Manual::Plugins::Using>
+L<Skryf::Manual::Themes>
+
+L<Skryf::Manual::Installing>
+
+L<Skryf> (the library)
+
+L<skryf> (the command)
 
 =head1 AUTHOR
 

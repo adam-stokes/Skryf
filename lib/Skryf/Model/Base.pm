@@ -1,4 +1,4 @@
-package App::skryf::Model::Base;
+package Skryf::Model::Base;
 
 use Mojo::Base -base;
 use Mango;
@@ -21,7 +21,7 @@ __END__
 
 =head1 NAME
 
-App::skryf::Model::Base - Base Model Skryf
+Skryf::Model::Base - Base Model Skryf
 
 =head1 DESCRIPTION
 
