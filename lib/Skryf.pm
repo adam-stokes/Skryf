@@ -11,11 +11,6 @@ use DDP;
 
 our $VERSION = '0.99_3';
 
-has admin_menu => sub {
-    my $self = shift;
-    return [];
-};
-
 sub startup {
     my $self = shift;
 
@@ -54,7 +49,7 @@ sub startup {
         db => sub {
             my $self       = shift;
             my $collection = shift;
-            my $store      = "Skryf::Model::$collection";
+            my $store      = "models::$collection";
             load_class($store);
             $store->new(dbname => $self->config->{dbname});
         }

@@ -35,6 +35,7 @@ sub run {
     }
     else {
         $app_name_p->mkpath or die $!;
+        $app_name_p->child('models')->mkpath or die $!;
 
         # copy templates
         dircopy(path(dist_dir('Skryf'), 'theme/templates'),
@@ -47,8 +48,12 @@ sub run {
         # copy theme
         dircopy(path(dist_dir('Skryf'), 'theme/public'),
             $app_name_p->child('public'));
-	fcopy(path(dist_dir('Skryf'), 'app.pl'), $app_name_p->child('app.pl'));
-	fcopy(path(dist_dir('Skryf'), 'cpanfile'), $app_name_p->child('cpanfile'));
+        fcopy(path(dist_dir('Skryf'), 'app.pl'),
+            $app_name_p->child('app.pl'));
+        fcopy(
+            path(dist_dir('Skryf'), 'cpanfile'),
+            $app_name_p->child('cpanfile')
+        );
     }
     my $model = Skryf::Model::User->new(dbname => $app_name);
     say '-' x 79;
@@ -66,9 +71,11 @@ sub run {
 
     say '-' x 79;
     say "Installing dependencies ...";
-    # XXX: just until these guys are out of development phase to support git://
+
+   # XXX: just until these guys are out of development phase to support git://
     my $cpanm = App::cpanminus::script->new;
-    $cpanm->{argv} = ['App::cpanminus@1.7102', 'Module::CPANfile@1.0905', 'Carton@1.0.901'];
+    $cpanm->{argv} =
+      ['App::cpanminus@1.7102', 'Module::CPANfile@1.0905', 'Carton@1.0.901'];
     $cpanm->doit or exit(1);
     say '-' x 79;
     say "Skryf Setup completed.";

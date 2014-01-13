@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 use FindBin;
-BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
+BEGIN { unshift @INC, "$FindBin::Bin/models" }
 
 require Mojolicious::Commands;
 Mojolicious::Commands->start_app('Skryf');
