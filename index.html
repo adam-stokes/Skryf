@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,17 +16,18 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Skryf</h1>
-        <p>Perl on web.</p>
-
-        <p class="view"><a href="https://github.com/skryf/Skryf">View the Project on GitHub <small>skryf/Skryf</small></a></p>
-
+        <h1 class="header">Skryf</h1>
+        <p class="header">Perl on web.</p>
 
         <ul>
-          <li><a href="https://github.com/skryf/Skryf/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/skryf/Skryf/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/skryf/Skryf">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/skryf/Skryf/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/skryf/Skryf/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/skryf/Skryf">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/skryf">skryf</a></p>
+
+
       </header>
       <section>
         <h1>
@@ -65,8 +67,6 @@ $ carton exec morbo app.pl
 <p>This is your main hook into the application, it will be called at
 application startup. Meant to be overloaded in a subclass.</p>
 
-<p>Register plugin in <a href="https://metacpan.org/pod/Mojolicious">Mojolicious</a> application.</p>
-
 <h1>
 <a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>AUTHOR</h1>
 
@@ -83,11 +83,10 @@ application startup. Meant to be overloaded in a subclass.</p>
 <p>Licensed under the same terms as Perl.</p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/skryf">skryf</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
