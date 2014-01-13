@@ -7,13 +7,12 @@ use File::ShareDir ':ALL';
 use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
-use DDP;
 
 our $VERSION = '0.99_3';
 
 sub startup {
     my $self = shift;
-    p @INC;
+
 ###############################################################################
 # Skryf::Command namespace
 ###############################################################################
