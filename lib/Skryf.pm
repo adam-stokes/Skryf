@@ -9,7 +9,7 @@ use Path::Tiny;
 use Class::Load ':all';
 use DDP;
 
-our $VERSION = '0.99_2';
+our $VERSION = '0.99_3';
 
 has admin_menu => sub {
     my $self = shift;
