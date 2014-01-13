@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>App-skryf by skryf</title>
+    <title>Skryf by skryf</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,8 +15,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>App-skryf</h1>
-        <p>The Perl CMS.</p>
+        <h1>Skryf</h1>
+        <p>Perl on web.</p>
 
         <p class="view"><a href="https://github.com/skryf/Skryf">View the Project on GitHub <small>skryf/Skryf</small></a></p>
 
@@ -41,7 +41,7 @@
 <h1>
 <a name="prereqs" class="anchor" href="#prereqs"><span class="octicon octicon-link"></span></a>PREREQS</h1>
 
-<p>Perl 5.14 or higher and Mongo.</p>
+<p>Perl 5.14 or higher, <a href="https://metacpan.org/pod/App::cpanminus">App::cpanminus</a> &gt;= 1.7102, and Mongo.</p>
 
 <h1>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>INSTALL</h1>
@@ -49,7 +49,8 @@
 <pre><code>$ cpanm git@github.com:skryf/Skryf.git
 $ skryf new [NAME]
 $ cd [NAME]
-$ morbo app.pl
+$ carton install
+$ carton exec morbo app.pl
 </code></pre>
 
 <h1>
