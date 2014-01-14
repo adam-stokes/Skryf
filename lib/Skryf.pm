@@ -9,7 +9,7 @@ use Path::Tiny;
 use Class::Load ':all';
 use DDP;
 
-our $VERSION = '0.99_7';
+our $VERSION = '0.99_8';
 
 sub startup {
     my $app = shift;
