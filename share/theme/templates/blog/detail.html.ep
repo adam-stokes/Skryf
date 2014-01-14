@@ -1,0 +1,25 @@
+% use DateTime::Format::RFC3339;
+% layout 'main';
+  %= javascript begin
+    hljs.tabReplace = '    ';
+    hljs.initHighlightingOnLoad();
+  %= end
+  %= t 'div', class => 'post-body' => begin
+  % my $f = DateTime::Format::RFC3339->new;
+  % my $dt = $f->parse_datetime($post->{created});
+  <div class="post-title">
+    <div class="date">
+      <div class="date-month"><%= $dt->strftime('%b') %></div>
+      <div class="date-day"><%= $dt->strftime('%d') %></div>
+    </div>
+    %= t 'h1' => begin 
+      <%= $post->{topic} %>
+    %= end
+      <p>
+      <strong>Tags</strong>: <i><%= join(', ', $post->{tags}) %></i>
+      </p>
+    </div>
+    <%== $post->{html} %>
+    <%= disqus_inc config->{social}{disqus} || 'imnotset' %>
+  %= end
+

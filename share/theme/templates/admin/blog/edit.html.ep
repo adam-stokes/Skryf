@@ -1,3 +1,19 @@
 % layout 'admin';
 
-<h1>Blog Edit</h1>
+%= t 'div', class => 'post-body' => begin
+  %= t 'h2' => 'Update: '. $post->{title}
+    % if (my $msg = flash 'message') {
+    <b><%= $msg %></b>
+    % }
+  %= form_for url_for("admin_blog_update"), class => 'blog-form' => ( method => 'POST' ) => begin
+  %= hidden_field csrf_field
+  %= hidden_field slug => $post->{slug}
+  %= text_field 'title', type => 'text', class => 'blog-form-control', value => $post->{title}
+  %= t 'br'
+  %= text_area 'content' => $post->{content}
+  %= t 'br'
+  %= text_field 'tags', type => 'text', class => 'blog-form-control', value => $post->{tags}
+  %= t 'br'
+  %= submit_button 'Update', class => 'btn'
+  %= end
+%= end

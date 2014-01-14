@@ -50,7 +50,7 @@ sub startup {
             my $self = shift;
             my $message = shift || "Not Authorized";
             $self->flash(message => $message);
-            $self->redirect_to($self->config->{landing_page});
+            $self->redirect_to('login');
             return 0;
         }
     );
