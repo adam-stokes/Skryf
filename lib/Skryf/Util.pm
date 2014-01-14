@@ -10,7 +10,7 @@ use XML::Atom::SimpleFeed;
 use Encode;
 use DateTime::Format::RFC3339;
 
-our $VERSION = '0.99_6';
+our $VERSION = '0.99_7';
 
 sub convert {
     my ($self, $content, $use_wikilinks) = @_;

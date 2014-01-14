@@ -2,6 +2,9 @@ Revision history for Skryf
 
 {{$NEXT}}
 
+0.99_7  2014-01-14 15:36:52 EST
+	- Finish testing authentication routes
+
 0.99_6  2014-01-14 13:02:48 EST
 	- Update authentication callback
 
