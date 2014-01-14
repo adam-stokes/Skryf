@@ -16,7 +16,7 @@ eval Mojo::UserAgent->new->get(
     'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
 require App::cpanminus;
 
-our $VERSION = '0.99_5';
+our $VERSION = '0.99_6';
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";

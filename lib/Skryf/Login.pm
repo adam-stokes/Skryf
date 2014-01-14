@@ -5,7 +5,7 @@ use Mojo::Util qw(hmac_sha1_sum);
 use Skryf::Model::User;
 use DDP;
 
-our $VERSION = '0.99_5';
+our $VERSION = '0.99_6';
 
 has model => sub {
     my $self = shift;

@@ -2,6 +2,9 @@ Revision history for Skryf
 
 {{$NEXT}}
 
+0.99_6  2014-01-14 13:02:48 EST
+	- Update authentication callback
+
 0.99_5  2014-01-13 18:36:31 EST
 	- Core plugin blog added
 
