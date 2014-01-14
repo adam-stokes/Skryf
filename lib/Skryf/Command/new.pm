@@ -11,6 +11,7 @@ use Carp;
 use Path::Tiny;
 use IO::Prompt;
 use Skryf::Model::User;
+use DDP;
 
 eval Mojo::UserAgent->new->get(
     'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
@@ -42,6 +43,10 @@ sub run {
       prompt(-default => 'hackr@ownz.me', -tty, 'Owner email: ');
     $self->attrs->{site_desc} =
       prompt(-default => 'a tagline site.', -tty, 'Site description: ');
+    $self->attrs->{site_secret} = prompt(
+        -default => 'this sentence would be a secret.',
+        -tty, 'Site Secret: '
+    );
     my $app_name_p = path($app_name);
 
     if ($app_name_p->exists) {
@@ -82,7 +87,9 @@ sub run {
 ###############################################################################
 # Setup database and user credentials
 ###############################################################################
-    my $model = Skryf::Model::User->new(dbname => $app_name);
+    $self->app->secrets->[0] = $self->attrs->{site_secret};
+
+    my $model = Skryf::Model::User->new(dbname => sprintf("%s_development", $app_name));
     say "Database($app_name) configuration ...";
     my $username = prompt('Administrator login: ', -tty);
     my $password = prompt('Administrator password: ', -echo => '*', -tty);

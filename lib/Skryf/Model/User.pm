@@ -21,8 +21,7 @@ sub create {
         $self->users->insert(
             {   created  => DateTime->now,
                 username => $username,
-                password =>
-                  hmac_sha1_sum($self->app->secrets->[0], $password),
+                password => $password
             }
         );
     }

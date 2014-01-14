@@ -3,7 +3,6 @@ package Skryf::Login;
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Util qw(hmac_sha1_sum);
 use Skryf::Model::User;
-use DDP;
 
 our $VERSION = '0.99_6';
 
@@ -27,9 +26,8 @@ sub auth {
     my $self         = shift;
     my $user         = $self->model->get($self->param('username'));
     my $entered_pass = hmac_sha1_sum($self->app->secrets->[0], $self->param('password'));
-
     if ($entered_pass eq $user->{password}) {
-        $self->flash(message => 'authenticated.');
+        $self->flash(message => 'Youre authenticated!');
         $self->session(user     => 1);
         $self->session(username => $user);
         $self->redirect_to('welcome');

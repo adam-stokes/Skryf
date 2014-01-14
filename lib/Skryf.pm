@@ -40,7 +40,7 @@ sub startup {
     }
     $app->plugin('Config' => {file => $cfgfile});
     $app->config->{version} = eval $VERSION;
-    $app->secrets($app->config->{secret});
+    $app->secrets($app->config->{secrets});
 
 ###############################################################################
 # Authentication helpers
@@ -57,7 +57,7 @@ sub startup {
     $app->helper(
         is_admin => sub {
             my $self = shift;
-            return undef unless $app->session->{user};
+            return undef unless $self->session->{user};
         }
     );
 
