@@ -1,6 +1,7 @@
 Revision history for Skryf
 
 {{$NEXT}}
+	- Start work on refreshing admin theme
 
 0.99_7  2014-01-14 15:36:52 EST
 	- Finish testing authentication routes
