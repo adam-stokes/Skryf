@@ -1,6 +1,9 @@
 % layout 'default';
 %= t 'div', class => 'post-body' => begin
   %= t 'h1' => '404 >:('
+    % if (my $msg = flash 'message') {
+     <b><%= $msg %></b>
+    % }
   %= t 'p' => begin
     This is your development server. Make sure this isn't the same issue on production!
   %= end

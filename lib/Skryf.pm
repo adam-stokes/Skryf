@@ -12,23 +12,23 @@ use DDP;
 our $VERSION = '0.99_5';
 
 sub startup {
-    my $self = shift;
+    my $app = shift;
 
 ###############################################################################
 # Skryf::Command namespace
 ###############################################################################
-    push @{$self->commands->namespaces}, 'Skryf::Command';
+    push @{$app->commands->namespaces}, 'Skryf::Command';
 
 ###############################################################################
 # Setup configuration
 ###############################################################################
     my $cfgfile = undef;
-    if ($self->mode eq "development") {
+    if ($app->mode eq "development") {
         $cfgfile = path($CWD, "config/development.conf");
         path(dist_dir('Skryf'), 'config/development.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
-    elsif ($self->mode eq "staging") {
+    elsif ($app->mode eq "staging") {
         $cfgfile = path($CWD, "config/staging.conf");
         path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
@@ -38,81 +38,83 @@ sub startup {
         path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
           unless $cfgfile->exists;
     }
-    $self->plugin('Config' => {file => $cfgfile});
-    $self->config->{version} = eval $VERSION;
-    $self->secrets($self->config->{secret});
+    $app->plugin('Config' => {file => $cfgfile});
+    $app->config->{version} = eval $VERSION;
+    $app->secrets($app->config->{secret});
 
 ###############################################################################
 # Authentication helpers
 ###############################################################################
-    $self->helper(
-        is_admin => sub {
+    $app->helper(
+        auth_fail => sub {
             my $self = shift;
-            unless ($self->session('user')) {
-                $self->flash(message => 'Please login first');
-                $self->redirect_to($self->url_for('login'));
-                return;
-            }
-            return 1;
+            my $message = shift || "Not Authorized";
+            $self->flash(message => $message);
+            $self->redirect_to($self->config->{landing_page});
+            return 0;
         }
     );
-
-    $self->helper(
-        auth_r => sub {
+    $app->helper(
+        is_admin => sub {
             my $self = shift;
-            return $self->app->routes->under($self->is_admin);
+            return undef unless $app->session->{user};
         }
     );
 
 ###############################################################################
 # Load global plugins
 ###############################################################################
-    push @{$self->plugins->namespaces}, 'Skryf::Plugin';
-    for (keys %{$self->config->{plugins}}) {
-        $self->log->debug('Loading plugin: ' . $_);
-        $self->plugin($_) if $self->config->{plugins}{$_} > 0;
+    push @{$app->plugins->namespaces}, 'Skryf::Plugin';
+    for (keys %{$app->config->{plugins}}) {
+        $app->log->debug('Loading plugin: ' . $_);
+        $app->plugin($_) if $app->config->{plugins}{$_} > 0;
     }
 
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
-    push @{$self->renderer->paths}, 'templates';
-    push @{$self->static->paths},   'public';
+    push @{$app->renderer->paths}, 'templates';
+    push @{$app->static->paths},   'public';
 
     # Fallback
-    push @{$self->renderer->paths},
+    push @{$app->renderer->paths},
       path(dist_dir('Skryf'), 'theme/templates');
-    push @{$self->static->paths},   path(dist_dir('Skryf'), 'theme/public');
+    push @{$app->static->paths},   path(dist_dir('Skryf'), 'theme/public');
 
 ###############################################################################
 # Routing
 ###############################################################################
-    my $r = $self->routes;
 
-    # Administration
-    $r->get('/login')->to('login#login')->name('login');
-    $r->get('/logout')->to('login#logout')->name('logout');
-    $r->post('/auth')->to('login#auth')->name('auth');
-
-    if ($self->auth_r) {
-        $self->auth_r->route('/admin')->via('GET')->to(
-            cb => sub {
-                my $self = shift;
-                $self->render('/admin/dashboard');
-            }
-        )->name('admin_dashboard');
-    }
-    $r->get('/')->to(
-        cb => sub {
+    ###########################################################################
+    # Authentication
+    ###########################################################################
+    my $r = $app->routes;
+    $r->any(
+        '/' => sub {
             my $self = shift;
             if ($self->config->{landing_page}) {
-                $self->render($self->config->{landing_page});
+                $self->render($app->config->{landing_page});
             }
             else {
                 $self->render('welcome');
             }
         }
     )->name('welcome');
+
+    $r->any('/login')->to('login#login');
+    $r->any('/logout')->to('login#logout');
+    $r->post('/auth')->to('login#auth');
+
+    ###########################################################################
+    # Administration
+    ###########################################################################
+    my $if_admin = $r->under(
+        sub {
+            my $self = shift;
+            return $self->auth_fail unless $self->is_admin;
+        }
+    );
+    $if_admin->any('/admin/dashboard')->to('admin#dashboard');
 }
 
 1;
