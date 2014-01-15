@@ -1,12 +1,7 @@
 Revision history for Skryf
 
 {{$NEXT}}
+	- Use version for parsing semantic versions
 
 1.0.0  2014-01-14 20:33:31 EST
   - Make Blog work out of the box.
-
-0.99_9  2014-01-14 20:26:25 EST
-	- Add theme support back in
-
-0.99_8  2014-01-14 16:02:16 EST
-	- Start work on refreshing admin theme
