@@ -11,8 +11,14 @@ has model => sub {
     Skryf::Model::User->new(dbname => $self->config->{dbname});
 };
 
+has user => sub {
+    my $self = shift;
+    return $self->model->get($self->session('username'));
+};
+
 sub dashboard {
     my $self = shift;
+    $self->stash(user => $self->user);
     $self->render('/admin/dashboard');
 }
 

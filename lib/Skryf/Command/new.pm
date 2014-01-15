@@ -11,7 +11,6 @@ use Carp;
 use Path::Tiny;
 use IO::Prompt;
 use Skryf::Model::User;
-use DDP;
 
 eval Mojo::UserAgent->new->get(
     'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
@@ -35,6 +34,7 @@ sub run {
     $app_name = prompt('Application name: ', -tty) unless defined $app_name;
     $self->attrs->{site} =
       prompt(-default => 'http://localhost', -tty, 'Site host: ');
+    $self->attrs->{site_port} = prompt(-default => '3000', -tty, 'Site port: ');
     $self->attrs->{site_title} =
       prompt(-default => 'Perl on web.', -tty, 'Site title: ');
     $self->attrs->{site_author} =

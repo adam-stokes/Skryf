@@ -7,7 +7,6 @@ use File::ShareDir ':ALL';
 use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
-use DDP;
 
 our $VERSION = '0.99_8';
 
@@ -57,7 +56,7 @@ sub startup {
     $app->helper(
         is_admin => sub {
             my $self = shift;
-            return undef unless $self->session->{user};
+            return undef unless $self->session->{is_admin};
         }
     );
 

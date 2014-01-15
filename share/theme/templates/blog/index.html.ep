@@ -1,5 +1,5 @@
 % use DateTime::Format::RFC3339;
-% layout 'main';
+% layout 'default';
 %= t 'h1' => 'Archives'
 %= t 'div', class => 'archive-list' => begin
   %= tag 'ul' => begin

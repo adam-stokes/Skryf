@@ -13,6 +13,7 @@ has model => sub {
 
 sub login {
     my $self = shift;
+    p $self->session('username');
     $self->render('login');
 }
 
@@ -23,13 +24,14 @@ sub logout {
 }
 
 sub auth {
-    my $self         = shift;
-    my $user         = $self->model->get($self->param('username'));
-    my $entered_pass = hmac_sha1_sum($self->app->secrets->[0], $self->param('password'));
+    my $self = shift;
+    my $user = $self->model->get($self->param('username'));
+    my $entered_pass =
+      hmac_sha1_sum($self->app->secrets->[0], $self->param('password'));
     if ($entered_pass eq $user->{password}) {
         $self->flash(message => 'Youre authenticated!');
-        $self->session(user     => 1);
-        $self->session(username => $user);
+        $self->session(is_admin => 1);
+        $self->session(username => $user->{username});
         $self->redirect_to('welcome');
     }
     else {
