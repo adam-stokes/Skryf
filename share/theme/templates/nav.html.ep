@@ -1,5 +1,0 @@
-<div id="navbar">
-  <div class="links">
-  %= link_to "Home" => "/"
-  </div>
-</div>

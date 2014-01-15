@@ -9,7 +9,6 @@
   %= end
   %= t 'body' => begin
     %= t 'div', id => 'container' => begin
-      %= include 'nav'
         %= t 'div', id => 'page-body' => begin
           <%= content %>
         %= end

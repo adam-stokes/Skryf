@@ -75,6 +75,9 @@ sub startup {
     push @{$app->renderer->paths}, 'templates';
     push @{$app->static->paths},   'public';
 
+    # Load any custom theme specifics
+    $app->plugin($self->config->{theme}) if $self->config->{theme};
+
     # Fallback
     push @{$app->renderer->paths},
       path(dist_dir('Skryf'), 'theme/templates');

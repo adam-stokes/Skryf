@@ -1,11 +1,15 @@
 requires 'Skryf', '0', git => 'git@github.com:skryf/Skryf.git';
+requires 'Skryf::Plugin::Blog', '0',
+  git => 'git@github.com:skryf/Skryf-Plugin-Blog.git';
+requires 'Skryf::Theme::Booshka', '0',
+  git => 'git@github.com:skryf/Skryf-Theme-Booshka.git';
 
 on test => sub {
-  requires 'Test::More';
-  requires 'Test::Mojo';
+    requires 'Test::More';
+    requires 'Test::Mojo';
 };
 
 on build => sub {
-  requires 'Test::More';
-  requires 'Test::Mojo';
+    requires 'Test::More';
+    requires 'Test::Mojo';
 };
