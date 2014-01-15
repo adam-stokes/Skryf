@@ -62,7 +62,8 @@
             "Test::Mojo" : "0",
             "Test::More" : "0",
             "Text::MultiMarkdown" : "0",
-            "XML::Atom::SimpleFeed" : "0"
+            "XML::Atom::SimpleFeed" : "0",
+            "version" : "0"
          }
       },
       "test" : {

@@ -7,9 +7,10 @@ use File::ShareDir ':ALL';
 use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
+use version;
 
 our $VERSION = '1.0.0';
-$VERSION = eval $VERSION;
+$VERSION = version->parse($VERSION);
 
 sub startup {
     my $app = shift;

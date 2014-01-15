@@ -19,6 +19,7 @@ requires 'Test::Mojo';
 requires 'Test::More';
 requires 'Text::MultiMarkdown';
 requires 'XML::Atom::SimpleFeed';
+requires 'version';
 
 on test => sub {
   requires 'Test::More';
