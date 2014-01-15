@@ -9,7 +9,7 @@ use Path::Tiny;
 use Class::Load ':all';
 use version;
 
-our $VERSION = '1.0.0';
+our $VERSION = '1.0.1';
 $VERSION = version->parse($VERSION);
 
 sub startup {

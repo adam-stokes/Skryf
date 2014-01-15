@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Controller';
 use Mojo::Util qw(hmac_sha1_sum);
 use Skryf::Model::User;
 
-our $VERSION = '1.0.0';
+our $VERSION = '1.0.1';
 
 has model => sub {
     my $self = shift;

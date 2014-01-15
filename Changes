@@ -1,6 +1,8 @@
 Revision history for Skryf
 
 {{$NEXT}}
+
+1.0.1  2014-01-14 20:50:24 EST
 	- Use version for parsing semantic versions
 
 1.0.0  2014-01-14 20:33:31 EST

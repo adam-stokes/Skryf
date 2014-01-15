@@ -8,7 +8,7 @@ use Path::Tiny;
 use Skryf::Model::Blog;
 use DateTime::Format::RFC3339;
 
-our $VERSION = '1.0.0';
+our $VERSION = '1.0.1';
 
 has description => "Import blog posts from another service\n";
 has usage       => <<"EOF";
