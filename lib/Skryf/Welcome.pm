@@ -2,7 +2,7 @@ package Skryf::Welcome;
 
 use Mojo::Base 'Mojolicious::Controller';
 
-our $VERSION = '0.99_8';
+our $VERSION = '0.99_9';
 
 sub index {
   my $self = shift;

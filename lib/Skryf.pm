@@ -8,7 +8,7 @@ use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
 
-our $VERSION = '0.99_8';
+our $VERSION = '0.99_9';
 $VERSION = eval $VERSION;
 
 sub startup {
