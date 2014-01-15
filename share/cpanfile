@@ -3,6 +3,9 @@ requires 'Skryf::Plugin::Blog', '0',
   git => 'git@github.com:skryf/Skryf-Plugin-Blog.git';
 requires 'Skryf::Theme::Booshka', '0',
   git => 'git@github.com:skryf/Skryf-Theme-Booshka.git';
+requires 'Mojolicious::Plugin::Gravatar';
+requires 'Mojolicious::Plugin::GoogleAnalytics';
+requires 'Mojolicious::Plugin::Disqus::Tiny';
 
 on test => sub {
     requires 'Test::More';

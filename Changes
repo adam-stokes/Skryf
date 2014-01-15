@@ -1,6 +1,7 @@
 Revision history for Skryf
 
 {{$NEXT}}
+  - Make Blog work out of the box.
 
 0.99_9  2014-01-14 20:26:25 EST
 	- Add theme support back in
