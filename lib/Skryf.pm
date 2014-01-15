@@ -9,6 +9,7 @@ use Path::Tiny;
 use Class::Load ':all';
 
 our $VERSION = '0.99_8';
+$VERSION = eval $VERSION;
 
 sub startup {
     my $app = shift;
@@ -38,7 +39,7 @@ sub startup {
           unless $cfgfile->exists;
     }
     $app->plugin('Config' => {file => $cfgfile});
-    $app->config->{version} = eval $VERSION;
+    $app->config->{version} = $VERSION;
     $app->secrets($app->config->{secrets});
 
 ###############################################################################
@@ -76,7 +77,8 @@ sub startup {
     push @{$app->static->paths},   'public';
 
     # Load any custom theme specifics
-    $app->plugin($self->config->{theme}) if $self->config->{theme};
+    push @{$app->plugins->namespaces}, 'Skryf::Theme';
+    $app->plugin($app->config->{theme}) if $app->config->{theme};
 
     # Fallback
     push @{$app->renderer->paths},

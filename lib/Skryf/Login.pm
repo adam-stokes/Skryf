@@ -13,7 +13,6 @@ has model => sub {
 
 sub login {
     my $self = shift;
-    p $self->session('username');
     $self->render('login');
 }
 

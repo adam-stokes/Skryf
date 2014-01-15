@@ -56,6 +56,8 @@ sub run {
     }
     else {
         $app_name_p->child('config')->mkpath or die $!;
+        $app_name_p->child('templates')->mkpath or die $!;
+        $app_name_p->child('public')->mkpath or die $!;
 
         for my $_conf (qw/production staging development/) {
             $self->attrs->{dbname} = sprintf("%s_%s", $app_name, $_conf);
@@ -69,13 +71,6 @@ sub run {
               ->spew_utf8($rendered_conf);
         }
 
-        # copy templates
-        dircopy(path(dist_dir('Skryf'), 'theme/templates'),
-            $app_name_p->child('templates'));
-
-        # copy theme
-        dircopy(path(dist_dir('Skryf'), 'theme/public'),
-            $app_name_p->child('public'));
         fcopy(path(dist_dir('Skryf'), 'app.pl'),
             $app_name_p->child('app.pl'));
         fcopy(
@@ -88,18 +83,23 @@ sub run {
 # Setup database and user credentials
 ###############################################################################
     $self->app->secrets->[0] = $self->attrs->{site_secret};
-
-    my $model = Skryf::Model::User->new(dbname => sprintf("%s_development", $app_name));
     say "Database($app_name) configuration ...";
     my $username = prompt('Administrator login: ', -tty);
     my $password = prompt('Administrator password: ', -echo => '*', -tty);
-    if ($model->get($username)) {
-        croak
-          "The user: $username already exists in the database.\n",
-          "Please remove if you wish to re-auth";
+
+    for my $env (qw/production staging development/) {
+        my $model =
+          Skryf::Model::User->new(
+            dbname => sprintf("%s_%s", $app_name, $env));
+        if ($model->get($username)) {
+            croak
+              "The user: $username already exists in the $env database.\n",
+              "Please remove if you wish to re-auth";
+        }
+        printf("Creating user in %s_%s ..\n", $app_name, $env);
+        $model->create($username,
+            hmac_sha1_sum($self->app->secrets->[0], $password));
     }
-    $model->create($username,
-        hmac_sha1_sum($self->app->secrets->[0], $password));
 
 ###############################################################################
 # Install required dependencies from cpan

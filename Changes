@@ -1,28 +1,7 @@
 Revision history for Skryf
 
 {{$NEXT}}
+	- Add theme support back in
 
 0.99_8  2014-01-14 16:02:16 EST
 	- Start work on refreshing admin theme
-
-0.99_7  2014-01-14 15:36:52 EST
-	- Finish testing authentication routes
-
-0.99_6  2014-01-14 13:02:48 EST
-	- Update authentication callback
-
-0.99_5  2014-01-13 18:36:31 EST
-	- Core plugin blog added
-
-0.99_4  2014-01-13 14:30:43 EST
-	- version all packages
-	- add administrator helpers
-
-0.99_3  2014-01-12 23:35:51 EST
-	- expose site specific development
-
-0.99_2  2014-01-09 20:28:36 EST
-	- freshen up import command
-
-0.99_1  2014-01-09 17:29:28 EST
-        - Pre-release
