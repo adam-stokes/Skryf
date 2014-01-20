@@ -32,7 +32,7 @@
       },
       "configure" : {
          "requires" : {
-            "Module::Build::Tiny" : "0.030"
+            "Module::Build::Tiny" : "0.031"
          }
       },
       "develop" : {
