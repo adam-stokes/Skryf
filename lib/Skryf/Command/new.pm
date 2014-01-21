@@ -51,7 +51,8 @@ sub run {
 
     if ($app_name_p->exists) {
         croak
-          "The application directory: $app_name exists. Please create a new application",
+          "The application directory: $app_name exists. \n",
+          "Please create a new application",
           "or remove the existing one to proceed.\n";
     }
     else {
