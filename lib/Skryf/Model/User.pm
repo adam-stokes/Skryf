@@ -1,4 +1,5 @@
 package Skryf::Model::User;
+# ABSTRACT: Skryf user model
 
 use Mojo::Base 'Skryf::Model::Base';
 use Mojo::Util qw(hmac_sha1_sum);
@@ -47,53 +48,36 @@ sub save {
 
 __END__
 
-=head1 NAME
-
-Skryf::Model::User - User Model Skryf
-
 =head1 DESCRIPTION
 
 User model 
 
-=head1 METHODS
-
-=head2 B<users>
+=method users
 
 Grabs user collection from Mongo
 
-=head2 B<all>
+=method all
 
 Returns all users
 
-=head2 B<check>
+=method check
 
 Checks username/password against database
 
-=head2 B<create>
+=method create
 
 Creates a user
 
-=head2 B<get>
+=method get
 
 Gets single user
 
-=head2 B<remove>
+=method remove
 
 Removes user
 
-=head2 B<save>
+=method save
 
 Saves user and attributes
-
-=head1 SEE ALSO
-
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>. L<Mango>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
 
 =cut

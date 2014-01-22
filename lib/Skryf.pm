@@ -10,8 +10,7 @@ use Path::Tiny;
 use Class::Load ':all';
 use version;
 
-our $VERSION = '1.0.1';
-$VERSION = version->parse($VERSION);
+$VERSION = version->parse($Skryf::VERSION);
 
 sub startup {
     my $app = shift;
@@ -127,13 +126,9 @@ sub startup {
 
 __END__
 
-=head1 NAME
-
-Skryf - Perl on web.
-
 =head1 DESCRIPTION
 
-Perl on web platform.
+easy does it web application development.
 
 =head1 PREREQS
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env perl
+# PODNAME: skryf
+# ABSTRACT: Perl on web.
 use strict;
 use warnings;
 
@@ -11,14 +13,6 @@ push @{$commands->namespaces}, 'Skryf::Command';
 $commands->run(@ARGV);
 
 __END__
-
-=head1 NAME
-
-Skryf - Perl on web.
-
-=head1 DESCRIPTION
-
-Perl on web, easy does it web development.
 
 =head1 INSTALLATION
 
@@ -69,17 +63,5 @@ I use Ubic to manage the process
       ubic_log => $ENV{HOME} ."/skryf-application/logs/app.ubic.log",
       user => $ENV{USER}
      );
-
-=head1 AUTHOR
-
-Adam Stokes E<lt>adamjs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-Licensed under the same terms as Perl.
 
 =cut

@@ -4,15 +4,11 @@ NAME
 
 VERSION
 
-    version 1.0.3
+    version 1.0.4
 
 DESCRIPTION
 
-    Perl on web platform.
-
-NAME
-
-    Skryf - Perl on web.
+    easy does it web application development.
 
 PREREQS
 

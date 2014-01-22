@@ -20,7 +20,9 @@ my %WriteMakefileArgs = (
     "File::ShareDir::Install" => "0.03"
   },
   "DISTNAME" => "Skryf",
-  "EXE_FILES" => [],
+  "EXE_FILES" => [
+    "bin/skryf"
+  ],
   "LICENSE" => "perl",
   "NAME" => "Skryf",
   "PREREQ_PM" => {
@@ -33,6 +35,7 @@ my %WriteMakefileArgs = (
     "File::Copy::Recursive" => 0,
     "File::ShareDir" => 0,
     "File::chdir" => 0,
+    "FindBin" => 0,
     "IO::Prompt" => 0,
     "Mango" => 0,
     "Mojo::Base" => 0,
@@ -40,26 +43,26 @@ my %WriteMakefileArgs = (
     "Mojo::Template" => 0,
     "Mojo::UserAgent" => 0,
     "Mojo::Util" => 0,
+    "Mojolicious::Commands" => 0,
     "Path::Tiny" => 0,
     "String::Dirify" => 0,
     "String::Util" => 0,
     "Text::MultiMarkdown" => 0,
     "XML::Atom::SimpleFeed" => 0,
     "constant" => 0,
-    "version" => 0
+    "strict" => 0,
+    "version" => 0,
+    "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "FindBin" => 0,
     "List::Util" => 0,
     "Mojolicious" => 0,
     "Test::Mojo" => 0,
     "Test::More" => 0,
     "Test::NoTabs" => 0,
-    "lib" => 0,
-    "strict" => 0,
-    "warnings" => 0
+    "lib" => 0
   },
-  "VERSION" => "1.0.3",
+  "VERSION" => "1.0.4",
   "test" => {
     "TESTS" => "t/*.t t/model/*.t t/web/*.t"
   }
@@ -86,6 +89,7 @@ my %FallbackPrereqs = (
   "Mojo::UserAgent" => 0,
   "Mojo::Util" => 0,
   "Mojolicious" => 0,
+  "Mojolicious::Commands" => 0,
   "Path::Tiny" => 0,
   "String::Dirify" => 0,
   "String::Util" => 0,

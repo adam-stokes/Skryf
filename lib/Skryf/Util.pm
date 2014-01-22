@@ -1,4 +1,5 @@
 package Skryf::Util;
+# ABSTRACT: Skryf utility functions
 
 use Mojo::Base -base;
 
@@ -9,8 +10,6 @@ use String::Util 'trim';
 use XML::Atom::SimpleFeed;
 use Encode;
 use DateTime::Format::RFC3339;
-
-our $VERSION = '1.0.1';
 
 sub convert {
     my ($self, $content, $use_wikilinks) = @_;

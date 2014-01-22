@@ -1,4 +1,5 @@
 package Skryf::Model::Page;
+# ABSTRACT: Skryf page model
 
 use Mojo::Base 'Skryf::Model::Base';
 
@@ -58,30 +59,13 @@ sub search {
 
 __END__
 
-=head1 NAME
-
-Skryf::Model::Page - Page Model Skryf
-
 =head1 DESCRIPTION
 
 Page model
 
-=head1 METHODS
-
-=head2 B<pages>
+=method pages
 
 Pages collection
-
-=head1 SEE ALSO
-
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>. L<Mango>.
-
-=head1 COPYRIGHT AND LICENSE
-
-This plugin is copyright (c) 2013 by Adam Stokes <adamjs@cpan.org>
-
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
 
 =cut
 
