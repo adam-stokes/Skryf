@@ -10,8 +10,6 @@ use Path::Tiny;
 use Class::Load ':all';
 use version;
 
-$VERSION = version->parse($Skryf::VERSION);
-
 sub startup {
     my $app = shift;
 
@@ -40,7 +38,7 @@ sub startup {
           unless $cfgfile->exists;
     }
     $app->plugin('Config' => {file => $cfgfile});
-    $app->config->{version} = $VERSION;
+    $app->config->{version} = $Skryf::VERSION;
     $app->secrets($app->config->{secrets});
 
 ###############################################################################

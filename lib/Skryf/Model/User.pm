@@ -50,7 +50,7 @@ __END__
 
 =head1 DESCRIPTION
 
-User model 
+User model
 
 =method users
 
