@@ -1,4 +1,5 @@
 package Skryf;
+# ABSTRACT: Skryf application
 
 use Mojo::Base 'Mojolicious';
 
@@ -155,17 +156,5 @@ L<Mojolicious> and overloads the following:
 
 This is your main hook into the application, it will be called at
 application startup. Meant to be overloaded in a subclass.
-
-=head1 AUTHOR
-
-Adam Stokes E<lt>adamjs@cpan.orgE<gt>
-
-=head1 COPYRIGHT
-
-Copyright 2013-2014 Adam Stokes
-
-=head1 LICENSE
-
-Licensed under the same terms as Perl.
 
 =cut
