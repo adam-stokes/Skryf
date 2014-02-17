@@ -18,6 +18,7 @@ sub login {
 sub logout {
     my $self = shift;
     $self->session(expires => 1);
+    $self->flash(message => 'You are now logged out.');
     $self->redirect_to($self->config->{landing_page});
 }
 
@@ -33,7 +34,7 @@ sub auth {
         $self->redirect_to('welcome');
     }
     else {
-        $self->flash(message => 'failed auth.');
+        $self->flash(message => 'Incorrect password/username, please try again.');
         $self->redirect_to('login');
     }
 }
