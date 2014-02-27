@@ -19,5 +19,4 @@ RUN apt-get upgrade -y
 # Install basic packages.
 RUN apt-get install -y curl git perl perl-modules cpanminus cpanoutdated build-essential
 
-RUN cpanm https://github.com/skryf/Skryf/archive/v1.0.6.tar.gz
-
+RUN cpanm https://github.com/skryf/Skryf/archive/v1.0.7.tar.gz
