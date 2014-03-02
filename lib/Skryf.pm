@@ -72,16 +72,20 @@ sub startup {
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
-    push @{$app->renderer->paths}, 'templates';
-    push @{$app->static->paths},   'public';
+    if ($app->config->{theme} !~ /static_site/) {
+        push @{$app->renderer->paths}, 'templates';
+        push @{$app->static->paths},   'public';
 
-    # Load any custom theme specifics
-    push @{$app->plugins->namespaces}, 'Skryf::Theme';
-    $app->plugin($app->config->{theme}) if $app->config->{theme};
+        # Load any custom theme specifics
+        push @{$app->plugins->namespaces}, 'Skryf::Theme';
+        $app->plugin($app->config->{theme}) if $app->config->{theme};
+    }
+    else {
+        push @{$app->static->paths}, 'public';
+    }
 
     # Fallback
-    push @{$app->renderer->paths},
-      path(dist_dir('Skryf'), 'theme/templates');
+    push @{$app->renderer->paths}, path(dist_dir('Skryf'), 'theme/templates');
     push @{$app->static->paths},   path(dist_dir('Skryf'), 'theme/public');
 
 ###############################################################################
@@ -95,18 +99,25 @@ sub startup {
     $r->any(
         '/' => sub {
             my $self = shift;
-            if ($self->config->{landing_page}) {
-                $self->render($app->config->{landing_page});
+            if ($self->config->{theme} =~ /static_site/) {
+                $self->render_static($app->config->{landing_page});
             }
             else {
-                $self->render('welcome');
+                if ($self->config->{landing_page}) {
+                    $self->render($app->config->{landing_page});
+                }
+                else {
+                    $self->render('welcome');
+                }
             }
         }
     )->name('welcome');
 
-    $r->any('/login')->to('login#login');
-    $r->any('/logout')->to('login#logout');
-    $r->post('/auth')->to('login#auth');
+    if ($self->config->{theme} !~ /static_site/) {
+        $r->any('/login')->to('login#login');
+        $r->any('/logout')->to('login#logout');
+        $r->post('/auth')->to('login#auth');
+    }
 
     ###########################################################################
     # Administration
