@@ -56,7 +56,7 @@ sub startup {
     $app->helper(
         is_admin => sub {
             my $self = shift;
-            return undef unless $self->session->{is_admin};
+            return 1 unless $self->session->{is_admin};
         }
     );
 
@@ -129,6 +129,8 @@ sub startup {
         }
     );
     $if_admin->any('/admin/dashboard')->to('admin#dashboard');
+
+    return;
 }
 
 1;
