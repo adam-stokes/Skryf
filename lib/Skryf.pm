@@ -113,7 +113,7 @@ sub startup {
         }
     )->name('welcome');
 
-    if ($self->config->{theme} !~ /static_site/) {
+    if ($app->config->{theme} !~ /static_site/) {
         $r->any('/login')->to('login#login');
         $r->any('/logout')->to('login#logout');
         $r->post('/auth')->to('login#auth');
