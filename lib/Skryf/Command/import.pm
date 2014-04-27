@@ -1,5 +1,5 @@
 package Skryf::Command::import;
-
+# ABSTRACT: imports data from service
 
 1;
 

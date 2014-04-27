@@ -1,5 +1,7 @@
 package Skryf::Command::new;
 
+# ABSTRACT: Start a new skryf application
+
 use Mojo::Base 'Mojolicious::Commands';
 use Mojo::Util qw(hmac_sha1_sum);
 use Mojo::UserAgent;
