@@ -43,25 +43,6 @@ sub startup {
     $app->secrets($app->config->{secrets});
 
 ###############################################################################
-# Authentication helpers
-###############################################################################
-    $app->helper(
-        auth_fail => sub {
-            my $self = shift;
-            my $message = shift || "Not Authorized";
-            $self->flash(message => $message);
-            $self->redirect_to('login');
-            return 0;
-        }
-    );
-    $app->helper(
-        is_admin => sub {
-            my $self = shift;
-            return 1 unless $self->session->{is_admin};
-        }
-    );
-
-###############################################################################
 # Load core and any additional namespaces
 ###############################################################################
     push @{$app->plugins->namespaces}, 'Skryf::Plugin';
@@ -125,22 +106,6 @@ sub startup {
         }
     )->name('welcome');
 
-    if ($app->config->{theme} !~ /static_site/) {
-        $r->any('/login')->to('login#login');
-        $r->any('/logout')->to('login#logout');
-        $r->post('/auth')->to('login#auth');
-    }
-
-    ###########################################################################
-    # Administration
-    ###########################################################################
-    my $if_admin = $r->under(
-        sub {
-            my $self = shift;
-            return $self->auth_fail unless $self->is_admin;
-        }
-    );
-    $if_admin->any('/admin/dashboard')->to('admin#dashboard');
 
     return;
 }

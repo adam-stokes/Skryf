@@ -1,4 +1,5 @@
 package Skryf::Model::User;
+
 # ABSTRACT: Skryf user model
 
 use Mojo::Base 'Skryf::Model::Base';
@@ -15,6 +16,12 @@ sub all {
     $self->users->find()->all;
 }
 
+sub roles {
+    my ($self, $username) = @_;
+    my $user = $self->get($username);
+    return $user->{roles};
+}
+
 sub create {
     my ($self, $username, $password) = @_;
     my $user = $self->users->find_one({username => $username});
@@ -22,7 +29,8 @@ sub create {
         $self->users->insert(
             {   created  => DateTime->now,
                 username => $username,
-                password => $password
+                password => $password,
+                roles    => [qw/Subscriber/],
             }
         );
     }
