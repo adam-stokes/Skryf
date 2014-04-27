@@ -9,7 +9,7 @@ requires "File::ShareDir" => "0";
 requires "File::chdir" => "0";
 requires "FindBin" => "0";
 requires "IO::Prompt" => "0";
-requires "Mango" => "0";
+requires "Mango" => "0.24";
 requires "Mojo::Base" => "0";
 requires "Mojo::JSON" => "0";
 requires "Mojo::Template" => "0";
@@ -28,6 +28,7 @@ requires "warnings" => "0";
 
 on 'test' => sub {
   requires "List::Util" => "0";
+  requires "Mango" => "0.24";
   requires "Mojolicious" => "0";
   requires "Test::Mojo" => "0";
   requires "Test::More" => "0";

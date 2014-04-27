@@ -1,4 +1,5 @@
 package Skryf;
+
 # ABSTRACT: Skryf application
 
 use Mojo::Base 'Mojolicious';
@@ -61,12 +62,24 @@ sub startup {
     );
 
 ###############################################################################
-# Load global plugins
+# Load core and any additional namespaces
 ###############################################################################
     push @{$app->plugins->namespaces}, 'Skryf::Plugin';
+    push @{$app->plugins->namespaces}, 'Skryf::Theme';
+
+    # Add additional namespaces if configured
+    for (@{$app->config->{namespaces}}) {
+        $app->log->debug('Adding namespace: ' . $_);
+        push @{$app->plugins->namespaces}, $_ . '::Plugin';
+        push @{$app->plugins->namespaces}, $_ . '::Theme';
+    }
+
+###############################################################################
+# Load global plugins
+###############################################################################
     for (keys %{$app->config->{plugins}}) {
         $app->log->debug('Loading plugin: ' . $_);
-        $app->plugin($_) if $app->config->{plugins}{$_} > 0;
+        $app->plugin($_) if $app->config->{plugins}{$_} == 1;
     }
 
 ###############################################################################
@@ -77,7 +90,6 @@ sub startup {
         push @{$app->static->paths},   'public';
 
         # Load any custom theme specifics
-        push @{$app->plugins->namespaces}, 'Skryf::Theme';
         $app->plugin($app->config->{theme}) if $app->config->{theme};
     }
     else {
