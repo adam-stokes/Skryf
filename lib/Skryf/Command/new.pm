@@ -12,7 +12,7 @@ use File::Copy::Recursive qw[fcopy dircopy];
 use Carp;
 use Path::Tiny;
 use IO::Prompt;
-use Skryf::Model::User;
+use Skryf::Plugin::Auth::Model::User;
 
 eval Mojo::UserAgent->new->get(
     'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
@@ -90,7 +90,7 @@ sub run {
 
     for my $env (qw/production staging development/) {
         my $model =
-          Skryf::Model::User->new(
+          Skryf::Plugin::Auth::Model::User->new(
             dbname => sprintf("%s_%s", $app_name, $env));
         if ($model->get($username)) {
             croak

@@ -1,6 +1,8 @@
 requires 'Skryf', '0', git => 'git@github.com:skryf/Skryf.git';
 requires 'Skryf::Plugin::Blog', '0',
   git => 'git@github.com:skryf/Skryf-Plugin-Blog.git';
+requires 'Skryf::Plugin::Auth', '0',
+  git => 'git@github.com:skryf/Skryf-Plugin-Auth.git';
 requires 'Skryf::Theme::Booshka', '0',
   git => 'git@github.com:skryf/Skryf-Theme-Booshka.git';
 
