@@ -22,24 +22,19 @@ __END__
 
     $ skryf new
 
-=head2 Themes
+=head2 THEMES
 
-Themes are installed via carton and a cpanfile, in your B<cpanfile> add the following:
+    $ cpanm git@github.com:skryf/Skryf-Theme-Booshka.git
 
-    requires 'Skryf::Theme::Booshka', '0', git => 'git@github.com:skryf/Skryf-Theme-Booshka.git';
-    $ carton install
-
-Then specify the theme in your config:
+Then specify the theme in your config B<config/*.conf>:
 
     theme => 'Booshka'
 
 =head2 Plugins
 
-Plugins are installed via carton and a cpanfile, in your B<cpanfile> add the following:
+    $ cpanm git@github.com:skryf/Skryf-Plugin-Blog.git
 
-    requires 'Skryf::Plugin::Blog', '0', git => 'git@github.com:skryf/Skryf-Plugin-Blog.git';
-
-Then specify plugin in your config:
+Then specify plugin in your config B<config/*.conf>:
 
     plugins => { 'Blog' => 1 }
 

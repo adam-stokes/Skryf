@@ -56,6 +56,7 @@ sub run {
         $app_name_p->child('config')->mkpath    or die $!;
         $app_name_p->child('templates')->mkpath or die $!;
         $app_name_p->child('public')->mkpath    or die $!;
+        $app_name_p->child('logs')->mkpath      or die $!;
 
         for my $_conf (qw/production staging development/) {
             $self->attrs->{dbname} = sprintf("%s_%s", $app_name, $_conf);
