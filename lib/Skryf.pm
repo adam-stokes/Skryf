@@ -10,6 +10,7 @@ use File::chdir;
 use Path::Tiny;
 use Class::Load ':all';
 use version;
+use Skryf::DB;
 
 sub startup {
     my $app = shift;
@@ -88,7 +89,7 @@ sub startup {
     $app->helper(
         db => sub {
             my $self = shift;
-            Skryf::Model::Base->new(dbname => $self->config->{dbname});
+            Skryf::DB->new(dbname => $self->config->{dbname});
         }
     );
 ###############################################################################
@@ -135,7 +136,7 @@ easy does it web application development.
 
 =head1 PREREQS
 
-Perl 5.14 or higher, L<App::cpanminus> >= 1.7102, and Mongo.
+Perl 5.14+ and Mongo.
 
 =head1 INSTALL
 
