@@ -7,7 +7,8 @@ use Skryf::Model::User;
 
 has model => sub {
     my $self = shift;
-    Skryf::Model::User->new(dbname => $self->config->{dbname});
+    my $_model = Skryf::Model::User->new;
+    
 };
 
 has user => sub {
