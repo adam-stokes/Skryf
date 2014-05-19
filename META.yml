@@ -3,6 +3,7 @@ abstract: 'Skryf application'
 author:
   - 'Adam Stokes <adamjs@cpan.org>'
 build_requires:
+  Carton: '0'
   List::Util: '0'
   Mango: '0.24'
   Mojolicious: '0'
@@ -21,7 +22,6 @@ meta-spec:
   version: '1.4'
 name: Skryf
 requires:
-  App::cpanminus: '0'
   Carp: '0'
   Class::Load: '0'
   DateTime: '0'

@@ -1,4 +1,3 @@
-requires "App::cpanminus" => "0";
 requires "Carp" => "0";
 requires "Class::Load" => "0";
 requires "DateTime" => "0";
@@ -27,6 +26,7 @@ requires "version" => "0";
 requires "warnings" => "0";
 
 on 'test' => sub {
+  requires "Carton" => "0";
   requires "List::Util" => "0";
   requires "Mango" => "0.24";
   requires "Mojolicious" => "0";

@@ -12,11 +12,7 @@ use File::Copy::Recursive qw[fcopy dircopy];
 use Carp;
 use Path::Tiny;
 use IO::Prompt;
-use Skryf::Plugin::Auth::Model::User;
-
-eval Mojo::UserAgent->new->get(
-    'https://raw.github.com/miyagawa/cpanminus/devel/cpanm')->res->body;
-require App::cpanminus;
+use Skryf::Model::User;
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";
@@ -34,7 +30,8 @@ sub run {
     $app_name = prompt('Application name: ', -tty) unless defined $app_name;
     $self->attrs->{site} =
       prompt(-default => 'http://localhost', -tty, 'Site host: ');
-    $self->attrs->{site_port} = prompt(-default => '3000', -tty, 'Site port: ');
+    $self->attrs->{site_port} =
+      prompt(-default => '3000', -tty, 'Site port: ');
     $self->attrs->{site_title} =
       prompt(-default => 'Perl on web.', -tty, 'Site title: ');
     $self->attrs->{site_author} =
@@ -56,9 +53,9 @@ sub run {
           "or remove the existing one to proceed.\n";
     }
     else {
-        $app_name_p->child('config')->mkpath or die $!;
+        $app_name_p->child('config')->mkpath    or die $!;
         $app_name_p->child('templates')->mkpath or die $!;
-        $app_name_p->child('public')->mkpath or die $!;
+        $app_name_p->child('public')->mkpath    or die $!;
 
         for my $_conf (qw/production staging development/) {
             $self->attrs->{dbname} = sprintf("%s_%s", $app_name, $_conf);
@@ -74,10 +71,6 @@ sub run {
 
         fcopy(path(dist_dir('Skryf'), 'app.pl'),
             $app_name_p->child('app.pl'));
-        fcopy(
-            path(dist_dir('Skryf'), 'cpanfile'),
-            $app_name_p->child('cpanfile')
-        );
     }
 
 ###############################################################################
@@ -90,7 +83,7 @@ sub run {
 
     for my $env (qw/production staging development/) {
         my $model =
-          Skryf::Plugin::Auth::Model::User->new(
+          Skryf::Model::User->new(
             dbname => sprintf("%s_%s", $app_name, $env));
         if ($model->get($username)) {
             croak
@@ -102,16 +95,6 @@ sub run {
             hmac_sha1_sum($self->app->secrets->[0], $password));
     }
 
-###############################################################################
-# Install required dependencies from cpan
-###############################################################################
-    say "Installing dependencies ...";
-
-   # XXX: just until these guys are out of development phase to support git://
-    my $cpanm = App::cpanminus::script->new;
-    $cpanm->{argv} =
-      ['App::cpanminus@1.7102', 'Module::CPANfile@1.0905', 'Carton@1.0.901'];
-    $cpanm->doit;
     say "Setting permissions";
     system("find " . $app_name_p . " -type f | xargs chmod u+rw");
     system("find " . $app_name_p . " -type d | xargs chmod u+r");

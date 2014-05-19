@@ -89,6 +89,12 @@ sub startup {
     # Authentication
     ###########################################################################
     my $r = $app->routes;
+    if ($app->config->{theme} !~ /static_site/) {
+        $r->any('/login')->to('auth#login');
+        $r->any('/logout')->to('auth#logout');
+        $r->post('/authenticate')->to('auth#verify');
+    }
+
     $r->any(
         '/' => sub {
             my $self = shift;
@@ -105,7 +111,6 @@ sub startup {
             }
         }
     )->name('welcome');
-
 
     return;
 }
