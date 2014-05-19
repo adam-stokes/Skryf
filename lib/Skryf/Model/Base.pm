@@ -1,26 +1,80 @@
 package Skryf::Model::Base;
+
 # ABSTRACT: Base model
 
-use Mojo::Base -base;
 use Mango;
 
-has 'mpath' => 'mongodb://localhost:27017/';
+use Moo;
+use namespace::clean;
 
-has 'dbname' => sub {
-    my $self = shift;
-    my $_dbname = $ENV{TEST_ONLINE} || 'skryf';
-    return $_dbname;
-};
+has 'mpath' => (
+    is      => 'ro',
+    default => sub {'mongodb://localhost:27017/'},
+);
 
-sub mgo {
-    my $self = shift;
-    return Mango->new($self->mpath . $self->dbname);
-}
+has 'dbname' => (
+    is      => 'ro',
+    default => sub {
+        my $self = shift;
+        $ENV{TEST_ONLINE} || 'skryf';
+    },
+);
+
+has 'mgo' => (
+    is   => 'ro',
+    lazy => 1,
+    default =>
+      sub { my $self = shift; Mango->new($self->mpath . $self->dbname); },
+);
+
+=attr q
+
+Holds the collection methods
+
+=cut
+has 'q' => (
+    is   => 'rw',
+    lazy => 1,
+);
+
+has namespace => (
+    is      => 'rw',
+    trigger => sub {
+        my ($self, $name) = @_;
+        $self->q($self->mgo->db->collection($name));
+    }
+);
 
 sub current_db {
     my $self = shift;
     return sprintf("%s%s", $self->mpath, $self->dbname);
 }
+
+sub all {
+    my $self = shift;
+    $self->q->find()->all;
+}
+
+sub get {
+    my ($self, $key, $value) = @_;
+    $self->q->find_one({$key => $value});
+}
+
+sub remove {
+    my ($self, $key, $value) = @_;
+    $self->q->remove({$key => $value});
+}
+
+sub save {
+    my ($self, $attrs) = @_;
+    $self->q->save($attrs);
+}
+
+sub search {
+    my ($self, $kwds) = @_;
+    $self->q->find({content => qr/$kwds/})->all;
+}
+
 
 1;
 __END__

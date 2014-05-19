@@ -1,33 +1,26 @@
 package Skryf::Model::Page;
 # ABSTRACT: Skryf page model
 
-use Mojo::Base 'Skryf::Model::Base';
 
 use Skryf::Util;
 use DateTime;
 
 use constant USE_WIKILINKS => 1;
 
-sub pages {
-    my $self = shift;
-    $self->mgo->db->collection('pages');
-}
+use Moo;
+extends 'Skryf::Model::Base';
+use namespace::clean;
 
-sub all {
+sub BUILD {
     my $self = shift;
-    $self->pages->find->sort({created => -1})->all;
-}
-
-sub get {
-    my ($self, $slug) = @_;
-    $self->pages->find_one({slug => $slug});
+    $self->namespace('pages');
 }
 
 sub create {
     my ($self, $slug, $content, $created) = @_;
     $created = DateTime->now unless $created;
     my $html = Skryf::Util->convert($content, USE_WIKILINKS);
-    $self->pages->insert(
+    $self->q->insert(
         {   slug    => $slug,
             content => $content,
             created => $created->strftime('%Y-%m-%dT%H:%M:%SZ'),
@@ -42,17 +35,7 @@ sub save {
     $page->{html} =
       Skryf::Util->convert($page->{content}, USE_WIKILINKS);
     $page->{modified} = $lt->strftime('%Y-%m-%dT%H:%M:%SZ');
-    $self->pages->save($page);
-}
-
-sub remove {
-    my ($self, $slug) = @_;
-    $self->pages->remove({slug => $slug});
-}
-
-sub search {
-    my ($self, $kwds) = @_;
-    $self->pages->find({content => qr/$kwds/})->all;
+    $self->q->save($page);
 }
 
 1;

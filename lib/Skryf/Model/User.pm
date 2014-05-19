@@ -2,31 +2,22 @@ package Skryf::Model::User;
 
 # ABSTRACT: Skryf user model
 
-use Mojo::Base 'Skryf::Model::Base';
-use Mojo::Util qw(hmac_sha1_sum);
 use DateTime;
 
-sub users {
-    my $self = shift;
-    $self->mgo->db->collection('users');
-}
+use Moo;
+extends 'Skryf::Model::Base';
+use namespace::clean;
 
-sub all {
+sub BUILD {
     my $self = shift;
-    $self->users->find()->all;
-}
-
-sub roles {
-    my ($self, $username) = @_;
-    my $user = $self->get($username);
-    return $user->{roles};
+    $self->namespace('users');
 }
 
 sub create {
     my ($self, $username, $password) = @_;
-    my $user = $self->users->find_one({username => $username});
+    my $user = $self->get({username => $username});
     if (!$user) {
-        $self->users->insert(
+        $self->q->insert(
             {   created  => DateTime->now,
                 username => $username,
                 password => $password,
@@ -35,21 +26,6 @@ sub create {
         );
     }
     return 1;
-}
-
-sub get {
-    my ($self, $username) = @_;
-    $self->users->find_one({username => $username});
-}
-
-sub remove {
-    my ($self, $username) = @_;
-    $self->users->remove({username => $username});
-}
-
-sub save {
-    my ($self, $user) = @_;
-    $self->users->save($user);
 }
 
 1;
