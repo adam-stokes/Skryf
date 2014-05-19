@@ -3,7 +3,6 @@ abstract: 'Skryf application'
 author:
   - 'Adam Stokes <adamjs@cpan.org>'
 build_requires:
-  Carton: '0'
   List::Util: '0'
   Mango: '0.24'
   Mojolicious: '0'

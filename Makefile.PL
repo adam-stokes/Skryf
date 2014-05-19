@@ -54,7 +54,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "Carton" => 0,
     "List::Util" => 0,
     "Mango" => "0.24",
     "Mojolicious" => 0,
@@ -72,7 +71,6 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "Carp" => 0,
-  "Carton" => 0,
   "Class::Load" => 0,
   "DateTime" => 0,
   "DateTime::Format::RFC3339" => 0,
