@@ -30,7 +30,7 @@ Then specify the theme in your config B<config/*.conf>:
 
     theme => 'Booshka'
 
-=head2 Plugins
+=head2 PLUGINS
 
     $ cpanm git@github.com:skryf/Skryf-Plugin-Blog.git
 
