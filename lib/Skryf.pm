@@ -92,6 +92,25 @@ sub startup {
             Skryf::DB->new(dbname => $self->config->{dbname});
         }
     );
+
+    $app->helper(
+        auth_role_fail => sub {
+            my $self = shift;
+            $self->flash(message => 'Incorrect permission for this section');
+            $self->redirect_to('login');
+        }
+    );
+
+    $app->helper(
+        auth_has_role => sub {
+            my $self = shift;
+            my $k = shift;
+            my $v = shift;
+            my $user = $self->db->namespace('users')
+              ->find_one({username => $self->session->{username}});
+            return $user->{roles}->{$k}->{$v};
+        }
+    );
 ###############################################################################
 # Routing
 ###############################################################################

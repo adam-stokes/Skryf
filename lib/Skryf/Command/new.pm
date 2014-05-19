@@ -84,9 +84,7 @@ sub run {
     my $password = prompt('Administrator password: ', -echo => '*', -tty);
 
     for my $env (qw/production staging development/) {
-        my $db =
-          Skryf::DB->new(
-            dbname => sprintf("%s_%s", $app_name, $env));
+        my $db = Skryf::DB->new(dbname => sprintf("%s_%s", $app_name, $env));
         my $users = $db->namespace('users');
         if ($users->find_one({username => $username})) {
             croak
@@ -94,9 +92,19 @@ sub run {
               "Please remove if you wish to re-auth";
         }
         printf("Creating user in %s_%s ..\n", $app_name, $env);
-        $users->insert({created => DateTime->now,
-                        username => $username,
-                        password => hmac_sha1_sum($self->app->secrets->[0], $password)});
+        $users->insert(
+            {   created  => DateTime->now,
+                username => $username,
+                password =>
+                  hmac_sha1_sum($self->app->secrets->[0], $password),
+                roles => {
+                    admin => {
+                        is_staff => 1,
+                        is_owner => 1
+                    }
+                }
+            }
+        );
     }
 
     say "Setting permissions";
