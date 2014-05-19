@@ -27,12 +27,9 @@ has 'mgo' => (
       sub { my $self = shift; Mango->new($self->mpath . $self->dbname); },
 );
 
-has namespace => (
-    is      => 'rw',
-    trigger => sub {
-        my ($self, $name) = @_;
-        $self->mgo->db->collection($name);
-    }
-);
+sub namespace {
+    my ($self, $name) = @_;
+    $self->mgo->db->collection($name);
+}
 
 1;

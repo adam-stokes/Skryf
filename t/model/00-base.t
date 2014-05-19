@@ -8,12 +8,12 @@ use FindBin;
 use lib "$FindBin::Bin../../lib";
 
 diag('Testing base model');
-use_ok('Skryf::Model::Base');
+use_ok('Skryf::DB');
 my $model;
 
 $model =
-  Skryf::Model::Base->new;
+  Skryf::DB->new;
 ok($model);
-ok($model->mgo);
+ok($model->namespace('test'));
 
 done_testing();

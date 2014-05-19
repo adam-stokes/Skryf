@@ -10,20 +10,22 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag("Testing page model");
-use_ok('Skryf::Model::Page');
+use_ok('Skryf::DB');
 
+my $db;
 my $model;
 
-my $slug = 'WikiWord';
+my $slug    = 'WikiWord';
 my $content = 'WikiWord';
 
-$model = Skryf::Model::Page->new;
+$db    = Skryf::DB->new;
+$model = $db->namespace('pages');
 ok $model;
-ok $model->pages;
+
 #cleanup
-ok $model->pages->drop();
-ok $model->create($slug, $content);
-my $page = $model->get($slug);
+ok $model->drop();
+ok $model->insert({slug => $slug, content => $content});
+my $page = $model->find_one({slug => $slug});
 ok $page;
 ok $page->{html} =~ /<a href="WikiWord">WikiWord<\/a>/;
 ok $model->remove($slug);

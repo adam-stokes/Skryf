@@ -28,7 +28,6 @@ requires "version" => "0";
 requires "warnings" => "0";
 
 on 'test' => sub {
-  requires "List::Util" => "0";
   requires "Mango" => "0.24";
   requires "Mojolicious" => "0";
   requires "Test::Mojo" => "0";
@@ -39,7 +38,7 @@ on 'test' => sub {
 
 on 'configure' => sub {
   requires "ExtUtils::MakeMaker" => "6.30";
-  requires "File::ShareDir::Install" => "0.03";
+  requires "File::ShareDir::Install" => "0.06";
 };
 
 on 'develop' => sub {

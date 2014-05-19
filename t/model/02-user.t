@@ -12,30 +12,33 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
 diag("Testing user models");
-use_ok('Skryf::Model::User');
+use_ok('Skryf::DB');
+my $db;
 my $model;
 
 my $username = 'joebob';
 my $password = hmac_sha1_sum('password', 'sillyman');
 
-$model =
-  Skryf::Model::User->new;
+$db = Skryf::DB->new;
+$model = $db->namespace('users');
 ok $model;
-ok $model->users;
 
-ok $model->create(
-    $username,
-    $password,
-    {   launchpad => {
-            token        => 'aaaa',
-            token_secret => 'bbbb',
-        },
-    },
+ok $model->insert(
+    {   username => $username,
+        password => $password,
+        attrs    => {
+            launchpad => {
+                token        => 'aaaa',
+                token_secret => 'bbbb',
+            },
+        }
+    }
 );
 
-my $user_check = $model->get($username);
+my $user_check = $model->find_one({username => $username});
 ok $username eq $user_check->{username};
 ok $password eq $user_check->{password};
+
 #ok $model->remove($username);
 
 done_testing();
