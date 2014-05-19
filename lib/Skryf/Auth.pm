@@ -1,4 +1,5 @@
 package Skryf::Auth;
+
 # ABSTRACT: Skryf login controller
 
 use Mojo::Base 'Mojolicious::Controller';
@@ -18,7 +19,8 @@ sub logout {
 
 sub verify {
     my $self = shift;
-    my $user = $self->auth_model->get($self->param('username'));
+    my $user = $self->db->namespace('users')
+      ->find_one({username => $self->param('username')});
     my $entered_pass =
       hmac_sha1_sum($self->app->secrets->[0], $self->param('password'));
     if ($entered_pass eq $user->{password}) {
@@ -27,7 +29,8 @@ sub verify {
         $self->redirect_to('welcome');
     }
     else {
-        $self->flash(message => 'Incorrect password/username, please try again.');
+        $self->flash(
+            message => 'Incorrect password/username, please try again.');
         $self->redirect_to('login');
     }
 }
