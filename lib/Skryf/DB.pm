@@ -27,21 +27,11 @@ has 'mgo' => (
       sub { my $self = shift; Mango->new($self->mpath . $self->dbname); },
 );
 
-=attr q
-
-Holds the collection methods
-
-=cut
-has 'q' => (
-    is   => 'rw',
-    lazy => 1,
-);
-
 has namespace => (
     is      => 'rw',
     trigger => sub {
         my ($self, $name) = @_;
-        $self->q($self->mgo->db->collection($name));
+        $self->mgo->db->collection($name);
     }
 );
 

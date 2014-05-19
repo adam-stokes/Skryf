@@ -12,7 +12,8 @@ use File::Copy::Recursive qw[fcopy dircopy];
 use Carp;
 use Path::Tiny;
 use IO::Prompt;
-use Skryf::Model::User;
+use DateTime;
+use Skryf::DB;
 
 has description => "Create a new Skryf application.\n";
 has usage       => "usage: $0 new [NAME]\n";
@@ -83,17 +84,19 @@ sub run {
     my $password = prompt('Administrator password: ', -echo => '*', -tty);
 
     for my $env (qw/production staging development/) {
-        my $model =
-          Skryf::Model::User->new(
+        my $db =
+          Skryf::DB->new(
             dbname => sprintf("%s_%s", $app_name, $env));
-        if ($model->get($username)) {
+        my $users = $db->namespace('users');
+        if ($users->find_one({username => $username})) {
             croak
               "The user: $username already exists in the $env database.\n",
               "Please remove if you wish to re-auth";
         }
         printf("Creating user in %s_%s ..\n", $app_name, $env);
-        $model->create($username,
-            hmac_sha1_sum($self->app->secrets->[0], $password));
+        $users->insert({created => DateTime->now,
+                        username => $username,
+                        password => hmac_sha1_sum($self->app->secrets->[0], $password)});
     }
 
     say "Setting permissions";
