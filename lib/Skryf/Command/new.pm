@@ -102,7 +102,8 @@ sub run {
                         is_staff => 1,
                         is_owner => 1
                     }
-                }
+                },
+                domain => $self->attrs->{site}
             }
         );
     }

@@ -26,6 +26,7 @@ sub verify {
     if ($entered_pass eq $user->{password}) {
         $self->flash(message => 'Youre authenticated!');
         $self->session(username => $user->{username});
+        $self->session(domain => $user->{domain});
         $self->redirect_to('welcome');
     }
     else {
