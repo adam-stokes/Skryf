@@ -64,7 +64,7 @@ my %WriteMakefileArgs = (
     "Test::NoTabs" => 0,
     "lib" => 0
   },
-  "VERSION" => "1.0.9",
+  "VERSION" => "1.1",
   "test" => {
     "TESTS" => "t/*.t t/model/*.t t/web/*.t"
   }
