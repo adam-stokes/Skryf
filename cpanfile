@@ -7,6 +7,7 @@ requires "File::Copy::Recursive" => "0";
 requires "File::ShareDir" => "0";
 requires "File::chdir" => "0";
 requires "FindBin" => "0";
+requires "Hash::Merge" => "0";
 requires "IO::Prompt" => "0";
 requires "Mango" => "0.24";
 requires "Mojo::Base" => "0";

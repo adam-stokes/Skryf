@@ -29,6 +29,7 @@ requires:
   File::ShareDir: '0'
   File::chdir: '0'
   FindBin: '0'
+  Hash::Merge: '0'
   IO::Prompt: '0'
   Mango: '0.24'
   Mojo::Base: '0'

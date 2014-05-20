@@ -1,0 +1,24 @@
+{
+  "users": [
+    { "password" : "pass",
+      "username" : "testuser",
+      "email" : "testuser@example.com",
+      "roles" : { "admin" : { "is_owner" : 1,
+                              "is_staff" : 1
+                            }
+                }
+    },
+    { "password" : "pass",
+      "username" : "testuser1",
+      "email" : "testuser1@example.com"
+    },
+    { "password" : "pass",
+      "username" : "testuser2",
+      "email" : "testuser2@example.com"
+    },
+    { "password" : "pass",
+      "username" : "testuser3",
+      "email" : "testuser3@example.com"
+    }
+  ]
+}
