@@ -115,6 +115,7 @@ sub startup {
 # Routing
 ###############################################################################
     my $r = $app->routes;
+
     # Admin
     my $if_admin = $app->routes->under(
         sub {
@@ -126,8 +127,10 @@ sub startup {
 
     $if_admin->any('/admin')->to('admin#dashboard')->name('admin_dashboard');
     $if_admin->any('/admin/users')->to('admin#users')->name('admin_users');
-    $if_admin->any('/admin/users/modify')->to('admin#modify')
+    $if_admin->any('/admin/users/modify/:username')->to('admin#modify_user')
       ->name('admin_users_modify');
+    $if_admin->any('/admin/users/delete/:username')->to('admin#delete_user')
+      ->name('admin_users_delete');
 
     # Authentication
     if ($app->config->{theme} !~ /static_site/) {
