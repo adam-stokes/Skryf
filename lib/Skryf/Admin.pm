@@ -1,25 +1,41 @@
 package Skryf::Admin;
-# ABSTRACT: Skryf admin routines
+
+# ABSTRACT: admin controller
 
 use Mojo::Base 'Mojolicious::Controller';
-use Mojo::Util qw(hmac_sha1_sum);
-use Skryf::Model::User;
-
-has model => sub {
-    my $self = shift;
-    my $_model = Skryf::Model::User->new;
-    
-};
-
-has user => sub {
-    my $self = shift;
-    return $self->model->get($self->session('username'));
-};
 
 sub dashboard {
     my $self = shift;
-    $self->stash(user => $self->user);
     $self->render('/admin/dashboard');
+}
+
+sub users {
+  my $self = shift;
+  my $users = $self->db->namespace('users')->find()->all;
+  $self->stash(userlist => $users);
+  $self->render('/admin/users');
+}
+
+sub modify {
+    my $self     = shift;
+    my $username = $self->param('username');
+    my $user =
+      $self->db->namespace('users')->find_one({username => $username});
+    if ($self->req->method eq "POST") {
+        my $params = $self->req->params->to_hash;
+        if ($user) {
+            $self->db->namespace('users')
+              ->update({username => $user}, $params);
+        }
+        else {
+            $self->db->namespace('users')->insert($params);
+        }
+    }
+    else {
+        $self->stash(user => $user);
+        $self->render('/admin/users/modify');
+    }
+
 }
 
 1;

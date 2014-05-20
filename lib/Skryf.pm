@@ -82,7 +82,6 @@ sub startup {
     push @{$app->renderer->paths}, path(dist_dir('Skryf'), 'theme/templates');
     push @{$app->static->paths},   path(dist_dir('Skryf'), 'theme/public');
 
-
 ###############################################################################
 # Helpers
 ###############################################################################
@@ -115,11 +114,22 @@ sub startup {
 ###############################################################################
 # Routing
 ###############################################################################
-
-    ###########################################################################
-    # Authentication
-    ###########################################################################
     my $r = $app->routes;
+    # Admin
+    my $if_admin = $app->routes->under(
+        sub {
+            my $self = shift;
+            return $self->auth_role_fail
+              unless $self->auth_has_role('admin', 'is_staff');
+        }
+    );
+
+    $if_admin->any('/admin')->to('admin#dashboard')->name('admin_dashboard');
+    $if_admin->any('/admin/users')->to('admin#users')->name('admin_users');
+    $if_admin->any('/admin/users/modify')->to('admin#modify')
+      ->name('admin_users_modify');
+
+    # Authentication
     if ($app->config->{theme} !~ /static_site/) {
         $r->any('/login')->to('auth#login');
         $r->any('/logout')->to('auth#logout');
