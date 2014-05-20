@@ -1,9 +1,0 @@
-% layout 'admin';
-
-<div class="user-details">
-<h2><%= $user->{username} %></h2>
-
-% use DDP;
-<%= p $user->{social} %>
-
-</div>
