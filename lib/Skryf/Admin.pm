@@ -29,7 +29,7 @@ sub modify_user {
         my $params = $self->req->params->to_hash;
         $params->{created} = DateTime->now;
         if ($user) {
-            if ($params->{password} != $user->{password}) {
+            if ($params->{password} eq $params->{confirmpassword}) {
                 $params->{password} =
                   hmac_sha1_sum($self->app->secrets->[0],
                     $params->{password});
