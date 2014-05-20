@@ -176,8 +176,7 @@ Perl 5.14+ and Mongo.
     $ cpanm git@github.com:skryf/Skryf.git
     $ skryf new [NAME]
     $ cd [NAME]
-    $ carton install
-    $ carton exec morbo app.pl
+    $ morbo app.pl
 
 =head1 METHODS
 
