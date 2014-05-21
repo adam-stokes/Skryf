@@ -93,6 +93,14 @@ sub startup {
     );
 
     $app->helper(
+      get_user => sub {
+        my $self = shift;
+        my $username = shift;
+        return $self->db->namespace('users')->find_one({username => $username});
+      }
+    );
+
+    $app->helper(
         auth_role_fail => sub {
             my $self = shift;
             $self->flash(message => 'Incorrect permission for this section');

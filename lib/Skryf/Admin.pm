@@ -35,17 +35,14 @@ sub modify_user {
                     $params->{password});
             }
             my $merge = Hash::Merge->new('RIGHT_PRECEDENT');
-            $self->db->namespace('users')->update(
-                {username => $user->{username}},
-                $merge->merge($user, $params)
-            );
+            $self->db->namespace('users')->save($merge->merge($user, $params));
         }
         else {
             $params->{password} =
               hmac_sha1_sum($self->app->secrets->[0], $params->{password});
             $self->db->namespace('users')->insert($params);
         }
-        $self->flash(message => "User updated.");
+        $self->flash(success => "User updated.");
         $self->redirect_to($self->url_for('admin_users'));
     }
     else {
@@ -62,7 +59,7 @@ sub delete_user {
       $self->flash(warning => "You cannot delete the owner.");
     } else {
       $self->db->namespace('users')->remove({username => $username});
-      $self->flash(message => sprintf("User: %s deleted", $username));
+      $self->flash(success => sprintf("User: %s deleted", $username));
     }
     $self->redirect_to($self->url_for('admin_users'));
 }

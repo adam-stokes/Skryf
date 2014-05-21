@@ -24,14 +24,14 @@ sub verify {
     my $entered_pass =
       hmac_sha1_sum($self->app->secrets->[0], $self->param('password'));
     if ($entered_pass eq $user->{password}) {
-        $self->flash(message => 'Youre authenticated!');
+        $self->flash(success => 'Youre authenticated!');
         $self->session(username => $user->{username});
         $self->session(domain => $user->{domain});
         $self->redirect_to('welcome');
     }
     else {
         $self->flash(
-            message => 'Incorrect password/username, please try again.');
+            danger => 'Incorrect password/username, please try again.');
         $self->redirect_to('login');
     }
 }
