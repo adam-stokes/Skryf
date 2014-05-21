@@ -4,89 +4,120 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Skryf by skryf</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/skryf/Skryf">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/skryf/Skryf/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/skryf/Skryf/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1 class="header">Skryf</h1>
-        <p class="header">Perl on web.</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/skryf/Skryf/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/skryf/Skryf/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/skryf/Skryf">View On GitHub</a></li>
-        </ul>
-
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/skryf">skryf</a></p>
-
-
-      </header>
       <section>
-        <h1>
-<a name="name" class="anchor" href="#name"><span class="octicon octicon-link"></span></a>NAME</h1>
+        <div id="title">
+          <h1>Skryf</h1>
+          <p>Perl on web.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/skryf">skryf</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
 
-<p>Skryf - Perl on web.</p>
+        <p>NAME</p>
 
-<h1>
-<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>DESCRIPTION</h1>
-
-<p>Perl on web platform.</p>
-
-<h1>
-<a name="prereqs" class="anchor" href="#prereqs"><span class="octicon octicon-link"></span></a>PREREQS</h1>
-
-<p>Perl 5.14 or higher, <a href="https://metacpan.org/pod/App::cpanminus">App::cpanminus</a> &gt;= 1.7102, and Mongo.</p>
-
-<h1>
-<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>INSTALL</h1>
-
-<pre><code>$ cpanm git@github.com:skryf/Skryf.git
-$ skryf new [NAME]
-$ cd [NAME]
-$ carton install
-$ carton exec morbo app.pl
+<pre><code>Skryf - Skryf application
 </code></pre>
 
-<h1>
-<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>METHODS</h1>
+<p>VERSION</p>
 
-<p><a href="https://metacpan.org/pod/Skryf">Skryf</a> inherits all methods from
-<a href="https://metacpan.org/pod/Mojolicious">Mojolicious</a> and overloads the following:</p>
+<pre><code>version 1.3
+</code></pre>
 
-<h2>
-<a name="startup" class="anchor" href="#startup"><span class="octicon octicon-link"></span></a>startup</h2>
+<p>DESCRIPTION</p>
 
-<p>This is your main hook into the application, it will be called at
-application startup. Meant to be overloaded in a subclass.</p>
+<pre><code>easy does it web application development.
+</code></pre>
 
-<h1>
-<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>AUTHOR</h1>
+<p>PREREQS</p>
 
-<p>Adam Stokes <a href="mailto:adamjs@cpan.org">adamjs@cpan.org</a></p>
+<pre><code>Perl 5.14+ and Mongo.
+</code></pre>
 
-<h1>
-<a name="copyright" class="anchor" href="#copyright"><span class="octicon octicon-link"></span></a>COPYRIGHT</h1>
+<p>INSTALL</p>
 
-<p>Copyright 2013-2014 Adam Stokes</p>
+<pre><code>    $ cpanm git@github.com:skryf/Skryf.git
+    $ skryf new [NAME]
+    $ cd [NAME]
+    $ morbo app.pl
+</code></pre>
 
-<h1>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE</h1>
+<p>METHODS</p>
 
-<p>Licensed under the same terms as Perl.</p>
+<pre><code>Skryf inherits all methods from Mojolicious and overloads the
+following:
+</code></pre>
+
+<p>startup</p>
+
+<pre><code>This is your main hook into the application, it will be called at
+application startup. Meant to be overloaded in a subclass.
+</code></pre>
+
+<p>AUTHOR</p>
+
+<pre><code>Adam Stokes &lt;adamjs@cpan.org&gt;
+</code></pre>
+
+<p>COPYRIGHT AND LICENSE</p>
+
+<pre><code>This software is copyright (c) 2014 by Adam Stokes.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+</code></pre>
+
+<p>DISCLAIMER OF WARRANTY</p>
+
+<pre><code>BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
+ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
+YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
+NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
+TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
+</code></pre>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
-      </footer>
+
     </div>
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+    
   </body>
 </html>
