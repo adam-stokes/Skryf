@@ -2,51 +2,17 @@ package Skryf::DB;
 
 # ABSTRACT: database connection
 
+use Mojo::Base -base;
 use Mango;
-use Module::Runtime qw(use_module);
-use Moo;
-use Types::Standard qw(:all);
-use namespace::clean;
 
-has 'mpath' => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => sub { 'mongodb://localhost:27017/' }
-);
+has 'mpath' => 'mongodb://localhost:27017/';
+has 'dbname' => $ENV{TEST_ONLINE} // 'skryf';
+has 'mgo' =>
+  sub { my $self = shift; return Mango->new($self->mpath . $self->dbname); };
 
-has 'dbname' => (
-    is      => 'ro',
-    isa     => Str,
-    lazy    => 1,
-    default => sub { $ENV{TEST_ONLINE} || 'skryf' }
-);
-
-has 'mgo' => (
-    is      => 'ro',
-    lazy => 1,
-    default => sub {
-        my $self = shift;
-        return Mango->new($self->mpath . $self->dbname);
-    }
-);
-
-has 'collection' => (
-  is => 'ro',
-  isa => Str,
-  lazy => 1,
-  required => 1,
-  default => sub { 'test' }
-);
-
-sub q {
+sub namespace {
     my ($self, $name) = @_;
-    $self->mgo->db->collection($self->collection);
-}
-
-sub model {
-    my ($self, $name) = @_;
-    return use_module($name)->new;
+    $self->mgo->db->collection($name);
 }
 
 1;

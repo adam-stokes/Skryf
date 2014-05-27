@@ -19,14 +19,11 @@ my $slug    = 'WikiWord';
 my $content = 'WikiWord';
 
 $db    = Skryf::DB->new;
-$model = $db->model('Skryf::Model::Page');
-ok $model;
-ok $model->collection eq 'pages';
 
 #cleanup
-ok $model->save({slug => $slug, content => $content});
-my $page = $model->find_page({slug => $slug});
-ok $page->{html} =~ /<a href="WikiWord">WikiWord<\/a>/;
-ok $model->remove_page($page);
+ok $db->namespace('pages')->save({slug => $slug, content => $content});
+my $page = $db->namespace('pages')->find_one({slug => $slug});
+#ok $page->{html} =~ /<a href="WikiWord">WikiWord<\/a>/;
+ok $db->namespace('pages')->remove($page);
 
 done_testing();

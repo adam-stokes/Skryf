@@ -96,8 +96,7 @@ sub startup {
       get_user => sub {
         my $self = shift;
         my $username = shift;
-        my $model = $self->db->modal('Skryf::Model::User');
-        return $self->find_user({username => $username});
+        return $self->db->namespace('users')->find_one({username => $username});
       }
     );
 
