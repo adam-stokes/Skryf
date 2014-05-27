@@ -20,12 +20,11 @@ sub run {
     my $fixtures = path($fixturepath)->slurp_utf8;
     my $json     = decode_json($fixtures);
     my $db       = Skryf::DB->new(dbname => $dbname);
-    my $users    = $db->model('Skryf::Model::User');
     for my $i (@{$json->{users}}) {
         say "Adding user: " . $i->{username};
         $i->{password} =
           hmac_sha1_sum('this sentence would be a secret.', $i->{password});
-        $users->insert($i);
+        $db->namespace('users')->save($i);
     }
 
 }

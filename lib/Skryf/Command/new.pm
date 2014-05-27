@@ -85,14 +85,14 @@ sub run {
 
     for my $env (qw/production staging development/) {
         my $db = Skryf::DB->new(dbname => sprintf("%s_%s", $app_name, $env));
-        my $users = $db->model('Skryf::Model::User');
-        if ($users->find_user({username => $username})) {
+        my $users = $db->namespace('users')->find_one({username => $username});
+        if ($users) {
             croak
               "The user: $username already exists in the $env database.\n",
               "Please remove if you wish to re-auth";
         }
         printf("Creating user in %s_%s ..\n", $app_name, $env);
-        $users->save(
+        $db->namespace('users')->save(
             {   created  => DateTime->now,
                 username => $username,
                 password =>
