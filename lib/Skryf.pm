@@ -96,7 +96,8 @@ sub startup {
       get_user => sub {
         my $self = shift;
         my $username = shift;
-        return $self->db->namespace('users')->find_one({username => $username});
+        my $model = $self->db->modal('Skryf::Model::User');
+        return $self->find_user({username => $username});
       }
     );
 
@@ -113,8 +114,7 @@ sub startup {
             my $self = shift;
             my $k = shift;
             my $v = shift;
-            my $user = $self->db->namespace('users')
-              ->find_one({username => $self->session->{username}});
+            my $user = $self->get_user($self->session->{username});
             return $user->{roles}->{$k}->{$v};
         }
     );

@@ -20,7 +20,7 @@ sub run {
     my $fixtures = path($fixturepath)->slurp_utf8;
     my $json     = decode_json($fixtures);
     my $db       = Skryf::DB->new(dbname => $dbname);
-    my $users    = $db->namespace('users');
+    my $users    = $db->model('Skryf::Model::User');
     for my $i (@{$json->{users}}) {
         say "Adding user: " . $i->{username};
         $i->{password} =

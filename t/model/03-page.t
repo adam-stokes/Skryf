@@ -9,7 +9,7 @@ use lib "$FindBin::Bin../../lib";
 plan skip_all => 'set TEST_ONLINE to enable this test'
   unless $ENV{TEST_ONLINE};
 
-diag("Testing page model");
+note("Testing page model");
 use_ok('Skryf::DB');
 
 my $db;
@@ -19,15 +19,14 @@ my $slug    = 'WikiWord';
 my $content = 'WikiWord';
 
 $db    = Skryf::DB->new;
-$model = $db->namespace('pages');
+$model = $db->model('Skryf::Model::Page');
 ok $model;
+ok $model->collection eq 'pages';
 
 #cleanup
-ok $model->drop();
-ok $model->insert({slug => $slug, content => $content});
-my $page = $model->find_one({slug => $slug});
-ok $page;
+ok $model->save({slug => $slug, content => $content});
+my $page = $model->find_page({slug => $slug});
 ok $page->{html} =~ /<a href="WikiWord">WikiWord<\/a>/;
-ok $model->remove($slug);
+ok $model->remove_page($page);
 
 done_testing();

@@ -39,6 +39,7 @@ my %WriteMakefileArgs = (
     "Hash::Merge" => 0,
     "IO::Prompt" => 0,
     "Mango" => "0.24",
+    "Module::Runtime" => 0,
     "Mojo::Base" => 0,
     "Mojo::JSON" => 0,
     "Mojo::Template" => 0,
@@ -50,6 +51,7 @@ my %WriteMakefileArgs = (
     "String::Dirify" => 0,
     "String::Util" => 0,
     "Text::MultiMarkdown" => 0,
+    "Types::Standard" => 0,
     "XML::Atom::SimpleFeed" => 0,
     "constant" => 0,
     "namespace::clean" => 0,
@@ -58,6 +60,7 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
+    "DDP" => 0,
     "Mango" => "0.24",
     "Mojolicious" => 0,
     "Test::Mojo" => 0,
@@ -67,7 +70,7 @@ my %WriteMakefileArgs = (
   },
   "VERSION" => "1.3",
   "test" => {
-    "TESTS" => "t/*.t t/model/*.t t/web/*.t"
+    "TESTS" => "t/*.t t/model/*.t"
   }
 );
 
@@ -75,6 +78,7 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "Carp" => 0,
   "Class::Load" => 0,
+  "DDP" => 0,
   "DateTime" => 0,
   "DateTime::Format::RFC3339" => 0,
   "Encode" => 0,
@@ -85,6 +89,7 @@ my %FallbackPrereqs = (
   "Hash::Merge" => 0,
   "IO::Prompt" => 0,
   "Mango" => "0.24",
+  "Module::Runtime" => 0,
   "Mojo::Base" => 0,
   "Mojo::JSON" => 0,
   "Mojo::Template" => 0,
@@ -100,6 +105,7 @@ my %FallbackPrereqs = (
   "Test::More" => 0,
   "Test::NoTabs" => 0,
   "Text::MultiMarkdown" => 0,
+  "Types::Standard" => 0,
   "XML::Atom::SimpleFeed" => 0,
   "constant" => 0,
   "lib" => 0,

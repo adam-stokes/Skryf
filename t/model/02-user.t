@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use Test::More;
 use Mojo::Util qw(hmac_sha1_sum);
+use DDP;
 
 use FindBin;
 use lib "$FindBin::Bin../../lib";
@@ -14,32 +15,25 @@ plan skip_all => 'set TEST_ONLINE to enable this test'
 diag("Testing user models");
 use_ok('Skryf::DB');
 my $db;
-my $model;
 
 my $username = 'joebob';
 my $password = hmac_sha1_sum('password', 'sillyman');
 
 $db = Skryf::DB->new;
-$model = $db->namespace('users');
-ok $model;
+my $model = $db->model('Skryf::Model::User');
+ok $model->collection eq 'users';
 
-ok $model->insert(
-    {   username => $username,
-        password => $password,
-        attrs    => {
-            launchpad => {
-                token        => 'aaaa',
-                token_secret => 'bbbb',
-            },
-        }
-    }
-);
+my $params = {
+    username => $username,
+    password => $password,
+    roles    => {admin => {is_admin => 1, is_owner => 1}}
+};
+ok $model->save($params);
 
-my $user_check = $model->find_one({username => $username});
+my $user_check = $model->find_user({username => $username});
 ok $username eq $user_check->{username};
 ok $password eq $user_check->{password};
-
-#ok $model->remove($username);
+ok $model->remove_user($user_check);
 
 done_testing();
 

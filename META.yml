@@ -3,6 +3,7 @@ abstract: 'Skryf application'
 author:
   - 'Adam Stokes <adamjs@cpan.org>'
 build_requires:
+  DDP: '0'
   Mango: '0.24'
   Mojolicious: '0'
   Test::Mojo: '0'
@@ -32,6 +33,7 @@ requires:
   Hash::Merge: '0'
   IO::Prompt: '0'
   Mango: '0.24'
+  Module::Runtime: '0'
   Mojo::Base: '0'
   Mojo::JSON: '0'
   Mojo::Template: '0'
@@ -43,6 +45,7 @@ requires:
   String::Dirify: '0'
   String::Util: '0'
   Text::MultiMarkdown: '0'
+  Types::Standard: '0'
   XML::Atom::SimpleFeed: '0'
   constant: '0'
   namespace::clean: '0'
