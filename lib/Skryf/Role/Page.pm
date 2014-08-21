@@ -1,4 +1,5 @@
 package Skryf::Role::Page;
+
 # ABSTRACT: Skryf page model
 
 use Skryf::Util;
@@ -24,4 +25,3 @@ __END__
 Page model
 
 =cut
-
