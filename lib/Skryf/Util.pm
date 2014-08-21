@@ -1,4 +1,5 @@
 package Skryf::Util;
+
 # ABSTRACT: Skryf utility functions
 
 use Mojo::Base -base;

@@ -7,6 +7,7 @@ use Mojo::Util qw(hmac_sha1_sum);
 
 sub login {
     my $self = shift;
+    $self->flash(message => 'You are logged in.');
     $self->render('login');
 }
 
@@ -26,7 +27,7 @@ sub verify {
     if ($entered_pass eq $user->{password}) {
         $self->flash(success => 'Youre authenticated!');
         $self->session(username => $user->{username});
-        $self->session(domain => $user->{domain});
+        $self->session(domain   => $user->{domain});
         $self->redirect_to('welcome');
     }
     else {

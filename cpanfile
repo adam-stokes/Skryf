@@ -9,7 +9,7 @@ requires "File::chdir" => "0";
 requires "FindBin" => "0";
 requires "Hash::Merge" => "0";
 requires "IO::Prompt" => "0";
-requires "Mango" => "0.24";
+requires "Mango" => "0";
 requires "Mojo::Base" => "0";
 requires "Mojo::JSON" => "0";
 requires "Mojo::Template" => "0";
@@ -29,7 +29,7 @@ requires "warnings" => "0";
 
 on 'test' => sub {
   requires "DDP" => "0";
-  requires "Mango" => "0.24";
+  requires "Mango" => "0";
   requires "Mojolicious" => "0";
   requires "Test::Mojo" => "0";
   requires "Test::More" => "0";
@@ -38,11 +38,12 @@ on 'test' => sub {
 };
 
 on 'configure' => sub {
-  requires "ExtUtils::MakeMaker" => "6.30";
+  requires "ExtUtils::MakeMaker" => "0";
   requires "File::ShareDir::Install" => "0.06";
 };
 
 on 'develop' => sub {
   requires "Test::More" => "0";
   requires "Test::NoTabs" => "0";
+  requires "Test::Synopsis" => "0";
 };
