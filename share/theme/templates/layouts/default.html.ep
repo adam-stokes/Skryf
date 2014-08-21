@@ -23,7 +23,6 @@
     </script>
     %= javascript '/js/vendor.min.js'
     %= javascript '/js/app.min.js'
-    -->
 </head>
 
 <body>
