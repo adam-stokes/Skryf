@@ -150,7 +150,9 @@ sub startup {
     $r->any(
         '/' => sub {
             my $self = shift;
-            if ($self->config->{theme} =~ /static_site/) {
+            if (   $self->config->{theme}
+                && $self->config->{theme} =~ /static_site/)
+            {
                 $self->render_static($app->config->{landing_page});
             }
             else {

@@ -1,6 +1,13 @@
+% my $class_id;
+% if (session 'username') {
+%    $class_id = 'admin_container';
+% } elsif (stash 'class_id') {
+%    $class_id = stash 'class_id';
+% } else {
+%    $class_id = 'site_container';
+% }
 <!DOCTYPE html>
 <html>
-
 <head>
     %= t 'title' => config->{title}
     %= stylesheet '/css/vendor.min.css'
@@ -8,7 +15,7 @@
      <script charset="utf-8">
         WebFontConfig = {
             google: {
-                families: ['Overlock:400,700,900:latin', 'PT+Sans:400,700:latin']
+                families: ['Source+Sans+Pro:400,700,900:latin', 'Open+Sans:400,700:latin']
             }
         };
         (function() {
@@ -25,9 +32,37 @@
     %= javascript '/js/app.min.js'
 </head>
 
-<body>
-    <h1 class="ui"><%= config->{title} %> <small>by <%= config->{author} %></small></h1>
-    <%= content %>
+<body id="<%= $class_id %>">
+    <div class="ui fixed transparent inverted main menu">
+        <a href="/" class="popup icon home item" data-content="Go Home!">
+            <i class="icon home"></i>
+        </a>
+        <a href="/login" class="icon sign in item">
+            <i class="sign in icon"></i>
+        </a>
+        <div class="title item">
+            <%= config->{title} %>
+        </div>
+    </div>
+    <div class="masthead segment">
+        <div class="ui page grid">
+            <div class="column">
+                <h1 class="ui header"><%= config->{title} %></h1>
+                <h2 class="ui header"><%= config->{tagline} // 'yes, its perl.' %></h2>
+                <p><%= config->{description} // 'denying homiez since \'81' %></p>
+            </div>
+        </div>
+    </div>
+    <div class="stripe">
+        <div class="ui page grid">
+            %= include 'sidenav'
+            <div class="thirteen wide column">
+                <div class="ui">
+                    <%= content %>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

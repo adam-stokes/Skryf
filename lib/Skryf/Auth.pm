@@ -7,7 +7,6 @@ use Mojo::Util qw(hmac_sha1_sum);
 
 sub login {
     my $self = shift;
-    $self->flash(message => 'You are logged in.');
     $self->render('login');
 }
 
