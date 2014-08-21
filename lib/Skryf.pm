@@ -67,7 +67,7 @@ sub startup {
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
-    if ($app->config->{theme} !~ /static_site/) {
+    if ($app->config->{theme} && $app->config->{theme} !~ /static_site/) {
         push @{$app->renderer->paths}, 'templates';
         push @{$app->static->paths},   'public';
 
@@ -93,11 +93,12 @@ sub startup {
     );
 
     $app->helper(
-      get_user => sub {
-        my $self = shift;
-        my $username = shift;
-        return $self->db->namespace('users')->find_one({username => $username});
-      }
+        get_user => sub {
+            my $self     = shift;
+            my $username = shift;
+            return $self->db->namespace('users')
+              ->find_one({username => $username});
+        }
     );
 
     $app->helper(
@@ -111,8 +112,8 @@ sub startup {
     $app->helper(
         auth_has_role => sub {
             my $self = shift;
-            my $k = shift;
-            my $v = shift;
+            my $k    = shift;
+            my $v    = shift;
             my $user = $self->get_user($self->session->{username});
             return $user->{roles}->{$k}->{$v};
         }
@@ -140,7 +141,7 @@ sub startup {
       ->name('admin_users_delete');
 
     # Authentication
-    if ($app->config->{theme} !~ /static_site/) {
+    if ($app->config->{theme} && $app->config->{theme} !~ /static_site/) {
         $r->any('/login')->to('auth#login');
         $r->any('/logout')->to('auth#logout');
         $r->post('/authenticate')->to('auth#verify');

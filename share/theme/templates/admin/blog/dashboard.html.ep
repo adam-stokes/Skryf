@@ -1,0 +1,26 @@
+% layout 'default';
+
+<div class="page-header">
+<h1>Posts</h1>
+</div>
+
+<table class="table">
+  <tbody>
+  <tr>
+    <th>Title</th>
+    <th>Created</th>
+    <th>Public</th>
+    <th>Action</th>
+  </tr>
+  % foreach (@{$postlist}) {
+    <tr>
+      <td>
+        <%= link_to $_->{title} => url_for("admin_blog_edit", slug => $_->{slug}) %>
+      </td>
+      <td><%= $_->{created} %></td>
+      <td>n/a</td>
+      <td><%= link_to "Delete" => url_for("admin_blog_delete", slug => $_->{slug}) %></td>
+    </tr>
+  % }
+  </tbody>
+</table>

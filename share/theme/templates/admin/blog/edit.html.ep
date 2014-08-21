@@ -1,0 +1,25 @@
+%# Blog edit page
+
+% layout 'default';
+
+<div class="page-header">
+  <h2>Update <small><%= $post->{title} %></small></h2>
+</div>
+
+%= form_for url_for("admin_blog_update"), role => 'form' => ( method => 'POST' ) => begin
+%= hidden_field slug => $post->{slug}
+<div class="form-group">
+  <label for="postTitle">Post Title</label>
+  %= text_field 'title', type => 'text', class => 'form-control', id => 'postTitle', value => $post->{title}
+</div>
+<div class="form-group">
+  <label for="postContent">Body of post</label>
+  %= text_area 'content' => $post->{content}, class => 'form-control'
+</div>
+<div class="form-group">
+  <label for="postTags">Tags</label>
+  %= text_field 'tags', type => 'text', id => 'postTags', class => 'form-control', value => $post->{tags}
+</div>
+  %= submit_button 'Update', class => 'btn btn-default'
+%= end
+

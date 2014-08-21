@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    %= t 'title' => config->{title}
+    <!--
+    %= stylesheet '/stylesheets/bundle.css'
+    %= javascript '/javascripts/app.min.js'
+    -->
+</head>
+
+<body>
+    <h1><%= config->{title} %> <small>by <%= config->{author} %></small></h1>
+    <%= content %>
+</body>
+
+</html>

@@ -1,11 +1,11 @@
 {
-  "name": "App-skryf-Theme-Booshka",
+  "name": "Skryf",
   "version": "0.0.1",
-  "homepage": "https://github.com/skryf/App-skryf-Theme-Booshka",
+  "homepage": "https://github.com/skryf/Skryf",
   "authors": [
     "Adam Stokes <adam.stokes@ubuntu.com>"
   ],
-  "license": "MIT",
+  "license": "Perl",
   "private": true,
   "ignore": [
     "**/.*",
@@ -15,8 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "ace": "~1.1.1",
-    "highlightjs": "~7.5.0",
-    "jquery": "~2.0.3"
+    "semantic": "~0.19.0"
   }
 }

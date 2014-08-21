@@ -1,0 +1,3 @@
+% layout 'default';
+
+%= t 'h1' => 'Welcome, '. session 'username'

@@ -1,0 +1,29 @@
+% layout 'default';
+
+%= t 'div', class  => 'post-body' => begin
+  %= t 'h2' => 'Profile for '. $profile->{username}
+  % if (my $msg = flash 'message') {
+    <h4><%= $msg %></h4>
+  % }
+  %= form_for "/admin/profile", class => 'blog-form' => ( method => 'POST' ) => begin
+    %= t 'div' => 'Email eg. ("Fullname" <email@address.com>)'
+    %= text_field 'email' => $profile->{attrs}{email}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
+    Password
+    %= t 'br'
+    %= password_field 'password', class => 'blog-form-control blog-form-control-medium', value => $profile->{password}
+    %= t 'h3' => 'Social Attributes'
+    %= t 'div' => 'Facebook'
+    %= text_field 'facebook' => $profile->{attrs}{facebook}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'div' => 'Twitter'
+    %= text_field 'twitter' => $profile->{attrs}{twitter}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'div' => 'Google+'
+    %= text_field 'gplus' => $profile->{attrs}{gplus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'div' => 'Github'
+    %= text_field 'github' => $profile->{attrs}{github}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'div' => 'Disqus'
+    %= text_field 'disqus' => $profile->{attrs}{disqus}{username}, type => 'text', class => 'blog-form-control blog-form-control-medium'
+    %= t 'br'
+    %= submit_button 'Save Profile', class => 'btn'
+  %= end
+%= end

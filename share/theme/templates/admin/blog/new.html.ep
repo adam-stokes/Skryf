@@ -1,0 +1,23 @@
+%# New blog post
+
+% layout 'default';
+
+<div class="page-header">
+  <h2>New Post</h2>
+</div>
+
+%= form_for url_for("admin_blog_new"), class => 'blog-form' => ( method => 'POST' ) => begin
+<div class="form-group">
+  <label for="postTitle">Post Title</label>
+  %= text_field 'title', type => 'text', class => 'form-control', id => 'postTitle'
+</div>
+<div class="form-group">
+  <label for="postContent">Body of post</label>
+  %= text_area 'content', class => 'form-control'
+</div>
+<div class="form-group">
+  <label for="postTags">Tags</label>
+  %= text_field 'tags', type => 'text', id => 'postTags', class => 'form-control'
+</div>
+  %= submit_button 'Add', class => 'btn btn-default'
+%= end
