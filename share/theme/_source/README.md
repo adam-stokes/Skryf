@@ -1,4 +1,3 @@
-gfsb
-====
+# Skryf
 
-Online Ordering
+Included theme for Skryf

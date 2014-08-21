@@ -15,6 +15,10 @@ vendorScripts = [
   "bower_components/semantic/build/packaged/javascript/semantic.min.js"
 ]
 
+appScripts = [
+    'static/js/app.js'
+]
+
 gulp.task "concatCSS", ->
   gulp.src(vendorCSS)
   .pipe(concat("vendor.min.css"))
@@ -26,10 +30,10 @@ gulp.task "concatJS", ->
     .pipe(uglify())
     .pipe(concat("vendor.min.js"))
     .pipe gulp.dest("../public/js/")
-  gulp.src(appScripts)
-    .pipe(concat("app.min.js"))
-    .pipe(uglify())
-    .pipe gulp.dest("../public/js/")
+    gulp.src(appScripts)
+      .pipe(uglify())
+      .pipe(concat("app.min.js"))
+      .pipe gulp.dest("../public/js/")
   return
 
 gulp.task "copyFonts", ->
