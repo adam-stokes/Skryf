@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use Test::More;
 use Mojo::Util qw(hmac_sha1_sum);
-use DDP;
 
 use FindBin;
 use lib "$FindBin::Bin../../lib";
@@ -34,4 +33,3 @@ ok $password eq $user_check->{password};
 ok $db->namespace('users')->remove($user_check);
 
 done_testing();
-

@@ -3,7 +3,6 @@ abstract: 'Skryf application'
 author:
   - 'Adam Stokes <adamjs@cpan.org>'
 build_requires:
-  DDP: '0'
   Mango: '0'
   Mojolicious: '0'
   Test::Mojo: '0'
@@ -49,4 +48,4 @@ requires:
   strict: '0'
   version: '0'
   warnings: '0'
-version: '1.5'
+version: '1.6'

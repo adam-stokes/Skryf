@@ -28,7 +28,6 @@ requires "version" => "0";
 requires "warnings" => "0";
 
 on 'test' => sub {
-  requires "DDP" => "0";
   requires "Mango" => "0";
   requires "Mojolicious" => "0";
   requires "Test::Mojo" => "0";

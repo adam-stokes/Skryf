@@ -57,7 +57,6 @@ my %WriteMakefileArgs = (
     "warnings" => 0
   },
   "TEST_REQUIRES" => {
-    "DDP" => 0,
     "Mango" => 0,
     "Mojolicious" => 0,
     "Test::Mojo" => 0,
@@ -65,7 +64,7 @@ my %WriteMakefileArgs = (
     "Test::NoTabs" => 0,
     "lib" => 0
   },
-  "VERSION" => "1.5",
+  "VERSION" => "1.6",
   "test" => {
     "TESTS" => "t/*.t t/model/*.t"
   }
@@ -75,7 +74,6 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "Carp" => 0,
   "Class::Load" => 0,
-  "DDP" => 0,
   "DateTime" => 0,
   "DateTime::Format::RFC3339" => 0,
   "Encode" => 0,
