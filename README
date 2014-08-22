@@ -4,7 +4,7 @@ NAME
 
 VERSION
 
-    version 1.6
+    version 1.7
 
 DESCRIPTION
 
@@ -12,7 +12,7 @@ DESCRIPTION
 
 PREREQS
 
-    Perl 5.14+ and Mongo.
+    Perl 5.18+ and Mongo 2.6+.
 
 INSTALL
 

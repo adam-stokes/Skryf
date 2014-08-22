@@ -179,7 +179,7 @@ easy does it web application development.
 
 =head1 PREREQS
 
-Perl 5.14+ and Mongo.
+Perl 5.18+ and Mongo 2.6+.
 
 =head1 INSTALL
 
