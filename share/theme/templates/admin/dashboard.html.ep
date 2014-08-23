@@ -2,4 +2,8 @@
 
 %= t 'h1' => 'Welcome, '. session 'username'
 
-This is your admin section
+<p>
+    This is the administration section where all configuration of the application
+    is handled. Browse the various paths to the left for managing plugins,
+    setting site configuration, and more.
+</p>

@@ -43,14 +43,14 @@
         % }
 
         <div class="title item">
-            <%= config->{title} %> (Dashboard)
+            <i>Administration of</i> <%= config->{title} %>
         </div>
     </div>
     <a class="ui green button">Site Settings</a>
     <div class="stripe">
-        <div class="ui grid">
+        <div class="ui page grid">
             %= include 'admin/nav'
-            <div class="thirteen wide column">
+            <div class="twelve wide column">
                 <div class="ui">
                     <%= content %>
                 </div>

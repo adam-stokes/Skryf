@@ -12,6 +12,11 @@ sub dashboard {
     $self->render('/admin/dashboard');
 }
 
+sub site_settings {
+    my $self = shift;
+    $self->render('/admin/site_settings');
+}
+
 sub users {
   my $self = shift;
   my $users = $self->db->namespace('users')->find()->all;

@@ -129,6 +129,9 @@ sub startup {
     );
 
     $if_admin->any('/admin')->to('admin#dashboard')->name('admin_dashboard');
+    $if_admin->any('/admin/settings')->to('admin#site_settings')
+      ->name('admin_site_settings');
+
     $if_admin->any('/admin/users')->to('admin#users')->name('admin_users');
     $if_admin->any('/admin/users/modify/:username')->to('admin#modify_user')
       ->name('admin_users_modify');

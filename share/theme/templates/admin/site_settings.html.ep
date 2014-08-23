@@ -1,0 +1,5 @@
+% layout 'admin';
+
+%= form_for "/admin/settings", class => 'ui form' => ( method => 'POST' ) => begin
+    %= submit_button 'Save Profile', class => 'ui button'
+%= end
