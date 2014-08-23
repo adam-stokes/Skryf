@@ -1,26 +1,29 @@
 % layout 'default';
 
-<h2>Login</h2>
+<h1>Login</h1>
 
 %# Login form
-%= form_for '/authenticate' => ( method => 'POST' ), role => 'form', class => 'form-horizontal' => begin
-<div class="form-group">
-  <label for="username" class="col-sm-2 control-label">Login</label>
-  <div class="col-sm-10">
-    %= text_field 'username', type => 'text', class => 'form-control', id => 'username'
+%= form_for '/authenticate' => ( method => 'POST' ), role => 'form', class => 'ui form segment' => begin
+<div class="field">
+  <label>Username</label>
+  <div class="ui left labeled icon input">
+    %= text_field 'username', type => 'text', placeholder => 'Username', id => 'username'
+    <i class="user icon"></i>
+    <div class="ui corner label">
+        <i class="icon asterisk"></i>
   </div>
 </div>
-<div class="form-group">
-  <label for="password" class="col-sm-2 control-label">Password</label>
-  <div class="col-sm-10">
+<div class="field">
+  <label>Password</label>
+  <div class="ui left labeled icon input">
     %= password_field 'password', class => 'form-control', id => 'password'
+    <i class="lock icon"></i>
+    <div class="ui corner label">
+        <i class="icon asterisk"></i>
+  </div>
   </div>
 </div>
-<div class="form-group">
-  <div class="col-sm-offset-2 col-sm-10">
-    %= submit_button 'Login', class => 'btn btn-default'
-  </div>
-</div>
+%= submit_button 'Login', class => 'ui blue submit button'
 
 %# End login form
 % end

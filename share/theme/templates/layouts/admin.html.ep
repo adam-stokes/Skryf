@@ -43,7 +43,7 @@
         % }
 
         <div class="title item">
-            <i>Administration of</i> <%= config->{title} %>
+            <i><small>Administration of</small></i> <strong><%= config->{title} %></strong>
         </div>
     </div>
     <a class="ui green button">Site Settings</a>

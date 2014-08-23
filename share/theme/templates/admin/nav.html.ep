@@ -1,6 +1,6 @@
 <div class="three wide column">
     <div class="ui vertical buttons">
-        <a class="ui green button" href=<%= url_for('admin_site_settings') %>">Site Settings</a>
+        <a class="ui green button" href="<%= url_for('admin_site_settings') %>">Site Settings</a>
         <a class="ui green button" href="/admin/plugins">Plugins</a>
     </div>
 </div>
