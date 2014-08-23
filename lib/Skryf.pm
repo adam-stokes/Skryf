@@ -67,16 +67,11 @@ sub startup {
 ###############################################################################
 # Set renderer paths for template/static files
 ###############################################################################
-    if ($app->config->{theme} && $app->config->{theme} !~ /static_site/) {
-        push @{$app->renderer->paths}, 'templates';
-        push @{$app->static->paths},   'public';
+    push @{$app->renderer->paths}, 'templates';
+    push @{$app->static->paths},   'public';
 
-        # Load any custom theme specifics
-        $app->plugin($app->config->{theme}) if $app->config->{theme};
-    }
-    else {
-        push @{$app->static->paths}, 'public';
-    }
+    # Load any custom theme specifics
+    $app->plugin($app->config->{theme}) if $app->config->{theme};
 
     # Fallback
     push @{$app->renderer->paths}, path(dist_dir('Skryf'), 'theme/templates');
@@ -141,11 +136,9 @@ sub startup {
       ->name('admin_users_delete');
 
     # Authentication
-    if ($app->config->{theme} && $app->config->{theme} !~ /static_site/) {
-        $r->any('/login')->to('auth#login');
-        $r->any('/logout')->to('auth#logout');
-        $r->post('/authenticate')->to('auth#verify');
-    }
+    $r->any('/login')->to('auth#login');
+    $r->any('/logout')->to('auth#logout');
+    $r->post('/authenticate')->to('auth#verify');
 
     $r->any(
         '/' => sub {

@@ -1,3 +1,25 @@
 % layout 'default';
 
-Skryf is installed.
+<h1 class="ui header">Welcome <small>to your new Skryf application.</small></h1>
+
+<div class="ui piled segment">
+    <p>This is the default theme, you should create your own or
+    customize this one.</p>
+    <p>Browse through the <%= link_to "documentation" => "/docs/manual" %> to familiarize yourself with the platform along with developing themes and plugins.</p>
+
+    <div class="ui header">
+      <h2>Features</h2>
+    </div>
+    <ul>
+      <li>Everything is pluggable.</li>
+      <li>Fast and responsive</li>
+      <li>Full websocket support</li>
+      <li>Baked in authentication</li>
+      <li>Baked in security measures</li>
+      <li>Baked in preforking web server</li>
+      <li>Mongo backed</li>
+      <li>Variety of core plugins (blog, wiki, search, etc)</li>
+      <li>Separation of business and design</li>
+      <li>Tag helpers for forms and other content filtering/formatting</li>
+    </ul>
+</div>

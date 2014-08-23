@@ -1,7 +1,7 @@
 % layout 'default';
 
 <h2>Login</h2>
-<!--
+
 %# Login form
 %= form_for '/authenticate' => ( method => 'POST' ), role => 'form', class => 'form-horizontal' => begin
 <div class="form-group">
@@ -24,4 +24,3 @@
 
 %# End login form
 % end
--->

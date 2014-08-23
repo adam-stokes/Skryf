@@ -1,3 +1,62 @@
-% $class_id = 'admin_container';
+<!DOCTYPE html>
+<html>
+<head>
+    %= t 'title' => config->{title}
+    %= stylesheet '/css/vendor.min.css'
+    %= stylesheet '/css/main.css'
+     <script charset="utf-8">
+        WebFontConfig = {
+            google: {
+                families: ['Source+Sans+Pro:400,700,900:latin', 'Open+Sans:400,700:latin']
+            }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+    %= javascript '/js/vendor.min.js'
+    %= javascript '/js/app.min.js'
+</head>
 
-% layout 'default';
+<body id="admin-container">
+    <div class="ui fixed transparent main menu">
+        <a href="/" class="popup icon home item" data-content="Go Home!">
+            <i class="icon home"></i>
+        </a>
+        % if (session 'username') {
+            <a href="/logout" class="icon sign out item">
+                <i class="sign out icon"></i>
+            </a>
+            <a href="/admin" class="icon settings item">
+                <i class="settings icon"></i>
+            </a>
+        % } else {
+            <a href="/login" class="icon sign in item">
+                <i class="sign in icon"></i>
+            </a>
+        % }
+
+        <div class="title item">
+            <%= config->{title} %> (Dashboard)
+        </div>
+    </div>
+    <a class="ui green button">Site Settings</a>
+    <div class="stripe">
+        <div class="ui grid">
+            %= include 'admin/nav'
+            <div class="thirteen wide column">
+                <div class="ui">
+                    <%= content %>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
