@@ -2,6 +2,7 @@ package Skryf;
 
 # ABSTRACT: Skryf application
 
+our $VERSION = '2';
 use Mojo::Base 'Mojolicious';
 
 use Carp;
@@ -193,5 +194,9 @@ L<Mojolicious> and overloads the following:
 
 This is your main hook into the application, it will be called at
 application startup. Meant to be overloaded in a subclass.
+
+=head1 AUTHOR
+
+Adam Stokes E<lt>adamjs@cpan.orgE<gt>
 
 =cut

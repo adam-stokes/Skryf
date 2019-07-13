@@ -22,3 +22,9 @@ local/
 node_modules
 bower_components
 npm-debug.log
+/Skryf-*
+/.build
+/_build_params
+/Build
+/Build.bat
+!LICENSE
