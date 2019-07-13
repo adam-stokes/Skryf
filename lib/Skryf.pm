@@ -17,74 +17,75 @@ sub startup {
     my $app = shift;
 
 ###############################################################################
-# Skryf::Command namespace
+    # Skryf::Command namespace
 ###############################################################################
-    push @{$app->commands->namespaces}, 'Skryf::Command';
+    push @{ $app->commands->namespaces }, 'Skryf::Command';
 
 ###############################################################################
-# Setup configuration
+    # Setup configuration
 ###############################################################################
     my $cfgfile = undef;
-    if ($app->mode eq "development") {
-        $cfgfile = path($CWD, "config/development.conf");
-        path(dist_dir('Skryf'), 'config/development.conf')->copy($cfgfile)
+    if ( $app->mode eq "development" ) {
+        $cfgfile = path( $CWD, "config/development.conf" );
+        path( dist_dir('Skryf'), 'config/development.conf' )->copy($cfgfile)
           unless $cfgfile->exists;
     }
-    elsif ($app->mode eq "staging") {
-        $cfgfile = path($CWD, "config/staging.conf");
-        path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
+    elsif ( $app->mode eq "staging" ) {
+        $cfgfile = path( $CWD, "config/staging.conf" );
+        path( dist_dir('Skryf'), 'config/production.conf' )->copy($cfgfile)
           unless $cfgfile->exists;
     }
     else {
-        $cfgfile = path($CWD, "config/production.conf");
-        path(dist_dir('Skryf'), 'config/production.conf')->copy($cfgfile)
+        $cfgfile = path( $CWD, "config/production.conf" );
+        path( dist_dir('Skryf'), 'config/production.conf' )->copy($cfgfile)
           unless $cfgfile->exists;
     }
-    $app->plugin('Config' => {file => $cfgfile});
+    $app->plugin( 'Config' => { file => $cfgfile } );
     $app->config->{version} = $Skryf::VERSION;
-    $app->secrets($app->config->{secrets});
+    $app->secrets( $app->config->{secrets} );
 
 ###############################################################################
-# Load core and any additional namespaces
+    # Load core and any additional namespaces
 ###############################################################################
-    push @{$app->plugins->namespaces}, 'Skryf::Plugin';
-    push @{$app->plugins->namespaces}, 'Skryf::Theme';
+    push @{ $app->plugins->namespaces }, 'Skryf::Plugin';
+    push @{ $app->plugins->namespaces }, 'Skryf::Theme';
 
     # Add additional namespaces if configured
-    for (@{$app->config->{namespaces}}) {
-        $app->log->debug('Adding namespace: ' . $_);
-        push @{$app->plugins->namespaces}, $_ . '::Plugin';
-        push @{$app->plugins->namespaces}, $_ . '::Theme';
+    for ( @{ $app->config->{namespaces} } ) {
+        $app->log->debug( 'Adding namespace: ' . $_ );
+        push @{ $app->plugins->namespaces }, $_ . '::Plugin';
+        push @{ $app->plugins->namespaces }, $_ . '::Theme';
     }
 
 ###############################################################################
-# Load global plugins
+    # Load global plugins
 ###############################################################################
-    for (keys %{$app->config->{plugins}}) {
-        $app->log->debug('Loading plugin: ' . $_);
+    for ( keys %{ $app->config->{plugins} } ) {
+        $app->log->debug( 'Loading plugin: ' . $_ );
         $app->plugin($_) if $app->config->{plugins}{$_} == 1;
     }
 
 ###############################################################################
-# Set renderer paths for template/static files
+    # Set renderer paths for template/static files
 ###############################################################################
-    push @{$app->renderer->paths}, 'templates';
-    push @{$app->static->paths},   'public';
+    push @{ $app->renderer->paths }, 'templates';
+    push @{ $app->static->paths },   'public';
 
     # Load any custom theme specifics
-    $app->plugin($app->config->{theme}) if $app->config->{theme};
+    $app->plugin( $app->config->{theme} ) if $app->config->{theme};
 
     # Fallback
-    push @{$app->renderer->paths}, path(dist_dir('Skryf'), 'theme/templates');
-    push @{$app->static->paths},   path(dist_dir('Skryf'), 'theme/public');
+    push @{ $app->renderer->paths },
+      path( dist_dir('Skryf'), 'theme/templates' );
+    push @{ $app->static->paths }, path( dist_dir('Skryf'), 'theme/public' );
 
 ###############################################################################
-# Helpers
+    # Helpers
 ###############################################################################
     $app->helper(
         db => sub {
             my $self = shift;
-            Skryf::DB->new(dbname => $self->config->{dbname});
+            Skryf::DB->new( dbname => $self->config->{dbname} );
         }
     );
 
@@ -93,14 +94,14 @@ sub startup {
             my $self     = shift;
             my $username = shift;
             return $self->db->namespace('users')
-              ->find_one({username => $username});
+              ->find_one( { username => $username } );
         }
     );
 
     $app->helper(
         auth_role_fail => sub {
             my $self = shift;
-            $self->flash(message => 'Incorrect permission for this section');
+            $self->flash( message => 'Incorrect permission for this section' );
             $self->redirect_to('login');
         }
     );
@@ -110,13 +111,13 @@ sub startup {
             my $self = shift;
             my $k    = shift;
             my $v    = shift;
-            my $user = $self->get_user($self->session->{username});
+            my $user = $self->get_user( $self->session->{username} );
             return $user->{roles}->{$k}->{$v};
         }
     );
 
 ###############################################################################
-# Routing
+    # Routing
 ###############################################################################
     my $r = $app->routes;
 
@@ -125,7 +126,7 @@ sub startup {
         sub {
             my $self = shift;
             return $self->auth_role_fail
-              unless $self->auth_has_role('admin', 'is_staff');
+              unless $self->auth_has_role( 'admin', 'is_staff' );
         }
     );
 
@@ -148,13 +149,13 @@ sub startup {
         '/' => sub {
             my $self = shift;
             if (   $self->config->{theme}
-                && $self->config->{theme} =~ /static_site/)
+                && $self->config->{theme} =~ /static_site/ )
             {
-                $self->render_static($app->config->{landing_page});
+                $self->render_static( $app->config->{landing_page} );
             }
             else {
-                if ($self->config->{landing_page}) {
-                    $self->render($app->config->{landing_page});
+                if ( $self->config->{landing_page} ) {
+                    $self->render( $app->config->{landing_page} );
                 }
                 else {
                     $self->render('welcome');

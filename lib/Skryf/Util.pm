@@ -13,10 +13,11 @@ use Encode;
 use DateTime::Format::RFC3339;
 
 sub convert {
-    my ($self, $content, $use_wikilinks) = @_;
+    my ( $self, $content, $use_wikilinks ) = @_;
     markdown(
         $content,
-        {   empty_element_suffix => '>',
+        {
+            empty_element_suffix => '>',
             tab_width            => 2,
             use_wikilinks        => $use_wikilinks,
         }
@@ -24,12 +25,12 @@ sub convert {
 }
 
 sub slugify {
-    my ($self, $topic, $auto) = @_;
-    dirify($topic, '-');
+    my ( $self, $topic, $auto ) = @_;
+    dirify( $topic, '-' );
 }
 
 sub feed {
-    my ($self, $config, $posts) = @_;
+    my ( $self, $config, $posts ) = @_;
     my $feed = XML::Atom::SimpleFeed->new(
         title => $config->{title},
         link  => $config->{site},
@@ -40,9 +41,9 @@ sub feed {
         author => $config->{author},
         id     => $config->{site},
     );
-    for my $post (@{$posts}) {
+    for my $post ( @{$posts} ) {
         my $f  = DateTime::Format::RFC3339->new();
-        my $dt = $f->parse_datetime($post->{created});
+        my $dt = $f->parse_datetime( $post->{created} );
         $feed->add_entry(
             title   => $post->{topic},
             link    => $config->{site} . '/post/' . $post->{slug},

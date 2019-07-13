@@ -9,9 +9,9 @@ use constant USE_WIKILINKS => 1;
 use Moo::Role;
 
 sub pre_save {
-    my ($self, $params) = @_;
+    my ( $self, $params ) = @_;
     my $created = $params->{created} // DateTime->now;
-    $params->{html} = Skryf::Util->convert($params->{content}, USE_WIKILINKS);
+    $params->{html} = Skryf::Util->convert( $params->{content}, USE_WIKILINKS );
     $params->{created} = $created->strftime('%Y-%m-%dT%H:%M:%SZ');
     return $params;
 }
